@@ -1,0 +1,39 @@
+.project-info {
+    margin: 15px;
+    position: relative;
+    margin-bottom: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 10px;
+
+}
+
+.project-info img {
+    border-radius: 10px;
+}
+
+.project-info img:hover {
+    transform: scale(1.05);
+    transition: all 1s;
+}
+
+.project-bottom-info {
+    /* border: 1px solid black; */
+    position: absolute;
+    bottom: -70px;
+    width: 75%;
+    padding: 10px;
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+
+
+}
+
+#projecct-read-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

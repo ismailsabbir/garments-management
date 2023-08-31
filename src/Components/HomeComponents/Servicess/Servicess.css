@@ -1,0 +1,49 @@
+.homeservices-con {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.homeservices-top {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.homeservices-top h5 {
+    color: #be5184;
+    margin-bottom: 10px;
+}
+
+.homeservices-top h6 {
+    color: rgb(46, 46, 81);
+    margin-bottom: 10px;
+
+}
+
+.homeservices-top p {
+    color: rgb(86, 85, 85);
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.home-servicess {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* flex-wrap: wrap; */
+}
+
+@media only screen and (max-width: 687px) {
+    .homeservices-top {
+        width: 90%;
+    }
+
+    .home-servicess {
+        width: 90%;
+    }
+}

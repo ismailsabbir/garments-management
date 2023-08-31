@@ -1,0 +1,103 @@
+.home-banner-hole {
+    width: 100%;
+    margin-bottom: 100px;
+}
+
+.home-banner-con {
+    height: 550px;
+    background-image: linear-gradient(rgba(151, 150, 160, 0.699), rgba(148, 146, 157, 0.699)), url(../../../Images/ban.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.home-banner-left {
+    width: 40%;
+    color: white;
+    margin-left: 10%;
+}
+
+.banner-text-top {
+    font-size: 1.2rem;
+    color: rgb(208, 229, 248);
+    font-weight: 400;
+}
+
+.home-banner-left h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.home-banner-p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.banner-bottom-con {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-around; */
+    position: absolute;
+    bottom: -55px;
+    left: 10%;
+}
+
+.banner-bottom-1 {
+    display: flex;
+    align-items: center;
+    color: white;
+    height: 150px;
+    padding: 20px;
+    width: 358px;
+    margin-right: 55px;
+    border-radius: 8px;
+}
+
+.banner-bottom-1 img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.togel-btn {
+    color: white;
+    border: 2px solid brown;
+}
+
+@media only screen and (max-width: 687px) {
+
+    .banner-bottom-con {
+
+        left: 0px;
+        bottom: -500px;
+        /* border: 2px solid brown; */
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0px;
+
+    }
+
+    .home-banner-left {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .home-banner-hole {
+        margin-bottom: 600px;
+    }
+
+    .banner-bottom-1 {
+        width: 90%;
+        margin: 0 auto;
+        margin-bottom: 20px;
+
+    }
+}

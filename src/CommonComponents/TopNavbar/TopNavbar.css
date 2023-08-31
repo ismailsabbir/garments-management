@@ -1,0 +1,68 @@
+.top-navbar-con {
+    padding: 8px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-navbar-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-navbar-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-right: 30px;
+}
+
+.navbar-top-icon {
+    font-size: 1.5rem;
+    color: #be5184;
+    margin-right: 8px;
+}
+
+.navbar-top-icon:hover {
+    color: #7D405C;
+}
+
+.navbat-top-text {
+    font-size: 1.1rem;
+    color: rgb(91, 90, 90);
+    font-weight: 400;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.top-navbar-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.socila-icon-p {
+    border: 1px solid #be5184;
+    background-color: #be5184;
+    padding: 5px;
+    border-radius: 50%;
+    margin-right: 8px;
+    margin-top: 10px;
+}
+
+.socila-icon-p:hover {
+    background-color: #7D405C;
+}
+
+.socila-icon {
+    color: white;
+}
+
+@media screen and (max-width: 992px) {
+    .top-navbar-con {
+        display: none;
+    }
+}

@@ -1,0 +1,45 @@
+.comments-con {
+    margin-bottom: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.comments {
+    width: 85%;
+    border: 1.5px solid #be5184;
+    position: relative;
+    padding: 80px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.comments-icon {
+    font-size: 2.5rem;
+    color: #be5184;
+    margin-bottom: 30px;
+}
+
+.comments p {
+    width: 70%;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: rgb(103, 102, 102);
+}
+
+.user-image {
+    width: 80px;
+    position: absolute;
+    bottom: -35px;
+    border-radius: 50%;
+}
+
+.user-image img {
+    width: 100%;
+    border-radius: 50%;
+}

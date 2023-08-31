@@ -1,0 +1,189 @@
+.mission-vission-con {
+    width: 100%;
+    height: auto;
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-around;
+    margin-top: 200px;
+    margin-bottom: 20px;
+}
+
+.mission-vission-left {
+    width: 40%;
+    height: 700px;
+    position: relative;
+}
+
+.mission-vission-left-big {
+    height: 530px;
+    width: 430px;
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    z-index: 3;
+    border-radius: 10px;
+}
+
+.mission-vission-left-big img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.mission-vission-left-small {
+    width: 300px;
+    height: 180px;
+    position: absolute;
+    top: 450px;
+    left: 70px;
+    z-index: 4;
+    border-radius: 10px;
+}
+
+.mission-vission-left-small img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.mission-vission-empty {
+    border: 1px solid #be5184;
+    width: 400px;
+    height: 500px;
+    position: absolute;
+    left: 120px;
+    top: 70px;
+    z-index: 1;
+    border-radius: 10px;
+
+}
+
+.mission-vission-right {
+    width: 50%;
+    /* border: 1px solid green; */
+}
+
+.about-garmen {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #be5184;
+}
+
+.mission-vission-right h1 {
+    color: rgb(24, 24, 49);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.mission-top-text {
+    font-size: 1.09rem;
+    color: rgb(74, 73, 73);
+    text-align: justify;
+    font-weight: 500;
+    margin-bottom: 40px;
+}
+
+.mission-vission {
+    display: flex;
+    margin-bottom: 20px;
+    /* align-items: center; */
+    /* justify-content: space-between; */
+}
+
+.vission {
+    border-right: 1px solid #be5184;
+    padding-right: 75px;
+
+}
+
+.vission h4 {
+    font-size: 1.7rem;
+    color: rgb(38, 38, 62);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.mission {
+
+    padding-left: 75px;
+}
+
+.mission h4 {
+    font-size: 1.7rem;
+    color: rgb(38, 38, 62);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.vission1 {
+    display: flex;
+    font-size: 1.1rem;
+    color: rgb(66, 64, 64);
+
+}
+
+.circel-icon {
+    color: #be5184;
+    font-size: 1.4rem;
+    margin-right: 6px;
+    margin-top: 4px;
+}
+
+@media only screen and (max-width: 687px) {
+    .mission-vission-con {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .mission-vission-left {
+        width: 100%;
+        height: 550px;
+    }
+
+    .mission-vission-left-big {
+        right: 5%;
+        height: 400px;
+        width: 70%;
+    }
+
+    .mission-vission-left-small {
+        width: 200px;
+        height: 150px;
+        top: 340px;
+        left: 10px;
+    }
+
+    .mission-vission-empty {
+        /* display: none; */
+        width: 70%;
+        height: 380px;
+        left: 60px;
+        top: 50px;
+    }
+
+    .mission-vission-right {
+        width: 94%;
+        /* border: 1px solid green; */
+    }
+
+    .mission-vission {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .vission {
+        padding: 0px;
+        width: 100%;
+        border: none;
+    }
+
+    .mission {
+        padding: 0px;
+        width: 100%;
+    }
+}

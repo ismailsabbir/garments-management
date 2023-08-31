@@ -1,0 +1,47 @@
+.nav-items {
+    width: 85%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.navbar-light .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 30 30%27%3e%3cpath stroke=%27rgba%28332, 46, 53, 0.75%29%27 stroke-linecap=%27round%27 stroke-miterlimit=%2710%27 stroke-width=%272%27 d=%27M4 7h22M4 15h22M4 23h22%27/%3e%3c/svg%3e") !important;
+
+}
+
+.navbar-light .navbar-toggler {
+    border: 1px solid white;
+}
+
+#nav-item {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-left: 25px;
+}
+
+#nav-item:hover {
+    color: hsl(332, 46%, 53%);
+}
+
+.new-item-color {
+    color: #7D405C;
+}
+
+.button {
+    background-color: #be5184;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 11px 12px;
+    border-radius: 2px;
+}
+
+.button:hover {
+    background-color: #7D405C;
+
+}

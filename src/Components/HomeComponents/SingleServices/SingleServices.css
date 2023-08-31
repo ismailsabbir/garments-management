@@ -1,0 +1,44 @@
+.service-info {
+    border: 1px solid rgb(35, 35, 58);
+    margin: 10px;
+    /* height: 300px; */
+    margin-bottom: 25px;
+    border-radius: 8px;
+    padding: 40px;
+    text-decoration: none;
+    color: black;
+
+}
+
+.service-info img {
+    width: 75px;
+    margin-bottom: 14px;
+
+}
+
+.service-info h3 {
+    color: rgb(31, 31, 54);
+}
+
+.service-info p {
+    color: rgb(97, 96, 96);
+    text-align: justify;
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+.read-more-btn {
+    text-decoration: none;
+    color: #be5184;
+    display: flex;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-top: 10px;
+
+}
+
+.right-arrow-sign {
+    font-size: 1.5rem;
+    margin-left: 5px;
+    margin-top: 3px;
+}
