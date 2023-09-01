@@ -50,6 +50,15 @@ const MainNavbar = () => {
                   isActive ? "new-item-color" : undefined
                 }
                 id="nav-item"
+                to="/Projects"
+              >
+                Projects
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "new-item-color" : undefined
+                }
+                id="nav-item"
                 to="/blog"
               >
                 Blog

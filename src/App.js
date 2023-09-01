@@ -9,6 +9,8 @@ import ErrorPages from "./Pages/ErrorPages/ErrorPages";
 import { createContext } from "react";
 import useFetch from "./Hooks/useFetch";
 import ServicesDetails from "./Pages/ServicesDetails/ServicesDetails";
+import ProjectDetails from "./Pages/ProjectDetails/ProjectDetails";
+import ProjectPages from "./Pages/ProjectsPages/ProjectPages";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -49,6 +51,20 @@ function App() {
           },
           element: <ServicesDetails></ServicesDetails>,
         },
+        {
+          path: "/projects",
+          element: <ProjectPages></ProjectPages>,
+        },
+        {
+          path: `/projectDetails/:id`,
+          loader: async ({ params }) => {
+            return fetch(
+              `${process.env.REACT_APP_URL}/projectDetails/${params.id}`
+            );
+          },
+          element: <ProjectDetails></ProjectDetails>,
+        },
+
         {
           path: "/contactus",
           element: <ContactUs></ContactUs>,

@@ -1,0 +1,20 @@
+.minproject {
+    width: 100%;
+    border: 1px solid rgb(28, 28, 69);
+    padding: 20px;
+    text-align: center;
+    color: white;
+    border-radius: 8px;
+}
+
+.minproject p {
+    font-size: 3rem;
+    font-weight: 600;
+    color: #be5184;
+}
+
+.minproject span {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 500;
+}

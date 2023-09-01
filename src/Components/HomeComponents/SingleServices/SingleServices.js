@@ -11,7 +11,7 @@ const SingleServices = ({ service }) => {
       <img src={service.picture} alt="not" />
       <h3>{service.name}</h3>
       <p>{service.about.slice(0, 70)}</p>
-      <Link to="/serviceDetails" className="read-more-btn">
+      <Link to={`/serviceDetails/${service?._id}`} className="read-more-btn">
         Read More
         <MdArrowRightAlt className="right-arrow-sign"></MdArrowRightAlt>{" "}
       </Link>

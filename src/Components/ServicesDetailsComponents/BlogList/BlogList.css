@@ -1,0 +1,20 @@
+.blog-list {
+    display: flex;
+    margin-bottom: 15px;
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.blog-list img {
+    width: 40%;
+    height: 90px;
+    border-radius: 6px;
+    margin-right: 4px;
+}
+
+.blog-list p {
+    text-align: left;
+    color: white;
+}

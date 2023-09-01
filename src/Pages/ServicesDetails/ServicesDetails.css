@@ -1,14 +1,6 @@
 .services-details-con {
-    border: 1px solid brown;
+    /* border: 1px solid brown; */
     width: 90%;
     margin: 0 auto;
 
-}
-
-.service-details-left {
-    border: 1px solid green;
-}
-
-.service-details-right {
-    border: 1px solid yellow;
 }

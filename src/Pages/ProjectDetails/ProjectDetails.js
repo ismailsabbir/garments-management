@@ -1,18 +1,19 @@
 import React from "react";
-import ServicesDetailsBanner from "../../Components/ServicesDetailsComponents/ServicesDetailsBanner/ServicesDetailsBanner";
 import { useLoaderData } from "react-router-dom";
-import ServicesDetailsLeft from "../../Components/ServicesDetailsComponents/ServicesDetailsLeft/ServicesDetailsLeft";
+import ProjectDetailsBanner from "../../Components/ProjectsDetailsComponents/ProjectDetailsBanner/ProjectDetailsBanner";
 import ServicesDetailsRight from "../../Components/ServicesDetailsComponents/ServicesDetailsRight/ServicesDetailsRight";
-import "./ServicesDetails.css";
-const ServicesDetails = () => {
-  const service = useLoaderData();
+import ProjectDetailsLeft from "../../Components/ProjectsDetailsComponents/ProjectDetailsLeft/ProjectDetailsLeft";
+
+const ProjectDetails = () => {
+  const project = useLoaderData();
+  // console.log(project);
   return (
     <div className="mb-28">
-      <ServicesDetailsBanner></ServicesDetailsBanner>
+      <ProjectDetailsBanner></ProjectDetailsBanner>
       <div className="services-details-con">
         <div className="row">
           <div className="service-details-left col col-12 col-lg-9 col-md-12 col-sm-12">
-            <ServicesDetailsLeft service={service}></ServicesDetailsLeft>
+            <ProjectDetailsLeft project={project}></ProjectDetailsLeft>
           </div>
           <div className="service-details-right col col-12 col-lg-3 col-md-12 col-sm-12">
             <ServicesDetailsRight></ServicesDetailsRight>
@@ -23,4 +24,4 @@ const ServicesDetails = () => {
   );
 };
 
-export default ServicesDetails;
+export default ProjectDetails;

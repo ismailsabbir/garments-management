@@ -1,0 +1,13 @@
+.small-contact-con {
+    margin-top: 30px;
+    width: 100%;
+    padding: 100px 20px;
+    background-image: linear-gradient(rgba(112, 111, 113, 0.699), rgba(110, 106, 118, 0.699)), url(../../../Images/contact4.avif);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+
+}
