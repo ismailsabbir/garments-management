@@ -8,14 +8,17 @@ import ContactUs from "./Pages/ContactUs/ContactUs";
 import ErrorPages from "./Pages/ErrorPages/ErrorPages";
 import { createContext } from "react";
 import useFetch from "./Hooks/useFetch";
+import ServicesDetails from "./Pages/ServicesDetails/ServicesDetails";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
   const projectss = useFetch(`${process.env.REACT_APP_URL}/projects`);
   const blogss = useFetch(`${process.env.REACT_APP_URL}/blogs`);
+  const memberss = useFetch(`${process.env.REACT_APP_URL}/members`);
   const blogs = blogss?.data;
   const projects = projectss?.data;
-  const alldata = { data, projects, blogs };
+  const member = memberss?.data;
+  const alldata = { data, projects, blogs, member };
   const router = createBrowserRouter([
     {
       path: "/",
@@ -36,6 +39,15 @@ function App() {
         {
           path: "/services",
           element: <ServicesPage></ServicesPage>,
+        },
+        {
+          path: `/serviceDetails/:id`,
+          loader: async ({ params }) => {
+            return fetch(
+              `${process.env.REACT_APP_URL}/serviceDetails/${params.id}`
+            );
+          },
+          element: <ServicesDetails></ServicesDetails>,
         },
         {
           path: "/contactus",

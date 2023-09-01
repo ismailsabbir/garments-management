@@ -1,0 +1,19 @@
+.teammember-con {
+    margin-bottom: 60px;
+}
+
+.teammember {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+#view-tem-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}

@@ -6,7 +6,6 @@ import { BiMessage } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import "./SingleBlog.css";
 const SingleBlog = ({ blog }) => {
-  console.log(blog);
   return (
     <Link
       className="blog-info col col-12 col-sm-12 col-md-4 col-lg-3"

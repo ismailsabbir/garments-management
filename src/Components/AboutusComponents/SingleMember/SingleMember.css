@@ -1,0 +1,41 @@
+.single-member-con {
+    width: 20%;
+    margin: 10px;
+    position: relative;
+}
+
+.single-info {
+    text-align: center;
+    z-index: 3;
+}
+
+.single-info img {
+    border-radius: 8px;
+    margin-bottom: 10px;
+    z-index: 3;
+}
+
+.member-empty {
+    width: 100%;
+    height: 350px;
+    border: 1.1px solid #be5184;
+    border-radius: 8px;
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    z-index: 1;
+}
+
+@media only screen and (max-width: 687px) {
+    .teammember {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .single-member-con {
+        width: 80%;
+        margin-bottom: 30px;
+    }
+}

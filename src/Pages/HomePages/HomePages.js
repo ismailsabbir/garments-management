@@ -9,7 +9,7 @@ import HomeComments from "../../Components/HomeComponents/HomeComments/HomeComme
 import HomeContact from "../../Components/HomeComponents/HomeContact/HomeContact";
 import HomeProjects from "../../Components/HomeComponents/HomeProjects/HomeProjects";
 import HomeBlogs from "../../Components/HomeComponents/HomeBlogs/HomeBlogs";
-import Questions from "../../Components/HomeComponents/Questions/Questions";
+
 const HomePages = () => {
   return (
     <div>
@@ -21,7 +21,7 @@ const HomePages = () => {
       <HomeComments></HomeComments>
       <HomeContact></HomeContact>
       <HomeProjects></HomeProjects>
-      <Questions></Questions>
+
       <HomeBlogs></HomeBlogs>
     </div>
   );
