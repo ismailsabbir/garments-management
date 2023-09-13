@@ -1,17 +1,14 @@
 .contact-media-con {
-    margin-top: 40px;
     width: 80%;
-    /* border: 1px solid gray; */
     margin: 0 auto;
     display: flex;
     justify-content: space-around;
-    margin-bottom: 40px;
+    margin-top: 70px;
+    margin-bottom: 50px;
 }
 
 .phone-con {
     display: flex;
-    /* align-items: center; */
-
 }
 
 .media-icon {
