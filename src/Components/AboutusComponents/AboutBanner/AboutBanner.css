@@ -1,14 +1,17 @@
 .about-banner-con {
-    height: 350px;
+    height: 400px;
     margin-bottom: 50px;
-    background-image: linear-gradient(rgba(54, 50, 73, 0.699), rgba(77, 74, 92, 0.699)), url(../../../Images/banner3.avif);
-    background-position: center;
+    background-image: linear-gradient(rgba(54, 50, 73, 0.699), rgba(77, 74, 92, 0.699)), url(../../../Images/lastbanner.webp);
+    /* background-position: center; */
+    background-position: center top;
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     color: white;
+
+
 }
 
 .about-banner-text h1 {}

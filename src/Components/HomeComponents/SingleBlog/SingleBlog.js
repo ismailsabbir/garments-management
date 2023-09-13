@@ -8,7 +8,7 @@ import "./SingleBlog.css";
 const SingleBlog = ({ blog }) => {
   return (
     <Link
-      className="blog-info col col-12 col-sm-12 col-md-4 col-lg-3"
+      className="blog-info col col-12 col-sm-12 col-md-4 col-lg-3 m-4"
       id="blog-info"
     >
       <img className="blog-image" src={blog.image} alt="not" />

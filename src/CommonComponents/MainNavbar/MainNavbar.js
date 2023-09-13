@@ -59,6 +59,16 @@ const MainNavbar = () => {
                   isActive ? "new-item-color" : undefined
                 }
                 id="nav-item"
+                to="/shop"
+              >
+                Shop
+              </NavLink>
+
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "new-item-color" : undefined
+                }
+                id="nav-item"
                 to="/blog"
               >
                 Blog
@@ -71,6 +81,24 @@ const MainNavbar = () => {
                 to="/contactus"
               >
                 ContactUs
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "new-item-color" : undefined
+                }
+                id="nav-item"
+                to="/SignUp"
+              >
+                SignUp
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "new-item-color" : undefined
+                }
+                id="nav-item"
+                to="/Login"
+              >
+                Login
               </NavLink>
             </Nav>
             <Navbar.Collapse className="justify-content-end">

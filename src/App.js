@@ -11,6 +11,10 @@ import useFetch from "./Hooks/useFetch";
 import ServicesDetails from "./Pages/ServicesDetails/ServicesDetails";
 import ProjectDetails from "./Pages/ProjectDetails/ProjectDetails";
 import ProjectPages from "./Pages/ProjectsPages/ProjectPages";
+import BlogPages from "./Pages/BlogPages/BlogPages";
+import ShopPages from "./Pages/ShopPages/ShopPages";
+import SignupPages from "./Pages/SignupPages/SignupPages";
+import LoginPages from "./Pages/LoginPages/LoginPages";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -64,10 +68,26 @@ function App() {
           },
           element: <ProjectDetails></ProjectDetails>,
         },
+        {
+          path: "/shop",
+          element: <ShopPages></ShopPages>,
+        },
+        {
+          path: "/blog",
+          element: <BlogPages></BlogPages>,
+        },
 
         {
           path: "/contactus",
           element: <ContactUs></ContactUs>,
+        },
+        {
+          path: "/SignUp",
+          element: <SignupPages></SignupPages>,
+        },
+        {
+          path: "/Login",
+          element: <LoginPages></LoginPages>,
         },
         {
           path: "*",

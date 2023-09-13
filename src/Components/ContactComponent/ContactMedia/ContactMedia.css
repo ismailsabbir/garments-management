@@ -1,0 +1,32 @@
+.contact-media-con {
+    margin-top: 40px;
+    width: 80%;
+    /* border: 1px solid gray; */
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+}
+
+.phone-con {
+    display: flex;
+    /* align-items: center; */
+
+}
+
+.media-icon {
+    font-size: 2.5rem;
+    color: #be5184;
+    margin-right: 10px;
+}
+
+.phone-right h5 {
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.phone-right p {
+    color: rgb(88, 88, 88);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
