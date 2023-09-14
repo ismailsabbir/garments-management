@@ -15,16 +15,22 @@ import BlogPages from "./Pages/BlogPages/BlogPages";
 import ShopPages from "./Pages/ShopPages/ShopPages";
 import SignupPages from "./Pages/SignupPages/SignupPages";
 import LoginPages from "./Pages/LoginPages/LoginPages";
+import Customizedpages from "./Pages/Customizedpages/Customizedpages";
+import CustomizedDetailsPage from "./Pages/CustomizedDetailsPage/CustomizedDetailsPage";
+
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
   const projectss = useFetch(`${process.env.REACT_APP_URL}/projects`);
   const blogss = useFetch(`${process.env.REACT_APP_URL}/blogs`);
   const memberss = useFetch(`${process.env.REACT_APP_URL}/members`);
+  const categorys = useFetch(`${process.env.REACT_APP_URL}/project-category`);
   const blogs = blogss?.data;
   const projects = projectss?.data;
   const member = memberss?.data;
-  const alldata = { data, projects, blogs, member };
+  const category = categorys.data;
+  // console.log(category);
+  const alldata = { data, projects, blogs, member, category };
   const router = createBrowserRouter([
     {
       path: "/",
@@ -88,6 +94,14 @@ function App() {
         {
           path: "/Login",
           element: <LoginPages></LoginPages>,
+        },
+        {
+          path: "/make-project",
+          element: <Customizedpages></Customizedpages>,
+        },
+        {
+          path: "/customized-details",
+          element: <CustomizedDetailsPage></CustomizedDetailsPage>,
         },
         {
           path: "*",

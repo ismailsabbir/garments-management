@@ -32,13 +32,18 @@
 }
 
 .button {
+    text-decoration: none;
     background-color: #be5184;
     border: none;
     color: white;
     font-size: 15px;
-    font-weight: 400;
+    font-weight: 500;
     padding: 11px 12px;
     border-radius: 2px;
+}
+
+#make-project-btn {
+    color: white;
 }
 
 .button:hover {

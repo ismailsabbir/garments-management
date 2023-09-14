@@ -9,11 +9,13 @@ import HomeComments from "../../Components/HomeComponents/HomeComments/HomeComme
 import HomeContact from "../../Components/HomeComponents/HomeContact/HomeContact";
 import HomeProjects from "../../Components/HomeComponents/HomeProjects/HomeProjects";
 import HomeBlogs from "../../Components/HomeComponents/HomeBlogs/HomeBlogs";
+import ProjectCategorys from "../../Components/HomeComponents/ProjectCategorys/ProjectCategorys";
 
 const HomePages = () => {
   return (
     <div>
       <HomeBanner></HomeBanner>
+      <ProjectCategorys></ProjectCategorys>
       <MissionVission></MissionVission>
       <Statistics></Statistics>
       <Servicess></Servicess>

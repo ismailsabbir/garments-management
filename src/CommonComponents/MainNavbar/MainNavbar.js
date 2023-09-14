@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import logo from "../../Images/Logo.png";
 import "./MainNavbar.css";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import TopNavbar from "../TopNavbar/TopNavbar";
 const MainNavbar = () => {
   return (
@@ -103,7 +103,14 @@ const MainNavbar = () => {
             </Nav>
             <Navbar.Collapse className="justify-content-end">
               <Navbar.Text>
-                <button className="button">MAKE PROJECT</button>
+                <Link
+                  to="/make-project"
+                  className="button"
+                  id="make-project-btn"
+                >
+                  Customized
+                </Link>
+                {/* <button className="button">MAKE PROJECT</button> */}
               </Navbar.Text>
             </Navbar.Collapse>
           </Navbar.Collapse>
