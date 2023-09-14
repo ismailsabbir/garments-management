@@ -100,7 +100,12 @@ function App() {
           element: <Customizedpages></Customizedpages>,
         },
         {
-          path: "/customized-details",
+          path: `/customized-details/:id`,
+          loader: async ({ params }) => {
+            return fetch(
+              `${process.env.REACT_APP_URL}/customized-details/${params.id}`
+            );
+          },
           element: <CustomizedDetailsPage></CustomizedDetailsPage>,
         },
         {

@@ -21,7 +21,7 @@ const ProjectCategorys = () => {
                   <h3>{cate?.name}</h3>
                   <p>{cate?.text}</p>
                   <Link
-                    to="/customized-details"
+                    to={`/customized-details/${cate?.category_id}`}
                     className="button"
                     id="custom-btn"
                   >
