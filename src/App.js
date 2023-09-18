@@ -17,6 +17,7 @@ import SignupPages from "./Pages/SignupPages/SignupPages";
 import LoginPages from "./Pages/LoginPages/LoginPages";
 import Customizedpages from "./Pages/Customizedpages/Customizedpages";
 import CustomizedDetailsPage from "./Pages/CustomizedDetailsPage/CustomizedDetailsPage";
+import OrderConfirmPages from "./Pages/OrderConfirmPages/OrderConfirmPages";
 
 export const servcontext = createContext();
 function App() {
@@ -29,7 +30,6 @@ function App() {
   const projects = projectss?.data;
   const member = memberss?.data;
   const category = categorys.data;
-  // console.log(category);
   const alldata = { data, projects, blogs, member, category };
   const router = createBrowserRouter([
     {
@@ -73,6 +73,10 @@ function App() {
             );
           },
           element: <ProjectDetails></ProjectDetails>,
+        },
+        {
+          path: "/order-confirm",
+          element: <OrderConfirmPages></OrderConfirmPages>,
         },
         {
           path: "/shop",
