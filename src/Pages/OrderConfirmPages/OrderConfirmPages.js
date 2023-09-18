@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./OrderConfirmPages.css";
 import { Form, Table } from "react-bootstrap";
 // import useFetch from "../../Hooks/useFetch";
 const OrderConfirmPages = () => {
+  const navigate = useNavigate();
   const { state } = useLocation();
   const orderinfo = state.request_info;
   const [size_s, setsizes] = useState();
@@ -77,9 +78,9 @@ const OrderConfirmPages = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data._id);
-        // if (data._id) {
-        //   navigate("/order-confirm", { state: { request_info } });
-        // }
+        if (data._id) {
+          navigate("/payment", { state: { orderconfirm } });
+        }
       })
       .catch((err) => {
         console.log(err.message);

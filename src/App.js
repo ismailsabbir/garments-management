@@ -18,6 +18,7 @@ import LoginPages from "./Pages/LoginPages/LoginPages";
 import Customizedpages from "./Pages/Customizedpages/Customizedpages";
 import CustomizedDetailsPage from "./Pages/CustomizedDetailsPage/CustomizedDetailsPage";
 import OrderConfirmPages from "./Pages/OrderConfirmPages/OrderConfirmPages";
+import PaymentPages from "./Pages/PaymentPages/PaymentPages";
 
 export const servcontext = createContext();
 function App() {
@@ -77,6 +78,10 @@ function App() {
         {
           path: "/order-confirm",
           element: <OrderConfirmPages></OrderConfirmPages>,
+        },
+        {
+          path: "/payment",
+          element: <PaymentPages></PaymentPages>,
         },
         {
           path: "/shop",
