@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -6,7 +6,10 @@ import logo from "../../Images/Logo.png";
 import "./MainNavbar.css";
 import { Link, NavLink } from "react-router-dom";
 import TopNavbar from "../TopNavbar/TopNavbar";
+import { AuthContext } from "../../Context/UserContext";
 const MainNavbar = () => {
+  const { user } = useContext(AuthContext);
+  console.log(user);
   return (
     <div>
       <TopNavbar></TopNavbar>

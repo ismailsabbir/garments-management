@@ -1,6 +1,7 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const CheckoutForm = ({ paymentinfo }) => {
   const [carterror, setcarderror] = useState("");
   const [clientSecret, setClientSecret] = useState("");
@@ -10,8 +11,7 @@ const CheckoutForm = ({ paymentinfo }) => {
   const [payprocessing, setpayprocessing] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
-  const { email, total_price } = paymentinfo;
-
+  const { email, orderid } = paymentinfo;
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/create-payment-intent`, {
       method: "POST",
@@ -21,10 +21,8 @@ const CheckoutForm = ({ paymentinfo }) => {
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
   }, [paymentinfo]);
-  console.log(clientSecret);
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("sub");
     if (!stripe || !elements) {
       return;
     }
@@ -66,49 +64,39 @@ const CheckoutForm = ({ paymentinfo }) => {
     if (paymentIntent.status === "succeeded") {
       setpaymentsucess("congratulations! Payment Completed");
       settransactionid(paymentIntent.id);
-      alert("sucess");
-      //   toast("Payment Completed!", {
-      //     position: "top-center",
-      //     autoClose: 50,
-      //     hideProgressBar: false,
-      //     closeOnClick: true,
-      //     pauseOnHover: true,
-      //     draggable: true,
-      //     progress: undefined,
-      //     theme: "light",
-      //   });
-      // setpaymentstatus(true);
-      // setpayprocessing(false);
-      // const paymentinfo = {
-      //   firstname,
-      //   lastname,
-      //   email,
-      //   mobile,
-      //   country,
-      //   city,
-      //   postcode,
-      //   productinfo,
-      //   totaldoler,
-      //   transactionId: paymentIntent.id,
-      // };
-      // Using Fetch API
-      // fetch(`${process.env.REACT_APP_HOST_LINK}/payments`, {
-      //   method: "POST",
-      //   body: JSON.stringify(paymentinfo),
-      //   headers: {
-      //     "Content-type": "application/json",
-      //   },
-      // })
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     if (data.insertedId) {
-      //       setpaymentstatus(true);
-      //       setpayprocessing(false);
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     console.log(err.message);
-      //   });
+
+      toast("Payment Completed!", {
+        position: "top-center",
+        autoClose: 80,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      const transiction_id = paymentIntent.id;
+      const orderinfo = {
+        ...paymentinfo,
+        transiction_id,
+      };
+      fetch(`${process.env.REACT_APP_URL}/payment/${orderid}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(orderinfo),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.insertedId) {
+            setpaymentstatus(true);
+            setpayprocessing(false);
+          }
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
     }
   };
   return (
@@ -137,7 +125,8 @@ const CheckoutForm = ({ paymentinfo }) => {
       >
         Pay
       </button>
-      <p className="payment-sucess">{paymentsucess}</p>
+      <p className="payment-sucess alert alert-success mt-6">{paymentsucess}</p>
+
       {paymentstatus ? (
         <p className="transaction-id">
           <span className="transactionspan">Transaction:</span>
@@ -147,7 +136,7 @@ const CheckoutForm = ({ paymentinfo }) => {
         <></>
       )}
 
-      {/* <ToastContainer></ToastContainer> */}
+      <ToastContainer></ToastContainer>
     </form>
   );
 };

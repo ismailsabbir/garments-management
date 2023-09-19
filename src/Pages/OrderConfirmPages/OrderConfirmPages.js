@@ -57,6 +57,8 @@ const OrderConfirmPages = () => {
     const address = e.target.address.value;
     const note = e.target.note.value;
     const order_status = "confirm";
+    const order = "not paid";
+    const transiction_id = "";
     const orderconfirm = {
       ...orderinfo,
       size_s,
@@ -67,6 +69,8 @@ const OrderConfirmPages = () => {
       address,
       note,
       order_status,
+      order,
+      transiction_id,
     };
     fetch(`${process.env.REACT_APP_URL}/requesed_order`, {
       method: "POST",
