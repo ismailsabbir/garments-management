@@ -19,6 +19,7 @@ import Customizedpages from "./Pages/Customizedpages/Customizedpages";
 import CustomizedDetailsPage from "./Pages/CustomizedDetailsPage/CustomizedDetailsPage";
 import OrderConfirmPages from "./Pages/OrderConfirmPages/OrderConfirmPages";
 import PaymentPages from "./Pages/PaymentPages/PaymentPages";
+import PrivetRoutes from "./Routes/PrivetRoutes";
 
 export const servcontext = createContext();
 function App() {
@@ -106,7 +107,11 @@ function App() {
         },
         {
           path: "/make-project",
-          element: <Customizedpages></Customizedpages>,
+          element: (
+            <PrivetRoutes>
+              <Customizedpages></Customizedpages>
+            </PrivetRoutes>
+          ),
         },
         {
           path: `/customized-details/:id`,
@@ -115,7 +120,11 @@ function App() {
               `${process.env.REACT_APP_URL}/customized-details/${params.id}`
             );
           },
-          element: <CustomizedDetailsPage></CustomizedDetailsPage>,
+          element: (
+            <PrivetRoutes>
+              <CustomizedDetailsPage></CustomizedDetailsPage>
+            </PrivetRoutes>
+          ),
         },
         {
           path: "*",

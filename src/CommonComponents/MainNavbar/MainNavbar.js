@@ -8,8 +8,18 @@ import { Link, NavLink } from "react-router-dom";
 import TopNavbar from "../TopNavbar/TopNavbar";
 import { AuthContext } from "../../Context/UserContext";
 const MainNavbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, userlogout } = useContext(AuthContext);
   console.log(user);
+  const handlelogout = () => {
+    console.log("sub");
+    userlogout()
+      .then(() => {
+        console.log("Log Out Sucessfully");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div>
       <TopNavbar></TopNavbar>
@@ -85,24 +95,27 @@ const MainNavbar = () => {
               >
                 ContactUs
               </NavLink>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "new-item-color" : undefined
-                }
-                id="nav-item"
-                to="/SignUp"
-              >
-                SignUp
-              </NavLink>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "new-item-color" : undefined
-                }
-                id="nav-item"
-                to="/Login"
-              >
-                Login
-              </NavLink>
+              {user?.uid ? (
+                <button
+                  className={({ isActive }) =>
+                    isActive ? "new-item-color" : undefined
+                  }
+                  id="nav-item"
+                  onClick={handlelogout}
+                >
+                  LogOut
+                </button>
+              ) : (
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "new-item-color" : undefined
+                  }
+                  id="nav-item"
+                  to="/Login"
+                >
+                  Login
+                </NavLink>
+              )}
             </Nav>
             <Navbar.Collapse className="justify-content-end">
               <Navbar.Text>

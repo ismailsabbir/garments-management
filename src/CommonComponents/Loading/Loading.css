@@ -1,0 +1,11 @@
+.lodaing-con {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-a {
+    width: 40%;
+}
