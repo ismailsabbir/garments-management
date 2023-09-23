@@ -20,6 +20,7 @@ import CustomizedDetailsPage from "./Pages/CustomizedDetailsPage/CustomizedDetai
 import OrderConfirmPages from "./Pages/OrderConfirmPages/OrderConfirmPages";
 import PaymentPages from "./Pages/PaymentPages/PaymentPages";
 import PrivetRoutes from "./Routes/PrivetRoutes";
+import ShopProducts from "./Components/ShopComponents/ShopProducts/ShopProducts";
 
 export const servcontext = createContext();
 function App() {
@@ -28,11 +29,23 @@ function App() {
   const blogss = useFetch(`${process.env.REACT_APP_URL}/blogs`);
   const memberss = useFetch(`${process.env.REACT_APP_URL}/members`);
   const categorys = useFetch(`${process.env.REACT_APP_URL}/project-category`);
+  const shopcategorys = useFetch(`${process.env.REACT_APP_URL}/shopcategory`);
+  const shopproducts = useFetch(`${process.env.REACT_APP_URL}/shopproduct`);
+  const shopproduct = shopproducts?.data;
+  const shopcategory = shopcategorys?.data;
   const blogs = blogss?.data;
   const projects = projectss?.data;
   const member = memberss?.data;
   const category = categorys.data;
-  const alldata = { data, projects, blogs, member, category };
+  const alldata = {
+    data,
+    projects,
+    blogs,
+    member,
+    category,
+    shopcategory,
+    shopproduct,
+  };
   const router = createBrowserRouter([
     {
       path: "/",
@@ -87,6 +100,10 @@ function App() {
         {
           path: "/shop",
           element: <ShopPages></ShopPages>,
+        },
+        {
+          path: `/shop-product/:id`,
+          element: <ShopProducts></ShopProducts>,
         },
         {
           path: "/blog",

@@ -9,11 +9,14 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const LoginPages = () => {
   let location = useLocation();
-  const { userlogin, signinwithgoogle, resetpassword, facebooksignup } =
+  const { userlogin, signinwithgoogle, resetpassword, facebooksignup, user } =
     useContext(AuthContext);
   const [errormessage, seterrormessage] = useState("");
   const [sucessmessage, setsucessmessage] = useState(false);
-  const [email, setemail] = useState("");
+  const [email1, setemail] = useState("");
+  const name = user?.displayName;
+  const email = user?.email;
+  const userdata = { name, email };
   const navigate = useNavigate();
   let from = location.state?.from?.pathname || "/";
   const loginuser = (e) => {
@@ -42,6 +45,17 @@ const LoginPages = () => {
         const user = req.user;
         console.log(user);
         setsucessmessage(true);
+        fetch(`${process.env.REACT_APP_URL}/users`, {
+          method: "POST",
+          body: JSON.stringify(userdata),
+          headers: {
+            "Content-type": "application/json",
+          },
+        })
+          .then((req) => req.json())
+          .then((data) => {
+            console.log(data);
+          });
         navigate("/login");
       })
       .catch((error) => {
@@ -54,7 +68,7 @@ const LoginPages = () => {
     setemail(email);
   };
   const handlerestpassword = () => {
-    if (!email) {
+    if (!email1) {
       toast("Enter email for Reset password!", {
         position: "top-center",
         autoClose: 1000,
@@ -67,7 +81,7 @@ const LoginPages = () => {
       });
       return;
     }
-    resetpassword(email)
+    resetpassword(email1)
       .then(() => {
         toast("Please check you email!", {
           position: "top-center",
@@ -88,6 +102,17 @@ const LoginPages = () => {
     facebooksignup()
       .then((req) => {
         console.log(req.user);
+        fetch(`${process.env.REACT_APP_URL}/users`, {
+          method: "POST",
+          body: JSON.stringify(userdata),
+          headers: {
+            "Content-type": "application/json",
+          },
+        })
+          .then((req) => req.json())
+          .then((data) => {
+            console.log(data);
+          });
         navigate("/login");
       })
       .catch((error) => {

@@ -41,6 +41,7 @@ const UserContext = ({ children }) => {
       displayName: name,
     });
   };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setuser(currentUser);

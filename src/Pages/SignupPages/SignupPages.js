@@ -7,10 +7,15 @@ import "./SignupPages.css";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/UserContext";
 const SignupPages = () => {
-  const { createuser, signinwithgoogle, updateusername, facebooksignup } =
+  const { createuser, signinwithgoogle, updateusername, facebooksignup, user } =
     useContext(AuthContext);
   const [errormessage, seterrormessage] = useState("");
   const [sucessmessage, setsucessmess] = useState(false);
+
+  const name = user?.displayName;
+  const email = user?.email;
+  const userdata = { name, email };
+  console.log(userdata);
   const handleregister = (e) => {
     e.preventDefault();
     setsucessmess(false);
@@ -18,6 +23,7 @@ const SignupPages = () => {
     const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
+    const userdata = { name, email };
     if (password.length < 8) {
       seterrormessage("Password must be 8 characters!!");
       return;
@@ -38,18 +44,42 @@ const SignupPages = () => {
           .catch((error) => {
             console.error(error);
           });
+        fetch(`${process.env.REACT_APP_URL}/users`, {
+          method: "POST",
+          body: JSON.stringify(userdata),
+          headers: {
+            "Content-type": "application/json",
+          },
+        })
+          .then((req) => req.json())
+          .then((data) => {
+            console.log(data);
+          });
       })
       .catch((error) => {
         console.log(error);
         seterrormessage(error.message);
       });
   };
+
   const handlegooglesignin = () => {
     signinwithgoogle()
       .then((req) => {
         const user = req.user;
         console.log(user);
         setsucessmess(true);
+
+        fetch(`${process.env.REACT_APP_URL}/users`, {
+          method: "POST",
+          body: JSON.stringify(userdata),
+          headers: {
+            "Content-type": "application/json",
+          },
+        })
+          .then((req) => req.json())
+          .then((data) => {
+            console.log(data);
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -61,6 +91,17 @@ const SignupPages = () => {
       .then((res) => {
         const user = res.user;
         console.log(user);
+        fetch(`${process.env.REACT_APP_URL}/users`, {
+          method: "POST",
+          body: JSON.stringify(userdata),
+          headers: {
+            "Content-type": "application/json",
+          },
+        })
+          .then((req) => req.json())
+          .then((data) => {
+            console.log(data);
+          });
       })
       .catch((error) => {
         console.log(error);

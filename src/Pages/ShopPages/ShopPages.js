@@ -1,9 +1,12 @@
 import React from "react";
-
+import "./ShopPage.css";
+import ShopBanner from "../../Components/ShopComponents/ShopBanner/ShopBanner";
+import ShopCategory from "../../Components/ShopComponents/ShopCategory/ShopCategory";
 const ShopPages = () => {
   return (
-    <div>
-      <h1>shop</h1>
+    <div className="">
+      <ShopBanner></ShopBanner>
+      <ShopCategory></ShopCategory>
     </div>
   );
 };
