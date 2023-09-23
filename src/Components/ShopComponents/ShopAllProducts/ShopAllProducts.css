@@ -1,0 +1,84 @@
+.all-products-con {
+    margin-top: 50px;
+}
+
+.shop-single-product {
+    margin-bottom: 30px;
+}
+
+.shop-product-inner {
+    height: 380px;
+    width: 100%;
+    position: relative;
+}
+
+.original-image {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.original-image,
+.hover-image {
+    max-width: 100%;
+    height: auto;
+    transition: opacity 0.3s ease;
+    /* Add a smooth transition effect */
+}
+
+.hover-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.shop-product-inner:hover .hover-image {
+    opacity: 1;
+}
+
+.add-to-cart-con {
+    position: absolute;
+    bottom: 0px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background-color: #2d3945;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.shop-product-inner:hover .add-to-cart-con {
+    opacity: 1;
+}
+
+.shop-product-information {
+    text-align: center;
+}
+
+.shop-product-information h6 {
+    color: rgb(41, 41, 78);
+    font-weight: 500;
+    padding-top: 12px;
+}
+
+.buy-now-button {
+    border: 0.5px solid gainsboro;
+    padding: 8px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: green;
+    font-weight: 500;
+    transition: ease 1s;
+}
+
+.buy-now-button:hover {
+    background-color: #be5184;
+    border: none;
+    color: white;
+}

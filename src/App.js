@@ -21,6 +21,7 @@ import OrderConfirmPages from "./Pages/OrderConfirmPages/OrderConfirmPages";
 import PaymentPages from "./Pages/PaymentPages/PaymentPages";
 import PrivetRoutes from "./Routes/PrivetRoutes";
 import ShopProducts from "./Components/ShopComponents/ShopProducts/ShopProducts";
+import ShopProductDetails from "./Components/ShopComponents/ShopProductDetails/ShopProductDetails";
 
 export const servcontext = createContext();
 function App() {
@@ -104,6 +105,10 @@ function App() {
         {
           path: `/shop-product/:id`,
           element: <ShopProducts></ShopProducts>,
+        },
+        {
+          path: `/shop-details/:categoryid/:id`,
+          element: <ShopProductDetails></ShopProductDetails>,
         },
         {
           path: "/blog",

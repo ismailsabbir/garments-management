@@ -10,7 +10,10 @@ const ShopProductRight = () => {
     <div>
       <h3>All Categories</h3>
       {shopcategory?.map((category) => (
-        <Link className="category-linking" to="">
+        <Link
+          className="category-linking"
+          to={`/shop-product/${category?.category_id}`}
+        >
           <BsArrowRightShort></BsArrowRightShort>
           <>{category?.category_name}</>
         </Link>

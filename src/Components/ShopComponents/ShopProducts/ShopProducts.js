@@ -1,17 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { servcontext } from "../../../App";
 import { FaHome } from "react-icons/fa";
 import { BsArrowRight } from "react-icons/bs";
 import "./ShopProducts.css";
 import ShopProductRight from "../ShopProductRight/ShopProductRight";
+import ShopAllProducts from "../ShopAllProducts/ShopAllProducts";
 const ShopProducts = () => {
   const { shopproduct } = useContext(servcontext);
-  //   const [singlproduct, setsinglproduct] = useState();
   const location = useLocation();
   const { pathname } = location;
   const id = pathname.split("/")[2];
-
+  console.log(id);
   const singleproducts = shopproduct?.filter(
     (products) => products.category_id === id
   );
@@ -33,6 +33,12 @@ const ShopProducts = () => {
         <div className="shop-product-left col col-12 col-lg-10 col-sm-12 col-md-12">
           <div className="shop-product-banner">
             <img src={singlproduct?.category_banner} alt="" />
+          </div>
+          <div className="all-product-container">
+            <ShopAllProducts
+              product={singlproduct}
+              categoryid={id}
+            ></ShopAllProducts>
           </div>
         </div>
         <div className="shop-product-right col col-12 col-lg-2 col-sm-12 col-md-12">
