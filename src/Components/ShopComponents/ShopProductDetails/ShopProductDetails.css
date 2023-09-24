@@ -1,0 +1,193 @@
+.shop-details-container {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.shop-details-left-right {
+    /* border: 1px solid green; */
+}
+
+.shop-details-left {
+    /* border: 1px solid gray; */
+    display: flex;
+}
+
+.shop-left-left {
+    width: 20%;
+}
+
+.daisplay-image-1 {
+    margin-bottom: 10px;
+    border: 1px solid gainsboro;
+}
+
+.shop-left-right {
+    height: 100%;
+    height: 100%;
+    margin-left: 20px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid gainsboro;
+}
+
+.zoom-image {
+    max-width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.shop-left-right:hover .zoom-image {
+    /* transform: scale(1.1); */
+}
+
+.shop-details-right {
+    /* border: 1px solid greenyellow; */
+}
+
+.review-stars {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.review-stars p {
+    font-size: 1rem;
+    color: rgb(63, 62, 62);
+    font-weight: 500;
+}
+
+.review-star {
+    font-size: 1.2rem;
+    color: gray;
+    margin-right: 4px;
+    margin-bottom: 10px;
+}
+
+.taka-stock-brand {
+    border-top: 1px solid gainsboro;
+    border-bottom: 1px solid gainsboro;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0px;
+    margin-bottom: 15px;
+
+
+}
+
+.product-stock {
+    border-left: 1px solid gainsboro;
+    padding-left: 60px;
+}
+
+.product-stock h6 {
+    display: flex;
+    align-items: center;
+}
+
+.product-stock span {
+    color: green;
+    margin-left: 3px;
+}
+
+.product-stock p {
+    display: flex;
+    align-items: center;
+}
+
+.stock-icon {
+    margin-right: 8px;
+    color: #be5184;
+    font-size: 1.1rem;
+}
+
+.brand-logo p {
+    text-align: center;
+    color: #be5184;
+}
+
+.brand-logo img {
+
+    width: 120px;
+    color: brown;
+}
+
+.number-cart-buy {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.number-input {
+    border: 1px solid gainsboro;
+    width: 10%;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.add-button-cart {
+    border: 1px solid rgb(44, 44, 75);
+    background-color: rgb(44, 44, 78);
+    color: white;
+    font-weight: 500;
+    padding: 10px;
+    width: 70%;
+    margin-right: 10px;
+    transition: all 1s;
+}
+
+.add-button-cart:hover {
+    background-color: white;
+    color: black;
+
+}
+
+.buy-button-now {
+    width: 15%;
+    padding: 10px;
+    border: 1px solid rgb(44, 44, 75);
+    background-color: rgb(44, 44, 78);
+    color: white;
+    font-weight: 500;
+    transition: all 1s;
+}
+
+.buy-button-now:hover {
+    background-color: white;
+    color: black;
+}
+
+.wishlist-compare {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-wishlist {
+    border: 1px solid #be5184;
+    background-color: #be5184;
+    color: white;
+    font-weight: 500;
+    width: 49%;
+    padding: 10px;
+    transition: all 1s;
+}
+
+.add-compare {
+    border: 1px solid #be5184;
+    background-color: #be5184;
+    color: white;
+    font-weight: 500;
+    width: 49%;
+    padding: 10px;
+    transition: all 1s;
+}
+
+.add-wishlist:hover {
+    background-color: white;
+    color: #be5184;
+}
+
+.add-compare:hover {
+    background-color: white;
+    color: #be5184;
+}
