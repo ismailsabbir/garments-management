@@ -5,6 +5,17 @@
     margin-bottom: 40px;
 }
 
+.cart-modal {
+    display: none;
+    position: fixed;
+    top: 120px;
+    right: 10px;
+    border: 1px solid black;
+    width: 399px;
+    z-index: 2;
+    background-color: wheat;
+}
+
 .shop-details-left {
     display: flex;
 }
@@ -154,6 +165,9 @@
 }
 
 .add-button-cart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 1px solid rgb(44, 44, 75);
     background-color: rgb(44, 44, 78);
     color: white;
@@ -162,6 +176,11 @@
     width: 70%;
     margin-right: 10px;
     transition: all 1s;
+}
+
+.cart-add-icon {
+    margin-right: 20px;
+    font-size: 1.5rem;
 }
 
 .add-button-cart:hover {
@@ -192,6 +211,9 @@
 }
 
 .add-wishlist {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 1px solid #be5184;
     background-color: #be5184;
     color: white;
@@ -201,7 +223,16 @@
     transition: all 1s;
 }
 
+.love-icon {
+    margin-right: 15px;
+    font-size: 1.5rem;
+
+}
+
 .add-compare {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 1px solid #be5184;
     background-color: #be5184;
     color: white;
@@ -209,6 +240,11 @@
     width: 49%;
     padding: 10px;
     transition: all 1s;
+}
+
+.product-compare-icon {
+    font-size: 1.5rem;
+    margin-right: 15px;
 }
 
 .add-wishlist:hover {

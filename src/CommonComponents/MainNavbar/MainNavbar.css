@@ -42,11 +42,77 @@
     border-radius: 2px;
 }
 
+.navbar-end-con {
+    /* border: 1px solid brown; */
+    display: flex;
+    align-items: center;
+    width: 620px;
+
+}
+
 #make-project-btn {
     color: white;
 }
 
 .button:hover {
     background-color: #7D405C;
+}
 
+.nav-useer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-left: 20px;
+}
+
+.nav-user-icon {
+    font-size: 1.5rem;
+    margin-right: 8px;
+}
+
+.nav-login-register {
+    line-height: 0%;
+
+}
+
+.nav-login-register p {
+    color: #be5184;
+    font-size: 1rem;
+}
+
+.nav-login {
+    text-decoration: none;
+    color: white;
+    font-size: 0.8rem;
+}
+
+.favarite-icon {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.nav-cart-con {
+    margin-left: 20px;
+    color: white;
+    /* border: 1px solid white; */
+    /* padding: 8.5px; */
+    border-radius: 5px;
+    /* background-color: #be5184; */
+
+}
+
+.nav-cart-icon {
+    font-size: 1.5rem;
+    color: white;
+    /* position: relative; */
+}
+
+.cartproduct-q {
+    border: 1px solid #be5184;
+    background-color: #be5184;
+    padding: 2px;
+    border-radius: 50%;
+    /* position: absolute; */
+    /* top: 2px; */
 }

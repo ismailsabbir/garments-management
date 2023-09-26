@@ -10,7 +10,13 @@ import { BsArrowRight } from "react-icons/bs";
 import { GoDotFill } from "react-icons/go";
 import ShopDetailsInfo from "../ShopDetailsInfo/ShopDetailsInfo";
 import ProductReviewsFrom from "../ProductReviewsFrom/ProductReviewsFrom";
+import { LiaShoppingBagSolid } from "react-icons/lia";
+import { MdCompareArrows } from "react-icons/md";
+import { IoHeartDislikeOutline } from "react-icons/io5";
+import { AuthContext } from "../../../Context/UserContext";
 const ShopProductDetails = () => {
+  const { user } = useContext(AuthContext);
+  const email = user?.email;
   const { shopproduct } = useContext(servcontext);
   const [size, setsize] = useState(38);
   const [quentuty, setquentity] = useState(1);
@@ -46,9 +52,35 @@ const ShopProductDetails = () => {
     size,
     quentuty,
   };
+  const productinfo = {
+    ...oneproduct,
+    email,
+  };
   console.log(shopinfo);
+  const handlecartadd = () => {
+    console.log("add", oneproduct);
+    fetch(`${process.env.REACT_APP_URL}/cartproduct`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(productinfo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data?._id) {
+        }
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
   return (
     <div className="shop-details-container">
+      <div className="cart-modal">
+        <h1>fjjfjf</h1>
+      </div>
       <div className="shop-details-left-right row">
         <div className="shop-details-left col col-12 col-lg-6 col-md-12 col-sm-12">
           <div className="shop-left-left">
@@ -180,15 +212,24 @@ const ShopProductDetails = () => {
               <span>{quentuty}</span>
               <button onClick={handledecress}>-</button>
             </div>
-            <button className="add-button-cart">ADD TO CART</button>
+            <button onClick={handlecartadd} className="add-button-cart">
+              <LiaShoppingBagSolid className="cart-add-icon"></LiaShoppingBagSolid>
+              ADD TO CART
+            </button>
             <Link to={`/checkout`} state={shopinfo} className="buy-button-now">
               BUY NOW
             </Link>
             {/* <button onClick={handlebuynow} className="buy-button-now">BUY NOW</button> */}
           </div>
           <div className="wishlist-compare">
-            <button className="add-wishlist">ADD TO Wish List</button>
-            <button className="add-compare">COMPARE THIS PRODUCT</button>
+            <button className="add-wishlist">
+              <IoHeartDislikeOutline className="love-icon"></IoHeartDislikeOutline>
+              ADD TO Wish List
+            </button>
+            <button className="add-compare">
+              <MdCompareArrows className="product-compare-icon"></MdCompareArrows>{" "}
+              COMPARE THIS PRODUCT
+            </button>
           </div>
         </div>
       </div>

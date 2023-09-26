@@ -6,7 +6,7 @@ import AboutUs from "./Pages/AboutUs/AboutUs";
 import ServicesPage from "./Pages/ServicesPage/ServicesPage";
 import ContactUs from "./Pages/ContactUs/ContactUs";
 import ErrorPages from "./Pages/ErrorPages/ErrorPages";
-import { createContext, useState } from "react";
+import { createContext } from "react";
 import useFetch from "./Hooks/useFetch";
 import ServicesDetails from "./Pages/ServicesDetails/ServicesDetails";
 import ProjectDetails from "./Pages/ProjectDetails/ProjectDetails";
@@ -24,7 +24,7 @@ import ShopProducts from "./Components/ShopComponents/ShopProducts/ShopProducts"
 import ShopProductDetails from "./Components/ShopComponents/ShopProductDetails/ShopProductDetails";
 import CheckOutPages from "./Components/ShopComponents/CheckOutPages/CheckOutPages";
 import ShopPaymentPages from "./Components/ShopComponents/ShopPaymentPages/ShopPaymentPages";
-
+import CartProductsPages from "./Pages/CartProductsPages/CartProductsPages";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -34,6 +34,7 @@ function App() {
   const categorys = useFetch(`${process.env.REACT_APP_URL}/project-category`);
   const shopcategorys = useFetch(`${process.env.REACT_APP_URL}/shopcategory`);
   const shopproducts = useFetch(`${process.env.REACT_APP_URL}/shopproduct`);
+
   const shopproduct = shopproducts?.data;
   const shopcategory = shopcategorys?.data;
   const blogs = blogss?.data;
@@ -109,6 +110,14 @@ function App() {
         {
           path: "/shoppayment",
           element: <ShopPaymentPages></ShopPaymentPages>,
+        },
+        {
+          path: `/cartproduct`,
+          element: (
+            <PrivetRoutes>
+              <CartProductsPages></CartProductsPages>
+            </PrivetRoutes>
+          ),
         },
         {
           path: `/shop-product/:id`,
