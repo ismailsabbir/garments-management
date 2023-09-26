@@ -1,16 +1,19 @@
 import React, { useContext, useState } from "react";
-
 import { servcontext } from "../../../App";
 import { Link, useLocation } from "react-router-dom";
 import ReactImageMagnify from "react-image-magnify";
+
 import { AiOutlineStar } from "react-icons/ai";
 import logo from "../../../Images/Logo.png";
 import "./ShopProductDetails.css";
 import { BsArrowRight } from "react-icons/bs";
 import { GoDotFill } from "react-icons/go";
+import ShopDetailsInfo from "../ShopDetailsInfo/ShopDetailsInfo";
+import ProductReviewsFrom from "../ProductReviewsFrom/ProductReviewsFrom";
 const ShopProductDetails = () => {
   const { shopproduct } = useContext(servcontext);
-  //   const[dressimage,setdressimage]=useState()
+  const [size, setsize] = useState(38);
+  const [quentuty, setquentity] = useState(1);
   const location = useLocation();
   const { pathname } = location;
   const categoryid = pathname.split("/")[2];
@@ -23,8 +26,27 @@ const ShopProductDetails = () => {
     (products) => products.product_id === id
   );
   const oneproduct = productss?.[0];
-  console.log(oneproduct);
   const [dressimage, setdressimage] = useState(oneproduct?.Product_image);
+  const handleincress = () => {
+    const newquentity = quentuty + 1;
+    setquentity(newquentity);
+  };
+  const handledecress = () => {
+    if (quentuty > 1) {
+      const newquentity = quentuty - 1;
+      setquentity(newquentity);
+    } else {
+      return;
+    }
+  };
+  console.log(quentuty);
+
+  const shopinfo = {
+    ...oneproduct,
+    size,
+    quentuty,
+  };
+  console.log(shopinfo);
   return (
     <div className="shop-details-container">
       <div className="shop-details-left-right row">
@@ -46,21 +68,39 @@ const ShopProductDetails = () => {
             </div>
           </div>
           <div className="shop-left-right">
-            <ReactImageMagnify
-              {...{
-                smallImage: {
-                  alt: "Wristwatch by Ted Baker London",
-                  isFluidWidth: true,
-                  src: dressimage,
-                },
-                largeImage: {
-                  src: dressimage,
-                  width: 1200,
-                  height: 1800,
-                },
-              }}
-            />
-            {/* <img className="zoom-image" src={dressimage} alt="not found" /> */}
+            {dressimage ? (
+              <ReactImageMagnify
+                {...{
+                  smallImage: {
+                    alt: "Wristwatch by Ted Baker London",
+                    isFluidWidth: true,
+                    src: dressimage,
+                  },
+                  largeImage: {
+                    src: dressimage,
+                    width: 1200,
+                    height: 1800,
+                  },
+                  magnifierPosition: "original",
+                }}
+              />
+            ) : (
+              <ReactImageMagnify
+                {...{
+                  smallImage: {
+                    alt: "Wristwatch by Ted Baker London",
+                    isFluidWidth: true,
+                    src: oneproduct?.Product_image,
+                  },
+                  largeImage: {
+                    src: oneproduct?.Product_image,
+                    width: 1200,
+                    height: 1800,
+                  },
+                  magnifierPosition: "original",
+                }}
+              />
+            )}
           </div>
         </div>
         <div className="shop-details-right col col-12 col-lg-6 col-md-12 col-sm-12">
@@ -96,16 +136,55 @@ const ShopProductDetails = () => {
               <p className="mt-2 ">Garment</p>
             </Link>
           </div>
+          {singleproducts?.[0]?.category_id !== "01" ? (
+            <div className="select-size-con">
+              <p>Select size: </p>
+              <button
+                className={size === 38 ? "select_size-btn" : "size_btn"}
+                onClick={() => setsize(38)}
+              >
+                38
+              </button>
+              <button
+                className={size === 40 ? "select_size-btn" : "size_btn"}
+                onClick={() => setsize(40)}
+              >
+                40
+              </button>
+              <button
+                className={size === 42 ? "select_size-btn" : "size_btn"}
+                onClick={() => setsize(42)}
+              >
+                42
+              </button>
+              <button
+                className={size === 44 ? "select_size-btn" : "size_btn"}
+                onClick={() => setsize(44)}
+              >
+                44
+              </button>
+              <button
+                className={size === 46 ? "select_size-btn" : "size_btn"}
+                onClick={() => setsize(46)}
+              >
+                46
+              </button>
+            </div>
+          ) : (
+            <></>
+          )}
+
           <div className="number-cart-buy">
-            <input
-              className="number-input"
-              type="number"
-              min="1"
-              step="1"
-              placeholder="pices"
-            />
+            <div className="number-input">
+              <button onClick={handleincress}>+</button>
+              <span>{quentuty}</span>
+              <button onClick={handledecress}>-</button>
+            </div>
             <button className="add-button-cart">ADD TO CART</button>
-            <button className="buy-button-now">BUY NOW</button>
+            <Link to={`/checkout`} state={shopinfo} className="buy-button-now">
+              BUY NOW
+            </Link>
+            {/* <button onClick={handlebuynow} className="buy-button-now">BUY NOW</button> */}
           </div>
           <div className="wishlist-compare">
             <button className="add-wishlist">ADD TO Wish List</button>
@@ -113,6 +192,8 @@ const ShopProductDetails = () => {
           </div>
         </div>
       </div>
+      <ShopDetailsInfo oneproduct={oneproduct}></ShopDetailsInfo>
+      <ProductReviewsFrom oneproduct={oneproduct}></ProductReviewsFrom>
     </div>
   );
 };

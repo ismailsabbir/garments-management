@@ -6,7 +6,7 @@ import AboutUs from "./Pages/AboutUs/AboutUs";
 import ServicesPage from "./Pages/ServicesPage/ServicesPage";
 import ContactUs from "./Pages/ContactUs/ContactUs";
 import ErrorPages from "./Pages/ErrorPages/ErrorPages";
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import useFetch from "./Hooks/useFetch";
 import ServicesDetails from "./Pages/ServicesDetails/ServicesDetails";
 import ProjectDetails from "./Pages/ProjectDetails/ProjectDetails";
@@ -22,6 +22,8 @@ import PaymentPages from "./Pages/PaymentPages/PaymentPages";
 import PrivetRoutes from "./Routes/PrivetRoutes";
 import ShopProducts from "./Components/ShopComponents/ShopProducts/ShopProducts";
 import ShopProductDetails from "./Components/ShopComponents/ShopProductDetails/ShopProductDetails";
+import CheckOutPages from "./Components/ShopComponents/CheckOutPages/CheckOutPages";
+import ShopPaymentPages from "./Components/ShopComponents/ShopPaymentPages/ShopPaymentPages";
 
 export const servcontext = createContext();
 function App() {
@@ -38,6 +40,7 @@ function App() {
   const projects = projectss?.data;
   const member = memberss?.data;
   const category = categorys.data;
+
   const alldata = {
     data,
     projects,
@@ -47,6 +50,7 @@ function App() {
     shopcategory,
     shopproduct,
   };
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -103,12 +107,20 @@ function App() {
           element: <ShopPages></ShopPages>,
         },
         {
+          path: "/shoppayment",
+          element: <ShopPaymentPages></ShopPaymentPages>,
+        },
+        {
           path: `/shop-product/:id`,
           element: <ShopProducts></ShopProducts>,
         },
         {
           path: `/shop-details/:categoryid/:id`,
           element: <ShopProductDetails></ShopProductDetails>,
+        },
+        {
+          path: `/checkout`,
+          element: <CheckOutPages></CheckOutPages>,
         },
         {
           path: "/blog",
