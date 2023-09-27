@@ -18,6 +18,7 @@ const facebookprovider = new FacebookAuthProvider();
 const UserContext = ({ children }) => {
   const [user, setuser] = useState({});
   const [loading, setloading] = useState(true);
+
   const createuser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };

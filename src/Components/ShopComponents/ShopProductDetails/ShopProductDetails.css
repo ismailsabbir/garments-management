@@ -256,3 +256,56 @@
     background-color: white;
     color: #be5184;
 }
+
+
+/* toast design */
+.toast-top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.toast-top img {
+    width: 80px;
+    margin-right: 10px;
+}
+
+.toast-message h6 {
+    color: #be5184;
+}
+
+.toast-message span {
+    color: green;
+    font-weight: 500;
+}
+
+#toast-name {
+    color: #be5184;
+}
+
+.toast-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.toast-cart-btn {
+    text-decoration: none;
+    width: 48%;
+    border: 1px solid rgb(32, 32, 65);
+    background-color: rgb(39, 39, 70);
+    font-size: 1rem;
+    color: white;
+    padding: 10px;
+}
+
+.toast-cart-btn1 {
+    text-decoration: none;
+    width: 48%;
+    border: 1px solid #be5184;
+    background-color: #be5184;
+    font-size: 1rem;
+    color: white;
+    padding: 10px;
+}

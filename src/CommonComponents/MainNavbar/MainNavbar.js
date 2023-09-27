@@ -15,13 +15,20 @@ import { useEffect } from "react";
 const MainNavbar = () => {
   const { user, userlogout } = useContext(AuthContext);
   const [cartproducts, setcartproducts] = useState([]);
-  console.log(user);
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => setcartproducts(data));
-  }, [user?.email]);
-
+    fetchData();
+  });
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`
+      );
+      const jsonData = await response.json();
+      setcartproducts(jsonData);
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+    }
+  };
   const handlelogout = () => {
     console.log("sub");
     userlogout()

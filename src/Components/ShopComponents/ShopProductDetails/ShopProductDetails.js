@@ -14,6 +14,7 @@ import { LiaShoppingBagSolid } from "react-icons/lia";
 import { MdCompareArrows } from "react-icons/md";
 import { IoHeartDislikeOutline } from "react-icons/io5";
 import { AuthContext } from "../../../Context/UserContext";
+import { ToastContainer, toast } from "react-toastify";
 const ShopProductDetails = () => {
   const { user } = useContext(AuthContext);
   const email = user?.email;
@@ -45,8 +46,6 @@ const ShopProductDetails = () => {
       return;
     }
   };
-  console.log(quentuty);
-
   const shopinfo = {
     ...oneproduct,
     size,
@@ -56,9 +55,7 @@ const ShopProductDetails = () => {
     ...oneproduct,
     email,
   };
-  console.log(shopinfo);
   const handlecartadd = () => {
-    console.log("add", oneproduct);
     fetch(`${process.env.REACT_APP_URL}/cartproduct`, {
       method: "POST",
       headers: {
@@ -69,8 +66,37 @@ const ShopProductDetails = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data?._id) {
+          toast(
+            <div>
+              <div className="toast-top">
+                <img src={data?.Product_image} alt="not found" />
+                <div className="toast-message">
+                  <h6>{data?.product_name}</h6>
+                  <p>
+                    <span>succeed:</span> You have add{" "}
+                    <span id="toast-name">{data?.product_name}</span>
+                  </p>
+                </div>
+              </div>
+              <div className="toast-button">
+                <Link to="/cartproduct" className="toast-cart-btn">
+                  View Cart
+                </Link>
+                <Link className="toast-cart-btn1">CheckOut</Link>
+              </div>
+            </div>,
+            {
+              position: "top-right",
+              autoClose: 10000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            }
+          );
         }
-        console.log(data);
       })
       .catch((err) => {
         console.log(err.message);
@@ -235,6 +261,7 @@ const ShopProductDetails = () => {
       </div>
       <ShopDetailsInfo oneproduct={oneproduct}></ShopDetailsInfo>
       <ProductReviewsFrom oneproduct={oneproduct}></ProductReviewsFrom>
+      <ToastContainer />
     </div>
   );
 };
