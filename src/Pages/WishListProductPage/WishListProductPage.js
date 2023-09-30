@@ -18,7 +18,7 @@ const WishListProductPage = () => {
   const [loading, setLoading] = useState(true);
   const [modalproduct, setmodalproduct] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [size, setsize] = useState('S');
+  const [detlets, setdelete] = useState(false);
   const [quentuty, setquentity] = useState(1);
   console.log(cartproducts);
   useEffect(() => {
@@ -100,6 +100,21 @@ const WishListProductPage = () => {
         });
     }
   };
+  const handledelete = (product) => {
+    fetch(`${process.env.REACT_APP_URL}/wishlistproduct/${product?._id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const remingproduct = cartproducts?.filter(
+          (rproduct) => rproduct?._id !== product?._id
+        );
+        setcartproducts(remingproduct);
+        if (data?.deletedCount > 0) {
+          setdelete(true);
+        }
+      });
+  };
   return (
     <div>
       <Modal
@@ -111,6 +126,24 @@ const WishListProductPage = () => {
         <Loading></Loading>
       ) : (
         <div className="wishlist-page-con">
+          {detlets && (
+            <div className="alert alert-success">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="stroke-current shrink-0 h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span>Success: You have modified your wish list!</span>
+            </div>
+          )}
           <div className="home-category-link">
             <Link className="cate-home-link">
               {" "}
@@ -144,7 +177,10 @@ const WishListProductPage = () => {
                       >
                         <BsBagDash></BsBagDash>
                       </button>
-                      <button className="wish-delet">
+                      <button
+                        onClick={() => handledelete(product)}
+                        className="wish-delet"
+                      >
                         {" "}
                         <RiDeleteBin5Line></RiDeleteBin5Line>
                       </button>
