@@ -25,6 +25,7 @@ import ShopProductDetails from "./Components/ShopComponents/ShopProductDetails/S
 import CheckOutPages from "./Components/ShopComponents/CheckOutPages/CheckOutPages";
 import ShopPaymentPages from "./Components/ShopComponents/ShopPaymentPages/ShopPaymentPages";
 import CartProductsPages from "./Pages/CartProductsPages/CartProductsPages";
+import WishListProductPage from "./Pages/WishListProductPage/WishListProductPage";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -116,6 +117,14 @@ function App() {
           element: (
             <PrivetRoutes>
               <CartProductsPages></CartProductsPages>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: `/wishlistproduct`,
+          element: (
+            <PrivetRoutes>
+              <WishListProductPage></WishListProductPage>
             </PrivetRoutes>
           ),
         },

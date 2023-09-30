@@ -173,6 +173,55 @@ const ShopAllProducts = ({ product, categoryid }) => {
     //     console.log(err.message);
     //   });
   };
+  const handleaddwishlist = (product) => {
+    const productinfo = {
+      ...product,
+      email,
+    };
+    fetch(`${process.env.REACT_APP_URL}/wishlistproduct`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(productinfo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data?._id) {
+          toast(
+            <div>
+              <div className="toast-top">
+                <img src={data?.Product_image} alt="not found" />
+                <div className="toast-message">
+                  <h6>{data?.product_name}</h6>
+                  <p>
+                    <span>succeed:</span> You have add{" "}
+                    <span id="toast-name">{data?.product_name}</span>
+                  </p>
+                </div>
+              </div>
+              <div className="toast-button">
+                To your
+                <Link to="/wishlistproduct">WishList</Link>
+              </div>
+            </div>,
+            {
+              position: "top-right",
+              autoClose: 10000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: false,
+              progress: undefined,
+              theme: "light",
+            }
+          );
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
   return (
     <div className="all-products-con">
       <Modal
@@ -200,13 +249,6 @@ const ShopAllProducts = ({ product, categoryid }) => {
                 />
               </Link>
 
-              {/* <button
-                onClick={() => handleaddtocart(product)}
-                className="add-to-cart-con"
-              >
-                Add to cart
-              </button> */}
-
               <div className="add-to-cart-con">
                 <div className="number-input" id="product-quen">
                   <button className="quen-icress" onClick={handleincress}>
@@ -224,7 +266,10 @@ const ShopAllProducts = ({ product, categoryid }) => {
                   <LiaShoppingBagSolid className="mr-2 text-lg"></LiaShoppingBagSolid>
                   Add to cart
                 </button>
-                <MdFavoriteBorder className="product-fava"></MdFavoriteBorder>
+                <MdFavoriteBorder
+                  onClick={() => handleaddwishlist(product)}
+                  className="product-fava"
+                ></MdFavoriteBorder>
                 <MdCompareArrows className="product-fava1"></MdCompareArrows>
               </div>
             </div>

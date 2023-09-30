@@ -6,33 +6,26 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { MdFavoriteBorder } from "react-icons/md";
-import { Link } from "react-router-dom";
 import Loading from "./../../CommonComponents/Loading/Loading";
 const CartProductsPages = () => {
   const { user } = useContext(AuthContext);
   const [cartproducts, setcartproducts] = useState([]);
   const [loading, setLoading] = useState(true);
   console.log(user);
-  // useEffect(() => {
-  //   fetch(`${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`)
-  //     .then((res) => res.json())
-  //     .then((data) => setcartproducts(data));
-  // }, [user?.email]);
 
   useEffect(() => {
-    // Simulate a data fetch with a delay (you should replace this with your actual fetch logic)
     setTimeout(() => {
-      fetch(`${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`) // Replace with your API endpoint
-        .then((response) => response.json())
+      fetch(`${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`)
+        .then((res) => res.json())
         .then((jsonData) => {
           setcartproducts(jsonData);
-          setLoading(false); // Set loading to false when data is fetched
+          setLoading(false);
         })
         .catch((error) => {
           console.error("Failed to fetch data:", error);
-          setLoading(false); // Set loading to false in case of an error
+          setLoading(false);
         });
-    }, 2000); // Simulated delay of 2 seconds
+    }, 2000);
   }, [user?.email]);
 
   console.log(cartproducts);

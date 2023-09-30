@@ -1,0 +1,19 @@
+.wishlist-product-con {
+    width: 85%;
+    border: 1px solid brown;
+    margin: 0 auto;
+}
+
+.wishlist-left {
+    border: 1px solid green;
+}
+
+.wishlist-right {
+    border: 1px solid yellow;
+}
+
+.wishlisst-product {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

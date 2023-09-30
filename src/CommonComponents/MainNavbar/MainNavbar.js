@@ -166,13 +166,21 @@ const MainNavbar = () => {
                   </Link>
                 </div>
               </div>
-              <div className="nav-useer">
+              <Link to={`/wishlistproduct`} className="nav-useer">
                 <RiDislikeLine className="favarite-icon"></RiDislikeLine>
-                <div className="nav-login-register">
+                <Link
+                  to="/wishlistproduct"
+                  className="nav-login-register no-underline"
+                >
                   <p> Wishlist</p>
-                  <Link className="nav-login">Edit your wishlist</Link>
-                </div>
-              </div>
+                  <Link
+                    to={`/wishlistproduct`}
+                    className="nav-login no-underline"
+                  >
+                    Edit your wishlist
+                  </Link>
+                </Link>
+              </Link>
               {/* <div className="nav-cart-con">
                 <BsBagDash className="nav-cart-icon"></BsBagDash>
                 <span className="cartproduct-q">dd</span>
