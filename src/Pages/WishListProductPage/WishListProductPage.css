@@ -1,19 +1,64 @@
 .wishlist-product-con {
     width: 85%;
-    border: 1px solid brown;
+    /* border: 1px solid brown; */
     margin: 0 auto;
+    margin-bottom: 40px;
+    margin-top: 10px;
 }
 
 .wishlist-left {
-    border: 1px solid green;
+    border: 1px solid gainsboro;
+    padding: 10px 15px;
+
 }
 
 .wishlist-right {
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
+    /* padding-left: 30px; */
 }
 
 .wishlisst-product {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-top: 20px;
+}
+
+.wishlisst-product img {
+    width: 85px;
+    height: 85px;
+}
+
+.wishlist-product {
+    /* border: 1px solid brown; */
+    width: 30%;
+}
+
+.stock {
+    color: green;
+}
+
+.wish-add-bag {
+    border: 1px solid gainsboro;
+    padding: 10px;
+    background-color: rgb(37, 37, 65);
+    color: white;
+    transition: all 2ms;
+}
+
+.wish-delet {
+    border: 1px solid gainsboro;
+    padding: 10px;
+    background-color: #be5184;
+    color: white;
+}
+
+.wish-add-bag:hover {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+}
+
+.wish-delet:hover {
+    background-color: #752c4e;
 }

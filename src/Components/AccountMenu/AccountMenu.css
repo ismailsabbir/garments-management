@@ -1,0 +1,22 @@
+.menu-link {
+    text-decoration: none;
+    color: rgb(70, 69, 69);
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+    transition: all 1ms;
+}
+
+.menu-link:hover {
+    color: #be5184;
+}
+
+.account-menu-con {
+    padding-left: 15px;
+}
+
+.account-menu-con h5 {
+    margin-bottom: 20px;
+}

@@ -9,7 +9,7 @@ import Modal from "../../../Hooks/Modal/Modal";
 import { ToastContainer, toast } from "react-toastify";
 
 const ShopAllProducts = ({ product, categoryid }) => {
-  const [size, setsize] = useState(38);
+  const [size, setsize] = useState("S");
   const [quentuty, setquentity] = useState(1);
   const [modalproduct, setmodalproduct] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,38 +29,6 @@ const ShopAllProducts = ({ product, categoryid }) => {
       return;
     }
   };
-
-  //   toast(
-  //     <div>
-  //       <div className="toast-top">
-  //         {/* <img src={data?.Product_image} alt="not found" /> */}
-  //         <div className="toast-message">
-  //           {/* <h6>{data?.product_name}</h6> */}
-  //           <p>
-  //             <span>succeed:</span> You have add{" "}
-  //             {/* <span id="toast-name">{data?.product_name}</span> */}
-  //           </p>
-  //         </div>
-  //       </div>
-  //       <div className="toast-button">
-  //         <Link to="/cartproduct" className="toast-cart-btn">
-  //           View Cart
-  //         </Link>
-  //         <Link className="toast-cart-btn1">CheckOut</Link>
-  //       </div>
-  //     </div>,
-  //     {
-  //       position: "top-center",
-  //       autoClose: 20000,
-  //       hideProgressBar: false,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: "light",
-  //     }
-  //   );
-  // };
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -126,52 +94,6 @@ const ShopAllProducts = ({ product, categoryid }) => {
           console.log(err.message);
         });
     }
-
-    // fetch(`${process.env.REACT_APP_URL}/cartproduct`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(productinfo),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     if (data?._id) {
-    //       toast(
-    //         <div>
-    //           <div className="toast-top">
-    //             <img src={data?.Product_image} alt="not found" />
-    //             <div className="toast-message">
-    //               <h6>{data?.product_name}</h6>
-    //               <p>
-    //                 <span>succeed:</span> You have add{" "}
-    //                 <span id="toast-name">{data?.product_name}</span>
-    //               </p>
-    //             </div>
-    //           </div>
-    //           <div className="toast-button">
-    //             <Link to="/cartproduct" className="toast-cart-btn">
-    //               View Cart
-    //             </Link>
-    //             <Link className="toast-cart-btn1">CheckOut</Link>
-    //           </div>
-    //         </div>,
-    //         {
-    //           position: "top-right",
-    //           autoClose: 10000,
-    //           hideProgressBar: false,
-    //           closeOnClick: true,
-    //           pauseOnHover: true,
-    //           draggable: true,
-    //           progress: undefined,
-    //           theme: "light",
-    //         }
-    //       );
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.message);
-    //   });
   };
   const handleaddwishlist = (product) => {
     const productinfo = {
