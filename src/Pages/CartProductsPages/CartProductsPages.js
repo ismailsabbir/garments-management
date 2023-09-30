@@ -31,6 +31,22 @@ const CartProductsPages = () => {
   console.log(cartproducts);
   const handleincress = () => {};
   const handledecress = () => {};
+  const handledelete = (product) => {
+    fetch(`${process.env.REACT_APP_URL}/cartproduct/${product?._id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const remingproduct = cartproducts?.filter(
+          (rproduct) => rproduct?._id !== product?._id
+        );
+        setcartproducts(remingproduct);
+        if (data?.deletedCount > 0) {
+          // setdelete(true);
+        }
+      });
+  };
+
   return (
     <div className="cartproduct-container">
       {loading ? (
@@ -63,7 +79,9 @@ const CartProductsPages = () => {
                       <h5>Tk: {product?.product_price}</h5>
                       <div className="favarite-delete">
                         <MdFavoriteBorder className="cart-delete1"></MdFavoriteBorder>
-                        <RiDeleteBin5Line className="cart-delete"></RiDeleteBin5Line>
+                        <button onClick={() => handledelete(product)}>
+                          <RiDeleteBin5Line className="cart-delete"></RiDeleteBin5Line>
+                        </button>
                       </div>
                     </div>
                     <div className="number-input">
