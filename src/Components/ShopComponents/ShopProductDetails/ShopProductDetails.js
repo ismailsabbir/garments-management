@@ -19,7 +19,7 @@ const ShopProductDetails = () => {
   const { user } = useContext(AuthContext);
   const email = user?.email;
   const { shopproduct } = useContext(servcontext);
-  const [size, setsize] = useState(38);
+  const [size, setsize] = useState("S");
   const [quentuty, setquentity] = useState(1);
   const location = useLocation();
   const { pathname } = location;
@@ -34,6 +34,7 @@ const ShopProductDetails = () => {
   );
   const oneproduct = productss?.[0];
   const [dressimage, setdressimage] = useState(oneproduct?.Product_image);
+  console.log(oneproduct?.dress_size);
   const handleincress = () => {
     const newquentity = quentuty + 1;
     setquentity(newquentity);
@@ -54,6 +55,8 @@ const ShopProductDetails = () => {
   const productinfo = {
     ...oneproduct,
     email,
+    quentuty,
+    size,
   };
   const handlecartadd = () => {
     fetch(`${process.env.REACT_APP_URL}/cartproduct`, {
@@ -102,6 +105,7 @@ const ShopProductDetails = () => {
         console.log(err.message);
       });
   };
+  console.log(size);
   return (
     <div className="shop-details-container">
       <div className="cart-modal">
@@ -194,10 +198,21 @@ const ShopProductDetails = () => {
               <p className="mt-2 ">Garment</p>
             </Link>
           </div>
-          {singleproducts?.[0]?.category_id !== "01" ? (
+          {oneproduct?.dress_size ? (
             <div className="select-size-con">
               <p>Select size: </p>
-              <button
+              {oneproduct?.dress_size?.map((asize) => (
+                <button
+                  className={
+                    size === asize?.size ? "select_size-btn" : "size_btn"
+                  }
+                  onClick={() => setsize(asize?.size)}
+                >
+                  {asize?.size}
+                </button>
+              ))}
+
+              {/* <button
                 className={size === 38 ? "select_size-btn" : "size_btn"}
                 onClick={() => setsize(38)}
               >
@@ -226,7 +241,7 @@ const ShopProductDetails = () => {
                 onClick={() => setsize(46)}
               >
                 46
-              </button>
+              </button> */}
             </div>
           ) : (
             <></>

@@ -177,7 +177,7 @@ const MainNavbar = () => {
                 <BsBagDash className="nav-cart-icon"></BsBagDash>
                 <span className="cartproduct-q">dd</span>
               </div> */}
-              <div className="indicator nav-cart-con">
+              <Link to="/cartproduct" className="indicator nav-cart-con">
                 <span className="indicator-item badge badge-secondary">
                   {cartproducts?.length}
                   <sup>+</sup>{" "}
@@ -188,7 +188,7 @@ const MainNavbar = () => {
                 >
                   <BsBagDash className="nav-cart-icon"></BsBagDash>
                 </Link>
-              </div>
+              </Link>
             </Navbar.Collapse>
           </Navbar.Collapse>
         </Container>

@@ -1,15 +1,185 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import "./ShopAllProducts.css";
 import { Link } from "react-router-dom";
 import { AiOutlineShopping } from "react-icons/ai";
+import { AuthContext } from "../../../Context/UserContext";
+import { LiaShoppingBagSolid } from "react-icons/lia";
+import { MdCompareArrows, MdFavoriteBorder } from "react-icons/md";
+import Modal from "../../../Hooks/Modal/Modal";
+import { ToastContainer, toast } from "react-toastify";
+
 const ShopAllProducts = ({ product, categoryid }) => {
+  const [size, setsize] = useState(38);
+  const [quentuty, setquentity] = useState(1);
+  const [modalproduct, setmodalproduct] = useState();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { user } = useContext(AuthContext);
+  const email = user?.email;
   const allproduct = product?.products;
   console.log(categoryid);
+  const handleincress = () => {
+    const newquentity = quentuty + 1;
+    setquentity(newquentity);
+  };
+  const handledecress = () => {
+    if (quentuty > 1) {
+      const newquentity = quentuty - 1;
+      setquentity(newquentity);
+    } else {
+      return;
+    }
+  };
+
+  //   toast(
+  //     <div>
+  //       <div className="toast-top">
+  //         {/* <img src={data?.Product_image} alt="not found" /> */}
+  //         <div className="toast-message">
+  //           {/* <h6>{data?.product_name}</h6> */}
+  //           <p>
+  //             <span>succeed:</span> You have add{" "}
+  //             {/* <span id="toast-name">{data?.product_name}</span> */}
+  //           </p>
+  //         </div>
+  //       </div>
+  //       <div className="toast-button">
+  //         <Link to="/cartproduct" className="toast-cart-btn">
+  //           View Cart
+  //         </Link>
+  //         <Link className="toast-cart-btn1">CheckOut</Link>
+  //       </div>
+  //     </div>,
+  //     {
+  //       position: "top-center",
+  //       autoClose: 20000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: "light",
+  //     }
+  //   );
+  // };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   const handleaddtocart = (product) => {
-    console.log(product);
+    setmodalproduct(product);
+    const productinfo = {
+      ...product,
+      quentuty,
+      size,
+      email,
+    };
+    if (product?.dress_size) {
+      openModal();
+    } else {
+      fetch(`${process.env.REACT_APP_URL}/cartproduct`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(productinfo),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data?._id) {
+            toast(
+              <div>
+                <div className="toast-top">
+                  <img src={data?.Product_image} alt="not found" />
+                  <div className="toast-message">
+                    <h6>{data?.product_name}</h6>
+                    <p>
+                      <span>succeed:</span> You have add{" "}
+                      <span id="toast-name">{data?.product_name}</span>
+                    </p>
+                  </div>
+                </div>
+                <div className="toast-button">
+                  <Link to="/cartproduct" className="toast-cart-btn">
+                    View Cart
+                  </Link>
+                  <Link className="toast-cart-btn1">CheckOut</Link>
+                </div>
+              </div>,
+              {
+                position: "top-right",
+                autoClose: 10000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+            );
+          }
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
+
+    // fetch(`${process.env.REACT_APP_URL}/cartproduct`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(productinfo),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     if (data?._id) {
+    //       toast(
+    //         <div>
+    //           <div className="toast-top">
+    //             <img src={data?.Product_image} alt="not found" />
+    //             <div className="toast-message">
+    //               <h6>{data?.product_name}</h6>
+    //               <p>
+    //                 <span>succeed:</span> You have add{" "}
+    //                 <span id="toast-name">{data?.product_name}</span>
+    //               </p>
+    //             </div>
+    //           </div>
+    //           <div className="toast-button">
+    //             <Link to="/cartproduct" className="toast-cart-btn">
+    //               View Cart
+    //             </Link>
+    //             <Link className="toast-cart-btn1">CheckOut</Link>
+    //           </div>
+    //         </div>,
+    //         {
+    //           position: "top-right",
+    //           autoClose: 10000,
+    //           hideProgressBar: false,
+    //           closeOnClick: true,
+    //           pauseOnHover: true,
+    //           draggable: true,
+    //           progress: undefined,
+    //           theme: "light",
+    //         }
+    //       );
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.message);
+    //   });
   };
   return (
     <div className="all-products-con">
+      <Modal
+        isOpen={isModalOpen}
+        closeModal={closeModal}
+        product={modalproduct}
+      />
       <div className="row">
         {allproduct?.map((product) => (
           <div className=" shop-single-product col col-12 col-lg-4 col-sm-12 col-md-6">
@@ -30,17 +200,39 @@ const ShopAllProducts = ({ product, categoryid }) => {
                 />
               </Link>
 
-              <button
+              {/* <button
                 onClick={() => handleaddtocart(product)}
                 className="add-to-cart-con"
               >
                 Add to cart
-              </button>
+              </button> */}
+
+              <div className="add-to-cart-con">
+                <div className="number-input" id="product-quen">
+                  <button className="quen-icress" onClick={handleincress}>
+                    +
+                  </button>
+                  <span>{quentuty}</span>
+                  <button className="quen-icress" onClick={handledecress}>
+                    -
+                  </button>
+                </div>
+                <button
+                  className="add-to-cart-button"
+                  onClick={() => handleaddtocart(product)}
+                >
+                  <LiaShoppingBagSolid className="mr-2 text-lg"></LiaShoppingBagSolid>
+                  Add to cart
+                </button>
+                <MdFavoriteBorder className="product-fava"></MdFavoriteBorder>
+                <MdCompareArrows className="product-fava1"></MdCompareArrows>
+              </div>
             </div>
 
             <div className="shop-product-information">
               <h6>{product?.product_name}</h6>
               <p>Tk:{product?.product_price}</p>
+
               <Link className="buy-now-button">
                 <AiOutlineShopping></AiOutlineShopping>{" "}
                 <span className="ml-2">Buy Now</span>
@@ -49,6 +241,7 @@ const ShopAllProducts = ({ product, categoryid }) => {
           </div>
         ))}
       </div>
+      <ToastContainer />
     </div>
   );
 };

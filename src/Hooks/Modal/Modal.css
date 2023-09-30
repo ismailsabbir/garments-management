@@ -1,0 +1,41 @@
+.modal-con {
+    /* border: 1px solid brown; */
+    width: 100%;
+}
+
+.modal-top {
+    width: 375px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* border: 1px solid brown; */
+}
+
+.modal-top h3 {
+    width: 80%;
+    /* border: 1px solid gray; */
+}
+
+.modal-bottoom {
+    width: 100%;
+    border: 1px solid #be5184;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 100px;
+}
+
+.modal-add-cart {
+    width: 100%;
+    border: 1px solid #be5184;
+    /* margin-top: 80px; */
+    background-color: #be5184;
+    color: white;
+    padding: 6px;
+
+}
+
+.modal-add-cart:hover {
+    background-color: #6d2e4b;
+    border: #70324f;
+}
