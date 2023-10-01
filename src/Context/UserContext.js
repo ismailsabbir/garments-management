@@ -26,6 +26,7 @@ const UserContext = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
   const userlogout = () => {
+    localStorage.removeItem("garments-token");
     return signOut(auth);
   };
   const signinwithgoogle = () => {

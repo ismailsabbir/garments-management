@@ -29,10 +29,26 @@ const LoginPages = () => {
     seterrormessage("");
     userlogin(email, password)
       .then((req) => {
-        console.log(req.user);
+        const user = req.user;
+        console.log(user);
+        const currentuser = {
+          email: user.email,
+        };
         setsucessmessage(true);
         form.reset();
-        navigate(from, { replace: true });
+        fetch(`${process.env.REACT_APP_URL}/jwt`, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(currentuser),
+        })
+          .then((req) => req.json())
+          .then((data) => {
+            console.log(data);
+            localStorage.setItem("garments-token", data?.token);
+            navigate(from, { replace: true });
+          });
       })
       .catch((error) => {
         console.log(error);

@@ -117,3 +117,23 @@
     /* position: absolute; */
     /* top: 2px; */
 }
+
+.account {
+    cursor: pointer;
+}
+
+.dropdrown-menu {
+    height: auto;
+    /* border: 1px solid brown; */
+    margin-top: 300px;
+    width: 300px;
+}
+
+.nav-account {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: gray;
+    font-size: 1rem;
+
+}

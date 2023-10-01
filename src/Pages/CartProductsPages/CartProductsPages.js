@@ -7,16 +7,28 @@ import { useState } from "react";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { MdFavoriteBorder } from "react-icons/md";
 import Loading from "./../../CommonComponents/Loading/Loading";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 const CartProductsPages = () => {
-  const { user } = useContext(AuthContext);
+  const { user, userlogout } = useContext(AuthContext);
+  const email = user?.email;
   const [cartproducts, setcartproducts] = useState([]);
   const [loading, setLoading] = useState(true);
   console.log(user);
 
   useEffect(() => {
     setTimeout(() => {
-      fetch(`${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`)
-        .then((res) => res.json())
+      fetch(`${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`, {
+        headers: {
+          authorization: `Beare ${localStorage.getItem("garments-token")}`,
+        },
+      })
+        .then((res) => {
+          if (res.status === 401 || res.status === 403) {
+            return userlogout();
+          }
+          return res.json();
+        })
         .then((jsonData) => {
           setcartproducts(jsonData);
           setLoading(false);
@@ -26,7 +38,7 @@ const CartProductsPages = () => {
           setLoading(false);
         });
     }, 2000);
-  }, [user?.email]);
+  }, [user?.email, userlogout]);
 
   console.log(cartproducts);
   const handleincress = () => {};
@@ -44,6 +56,98 @@ const CartProductsPages = () => {
         if (data?.deletedCount > 0) {
           // setdelete(true);
         }
+      });
+  };
+  const handleaddwishlist = (product) => {
+    const {
+      product_id,
+      product_name,
+      Product_image,
+      daisplay_image,
+      product_price,
+      stock,
+      description,
+      availavle,
+      brand,
+      color,
+      metarial,
+      fabric,
+      fit_type,
+      style,
+      neek_style,
+      age,
+      about,
+      dimention,
+      department,
+      manifacture,
+      available_date,
+    } = product;
+    const productinfo = {
+      product_id,
+      product_name,
+      Product_image,
+      daisplay_image,
+      product_price,
+      stock,
+      description,
+      availavle,
+      brand,
+      color,
+      metarial,
+      fabric,
+      fit_type,
+      style,
+      neek_style,
+      age,
+      about,
+      dimention,
+      department,
+      manifacture,
+      available_date,
+      email,
+    };
+    fetch(`${process.env.REACT_APP_URL}/wishlistproduct`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(productinfo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data?._id) {
+          toast(
+            <div>
+              <div className="toast-top">
+                <img src={data?.Product_image} alt="not found" />
+                <div className="toast-message">
+                  <h6>{data?.product_name}</h6>
+                  <p>
+                    <span>succeed:</span> You have add{" "}
+                    <span id="toast-name">{data?.product_name}</span>
+                  </p>
+                </div>
+              </div>
+              <div className="toast-button">
+                To your
+                <Link to="/wishlistproduct">WishList</Link>
+              </div>
+            </div>,
+            {
+              position: "top-right",
+              autoClose: 10000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: false,
+              progress: undefined,
+              theme: "light",
+            }
+          );
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
       });
   };
 
@@ -78,7 +182,9 @@ const CartProductsPages = () => {
                     <div>
                       <h5>Tk: {product?.product_price}</h5>
                       <div className="favarite-delete">
-                        <MdFavoriteBorder className="cart-delete1"></MdFavoriteBorder>
+                        <button onClick={() => handleaddwishlist(product)}>
+                          <MdFavoriteBorder className="cart-delete1"></MdFavoriteBorder>
+                        </button>
                         <button onClick={() => handledelete(product)}>
                           <RiDeleteBin5Line className="cart-delete"></RiDeleteBin5Line>
                         </button>
@@ -205,6 +311,7 @@ const CartProductsPages = () => {
           </div>
         </div>
       </div> */}
+      <ToastContainer></ToastContainer>
     </div>
   );
 };

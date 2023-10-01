@@ -12,6 +12,12 @@ import { RiDislikeLine } from "react-icons/ri";
 import { BsBagDash } from "react-icons/bs";
 import { useState } from "react";
 import { useEffect } from "react";
+import { BsEmojiSmile } from "react-icons/bs";
+import { AiOutlineInbox } from "react-icons/ai";
+import { GrFavorite } from "react-icons/gr";
+import { GoCodeReview } from "react-icons/go";
+import { BiLogOut } from "react-icons/bi";
+
 const MainNavbar = () => {
   const { user, userlogout } = useContext(AuthContext);
   const [cartproducts, setcartproducts] = useState([]);
@@ -21,8 +27,16 @@ const MainNavbar = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`
+        `${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`,
+        {
+          headers: {
+            authorization: `Beare ${localStorage.getItem("garments-token")}`,
+          },
+        }
       );
+      if (response.status === 401 || response.status === 403) {
+        console.log(response.status);
+      }
       const jsonData = await response.json();
       setcartproducts(jsonData);
     } catch (error) {
@@ -153,10 +167,10 @@ const MainNavbar = () => {
               <Link to="/make-project" className="button" id="make-project-btn">
                 Customized
               </Link>
-              <div className="nav-useer">
-                <FaUserPlus className="nav-user-icon"></FaUserPlus>
-                <div className="nav-login-register">
-                  <p>Account</p>
+              <div className="nav-useer dropdown">
+                <FaUserPlus tabIndex={0} className="nav-user-icon"></FaUserPlus>
+                <div className="nav-login-register account">
+                  <p tabIndex={0}>Account</p>
                   <Link to="/login" className="nav-login">
                     Login
                   </Link>
@@ -165,6 +179,33 @@ const MainNavbar = () => {
                     Register
                   </Link>
                 </div>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content z-[1] menu p-2 shadow bg-base-100  w-52 dropdrown-menu"
+                >
+                  <li>
+                    <Link to="" className="nav-account">
+                      <BsEmojiSmile></BsEmojiSmile> <>Manage My Account</>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="nav-account">
+                      <AiOutlineInbox></AiOutlineInbox> <>My Orders</>
+                    </Link>
+                    <Link className="nav-account">
+                      <GrFavorite></GrFavorite>
+                      <>My Wishlist & Followed Stores</>
+                    </Link>
+                    <Link className="nav-account">
+                      <GoCodeReview></GoCodeReview>
+                      <>My Reviews</>
+                    </Link>
+                    <Link className="nav-account">
+                      <BiLogOut></BiLogOut>
+                      <>Logout</>
+                    </Link>
+                  </li>
+                </ul>
               </div>
               <Link to={`/wishlistproduct`} className="nav-useer">
                 <RiDislikeLine className="favarite-icon"></RiDislikeLine>
