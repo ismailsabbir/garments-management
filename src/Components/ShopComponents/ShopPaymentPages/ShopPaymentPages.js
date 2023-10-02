@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import bkash from "../../../Images/bkash.png";
 import card from "../../../Images/cred.png";
 import nogod from "../../../Images/nogod.avif";
@@ -11,9 +11,21 @@ import blue from "../../../Images/bluecrd.png";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import ShopCheckoutForm from "../ShopCheckoutForm/ShopCheckoutForm";
+import { useEffect } from "react";
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 const ShopPaymentPages = () => {
+  const navigate = useNavigate();
   const { state } = useLocation();
+  // const [confirm_info, setConfirmInfo] = useState();
+
+  // useEffect(() => {
+  //   if (state && state.orderconfirm) {
+  //     setConfirmInfo(state.orderconfirm);
+  //   } else {
+  //     navigate("/shop");
+  //   }
+  // }, [state, navigate]);
+  // const confirm_info = state.orderconfirm;
   const confirm_info = state.orderconfirm;
   console.log(confirm_info);
   const [cardshow, setcardshow] = useState(true);

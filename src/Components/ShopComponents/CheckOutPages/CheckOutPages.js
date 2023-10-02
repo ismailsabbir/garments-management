@@ -3,6 +3,7 @@ import { Form } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./CheckOutPages.css";
 import { useState } from "react";
+import { useEffect } from "react";
 const CheckOutPages = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -15,8 +16,13 @@ const CheckOutPages = () => {
   const [email, setemail] = useState();
   const [mobile, setmobile] = useState();
   const [message, setmesssage] = useState();
-  const { product_id, product_name, size } = shopinfo;
-  console.log(product_name);
+  useEffect(() => {
+    if (!shopinfo) {
+      navigate("/shop");
+      console.log("not shop");
+    }
+  }, []);
+  // const { product_name, size } = shopinfo;
   const firstnamehandle = (e) => {
     const firstname = e.target.value;
     setfirstname(firstname);
@@ -61,6 +67,7 @@ const CheckOutPages = () => {
     const order_status = "confirm";
     const order = "not paid";
     const transiction_id = "";
+    const { product_name, size } = shopinfo;
     const orderconfirm = {
       firstname,
       lastname,

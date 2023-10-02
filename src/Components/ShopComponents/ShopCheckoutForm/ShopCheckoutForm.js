@@ -2,8 +2,10 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 const ShopCheckoutForm = ({ paymentinfo }) => {
   // const orderid = Math.floor(Math.random() * 90000) + 10000;
+  const navigate = useNavigate();
   const [carterror, setcarderror] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [paymentsucess, setpaymentsucess] = useState("");
@@ -12,6 +14,18 @@ const ShopCheckoutForm = ({ paymentinfo }) => {
   const [payprocessing, setpayprocessing] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
+  // const [paymentinfos, setpaymentinfos] = useState();
+
+  // useEffect(() => {
+  //   if (paymentinfo) {
+  //     setpaymentinfos(paymentinfo);
+  //     console.log(" payments");
+  //   } else {
+  //     navigate("/shop");
+  //     console.log("not payments");
+  //   }
+  // }, [paymentinfo, navigate]);
+  console.log(paymentinfo);
   const { email, orderid } = paymentinfo;
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/create-payment-intent`, {

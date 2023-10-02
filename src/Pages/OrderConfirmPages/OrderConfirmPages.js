@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./OrderConfirmPages.css";
 import { Form, Table } from "react-bootstrap";
-// import useFetch from "../../Hooks/useFetch";
 const OrderConfirmPages = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -12,9 +11,7 @@ const OrderConfirmPages = () => {
   const [size_l, setsizel] = useState();
   const [size_xl, setsizexl] = useState();
   const [size_xxl, setsizexxl] = useState();
-  // const [custom_size, setcustom_size] = useState();
-  // const { data } = useFetch(`${process.env.REACT_APP_URL}/dress_size`);
-
+  console.log(orderinfo);
   const handlesizes = (dress_number) => {
     const sizes = {
       size: "S",
@@ -54,6 +51,7 @@ const OrderConfirmPages = () => {
   console.log(size_s, size_m, size_l, size_xl, size_xxl);
   const handleorderconfirm = (e) => {
     e.preventDefault();
+    const postcode = e.target.postcode.value;
     const address = e.target.address.value;
     const note = e.target.note.value;
     const order_status = "confirm";
@@ -67,6 +65,7 @@ const OrderConfirmPages = () => {
       size_xl,
       size_xxl,
       address,
+      postcode,
       note,
       order_status,
       order,
@@ -209,6 +208,18 @@ const OrderConfirmPages = () => {
             <Form.Control
               className="address-input"
               name="address"
+              type="text"
+              placeholder=""
+            />
+          </Form.Group>
+          <Form.Group
+            className="mb-3 address-input-con"
+            controlId="exampleForm.ControlInput1"
+          >
+            <Form.Label className="address-input-lavel">Post Code</Form.Label>
+            <Form.Control
+              className="address-input"
+              name="postcode"
               type="text"
               placeholder=""
             />

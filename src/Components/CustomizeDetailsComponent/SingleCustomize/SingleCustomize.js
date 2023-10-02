@@ -136,6 +136,7 @@ const SingleCustomize = ({ category }) => {
 
   const requestsubmit = (e) => {
     e.preventDefault();
+    const name = e.target.name.value;
     const email = e.target.email.value;
     const phone = e.target.phone.value;
     var dress_photo;
@@ -178,6 +179,7 @@ const SingleCustomize = ({ category }) => {
     }
     const request_info = {
       orderid,
+      name,
       email,
       phone,
       category_name,
@@ -510,6 +512,13 @@ const SingleCustomize = ({ category }) => {
               <p>How do we contact you?</p>
             </div>
             <div className="contact-way">
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+              >
+                <Form.Label className="input-lable">Your Name</Form.Label>
+                <Form.Control name="name" type="text" placeholder="" required />
+              </Form.Group>
               <Form.Group
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"

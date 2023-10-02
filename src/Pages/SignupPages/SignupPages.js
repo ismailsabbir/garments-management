@@ -4,14 +4,16 @@ import { CgGoogle } from "react-icons/cg";
 import { BiLogoFacebook, BiLogoGmail } from "react-icons/bi";
 
 import "./SignupPages.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/UserContext";
 const SignupPages = () => {
   const { createuser, signinwithgoogle, updateusername, facebooksignup, user } =
     useContext(AuthContext);
   const [errormessage, seterrormessage] = useState("");
   const [sucessmessage, setsucessmess] = useState(false);
-
+  let location = useLocation();
+  const navigate = useNavigate();
+  let from = location.state?.from?.pathname || "/";
   const name = user?.displayName;
   const email = user?.email;
   const userdata = { name, email };
@@ -66,7 +68,9 @@ const SignupPages = () => {
     signinwithgoogle()
       .then((req) => {
         const user = req.user;
-        console.log(user);
+        const currentuser = {
+          email: user.email,
+        };
         setsucessmess(true);
 
         fetch(`${process.env.REACT_APP_URL}/users`, {
@@ -79,6 +83,19 @@ const SignupPages = () => {
           .then((req) => req.json())
           .then((data) => {
             console.log(data);
+            fetch(`${process.env.REACT_APP_URL}/jwt`, {
+              method: "POST",
+              headers: {
+                "Content-type": "application/json",
+              },
+              body: JSON.stringify(currentuser),
+            })
+              .then((req) => req.json())
+              .then((data) => {
+                console.log(data);
+                localStorage.setItem("garments-token", data?.token);
+                navigate(from, { replace: true });
+              });
           });
       })
       .catch((error) => {
@@ -90,6 +107,9 @@ const SignupPages = () => {
     facebooksignup()
       .then((res) => {
         const user = res.user;
+        const currentuser = {
+          email: user.email,
+        };
         console.log(user);
         fetch(`${process.env.REACT_APP_URL}/users`, {
           method: "POST",
@@ -101,6 +121,19 @@ const SignupPages = () => {
           .then((req) => req.json())
           .then((data) => {
             console.log(data);
+            fetch(`${process.env.REACT_APP_URL}/jwt`, {
+              method: "POST",
+              headers: {
+                "Content-type": "application/json",
+              },
+              body: JSON.stringify(currentuser),
+            })
+              .then((req) => req.json())
+              .then((data) => {
+                console.log(data);
+                localStorage.setItem("garments-token", data?.token);
+                navigate(from, { replace: true });
+              });
           });
       })
       .catch((error) => {

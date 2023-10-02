@@ -30,7 +30,6 @@ const LoginPages = () => {
     userlogin(email, password)
       .then((req) => {
         const user = req.user;
-        console.log(user);
         const currentuser = {
           email: user.email,
         };
@@ -59,6 +58,9 @@ const LoginPages = () => {
     signinwithgoogle()
       .then((req) => {
         const user = req.user;
+        const currentuser = {
+          email: user.email,
+        };
         console.log(user);
         setsucessmessage(true);
         fetch(`${process.env.REACT_APP_URL}/users`, {
@@ -71,6 +73,19 @@ const LoginPages = () => {
           .then((req) => req.json())
           .then((data) => {
             console.log(data);
+            fetch(`${process.env.REACT_APP_URL}/jwt`, {
+              method: "POST",
+              headers: {
+                "Content-type": "application/json",
+              },
+              body: JSON.stringify(currentuser),
+            })
+              .then((req) => req.json())
+              .then((data) => {
+                console.log(data);
+                localStorage.setItem("garments-token", data?.token);
+                navigate(from, { replace: true });
+              });
           });
         navigate("/login");
       })
@@ -117,7 +132,11 @@ const LoginPages = () => {
   const handlefacebooksign = () => {
     facebooksignup()
       .then((req) => {
-        console.log(req.user);
+        // console.log(req.user);
+        const user = req.user;
+        const currentuser = {
+          email: user.email,
+        };
         fetch(`${process.env.REACT_APP_URL}/users`, {
           method: "POST",
           body: JSON.stringify(userdata),
@@ -128,6 +147,19 @@ const LoginPages = () => {
           .then((req) => req.json())
           .then((data) => {
             console.log(data);
+            fetch(`${process.env.REACT_APP_URL}/jwt`, {
+              method: "POST",
+              headers: {
+                "Content-type": "application/json",
+              },
+              body: JSON.stringify(currentuser),
+            })
+              .then((req) => req.json())
+              .then((data) => {
+                console.log(data);
+                localStorage.setItem("garments-token", data?.token);
+                navigate(from, { replace: true });
+              });
           });
         navigate("/login");
       })

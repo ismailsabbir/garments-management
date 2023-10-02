@@ -26,6 +26,7 @@ import CheckOutPages from "./Components/ShopComponents/CheckOutPages/CheckOutPag
 import ShopPaymentPages from "./Components/ShopComponents/ShopPaymentPages/ShopPaymentPages";
 import CartProductsPages from "./Pages/CartProductsPages/CartProductsPages";
 import WishListProductPage from "./Pages/WishListProductPage/WishListProductPage";
+import PaymentSucessPage from "./Pages/PaymentSucessPage/PaymentSucessPage";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -98,11 +99,28 @@ function App() {
         },
         {
           path: "/order-confirm",
-          element: <OrderConfirmPages></OrderConfirmPages>,
+          element: (
+            <PrivetRoutes>
+              <OrderConfirmPages></OrderConfirmPages>
+            </PrivetRoutes>
+          ),
         },
         {
           path: "/payment",
-          element: <PaymentPages></PaymentPages>,
+          element: (
+            <PrivetRoutes>
+              {" "}
+              <PaymentPages></PaymentPages>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/payment/sucess",
+          element: (
+            <PrivetRoutes>
+              <PaymentSucessPage></PaymentSucessPage>
+            </PrivetRoutes>
+          ),
         },
         {
           path: "/shop",
@@ -110,7 +128,11 @@ function App() {
         },
         {
           path: "/shoppayment",
-          element: <ShopPaymentPages></ShopPaymentPages>,
+          element: (
+            <PrivetRoutes>
+              <ShopPaymentPages></ShopPaymentPages>
+            </PrivetRoutes>
+          ),
         },
         {
           path: `/cartproduct`,
@@ -138,7 +160,11 @@ function App() {
         },
         {
           path: `/checkout`,
-          element: <CheckOutPages></CheckOutPages>,
+          element: (
+            <PrivetRoutes>
+              <CheckOutPages></CheckOutPages>
+            </PrivetRoutes>
+          ),
         },
         {
           path: "/blog",
@@ -159,11 +185,7 @@ function App() {
         },
         {
           path: "/make-project",
-          element: (
-            <PrivetRoutes>
-              <Customizedpages></Customizedpages>
-            </PrivetRoutes>
-          ),
+          element: <Customizedpages></Customizedpages>,
         },
         {
           path: `/customized-details/:id`,
@@ -172,11 +194,7 @@ function App() {
               `${process.env.REACT_APP_URL}/customized-details/${params.id}`
             );
           },
-          element: (
-            <PrivetRoutes>
-              <CustomizedDetailsPage></CustomizedDetailsPage>
-            </PrivetRoutes>
-          ),
+          element: <CustomizedDetailsPage></CustomizedDetailsPage>,
         },
         {
           path: "*",

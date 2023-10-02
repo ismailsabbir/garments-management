@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./PaymentPages.css";
 import bkash from "../../Images/bkash.png";
 import card from "../..//Images/cred.png";
@@ -12,8 +12,11 @@ import { useLocation } from "react-router-dom";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "../../Components/PaymentComponent/CheckoutForm/CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
+import { AuthContext } from "../../Context/UserContext";
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 const PaymentPages = () => {
+  const { user } = useContext(AuthContext);
+  console.log(user);
   const { state } = useLocation();
   const confirm_info = state.orderconfirm;
   console.log(confirm_info);
@@ -26,6 +29,18 @@ const PaymentPages = () => {
   const handlebkashshow = () => {
     setcardshow(false);
     setbkashshow(true);
+  };
+  const handlebkashpayment = () => {
+    fetch(`${process.env.REACT_APP_URL}/shop_bkash_payment`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(confirm_info),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        window.location.replace(data.url);
+      });
   };
   return (
     <div className="paymentcontainer">
@@ -78,7 +93,9 @@ const PaymentPages = () => {
                     Wallet Number and OTP for successful account saving.
                   </p>
                   <p>2) For all subsequent users: Enter PIN to make payment</p>
-                  <button className="pay-now-btn">Pay Now</button>
+                  <button onClick={handlebkashpayment} className="pay-now-btn">
+                    Pay Now
+                  </button>
                 </div>
               </div>
             </div>
