@@ -15,7 +15,7 @@ import logo from "../../Images/Logo.png";
 import "./Footer.css";
 const Footer = () => {
   return (
-    <div className="bg-neutral">
+    <div className="bg-neutral print:hidden">
       <footer className="footer p-10 bg-neutral text-base-content">
         <div>
           <img className="h-16" src={logo} alt="not found" />

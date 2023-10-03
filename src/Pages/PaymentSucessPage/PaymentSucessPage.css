@@ -1,0 +1,129 @@
+.payment-sucess-con {
+    background-color: aliceblue;
+    margin-top: 40px;
+    margin: 0 auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.paymentinfo {
+    width: 80%;
+    background-color: white;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+.order-sum-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #be5184;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+    /* border-bottom: 1px solid #be5184; */
+}
+
+.products-images {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 200px;
+    width: 100%;
+    /* border: 1px solid brown; */
+    margin-bottom: 45px;
+    margin-top: 25px;
+}
+
+.main-product {
+    /* width: 20%; */
+    height: 100%;
+    /* border: 1px solid gold; */
+}
+
+.main-product img {
+    height: 100%;
+}
+
+.product-design {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 200px;
+    width: 60%;
+    /* border: 1px solid green; */
+    /* width: 50%; */
+
+}
+
+.product-design img {
+    height: 170px;
+
+    /* border: 1px solid black; */
+}
+
+/* .front-con {
+    width: 48%;
+    border: 1px solid brown;
+}
+
+.back-con {
+    width: 48%;
+    border: 1px solid brown;
+} */
+.payment-title {
+    color: #be5184;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.payment-customer-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid gainsboro;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    background-color: aliceblue;
+}
+
+.payment-customer-info div {
+    width: 25%;
+}
+
+.payment-customer-info div h5 {
+    font-size: 1rem;
+    padding-bottom: 10px;
+    border-bottom: 1px solid gray;
+}
+
+.payment-customer-info div h6 {
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(61, 60, 60);
+    padding-top: 6px;
+
+}
+
+.pay-sucess-button {
+    width: 100%;
+    margin-top: 65px;
+    margin-bottom: 20px;
+}
+
+.pay-sucess-button button {
+    width: 100%;
+    padding: 10px;
+    background-color: #be5184;
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 6px;
+}
+
+.pay-sucess-button button:hover {
+    background-color: #671f40;
+}

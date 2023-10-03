@@ -54,7 +54,7 @@ const MainNavbar = () => {
       });
   };
   return (
-    <div>
+    <div className="print:hidden">
       <TopNavbar></TopNavbar>
       <Navbar expand="lg" className="bg-neutral">
         <Container>
