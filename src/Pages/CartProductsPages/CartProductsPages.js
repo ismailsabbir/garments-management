@@ -157,16 +157,41 @@ const CartProductsPages = () => {
       });
   };
   const handledeleteallcart = () => {
-    fetch(`${process.env.REACT_APP_URL}/allcartproduct`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.deletedCount > 0) {
-          setcartproducts([]);
-        }
-      });
+    if (selectall) {
+      console.log("delete");
+      fetch(`${process.env.REACT_APP_URL}/allcartproduct`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data?.deletedCount > 0) {
+            setcartproducts([]);
+          }
+        });
+    } else {
+      return;
+    }
   };
+  const [selectproducts, setselectproduct] = useState([]);
+  const handlesetproduct = (product) => {
+    const selectpp = selectproducts?.find(
+      (aproduct) => aproduct._id === product?._id
+    );
+
+    if (selectpp?._id === product?._id) {
+      const remingproduct = selectproducts?.filter(
+        (rproduct) => rproduct?._id !== product?._id
+      );
+      setselectproduct(remingproduct);
+    } else {
+      setselectproduct([...selectproducts, product]);
+    }
+  };
+  const total_price = selectproducts.reduce((total, currentObject) => {
+    return total + parseInt(currentObject?.product_price);
+  }, 0);
+  console.log(total_price);
+  console.log(selectproducts);
   return (
     <div className="cartproduct-container">
       {loading ? (
@@ -183,15 +208,23 @@ const CartProductsPages = () => {
                   ></button>
                   <p>Select All ({cartproducts?.length} items)</p>
                 </div>
-                <RiDeleteBin5Line
-                  onClick={handledeleteallcart}
-                  className="cart-delete-icon"
-                ></RiDeleteBin5Line>
+                <button onClick={handledeleteallcart}>
+                  <RiDeleteBin5Line className="cart-delete-icon"></RiDeleteBin5Line>
+                </button>
               </div>
               <div className="cart-product-con">
                 {cartproducts?.map((product) => (
                   <div className="cart-product">
-                    <button className="select-a-cart-btn"></button>
+                    <button
+                      className={
+                        selectproducts?.find(
+                          (aproduct) => aproduct?._id === product?._id
+                        ) === product
+                          ? "select-a-product-btn"
+                          : "select-a-cart-btn"
+                      }
+                      onClick={() => handlesetproduct(product)}
+                    ></button>
                     <img
                       className="cart-image"
                       src={product?.Product_image}
@@ -214,7 +247,7 @@ const CartProductsPages = () => {
                     </div>
                     <div className="number-input">
                       <button onClick={handleincress}>+</button>
-                      <span>1</span>
+                      <span>{product?.quentuty}</span>
                       <button onClick={handledecress}>-</button>
                     </div>
                   </div>
@@ -223,10 +256,20 @@ const CartProductsPages = () => {
             </div>
             <div className="col col-12 col-lg-4 col-md-12 col-sm-12">
               <div className="cart-order-summary">
-                <h5>Order Summary </h5>
+                <h5 className="mb-2">Order Summary </h5>
+
+                {selectproducts?.map((product) => (
+                  <div className="summary-products">
+                    <div>
+                      <img src={product?.Product_image} alt="not" />
+                    </div>
+                    <p>{product?.product_name}</p>
+                    <h6>Tk: {product?.product_price}</h6>
+                  </div>
+                ))}
                 <div className="order-summar-com">
-                  <p>Subtotal (2 items)</p>
-                  <span className="cart-tk">TK: 645</span>
+                  <p>Subtotal ({selectproducts?.length})</p>
+                  <span className="cart-tk">TK: {total_price}</span>
                 </div>
                 <div className="order-summar-com">
                   <p>Shipping Fee</p>
@@ -245,7 +288,7 @@ const CartProductsPages = () => {
                 </div>
                 <div className="order-summar-com">
                   <p>Total</p>
-                  <p>TK: 200</p>
+                  <p>TK: {total_price}</p>
                 </div>
                 <div className="cart-checkout-con">
                   <button className="cart-checkout-btn">
