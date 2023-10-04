@@ -14,8 +14,7 @@ const CartProductsPages = () => {
   const email = user?.email;
   const [cartproducts, setcartproducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log(user);
-
+  const [selectall, setselectall] = useState(false);
   useEffect(() => {
     setTimeout(() => {
       fetch(`${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`, {
@@ -39,10 +38,18 @@ const CartProductsPages = () => {
         });
     }, 2000);
   }, [user?.email, userlogout]);
+  const handleallselect = () => {
+    if (selectall === true) {
+      setselectall(false);
+      return;
+    }
+    setselectall(true);
+  };
 
   console.log(cartproducts);
   const handleincress = () => {};
   const handledecress = () => {};
+
   const handledelete = (product) => {
     fetch(`${process.env.REACT_APP_URL}/cartproduct/${product?._id}`, {
       method: "DELETE",
@@ -54,7 +61,6 @@ const CartProductsPages = () => {
         );
         setcartproducts(remingproduct);
         if (data?.deletedCount > 0) {
-          // setdelete(true);
         }
       });
   };
@@ -150,7 +156,17 @@ const CartProductsPages = () => {
         console.log(err.message);
       });
   };
-
+  const handledeleteallcart = () => {
+    fetch(`${process.env.REACT_APP_URL}/allcartproduct`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.deletedCount > 0) {
+          setcartproducts([]);
+        }
+      });
+  };
   return (
     <div className="cartproduct-container">
       {loading ? (
@@ -161,10 +177,16 @@ const CartProductsPages = () => {
             <div className="col col-12 col-lg-8 col-md-12 col-sm-12 cartproduct-left">
               <div className="cart-all-select">
                 <div className="all-select-button-con">
-                  <button></button>
+                  <button
+                    className={selectall ? "selectall" : "unselectall"}
+                    onClick={handleallselect}
+                  ></button>
                   <p>Select All ({cartproducts?.length} items)</p>
                 </div>
-                <RiDeleteBin5Line className="cart-delete-icon"></RiDeleteBin5Line>
+                <RiDeleteBin5Line
+                  onClick={handledeleteallcart}
+                  className="cart-delete-icon"
+                ></RiDeleteBin5Line>
               </div>
               <div className="cart-product-con">
                 {cartproducts?.map((product) => (

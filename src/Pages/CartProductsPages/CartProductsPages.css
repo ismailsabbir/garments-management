@@ -34,6 +34,15 @@
     padding: 5px;
 }
 
+.unselectall {
+    border: 1px solid gainsboro;
+    padding: 5px;
+}
+
+.selectall {
+    background-color: #8b3d62;
+}
+
 .all-select-button-con p {
     margin-top: 12px;
     margin-left: 8px;
