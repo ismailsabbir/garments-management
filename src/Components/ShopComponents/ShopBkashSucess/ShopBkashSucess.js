@@ -1,10 +1,10 @@
 import React from "react";
-import "./PaymentSucessPage.css";
-import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 import { GoInfo } from "react-icons/go";
-const PaymentSucessPage = () => {
+import { useLocation } from "react-router-dom";
+
+const ShopBkashSucess = () => {
   const [products, setproducts] = useState([]);
   const location = useLocation();
   const query = new URLSearchParams(location.search);
@@ -12,7 +12,7 @@ const PaymentSucessPage = () => {
   console.log(transiction_id);
   useEffect(() => {
     fetch(
-      `${process.env.REACT_APP_URL}/order/by_transcation_id/${transiction_id}`
+      `${process.env.REACT_APP_URL}/product/order/by_transcation_id/${transiction_id}`
     )
       .then((res) => res.json())
       .then((data) => setproducts(data))
@@ -75,11 +75,11 @@ const PaymentSucessPage = () => {
             <div className="product-design">
               <div className="front-con">
                 <h6>Front Design</h6>
-                <img className="front" src={products?.frontphoto} alt="not" />
+                <img className="back" src={products?.backphoto} alt="not" />
               </div>
               <div className="back-con">
                 <h6>Back Design</h6>
-                <img className="back" src={products?.backphoto} alt="not" />
+                <img src={products?.dress_photo} alt="n" />
               </div>
             </div>
           </div>
@@ -152,4 +152,4 @@ const PaymentSucessPage = () => {
   );
 };
 
-export default PaymentSucessPage;
+export default ShopBkashSucess;

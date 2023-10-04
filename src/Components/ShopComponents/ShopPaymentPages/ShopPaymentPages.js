@@ -38,6 +38,18 @@ const ShopPaymentPages = () => {
     setcardshow(false);
     setbkashshow(true);
   };
+  const handlebkashpayment = () => {
+    fetch(`${process.env.REACT_APP_URL}/product_bkash_payment`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(confirm_info),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        window.location.replace(data.url);
+      });
+  };
   return (
     <div className="paymentcontainer">
       <div className="payment-text">
@@ -49,18 +61,36 @@ const ShopPaymentPages = () => {
                 <img src={card} alt="not found" />
                 <p>Credit/Debit Card</p>
               </div>
-              <div className="bkash">
+              {/* <div className="bkash">
                 <img src={nogod} alt="not found" />
                 <p>Nagad</p>
               </div>
               <div className="bkash">
                 <img src={rocket} alt="not found" />
                 <p>Rocket</p>
+              </div> */}
+              <div
+                className="bkash"
+                id="bkash-nagod-rocket"
+                onClick={handlebkashshow}
+              >
+                <div className="pay-bk">
+                  <img src={rocket} alt="not found" />
+                  <p>Rocket</p>
+                </div>
+                <div className="pay-bk">
+                  <img src={bkash} alt="not found" />
+                  <p>Save bKash Account</p>
+                </div>
+                <div className="pay-bk">
+                  <img src={nogod} alt="not found" />
+                  <p>Nagad</p>
+                </div>
               </div>
-              <div className="bkash" onClick={handlebkashshow}>
+              {/* <div className="bkash" onClick={handlebkashshow}>
                 <img src={bkash} alt="not found" />
                 <p>Save bKash Account</p>
-              </div>
+              </div> */}
               <div className="bkash">
                 <img src={cash} alt="not found" />
                 <p>Cash On Delivery</p>
@@ -91,7 +121,9 @@ const ShopPaymentPages = () => {
                     Wallet Number and OTP for successful account saving.
                   </p>
                   <p>2) For all subsequent users: Enter PIN to make payment</p>
-                  <button className="pay-now-btn">Pay Now</button>
+                  <button onClick={handlebkashpayment} className="pay-now-btn">
+                    Pay Now
+                  </button>
                 </div>
               </div>
             </div>

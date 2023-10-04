@@ -8,14 +8,16 @@ const CheckOutPages = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const shopinfo = location.state;
-  const [firstname, setfirstname] = useState();
+  const [name, setfirstname] = useState();
   const [lastname, setlastname] = useState();
   const [country, setcountry] = useState();
-  const [city, setcity] = useState();
+  const [address, setcity] = useState();
   const [postcode, setpostcode] = useState();
   const [email, setemail] = useState();
-  const [mobile, setmobile] = useState();
-  const [message, setmesssage] = useState();
+  const [phone, setmobile] = useState();
+  const [note, setmesssage] = useState();
+  const [errorinfo, seterrorinfo] = useState(false);
+  console.log(shopinfo);
   useEffect(() => {
     if (!shopinfo) {
       navigate("/shop");
@@ -55,6 +57,7 @@ const CheckOutPages = () => {
     const message = e.target.value;
     setmesssage(message);
   };
+
   const total_price =
     parseFloat(shopinfo?.product_price) * parseFloat(shopinfo?.quentuty) + 20;
   const today = new Date();
@@ -67,19 +70,37 @@ const CheckOutPages = () => {
     const order_status = "confirm";
     const order = "not paid";
     const transiction_id = "";
-    const { product_name, size } = shopinfo;
+    const {
+      product_name,
+      size,
+      quentuty,
+      product_price,
+      Product_image,
+      daisplay_image,
+    } = shopinfo;
+    const category_name = product_name;
+    const pices = quentuty;
+    const price = product_price;
+    const dress_photo = Product_image;
+    const backphoto = daisplay_image;
+    const qualityname = "Premium";
     const orderconfirm = {
-      firstname,
+      name,
       lastname,
       country,
-      city,
+      address,
       email,
-      message,
-      mobile,
+      note,
+      phone,
       postcode,
+      pices,
       size,
+      price,
       total_price,
-      product_name,
+      category_name,
+      dress_photo,
+      backphoto,
+      qualityname,
       order_date,
       delivery_date,
       order_status,
@@ -87,6 +108,10 @@ const CheckOutPages = () => {
       transiction_id,
       orderid,
     };
+    if (!name || !lastname || !email || !phone || !address || !postcode) {
+      seterrorinfo(true);
+      return;
+    }
     fetch(`${process.env.REACT_APP_URL}/shoporder`, {
       method: "POST",
       headers: {
@@ -123,6 +148,28 @@ const CheckOutPages = () => {
           </Link>
         </p>
       </div>
+      {errorinfo ? (
+        <div className="checkoutlogin">
+          <div className="alert alert-warning">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="stroke-current shrink-0 h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              />
+            </svg>
+            <span>Please give all information!</span>
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
       <div className="checkout-info-con">
         <Form className="checkout-inforow-col row">
           <div className="checkout-info-con-left col col-12 col-sm-12 col-md-12 col-lg-8">

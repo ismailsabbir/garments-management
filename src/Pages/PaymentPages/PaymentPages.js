@@ -53,17 +53,24 @@ const PaymentPages = () => {
                 <img src={card} alt="not found" />
                 <p>Credit/Debit Card</p>
               </div>
-              <div className="bkash">
-                <img src={nogod} alt="not found" />
-                <p>Nagad</p>
-              </div>
-              <div className="bkash">
-                <img src={rocket} alt="not found" />
-                <p>Rocket</p>
-              </div>
-              <div className="bkash" onClick={handlebkashshow}>
-                <img src={bkash} alt="not found" />
-                <p>Save bKash Account</p>
+
+              <div
+                className="bkash"
+                id="bkash-nagod-rocket"
+                onClick={handlebkashshow}
+              >
+                <div className="pay-bk">
+                  <img src={rocket} alt="not found" />
+                  <p>Rocket</p>
+                </div>
+                <div className="pay-bk">
+                  <img src={bkash} alt="not found" />
+                  <p>Save bKash Account</p>
+                </div>
+                <div className="pay-bk">
+                  <img src={nogod} alt="not found" />
+                  <p>Nagad</p>
+                </div>
               </div>
               <div className="bkash">
                 <img src={cash} alt="not found" />

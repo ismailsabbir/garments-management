@@ -134,6 +134,24 @@
     border-radius: 4px;
 }
 
+#bkash-nagod-rocket {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    /* border: 1px solid brown; */
+    width: auto;
+}
+
+.pay-bk {
+    width: 150px;
+    /* border: 1px solid black; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 @media only screen and (max-width: 687px) {
     .payment-text {
         width: 90%;

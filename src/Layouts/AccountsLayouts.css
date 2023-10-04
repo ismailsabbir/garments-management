@@ -1,0 +1,21 @@
+.account-layouts-hole {
+    background-color: aliceblue;
+    padding: 40px 0px;
+}
+
+.accounts-layouts-con {
+    width: 80%;
+    /* border: 1px solid brown; */
+    margin: 0 auto;
+    /* margin-top: 40px;
+    margin-bottom: 40px; */
+}
+
+.account-layouts-left {
+    border: 1px solid green;
+}
+
+.account-layouts-right {
+    border: 1px solid gold;
+    padding-left: 30px;
+}

@@ -27,6 +27,13 @@ import ShopPaymentPages from "./Components/ShopComponents/ShopPaymentPages/ShopP
 import CartProductsPages from "./Pages/CartProductsPages/CartProductsPages";
 import WishListProductPage from "./Pages/WishListProductPage/WishListProductPage";
 import PaymentSucessPage from "./Pages/PaymentSucessPage/PaymentSucessPage";
+import PaymentFailed from "./Pages/PaymentFailed/PaymentFailed";
+import MyCustomizedOrders from "./Pages/MyCustomizedOrders/MyCustomizedOrders";
+import AccountsLayouts from "./Layouts/AccountsLayouts";
+import MyAccountsManage from "./Components/AccountComponents/MyAccountsManage/MyAccountsManage";
+import ShopPaymentSucessPage from "./Components/ShopComponents/ShopPaymentSucessPage/ShopPaymentSucessPage";
+import ShopBkashSucess from "./Components/ShopComponents/ShopBkashSucess/ShopBkashSucess";
+import ShopBkashFailed from "./Components/ShopComponents/ShopBkashFailed/ShopBkashFailed";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -123,6 +130,15 @@ function App() {
           ),
         },
         {
+          path: "/payment/failed",
+          element: (
+            <PrivetRoutes>
+              <PaymentFailed></PaymentFailed>
+            </PrivetRoutes>
+          ),
+        },
+
+        {
           path: "/shop",
           element: <ShopPages></ShopPages>,
         },
@@ -133,6 +149,22 @@ function App() {
               <ShopPaymentPages></ShopPaymentPages>
             </PrivetRoutes>
           ),
+        },
+        {
+          path: "/shop_payment_sucess",
+          element: (
+            <PrivetRoutes>
+              <ShopPaymentSucessPage></ShopPaymentSucessPage>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/product/payment/sucess",
+          element: <ShopBkashSucess></ShopBkashSucess>,
+        },
+        {
+          path: "/product/payment/failed",
+          element: <ShopBkashFailed></ShopBkashFailed>,
         },
         {
           path: `/cartproduct`,
@@ -159,7 +191,7 @@ function App() {
           element: <ShopProductDetails></ShopProductDetails>,
         },
         {
-          path: `/checkout`,
+          path: "/checkout",
           element: (
             <PrivetRoutes>
               <CheckOutPages></CheckOutPages>
@@ -199,6 +231,28 @@ function App() {
         {
           path: "*",
           element: <ErrorPages></ErrorPages>,
+        },
+      ],
+    },
+    {
+      path: "/manage_account",
+      element: (
+        <PrivetRoutes>
+          <AccountsLayouts></AccountsLayouts>
+        </PrivetRoutes>
+      ),
+      children: [
+        {
+          path: "/manage_account",
+          element: <MyAccountsManage></MyAccountsManage>,
+        },
+        {
+          path: "/manage_account/customized_orders",
+          element: (
+            <PrivetRoutes>
+              <MyCustomizedOrders></MyCustomizedOrders>
+            </PrivetRoutes>
+          ),
         },
       ],
     },

@@ -1,18 +1,18 @@
 import React from "react";
-import "./PaymentSucessPage.css";
-import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 import { GoInfo } from "react-icons/go";
-const PaymentSucessPage = () => {
+import { useLocation } from "react-router-dom";
+
+const ShopPaymentSucessPage = () => {
   const [products, setproducts] = useState([]);
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const transiction_id = query.get("transiction_id");
-  console.log(transiction_id);
+  console.log(location);
   useEffect(() => {
     fetch(
-      `${process.env.REACT_APP_URL}/order/by_transcation_id/${transiction_id}`
+      `${process.env.REACT_APP_URL}/shoporder/by_transcation_id/${transiction_id}`
     )
       .then((res) => res.json())
       .then((data) => setproducts(data))
@@ -21,28 +21,6 @@ const PaymentSucessPage = () => {
       });
   }, [transiction_id]);
   console.log(products);
-  if (products?.length <= 0) {
-    return (
-      <div className="mt-4 mb-4 p-6">
-        <div className="alert alert-warning">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="stroke-current shrink-0 h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-            />
-          </svg>
-          <span>order not found !</span>
-        </div>
-      </div>
-    );
-  }
   return (
     <div className="payment-sucess-con">
       <div className="paymentinfo">
@@ -74,8 +52,8 @@ const PaymentSucessPage = () => {
 
             <div className="product-design">
               <div className="front-con">
-                <h6>Front Design</h6>
-                <img className="front" src={products?.frontphoto} alt="not" />
+                <h6>Full Design</h6>
+                <img className="front" src={products?.dress_photo} alt="not" />
               </div>
               <div className="back-con">
                 <h6>Back Design</h6>
@@ -152,4 +130,4 @@ const PaymentSucessPage = () => {
   );
 };
 
-export default PaymentSucessPage;
+export default ShopPaymentSucessPage;

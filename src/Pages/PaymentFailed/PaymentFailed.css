@@ -1,0 +1,40 @@
+.payment-failed-con {
+    background-color: aliceblue;
+    padding: 30px 0px;
+}
+
+.payment-failed-info {
+    width: 80%;
+    background-color: white;
+    padding: 20px;
+    margin: 0 auto;
+
+}
+
+.failed-product {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 1px solid gainsboro;
+    background-color: rgb(209, 216, 222);
+    padding: 15px;
+    border-radius: 6px;
+}
+
+.failed-product img {
+    height: 100px;
+}
+
+.failed-pay {
+    border: 1px solid #be5184;
+    background-color: #be5184;
+    padding: 7px 20px;
+    color: white;
+    font-weight: 500;
+    border-radius: 4px;
+
+}
+
+.failed-pay:hover {
+    background-color: #9a426b;
+}

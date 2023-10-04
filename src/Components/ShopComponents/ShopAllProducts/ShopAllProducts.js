@@ -1,22 +1,26 @@
 import React, { useContext, useState } from "react";
 import "./ShopAllProducts.css";
-import { Link } from "react-router-dom";
 import { AiOutlineShopping } from "react-icons/ai";
 import { AuthContext } from "../../../Context/UserContext";
 import { LiaShoppingBagSolid } from "react-icons/lia";
 import { MdCompareArrows, MdFavoriteBorder } from "react-icons/md";
 import Modal from "../../../Hooks/Modal/Modal";
 import { ToastContainer, toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
+import ShopModal from "../../../Hooks/ShopModal";
 
 const ShopAllProducts = ({ product, categoryid }) => {
+  const navigate = useNavigate();
   const [size, setsize] = useState("S");
   const [quentuty, setquentity] = useState(1);
   const [modalproduct, setmodalproduct] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isshopModalOpen, setIsshopModalOpen] = useState(false);
+  const [products, setproducts] = useState([]);
   const { user } = useContext(AuthContext);
   const email = user?.email;
   const allproduct = product?.products;
-  console.log(categoryid);
+
   const handleincress = () => {
     const newquentity = quentuty + 1;
     setquentity(newquentity);
@@ -36,6 +40,13 @@ const ShopAllProducts = ({ product, categoryid }) => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+  const openshopModal = () => {
+    setIsshopModalOpen(true);
+  };
+
+  const closeshopModal = () => {
+    setIsshopModalOpen(false);
   };
   const handleaddtocart = (product) => {
     setmodalproduct(product);
@@ -95,6 +106,22 @@ const ShopAllProducts = ({ product, categoryid }) => {
         });
     }
   };
+  const handlebuynow = (product) => {
+    setmodalproduct(product);
+    const productinfo = {
+      ...product,
+      quentuty,
+      size,
+      email,
+    };
+    if (product?.dress_size) {
+      openshopModal();
+    } else {
+      // navigate("/checkout", { state: { productinfo } });
+      openshopModal();
+    }
+  };
+
   const handleaddwishlist = (product) => {
     const productinfo = {
       ...product,
@@ -144,11 +171,17 @@ const ShopAllProducts = ({ product, categoryid }) => {
         console.log(err.message);
       });
   };
+  console.log(products);
   return (
     <div className="all-products-con">
       <Modal
         isOpen={isModalOpen}
         closeModal={closeModal}
+        product={modalproduct}
+      />
+      <ShopModal
+        isOpen={isshopModalOpen}
+        closeModal={closeshopModal}
         product={modalproduct}
       />
       <div className="row">
@@ -200,7 +233,10 @@ const ShopAllProducts = ({ product, categoryid }) => {
               <h6>{product?.product_name}</h6>
               <p>Tk:{product?.product_price}</p>
 
-              <Link className="buy-now-button">
+              <Link
+                onClick={() => handlebuynow(product)}
+                className="buy-now-button"
+              >
                 <AiOutlineShopping></AiOutlineShopping>{" "}
                 <span className="ml-2">Buy Now</span>
               </Link>

@@ -79,6 +79,7 @@ const ShopCheckoutForm = ({ paymentinfo }) => {
     if (paymentIntent.status === "succeeded") {
       setpaymentsucess("congratulations! Payment Completed");
       settransactionid(paymentIntent.id);
+      navigate(`/shop_payment_sucess?transiction_id=${paymentIntent.id}`);
 
       toast("Payment Completed!", {
         position: "top-center",

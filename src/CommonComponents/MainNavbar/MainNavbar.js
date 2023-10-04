@@ -184,13 +184,20 @@ const MainNavbar = () => {
                   className="dropdown-content z-[1] menu p-2 shadow bg-base-100  w-52 dropdrown-menu"
                 >
                   <li>
-                    <Link to="" className="nav-account">
+                    <Link to="/manage_account" className="nav-account">
                       <BsEmojiSmile></BsEmojiSmile> <>Manage My Account</>
                     </Link>
                   </li>
                   <li>
                     <Link className="nav-account">
                       <AiOutlineInbox></AiOutlineInbox> <>My Orders</>
+                    </Link>
+                    <Link
+                      to="/manage_account/customized_orders"
+                      className="nav-account"
+                    >
+                      <AiOutlineInbox></AiOutlineInbox>{" "}
+                      <>My Customized Orders</>
                     </Link>
                     <Link className="nav-account">
                       <GrFavorite></GrFavorite>

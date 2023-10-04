@@ -105,6 +105,56 @@ const ShopProductDetails = () => {
         console.log(err.message);
       });
   };
+  const handleaddwishlist = () => {
+    // const productinfo = {
+    //   ...product,
+    //   email,
+    // };
+    console.log("add");
+    fetch(`${process.env.REACT_APP_URL}/wishlistproduct`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(productinfo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data?._id) {
+          toast(
+            <div>
+              <div className="toast-top">
+                <img src={data?.Product_image} alt="not found" />
+                <div className="toast-message">
+                  <h6>{data?.product_name}</h6>
+                  <p>
+                    <span>succeed:</span> You have add{" "}
+                    <span id="toast-name">{data?.product_name}</span>
+                  </p>
+                </div>
+              </div>
+              <div className="toast-button">
+                To your
+                <Link to="/wishlistproduct">WishList</Link>
+              </div>
+            </div>,
+            {
+              position: "top-right",
+              autoClose: 10000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: false,
+              progress: undefined,
+              theme: "light",
+            }
+          );
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
   console.log(size);
   return (
     <div className="shop-details-container">
@@ -260,10 +310,9 @@ const ShopProductDetails = () => {
             <Link to={`/checkout`} state={shopinfo} className="buy-button-now">
               BUY NOW
             </Link>
-            {/* <button onClick={handlebuynow} className="buy-button-now">BUY NOW</button> */}
           </div>
           <div className="wishlist-compare">
-            <button className="add-wishlist">
+            <button onClick={handleaddwishlist} className="add-wishlist">
               <IoHeartDislikeOutline className="love-icon"></IoHeartDislikeOutline>
               ADD TO Wish List
             </button>
