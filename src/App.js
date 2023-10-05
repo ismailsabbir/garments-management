@@ -34,6 +34,10 @@ import MyAccountsManage from "./Components/AccountComponents/MyAccountsManage/My
 import ShopPaymentSucessPage from "./Components/ShopComponents/ShopPaymentSucessPage/ShopPaymentSucessPage";
 import ShopBkashSucess from "./Components/ShopComponents/ShopBkashSucess/ShopBkashSucess";
 import ShopBkashFailed from "./Components/ShopComponents/ShopBkashFailed/ShopBkashFailed";
+import CartCheckoutPages from "./Pages/CartCheckoutPages/CartCheckoutPages";
+import CartPaymentPages from "./Pages/CartPaymentPages/CartPaymentPages";
+import CartPaymentSucessPage from "./Pages/CartPaymentSucessPage/CartPaymentSucessPage";
+import CartPaymentFailed from "./Pages/CartPaymentFailed/CartPaymentFailed";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -151,10 +155,26 @@ function App() {
           ),
         },
         {
+          path: "/cartproductpayment",
+          element: (
+            <PrivetRoutes>
+              <CartPaymentPages></CartPaymentPages>
+            </PrivetRoutes>
+          ),
+        },
+        {
           path: "/shop_payment_sucess",
           element: (
             <PrivetRoutes>
               <ShopPaymentSucessPage></ShopPaymentSucessPage>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/cart_payment_sucess",
+          element: (
+            <PrivetRoutes>
+              <CartPaymentSucessPage></CartPaymentSucessPage>
             </PrivetRoutes>
           ),
         },
@@ -165,6 +185,14 @@ function App() {
         {
           path: "/product/payment/failed",
           element: <ShopBkashFailed></ShopBkashFailed>,
+        },
+        {
+          path: "/cart/payment/failed",
+          element: (
+            <PrivetRoutes>
+              <CartPaymentFailed></CartPaymentFailed>
+            </PrivetRoutes>
+          ),
         },
         {
           path: `/cartproduct`,
@@ -195,6 +223,14 @@ function App() {
           element: (
             <PrivetRoutes>
               <CheckOutPages></CheckOutPages>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/cart-checkout",
+          element: (
+            <PrivetRoutes>
+              <CartCheckoutPages></CartCheckoutPages>
             </PrivetRoutes>
           ),
         },

@@ -7,14 +7,17 @@ import { useState } from "react";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { MdFavoriteBorder } from "react-icons/md";
 import Loading from "./../../CommonComponents/Loading/Loading";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 import { ToastContainer, toast } from "react-toastify";
 const CartProductsPages = () => {
+  const navigate = useNavigate();
   const { user, userlogout } = useContext(AuthContext);
   const email = user?.email;
   const [cartproducts, setcartproducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectall, setselectall] = useState(false);
+  const [message, setmessae] = useState(false);
   useEffect(() => {
     setTimeout(() => {
       fetch(`${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`, {
@@ -46,9 +49,31 @@ const CartProductsPages = () => {
     setselectall(true);
   };
 
+  const handleincress = (productId) => {
+    const updatedProducts = cartproducts.map((product) => {
+      if (product._id === productId?._id) {
+        return { ...product, quentuty: parseInt(product.quentuty) + 1 };
+      }
+      return product;
+    });
+
+    setcartproducts(updatedProducts);
+  };
+  const handledecress = (productId) => {
+    const updatedProducts = cartproducts.map((product) => {
+      if (product._id === productId?._id) {
+        // return { ...product, quentuty: parseInt(product.quentuty) - 1 };
+        return {
+          ...product,
+          quentuty: Math.max(1, parseInt(product.quentuty) - 1),
+        };
+      }
+      return product;
+    });
+
+    setcartproducts(updatedProducts);
+  };
   console.log(cartproducts);
-  const handleincress = () => {};
-  const handledecress = () => {};
 
   const handledelete = (product) => {
     fetch(`${process.env.REACT_APP_URL}/cartproduct/${product?._id}`, {
@@ -173,7 +198,9 @@ const CartProductsPages = () => {
     }
   };
   const [selectproducts, setselectproduct] = useState([]);
+
   const handlesetproduct = (product) => {
+    setmessae(false);
     const selectpp = selectproducts?.find(
       (aproduct) => aproduct._id === product?._id
     );
@@ -188,10 +215,18 @@ const CartProductsPages = () => {
     }
   };
   const total_price = selectproducts.reduce((total, currentObject) => {
-    return total + parseInt(currentObject?.product_price);
+    return (
+      total + parseInt(currentObject?.product_price) * currentObject?.quentuty
+    );
   }, 0);
-  console.log(total_price);
-  console.log(selectproducts);
+  const handlecheckout = () => {
+    console.log(selectproducts);
+    if (selectproducts.length > 0) {
+      navigate("/cart-checkout", { state: { selectproducts } });
+    } else {
+      setmessae(true);
+    }
+  };
   return (
     <div className="cartproduct-container">
       {loading ? (
@@ -199,6 +234,26 @@ const CartProductsPages = () => {
       ) : (
         <div className="cartproduct-row-col">
           <div className="row">
+            {message ? (
+              <div className="alert alert-warning">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="stroke-current shrink-0 h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                  />
+                </svg>
+                <span>Please select minumum one Product.</span>
+              </div>
+            ) : (
+              <></>
+            )}
             <div className="col col-12 col-lg-8 col-md-12 col-sm-12 cartproduct-left">
               <div className="cart-all-select">
                 <div className="all-select-button-con">
@@ -246,9 +301,9 @@ const CartProductsPages = () => {
                       </div>
                     </div>
                     <div className="number-input">
-                      <button onClick={handleincress}>+</button>
+                      <button onClick={() => handleincress(product)}>+</button>
                       <span>{product?.quentuty}</span>
-                      <button onClick={handledecress}>-</button>
+                      <button onClick={() => handledecress(product)}>-</button>
                     </div>
                   </div>
                 ))}
@@ -263,7 +318,9 @@ const CartProductsPages = () => {
                     <div>
                       <img src={product?.Product_image} alt="not" />
                     </div>
-                    <p>{product?.product_name}</p>
+                    <p>
+                      {product?.product_name} ({product?.quentuty})items
+                    </p>
                     <h6>Tk: {product?.product_price}</h6>
                   </div>
                 ))}
@@ -291,7 +348,10 @@ const CartProductsPages = () => {
                   <p>TK: {total_price}</p>
                 </div>
                 <div className="cart-checkout-con">
-                  <button className="cart-checkout-btn">
+                  <button
+                    onClick={handlecheckout}
+                    className="cart-checkout-btn"
+                  >
                     {" "}
                     PROCEED TO CHECKOUT
                   </button>
@@ -301,6 +361,7 @@ const CartProductsPages = () => {
           </div>
         </div>
       )}
+
       {/* <div className="cartproduct-row-col">
         <div className="row">
           <div className="col col-12 col-lg-8 col-md-12 col-sm-12 cartproduct-left">

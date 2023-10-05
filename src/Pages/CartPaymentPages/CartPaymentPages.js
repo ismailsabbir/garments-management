@@ -1,18 +1,20 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import bkash from "../../../Images/bkash.png";
-import card from "../../../Images/cred.png";
-import nogod from "../../../Images/nogod.avif";
-import cash from "../../../Images/cashon.png";
-import rocket from "../../../Images/rocket.png";
-import visa from "../../../Images/visa.png";
-import circle from "../../../Images/circel.png";
-import blue from "../../../Images/bluecrd.png";
+import React from "react";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import bkash from "../../Images/bkash.png";
+import card from "../../Images/cred.png";
+import nogod from "../../Images/nogod.avif";
+import cash from "../../Images/cashon.png";
+import rocket from "../../Images/rocket.png";
+import visa from "../../Images/visa.png";
+import circle from "../../Images/circel.png";
+import blue from "../../Images/bluecrd.png";
 import { Elements } from "@stripe/react-stripe-js";
+import ShopCheckoutForm from "../../Components/ShopComponents/ShopCheckoutForm/ShopCheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
-import ShopCheckoutForm from "../ShopCheckoutForm/ShopCheckoutForm";
+import CartCheckoutForm from "../CartCheckoutForm/CartCheckoutForm";
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
-const ShopPaymentPages = () => {
+const CartPaymentPages = () => {
   const { state } = useLocation();
   const confirm_info = state.orderconfirm;
   console.log(confirm_info);
@@ -27,7 +29,7 @@ const ShopPaymentPages = () => {
     setbkashshow(true);
   };
   const handlebkashpayment = () => {
-    fetch(`${process.env.REACT_APP_URL}/product_bkash_payment`, {
+    fetch(`${process.env.REACT_APP_URL}/cart_bkash_payment`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(confirm_info),
@@ -83,9 +85,12 @@ const ShopPaymentPages = () => {
                 {/* //////////////////////////////////////////////// */}
                 <div>
                   <Elements stripe={stripePromise}>
-                    <ShopCheckoutForm
+                    <CartCheckoutForm
                       paymentinfo={confirm_info}
-                    ></ShopCheckoutForm>
+                    ></CartCheckoutForm>
+                    {/* <ShopCheckoutForm
+                      paymentinfo={confirm_info}
+                    ></ShopCheckoutForm> */}
                   </Elements>
                 </div>
               </div>
@@ -133,4 +138,4 @@ const ShopPaymentPages = () => {
   );
 };
 
-export default ShopPaymentPages;
+export default CartPaymentPages;

@@ -1,9 +1,11 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import React, { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-const ShopCheckoutForm = ({ paymentinfo }) => {
+import { ToastContainer, toast } from "react-toastify";
+
+const CartCheckoutForm = ({ paymentinfo }) => {
   const navigate = useNavigate();
   const [carterror, setcarderror] = useState("");
   const [clientSecret, setClientSecret] = useState("");
@@ -78,7 +80,7 @@ const ShopCheckoutForm = ({ paymentinfo }) => {
     if (paymentIntent.status === "succeeded") {
       setpaymentsucess("congratulations! Payment Completed");
       settransactionid(paymentIntent.id);
-      navigate(`/shop_payment_sucess?transiction_id=${paymentIntent.id}`);
+      navigate(`/cart_payment_sucess?transiction_id=${paymentIntent.id}`);
 
       toast("Payment Completed!", {
         position: "top-center",
@@ -95,7 +97,7 @@ const ShopCheckoutForm = ({ paymentinfo }) => {
         ...paymentinfo,
         transiction_id,
       };
-      fetch(`${process.env.REACT_APP_URL}/shoppayment/${orderid}`, {
+      fetch(`${process.env.REACT_APP_URL}/cartpayment/${orderid}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
@@ -156,4 +158,4 @@ const ShopCheckoutForm = ({ paymentinfo }) => {
   );
 };
 
-export default ShopCheckoutForm;
+export default CartCheckoutForm;
