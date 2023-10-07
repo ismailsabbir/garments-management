@@ -1,0 +1,61 @@
+.manage-info-con {
+    /* border: 1px solid gray; */
+    /* margin: 0 auto; */
+}
+
+.manage-info-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.manage-personal {
+    /* border: 1px solid gainsboro; */
+    background-color: white;
+    padding: 20px;
+    /* margin-right: 20px; */
+    height: 240px;
+
+}
+
+.manage-title {
+    color: blue;
+}
+
+.user-image-mange {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin: 0 auto;
+    color: #be5184;
+}
+
+.manage-user-name-email {
+    text-align: center;
+    margin-top: 6px;
+}
+
+.manage-user-name-email button {
+    margin-top: 20px;
+    border: 1px solid #be5184;
+    padding: 6px 10px;
+    background-color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgb(91, 90, 90);
+    transition: all 1s;
+}
+
+.manage-user-name-email button:hover {
+    border: none;
+    background-color: #be5184;
+    color: white;
+}
+
+.default-title {
+    font-size: 0.9rem;
+    color: rgb(80, 79, 79);
+
+}

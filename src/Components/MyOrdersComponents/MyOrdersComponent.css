@@ -1,0 +1,37 @@
+.order-quenty-con {
+    width: 100%;
+    background-color: white;
+    padding: 8px 10px;
+    margin-bottom: 20px;
+}
+
+.select1 {
+    border: 1px solid gray;
+    padding: 6px 6px;
+    width: 200px;
+}
+
+.shop-order-manage {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.shop-order-manage-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid gainsboro;
+}
+
+.shop-order-product-manage {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.shop-order-manage img {
+    width: 90px;
+    height: 90px;
+}

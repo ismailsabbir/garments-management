@@ -167,7 +167,7 @@ const MainNavbar = () => {
               <Link to="/make-project" className="button" id="make-project-btn">
                 Customized
               </Link>
-              <div className="nav-useer dropdown">
+              <div className="nav-useer dropdown dropdown-hover">
                 <FaUserPlus tabIndex={0} className="nav-user-icon"></FaUserPlus>
                 <div className="nav-login-register account">
                   <p tabIndex={0}>Account</p>

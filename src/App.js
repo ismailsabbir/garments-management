@@ -38,6 +38,10 @@ import CartCheckoutPages from "./Pages/CartCheckoutPages/CartCheckoutPages";
 import CartPaymentPages from "./Pages/CartPaymentPages/CartPaymentPages";
 import CartPaymentSucessPage from "./Pages/CartPaymentSucessPage/CartPaymentSucessPage";
 import CartPaymentFailed from "./Pages/CartPaymentFailed/CartPaymentFailed";
+import PersonalInformationEdit from "./Components/AccountComponents/PersonalInformationEdit/PersonalInformationEdit";
+import MyProfile from "./Components/AccountComponents/MyProfile/MyProfile";
+import MyAddress from "./Components/AccountComponents/MyAddress/MyAddress";
+import MyAddressEdit from "./Components/AccountComponents/MyAddressEdit/MyAddressEdit";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -287,6 +291,38 @@ function App() {
           element: (
             <PrivetRoutes>
               <MyCustomizedOrders></MyCustomizedOrders>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/manage_account/personal_information",
+          element: (
+            <PrivetRoutes>
+              <PersonalInformationEdit></PersonalInformationEdit>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/manage_account/my-profile",
+          element: (
+            <PrivetRoutes>
+              <MyProfile></MyProfile>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/manage_account/address-book",
+          element: (
+            <PrivetRoutes>
+              <MyAddress></MyAddress>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/manage_account/address-edit",
+          element: (
+            <PrivetRoutes>
+              <MyAddressEdit></MyAddressEdit>
             </PrivetRoutes>
           ),
         },

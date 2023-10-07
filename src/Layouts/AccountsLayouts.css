@@ -12,10 +12,10 @@
 }
 
 .account-layouts-left {
-    border: 1px solid green;
+    /* border: 1px solid green; */
 }
 
 .account-layouts-right {
-    border: 1px solid gold;
+    /* border: 1px solid gold; */
     padding-left: 30px;
 }

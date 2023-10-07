@@ -1,0 +1,67 @@
+.information-edit-con {
+    background-color: white;
+    padding: 20px;
+}
+
+.info-name-email {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.name-info-edit {
+    width: 48%;
+}
+
+.email-info-edit {
+    width: 48%;
+}
+
+.birth-gender {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.birth-con {
+    width: 48%;
+}
+
+.gender-con {
+    width: 48%;
+}
+
+.birthday-select {
+    display: flex;
+}
+
+
+
+.selectm {
+    border: 1px solid gainsboro;
+    padding: 8px;
+
+}
+
+.selectgrnder {
+    width: 100%;
+    border: 1px solid gainsboro;
+    padding: 8px;
+}
+
+.info-change-con {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-change-con button {
+    margin-top: 60px;
+    border: 1px solid #be5184;
+    background-color: #be5184;
+    padding: 6px 10px;
+    font-size: 0.9rem;
+    color: white;
+    font-weight: 500;
+}

@@ -1,0 +1,46 @@
+.name-address-con {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.address-edit-form {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+    width: 100%;
+    height: auto;
+}
+
+.address-name {
+    width: 48%;
+
+}
+
+.address-name input {
+    width: 100%;
+    border: 1px solid gray;
+    padding: 6px 4px;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.select-home-office {
+    width: 100%;
+    border: 1px solid gray;
+    padding: 6px 4px;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.address-change-btn {
+    background-color: #be5184;
+    border: 1px solid #be5184;
+    padding: 6px 20px;
+    font-size: 1rem;
+    color: white;
+    font-weight: 500;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
