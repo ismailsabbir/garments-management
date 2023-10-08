@@ -21,8 +21,15 @@ const LeftManageAccounts = () => {
       </div>
 
       <div className="account-link-con">
-        <Link className="manage-left-link">My Orders</Link>
-        <Link className="manage-left-link">My Customized Orders</Link>
+        <Link to="/manage_account/shop_orders" className="manage-left-link">
+          My Orders
+        </Link>
+        <Link
+          to="/manage_account/customized_orders"
+          className="manage-left-link"
+        >
+          My Customized Orders
+        </Link>
         <Link className="manage-left-link"> My Cancellations</Link>
       </div>
       <div className="account-link-con">

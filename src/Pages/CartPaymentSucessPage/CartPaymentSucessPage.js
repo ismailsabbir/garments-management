@@ -47,7 +47,7 @@ const CartPaymentSucessPage = () => {
         <div>
           <h5 className="payment-title">Product Information :</h5>
           <div className="">
-            {products?.shopinfo?.map((product) => (
+            {products?.productinfo?.map((product) => (
               <div className="cart-order-product">
                 <img src={product?.Product_image} alt="n" />
                 <p>{product?.product_name}</p>

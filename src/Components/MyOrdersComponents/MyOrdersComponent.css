@@ -3,6 +3,34 @@
     background-color: white;
     padding: 8px 10px;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-con {
+    /* border: 1px solid gainsboro; */
+
+}
+
+.search-con input {
+    padding: 6px 8px;
+    border: 1px solid gainsboro;
+}
+
+.search-con button {
+    background-color: #be5184;
+    border: 1px solid #be5184;
+    padding: 6px 8px;
+    font-size: 1rem;
+    color: white;
+    font-weight: 500;
+
+}
+
+.search-con button:hover {
+    border: 1px solid #75294c;
+    background-color: #75294c;
 }
 
 .select1 {
@@ -34,4 +62,23 @@
 .shop-order-manage img {
     width: 90px;
     height: 90px;
+}
+
+
+.pagination-con {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+#paginationbtn {
+    border: 1px solid gray;
+    padding: 4px 10px;
+    margin: 4px;
+}
+
+.selected-page-btn {
+    border: 1px solid gray;
+    background-color: #be5184;
 }

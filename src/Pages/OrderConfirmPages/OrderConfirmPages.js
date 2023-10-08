@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./OrderConfirmPages.css";
 import { Form, Table } from "react-bootstrap";
+import { useEffect } from "react";
+import { AuthContext } from "../../Context/UserContext";
+import { useContext } from "react";
 const OrderConfirmPages = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -11,42 +14,207 @@ const OrderConfirmPages = () => {
   const [size_l, setsizel] = useState();
   const [size_xl, setsizexl] = useState();
   const [size_xxl, setsizexxl] = useState();
+  const [sum, setSum] = useState(0);
+  const [errormessage, seterrormessage] = useState(false);
+  const [shoporder, setorders] = useState([]);
+  const [cartorder, setcartorder] = useState([]);
+  const [customized, setcustomized] = useState([]);
+  const [addresss, setaddres] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { user, userlogout } = useContext(AuthContext);
+  const [showorder, setshoworder] = useState([]);
+  const [infoerror, setinfoerror] = useState(false);
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_URL}/address?email=${user?.email}`, {
+      headers: {
+        authorization: `Beare ${localStorage.getItem("garments-token")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          return userlogout();
+        }
+        return res.json();
+      })
+      .then((jsonData) => {
+        setaddres(jsonData);
+        // setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch data:", error);
+        setLoading(false);
+      });
+  }, [user?.email, userlogout]);
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_URL}/shoporder?email=${user?.email}`, {
+      headers: {
+        authorization: `Beare ${localStorage.getItem("garments-token")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          return userlogout();
+        }
+        return res.json();
+      })
+      .then((jsonData) => {
+        setorders(jsonData);
+        // setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch data:", error);
+        setLoading(false);
+      });
+  }, [user?.email, userlogout]);
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_URL}/cart-s-order?email=${user?.email}`, {
+      headers: {
+        authorization: `Beare ${localStorage.getItem("garments-token")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          return userlogout();
+        }
+        return res.json();
+      })
+      .then((jsonData) => {
+        setcartorder(jsonData);
+        // setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch data:", error);
+        setLoading(false);
+      });
+  }, [user?.email, userlogout]);
+  useEffect(() => {
+    fetch(
+      `${process.env.REACT_APP_URL}/customize-s-order?email=${user?.email}`,
+      {
+        headers: {
+          authorization: `Beare ${localStorage.getItem("garments-token")}`,
+        },
+      }
+    )
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          return userlogout();
+        }
+        return res.json();
+      })
+      .then((jsonData) => {
+        setcustomized(jsonData);
+        // setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch data:", error);
+        setLoading(false);
+      });
+  }, [user?.email, userlogout]);
+  useEffect(() => {
+    if (addresss?.length >= 1) {
+      setshoworder(addresss);
+    } else if (cartorder?.length >= 1) {
+      setshoworder(cartorder);
+      setLoading(false);
+    } else if (customized.length >= 1) {
+      setshoworder(customized);
+      setLoading(false);
+    } else if (shoporder.length >= 1) {
+      setshoworder(shoporder);
+      setLoading(false);
+    } else {
+      setshoworder([
+        {
+          name: "Enter Name",
+          address: "House Number/Road Name/City/District",
+          phone: "Mobile Number",
+          email: "Enter Email",
+        },
+      ]);
+    }
+  }, [addresss, shoporder, cartorder, customized]);
+
   console.log(orderinfo);
   const handlesizes = (dress_number) => {
-    const sizes = {
-      size: "S",
-      dress_number,
-    };
-    setsizes(sizes);
+    seterrormessage(false);
+    if (!dress_number) {
+      const newsum = 0;
+      setSum(newsum);
+    } else {
+      const newsum = parseInt(sum) + parseInt(dress_number);
+      setSum(newsum);
+      seterrormessage(false);
+      const sizes = {
+        size: "S",
+        dress_number,
+      };
+      setsizes(sizes);
+    }
   };
-
   const handlesizem = (dress_number) => {
-    const sizes = {
-      size: "M",
-      dress_number,
-    };
-    setsizem(sizes);
+    seterrormessage(false);
+    if (!dress_number) {
+      const newsum = 0;
+      setSum(newsum);
+    } else {
+      const newsum = parseInt(sum) + parseInt(dress_number);
+      setSum(newsum);
+      seterrormessage(false);
+      const sizes = {
+        size: "M",
+        dress_number,
+      };
+      setsizem(sizes);
+    }
   };
   const handlesizel = (dress_number) => {
-    const sizes = {
-      size: "L",
-      dress_number,
-    };
-    setsizel(sizes);
+    seterrormessage(false);
+    if (!dress_number) {
+      const newsum = 0;
+      setSum(newsum);
+    } else {
+      const newsum = parseInt(sum) + parseInt(dress_number);
+      setSum(newsum);
+      seterrormessage(false);
+      const sizes = {
+        size: "L",
+        dress_number,
+      };
+      setsizel(sizes);
+    }
   };
   const handlesizexl = (dress_number) => {
-    const sizes = {
-      size: "XL",
-      dress_number,
-    };
-    setsizexl(sizes);
+    seterrormessage(false);
+    if (!dress_number) {
+      const newsum = 0;
+      setSum(newsum);
+    } else {
+      const newsum = parseInt(sum) + parseInt(dress_number);
+      setSum(newsum);
+      seterrormessage(false);
+      const sizes = {
+        size: "XL",
+        dress_number,
+      };
+      setsizexl(sizes);
+    }
   };
   const handlesizexxl = (dress_number) => {
-    const sizes = {
-      size: "XXL",
-      dress_number,
-    };
-    setsizexxl(sizes);
+    seterrormessage(false);
+    if (!dress_number) {
+      const newsum = 0;
+      setSum(newsum);
+    } else {
+      const newsum = parseInt(sum) + parseInt(dress_number);
+      setSum(newsum);
+      seterrormessage(false);
+      const sizes = {
+        size: "XXL",
+        dress_number,
+      };
+      setsizexxl(sizes);
+    }
   };
   console.log(size_s, size_m, size_l, size_xl, size_xxl);
   const handleorderconfirm = (e) => {
@@ -57,6 +225,15 @@ const OrderConfirmPages = () => {
     const order_status = "confirm";
     const order = "not paid";
     const transiction_id = "";
+    if (parseInt(orderinfo?.pices) < sum || sum === 0) {
+      seterrormessage(true);
+      return;
+    }
+    if (!postcode || !address || !note) {
+      setinfoerror(true);
+      return;
+    }
+
     const orderconfirm = {
       ...orderinfo,
       size_s,
@@ -92,6 +269,48 @@ const OrderConfirmPages = () => {
 
   return (
     <div className="order-confirm-con">
+      {infoerror ? (
+        <div className="alert alert-warning">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="stroke-current shrink-0 h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+            />
+          </svg>
+          <span>Please give all information</span>
+        </div>
+      ) : (
+        <></>
+      )}
+      {errormessage ? (
+        <div className="alert alert-warning">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="stroke-current shrink-0 h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+            />
+          </svg>
+          <span>
+            you selected {sum} items. But the quantity is {orderinfo?.pices}{" "}
+          </span>
+        </div>
+      ) : (
+        <></>
+      )}
       <div className="order-confirm-top">
         Your order has been Confirm.Thank you
       </div>
@@ -138,6 +357,15 @@ const OrderConfirmPages = () => {
       </div>
 
       <div className="dress-size-con">
+        <h6 className="mb-6">you selected {sum} items.</h6>
+        <div className="dress-size-quen">
+          <p>Size S: {size_s?.dress_number}</p>
+          <p>Size M : {size_m?.dress_number}</p>
+          <p>Size L: {size_l?.dress_number}</p>
+          <p>Size XL: {size_xl?.dress_number}</p>
+          <p>Size XXL: {size_xxl?.dress_number}</p>
+        </div>
+
         <div className="dress-sizes">
           <div className="size">
             <h6>Size:S</h6>
@@ -197,50 +425,52 @@ const OrderConfirmPages = () => {
         </div>
       </div>
       <div className="address-con">
-        <Form onSubmit={handleorderconfirm}>
-          <Form.Group
-            className="mb-3 address-input-con"
-            controlId="exampleForm.ControlInput1"
-          >
-            <Form.Label className="address-input-lavel">
-              Delivery address
-            </Form.Label>
-            <Form.Control
-              className="address-input"
-              name="address"
-              type="text"
-              placeholder=""
-            />
-          </Form.Group>
-          <Form.Group
-            className="mb-3 address-input-con"
-            controlId="exampleForm.ControlInput1"
-          >
-            <Form.Label className="address-input-lavel">Post Code</Form.Label>
-            <Form.Control
-              className="address-input"
-              name="postcode"
-              type="text"
-              placeholder=""
-            />
-          </Form.Group>
-          <Form.Group
-            className="mb-3 address-input-con"
-            controlId="exampleForm.ControlInput1"
-          >
-            <Form.Label className="address-input-lavel">Note</Form.Label>
-            <Form.Control
-              className="address-input"
-              name="note"
-              type="text"
-              placeholder=""
-            />
-          </Form.Group>
+        {showorder?.map((order) => (
+          <Form onSubmit={handleorderconfirm}>
+            <Form.Group
+              className="mb-3 address-input-con"
+              controlId="exampleForm.ControlInput1"
+            >
+              <Form.Label className="address-input-lavel">
+                Delivery address
+              </Form.Label>
+              <Form.Control
+                className="address-input"
+                name="address"
+                type="text"
+                placeholder={order?.address}
+              />
+            </Form.Group>
+            <Form.Group
+              className="mb-3 address-input-con"
+              controlId="exampleForm.ControlInput1"
+            >
+              <Form.Label className="address-input-lavel">Post Code</Form.Label>
+              <Form.Control
+                className="address-input"
+                name="postcode"
+                type="text"
+                placeholder=""
+              />
+            </Form.Group>
+            <Form.Group
+              className="mb-3 address-input-con"
+              controlId="exampleForm.ControlInput1"
+            >
+              <Form.Label className="address-input-lavel">Note</Form.Label>
+              <Form.Control
+                className="address-input"
+                name="note"
+                type="text"
+                placeholder=""
+              />
+            </Form.Group>
 
-          <button type="submit" className="confirm-btn">
-            Confirm Order
-          </button>
-        </Form>
+            <button type="submit" className="confirm-btn">
+              Confirm Order
+            </button>
+          </Form>
+        ))}
       </div>
     </div>
   );

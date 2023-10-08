@@ -85,6 +85,16 @@
 
 }
 
+.dress-size-quen {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: aliceblue;
+    padding: 6px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
 .size h6 {
     color: gray;
     font-size: 1rem;

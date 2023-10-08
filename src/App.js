@@ -42,6 +42,7 @@ import PersonalInformationEdit from "./Components/AccountComponents/PersonalInfo
 import MyProfile from "./Components/AccountComponents/MyProfile/MyProfile";
 import MyAddress from "./Components/AccountComponents/MyAddress/MyAddress";
 import MyAddressEdit from "./Components/AccountComponents/MyAddressEdit/MyAddressEdit";
+import MyordersComponents from "./Components/MyOrdersComponents/MyordersComponents";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -291,6 +292,14 @@ function App() {
           element: (
             <PrivetRoutes>
               <MyCustomizedOrders></MyCustomizedOrders>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/manage_account/shop_orders",
+          element: (
+            <PrivetRoutes>
+              <MyordersComponents></MyordersComponents>
             </PrivetRoutes>
           ),
         },
