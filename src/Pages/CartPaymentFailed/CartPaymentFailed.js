@@ -9,7 +9,8 @@ const CartPaymentFailed = () => {
   const query = new URLSearchParams(location.search);
   const orderid = parseInt(query.get("orderid"));
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_URL}/cart/order/by_order_id/${orderid}`)
+    // fetch(`${process.env.REACT_APP_URL}/cart/order/by_order_id/${orderid}`)
+    fetch(`${process.env.REACT_APP_URL}/product/order/by_order_id/${orderid}`)
       .then((req) => req.json())
       .then((data) => setproducts(data));
   }, [orderid]);
@@ -45,7 +46,8 @@ const CartPaymentFailed = () => {
           </svg>
           <span>Order Payment is not Completed !!!</span>
         </div>
-        {products?.shopinfo?.map((products) => (
+        <h6 className="mb-6">Order Id: {products?.orderid}</h6>
+        {products?.productinfo?.map((products) => (
           <div className="failed-product mb-6">
             <img src={products?.Product_image} alt="not" />
             <h6>Product: {products?.product_name}</h6>

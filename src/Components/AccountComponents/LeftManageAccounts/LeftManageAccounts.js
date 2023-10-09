@@ -30,12 +30,19 @@ const LeftManageAccounts = () => {
         >
           My Customized Orders
         </Link>
-        <Link className="manage-left-link"> My Cancellations</Link>
+        <Link to="/manage_account/cancelorder" className="manage-left-link">
+          {" "}
+          My Cancellations
+        </Link>
       </div>
       <div className="account-link-con">
-        <Link className="manage-left-link">My Reviews</Link>
-        <Link className="manage-left-link">My cart product</Link>
-        <Link className="manage-left-link">
+        <Link to="/manage_account/review" className="manage-left-link">
+          My Reviews
+        </Link>
+        <Link to="/manage_account/cartproduct" className="manage-left-link">
+          My cart product
+        </Link>
+        <Link to="/manage_account/wishlist" className="manage-left-link">
           My Wishlist & Followed Stores (1)
         </Link>
       </div>

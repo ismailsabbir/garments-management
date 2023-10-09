@@ -43,6 +43,10 @@ import MyProfile from "./Components/AccountComponents/MyProfile/MyProfile";
 import MyAddress from "./Components/AccountComponents/MyAddress/MyAddress";
 import MyAddressEdit from "./Components/AccountComponents/MyAddressEdit/MyAddressEdit";
 import MyordersComponents from "./Components/MyOrdersComponents/MyordersComponents";
+import MyWishlistPages from "./Components/AccountComponents/MyWishlistPages/MyWishlistPages";
+import MycartPages from "./Components/AccountComponents/MycartPages/MycartPages";
+import MyReviewsPages from "./Components/AccountComponents/MyReviewsPages/MyReviewsPages";
+import MyCancellOrderPage from "./Components/AccountComponents/MyCancellOrderPage/MyCancellOrderPage";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -300,6 +304,38 @@ function App() {
           element: (
             <PrivetRoutes>
               <MyordersComponents></MyordersComponents>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/manage_account/wishlist",
+          element: (
+            <PrivetRoutes>
+              <MyWishlistPages></MyWishlistPages>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/manage_account/cartproduct",
+          element: (
+            <PrivetRoutes>
+              <MycartPages></MycartPages>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/manage_account/review",
+          element: (
+            <PrivetRoutes>
+              <MyReviewsPages></MyReviewsPages>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/manage_account/cancelorder",
+          element: (
+            <PrivetRoutes>
+              <MyCancellOrderPage></MyCancellOrderPage>
             </PrivetRoutes>
           ),
         },

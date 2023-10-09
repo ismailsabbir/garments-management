@@ -11,8 +11,11 @@ const CartPaymentSucessPage = () => {
   const transiction_id = query.get("transiction_id");
   console.log(location);
   useEffect(() => {
+    // fetch(
+    //   `${process.env.REACT_APP_URL}/cartorder/by_transcation_id/${transiction_id}`
+    // )
     fetch(
-      `${process.env.REACT_APP_URL}/cartorder/by_transcation_id/${transiction_id}`
+      `${process.env.REACT_APP_URL}/shoporder/by_transcation_id/${transiction_id}`
     )
       .then((res) => res.json())
       .then((data) => setproducts(data))

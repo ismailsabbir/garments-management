@@ -16,7 +16,6 @@ const MyordersComponents = () => {
   const page = Math.ceil(count / datasize);
   console.log(datasize, count, page);
   useEffect(() => {
-    // setTimeout(() => {
     fetch(
       `${process.env.REACT_APP_URL}/shoporders?email=${user?.email}&page=${currentpage}&size=${datasize}`,
       {
@@ -40,7 +39,6 @@ const MyordersComponents = () => {
         console.error("Failed to fetch data:", error);
         setLoading(false);
       });
-    // }, 2000);
   }, [user?.email, userlogout, currentpage, datasize]);
 
   const handlesearch = (e) => {
@@ -107,15 +105,17 @@ const MyordersComponents = () => {
                 </div>
                 <button>Manage</button>
               </div>
-              <div className="shop-order-product-manage">
-                <img src={order?.dress_photo} alt="" />
-                <h6>{order?.category_name}</h6>
+              {order?.productinfo?.map((aproduct) => (
+                <div className="shop-order-product-manage">
+                  <img src={aproduct?.Product_image} alt="" />
+                  <h6>{aproduct?.product_name}</h6>
 
-                <h6>QTY:{order?.pices}</h6>
-                <p>{order?.order}</p>
-                <p>{order?.delivery_status}</p>
-                <p>{order?.dliveryDate}</p>
-              </div>
+                  <h6>QTY:{aproduct?.quentuty}</h6>
+                  <p>{order?.order}</p>
+                  <p>{order?.delivery_status}</p>
+                  <p>{order?.dliveryDate}</p>
+                </div>
+              ))}
             </div>
           ))}
           <div className="pagination-con">

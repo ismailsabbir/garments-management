@@ -217,8 +217,8 @@ const CartCheckoutPages = () => {
       seterrorinfo(true);
       return;
     }
-    // fetch(`${process.env.REACT_APP_URL}/shoporder`, {
-    fetch(`${process.env.REACT_APP_URL}/cartorder`, {
+    fetch(`${process.env.REACT_APP_URL}/shoporder`, {
+      // fetch(`${process.env.REACT_APP_URL}/cartorder`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",

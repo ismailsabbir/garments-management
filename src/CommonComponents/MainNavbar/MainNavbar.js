@@ -189,7 +189,10 @@ const MainNavbar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link className="nav-account">
+                    <Link
+                      to="/manage_account/shop_orders"
+                      className="nav-account"
+                    >
                       <AiOutlineInbox></AiOutlineInbox> <>My Orders</>
                     </Link>
                     <Link
@@ -199,18 +202,25 @@ const MainNavbar = () => {
                       <AiOutlineInbox></AiOutlineInbox>{" "}
                       <>My Customized Orders</>
                     </Link>
-                    <Link className="nav-account">
+                    <Link
+                      to="/manage_account/cartproduct"
+                      className="nav-account"
+                    >
+                      <BsBagDash></BsBagDash>
+                      <>My Shoping cart</>
+                    </Link>
+                    <Link to="/manage_account/wishlist" className="nav-account">
                       <GrFavorite></GrFavorite>
                       <>My Wishlist & Followed Stores</>
                     </Link>
-                    <Link className="nav-account">
+                    <Link to="/manage_account/review" className="nav-account">
                       <GoCodeReview></GoCodeReview>
                       <>My Reviews</>
                     </Link>
-                    <Link className="nav-account">
+                    <button onClick={handlelogout} className="nav-account">
                       <BiLogOut></BiLogOut>
                       <>Logout</>
-                    </Link>
+                    </button>
                   </li>
                 </ul>
               </div>
