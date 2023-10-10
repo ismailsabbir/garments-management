@@ -21,6 +21,7 @@ import { BiLogOut } from "react-icons/bi";
 const MainNavbar = () => {
   const { user, userlogout } = useContext(AuthContext);
   const [cartproducts, setcartproducts] = useState([]);
+  const [isFixed, setIsFixed] = useState(false);
   useEffect(() => {
     fetchData();
   });
@@ -53,10 +54,25 @@ const MainNavbar = () => {
         console.log(error);
       });
   };
+
+  const handleScroll = () => {
+    if (window.scrollY > 100) {
+      setIsFixed(true);
+    } else {
+      setIsFixed(false);
+    }
+  };
+  window.addEventListener("scroll", handleScroll);
   return (
-    <div className="print:hidden">
-      <TopNavbar></TopNavbar>
-      <Navbar expand="lg" className="bg-neutral">
+    <div className="print:hidden" id={isFixed ? "fixed" : ""}>
+      <div id={isFixed ? "topnone" : ""}>
+        <TopNavbar></TopNavbar>
+      </div>
+      <Navbar
+        expand="lg"
+        className="bg-neutral"
+        id={isFixed ? "mainnav-color" : ""}
+      >
         <Container>
           <Navbar.Brand href="#home">
             <img className="h-14" src={logo} alt="not found" />

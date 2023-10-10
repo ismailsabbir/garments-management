@@ -16,8 +16,9 @@ import CartCheckoutForm from "../CartCheckoutForm/CartCheckoutForm";
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 const CartPaymentPages = () => {
   const { state } = useLocation();
+  console.log(state);
   const confirm_info = state.orderconfirm;
-  console.log(confirm_info);
+
   const [cardshow, setcardshow] = useState(true);
   const [bkashshow, setbkashshow] = useState(false);
   const cardhandler = () => {

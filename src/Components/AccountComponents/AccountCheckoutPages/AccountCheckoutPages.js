@@ -1,11 +1,9 @@
-import React, { useContext } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import "./CartCheckoutPages.css";
-import { AuthContext } from "../../Context/UserContext";
-const CartCheckoutPages = () => {
+import { AuthContext } from "../../../Context/UserContext";
+
+const AccountCheckoutPages = () => {
   const { user, userlogout } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -413,4 +411,4 @@ const CartCheckoutPages = () => {
   );
 };
 
-export default CartCheckoutPages;
+export default AccountCheckoutPages;

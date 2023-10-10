@@ -228,6 +228,7 @@ const CartProductsPages = () => {
       setmessae(true);
     }
   };
+  console.log(selectproducts);
   return (
     <div className="cartproduct-container">
       {loading ? (

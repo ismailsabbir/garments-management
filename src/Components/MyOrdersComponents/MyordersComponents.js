@@ -6,7 +6,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Loading from "../../CommonComponents/Loading/Loading";
 import { Form } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 const MyordersComponents = () => {
+  const navigate = useNavigate();
   const { user, userlogout } = useContext(AuthContext);
   const [orders, setorders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -69,6 +71,9 @@ const MyordersComponents = () => {
         setLoading(false);
       });
   };
+  const handleorderpayment = (orderconfirm) => {
+    navigate("/cartproductpayment", { state: { orderconfirm } });
+  };
   console.log(orders);
   return (
     <div className="my-orders-continer">
@@ -96,6 +101,7 @@ const MyordersComponents = () => {
               <button type="submit">Search</button>
             </Form>
           </div>
+
           {orders?.map((order) => (
             <div className="shop-order-manage">
               <div className="shop-order-manage-title">
@@ -103,7 +109,21 @@ const MyordersComponents = () => {
                   <h6>Order {order?.orderid}</h6>
                   <h6>Placed on {order?.order_date}</h6>
                 </div>
-                <button>Manage</button>
+                <div>
+                  {order?.order === "paid" ? (
+                    <></>
+                  ) : (
+                    <button
+                      onClick={() => handleorderpayment(order)}
+                      className="order-pay-btn"
+                    >
+                      {" "}
+                      Pay Now
+                    </button>
+                  )}
+
+                  <button className="ml-6">Manage</button>
+                </div>
               </div>
               {order?.productinfo?.map((aproduct) => (
                 <div className="shop-order-product-manage">
@@ -111,7 +131,12 @@ const MyordersComponents = () => {
                   <h6>{aproduct?.product_name}</h6>
 
                   <h6>QTY:{aproduct?.quentuty}</h6>
-                  <p>{order?.order}</p>
+                  {order?.order === "paid" ? (
+                    <p>{order?.order}</p>
+                  ) : (
+                    <p>Payment Pending</p>
+                  )}
+                  <p>Estimated Delivery By {order?.delivery_date}</p>
                   <p>{order?.delivery_status}</p>
                   <p>{order?.dliveryDate}</p>
                 </div>

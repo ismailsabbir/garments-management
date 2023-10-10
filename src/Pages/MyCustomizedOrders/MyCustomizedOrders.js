@@ -6,7 +6,10 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Form } from "react-bootstrap";
 import Loading from "../../CommonComponents/Loading/Loading";
+import CustomizeDetailsBanner from "./../../Components/CustomizeDetailsComponent/CustomizeDetailsBanner/CustomizeDetailsBanner";
+import { useNavigate } from "react-router-dom";
 const MyCustomizedOrders = () => {
+  const navigate = useNavigate();
   const { user, userlogout } = useContext(AuthContext);
   const [orders, setorders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -69,6 +72,9 @@ const MyCustomizedOrders = () => {
         setLoading(false);
       });
   };
+  const handleorderpayment = (orderconfirm) => {
+    navigate("/payment", { state: { orderconfirm } });
+  };
   console.log(orders);
   return (
     <div className="my-orders-continer">
@@ -103,9 +109,21 @@ const MyCustomizedOrders = () => {
                   <h6>Order {order?.orderid}</h6>
                   <h6>Placed on {order?.order_date}</h6>
                 </div>
-                <button>Manage</button>
+                <div>
+                  {order?.order === "paid" ? (
+                    <></>
+                  ) : (
+                    <button
+                      onClick={() => handleorderpayment(order)}
+                      className="order-pay-btn"
+                    >
+                      {" "}
+                      Pay Now
+                    </button>
+                  )}
+                  <button className="ml-6">Manage</button>
+                </div>
               </div>
-              {/* {order?.productinfo?.map((aproduct) => ( */}
               <div className="shop-order-product-manage">
                 <img src={order?.dress_photo} alt="" />
                 <h6>{order?.category_name}</h6>
@@ -115,7 +133,6 @@ const MyCustomizedOrders = () => {
                 <p>{order?.delivery_status}</p>
                 <p>{order?.dliveryDate}</p>
               </div>
-              {/* ))} */}
             </div>
           ))}
           <div className="pagination-con">

@@ -4,6 +4,24 @@
     align-items: center;
     justify-content: center;
 
+
+}
+
+#fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 4;
+
+
+}
+
+#mainnav-color {
+    border-bottom: 1px solid #be5184;
+}
+
+#topnone {
+    display: none;
 }
 
 .navbar-light .navbar-toggler-icon {

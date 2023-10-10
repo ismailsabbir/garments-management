@@ -82,3 +82,11 @@
     border: 1px solid gray;
     background-color: #be5184;
 }
+
+.order-pay-btn {
+    text-decoration: none;
+    color: white;
+    background-color: #be5184;
+    padding: 4px 6px;
+    border-radius: 6px;
+}

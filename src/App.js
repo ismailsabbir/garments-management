@@ -47,6 +47,8 @@ import MyWishlistPages from "./Components/AccountComponents/MyWishlistPages/MyWi
 import MycartPages from "./Components/AccountComponents/MycartPages/MycartPages";
 import MyReviewsPages from "./Components/AccountComponents/MyReviewsPages/MyReviewsPages";
 import MyCancellOrderPage from "./Components/AccountComponents/MyCancellOrderPage/MyCancellOrderPage";
+import AccountCheckoutPages from "./Components/AccountComponents/AccountCheckoutPages/AccountCheckoutPages";
+import ScrollToTop from "./Hooks/ScrollToTop";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -77,7 +79,11 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Main></Main>,
+      element: (
+        <>
+          <Main></Main> <ScrollToTop />
+        </>
+      ),
       children: [
         {
           path: "/",
@@ -243,6 +249,15 @@ function App() {
             </PrivetRoutes>
           ),
         },
+        {
+          path: "/account-checkout",
+          element: (
+            <PrivetRoutes>
+              <AccountCheckoutPages></AccountCheckoutPages>
+            </PrivetRoutes>
+          ),
+        },
+
         {
           path: "/blog",
           element: <BlogPages></BlogPages>,

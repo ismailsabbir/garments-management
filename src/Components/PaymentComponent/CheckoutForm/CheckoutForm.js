@@ -1,8 +1,10 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const CheckoutForm = ({ paymentinfo }) => {
+  const navigate = useNavigate();
   const [carterror, setcarderror] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [paymentsucess, setpaymentsucess] = useState("");
@@ -64,7 +66,7 @@ const CheckoutForm = ({ paymentinfo }) => {
     if (paymentIntent.status === "succeeded") {
       setpaymentsucess("congratulations! Payment Completed");
       settransactionid(paymentIntent.id);
-
+      navigate(`/payment/sucess?transiction_id=${paymentIntent.id}`);
       toast("Payment Completed!", {
         position: "top-center",
         autoClose: 80,
@@ -92,6 +94,7 @@ const CheckoutForm = ({ paymentinfo }) => {
           if (data.insertedId) {
             setpaymentstatus(true);
             setpayprocessing(false);
+            // a
           }
         })
         .catch((err) => {
