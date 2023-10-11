@@ -6,17 +6,23 @@ const AccountMenu = () => {
   return (
     <div className="account-menu-con">
       <h5>Account Menu</h5>
-      <Link className="menu-link">
+      <Link to="/manage_account" className="menu-link">
         <BiChevronRight></BiChevronRight> <>MY ACCOUNT</>
       </Link>
       <Link className="menu-link">
         <BiChevronRight></BiChevronRight> ADDRESS BOOK
       </Link>
-      <Link className="menu-link">
+      <Link to="/manage_account/cartproduct" className="menu-link">
+        <BiChevronRight></BiChevronRight> ShOPING CART
+      </Link>
+      <Link to="/manage_account/wishlist" className="menu-link">
         <BiChevronRight></BiChevronRight> WISHLIST
       </Link>
-      <Link className="menu-link">
+      <Link to="/manage_account/shop_orders" className="menu-link">
         <BiChevronRight></BiChevronRight> ORDER HISTORY
+      </Link>
+      <Link to="/manage_account/customized_orders" className="menu-link">
+        <BiChevronRight></BiChevronRight>CUSTOMIZED ORDER HISTORY
       </Link>
     </div>
   );

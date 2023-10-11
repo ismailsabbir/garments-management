@@ -1,0 +1,145 @@
+.manage-order-id-tk {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 8px;
+}
+
+.manage-id-date {
+    line-height: 0%;
+}
+
+.manage-id-date p {
+    font-size: 0.8rem;
+    color: rgb(77, 76, 76);
+    font-weight: 500;
+    margin-top: 3px;
+}
+
+.manage-tk {
+    color: rgb(55, 54, 54);
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.manage-product-info {
+    margin-top: 30px;
+    padding: 10px;
+    background-color: white;
+}
+
+.manage-product-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid gray;
+    /* padding-bottom: 6px; */
+}
+
+.gift-box-package {
+    display: flex;
+    align-items: center;
+}
+
+.giftbox {
+    color: #be5184;
+    font-size: 1.3rem;
+    margin-right: 8px;
+}
+
+.brand {
+    color: blue;
+}
+
+.gift-box-package p {
+    margin-top: 14px;
+    margin-left: 6px;
+}
+
+.chat-icon {
+    color: #be5184;
+    font-size: 1.3rem;
+    margin-right: 6px;
+}
+
+.manage-chat {
+    display: flex;
+    align-items: center;
+}
+
+.product-manage-infor {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 10px;
+    /* border: 1px solid brown; */
+}
+
+.manage-image-name {
+    display: flex;
+}
+
+.manage-image-name div {}
+
+.manage-image-name img {
+    width: 100px;
+    height: 100px;
+}
+
+.manage-warenty {
+    margin-left: 15px;
+}
+
+.manage-warenty h6 {
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgb(64, 63, 63);
+}
+
+.manage-address-con {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.manage-address {
+    width: 48%;
+    /* border: 1px solid gainsboro; */
+    background-color: white;
+    padding: 15px;
+    height: 150px;
+}
+
+.manage-address p {
+    font-size: 1rem;
+    color: rgb(66, 65, 65);
+    line-height: 6px;
+}
+
+.manage-summary {
+    width: 48%;
+    /* border: 1px solid gainsboro; */
+    background-color: white;
+    padding: 15px;
+    height: 160px;
+}
+
+.manage-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sum-sum-icon {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.sum-icon {
+    font-size: 1.4rem;
+    color: #be5184;
+}

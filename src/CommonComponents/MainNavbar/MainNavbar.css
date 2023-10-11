@@ -1,10 +1,18 @@
 .nav-items {
-    width: 85%;
+    width: 60%;
     display: flex;
     align-items: center;
     justify-content: center;
+    /* border: 1px solid brown; */
+}
 
-
+.main-nav-con {
+    /* border: 1px solid white; */
+    width: 100%;
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-between;
+    padding: 0px 30px;
 }
 
 #fixed {
@@ -12,8 +20,6 @@
     top: 0;
     width: 100%;
     z-index: 4;
-
-
 }
 
 #mainnav-color {
@@ -22,6 +28,15 @@
 
 #topnone {
     display: none;
+}
+
+.navbar-brand-imaage {
+    /* border: 1px solid brown; */
+    /* width: 400px; */
+}
+
+.navbar-brand-imaage img {
+    height: 50px;
 }
 
 .navbar-light .navbar-toggler-icon {
@@ -64,7 +79,8 @@
     /* border: 1px solid brown; */
     display: flex;
     align-items: center;
-    width: 620px;
+    /* width: 620px; */
+    /* width: 10%; */
 
 }
 
@@ -143,7 +159,7 @@
 .dropdrown-menu {
     height: auto;
     /* border: 1px solid brown; */
-    margin-top: 300px;
+    margin-top: 320px;
     width: 300px;
 }
 
@@ -153,5 +169,78 @@
     text-decoration: none;
     color: gray;
     font-size: 1rem;
+
+}
+
+.nav-brand-tab {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* border: 1px solid gray; */
+}
+
+.account-wishlist-cart-con {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media only screen and (max-width: 600px) {
+    .nav-brand-tab {
+        width: 100%;
+    }
+
+    .main-nav-con {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        height: auto;
+    }
+
+    .nav-items {
+        /* border: 1px solid brown; */
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .navbar-end-con {
+        margin-top: 30px;
+        width: 100%;
+        /* border: 1px solid white; */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        padding-bottom: 10px;
+        /* border-top: 1px solid #be5184; */
+    }
+
+    .make-project-btn {
+        margin-bottom: 10px;
+    }
+
+    .nav-useer {
+        /* border: 1px solid green; */
+        margin: 0px;
+        margin-top: 20px;
+        margin-right: 10px;
+    }
+
+    #make-project-btn {
+        width: 100%;
+    }
+
+    .account-wishlist-cart-con {
+        border-top: 1px solid #be5184;
+        margin-top: 30px;
+        padding-top: 8px;
+    }
+
+    .dropdrown-menu {
+        /* border: 1px solid brown; */
+        width: 300px;
+        margin-top: 315px;
+
+    }
 
 }

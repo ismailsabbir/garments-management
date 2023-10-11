@@ -10,6 +10,7 @@ import Loading from "./../../CommonComponents/Loading/Loading";
 import { Link, useNavigate } from "react-router-dom";
 
 import { ToastContainer, toast } from "react-toastify";
+import { Form } from "react-bootstrap";
 const CartProductsPages = () => {
   const navigate = useNavigate();
   const { user, userlogout } = useContext(AuthContext);
@@ -18,30 +19,58 @@ const CartProductsPages = () => {
   const [loading, setLoading] = useState(true);
   const [selectall, setselectall] = useState(false);
   const [message, setmessae] = useState(false);
+  const [currentpage, setcurrentpage] = useState(0);
+  const [datasize, setdatasize] = useState(5);
+  const [count, setcount] = useState(0);
+  const page = Math.ceil(count / datasize);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     fetch(`${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`, {
+  //       headers: {
+  //         authorization: `Beare ${localStorage.getItem("garments-token")}`,
+  //       },
+  //     })
+  //       .then((res) => {
+  //         if (res.status === 401 || res.status === 403) {
+  //           return userlogout();
+  //         }
+  //         return res.json();
+  //       })
+  //       .then((jsonData) => {
+  //         setcartproducts(jsonData);
+  //         setLoading(false);
+  //       })
+  //       .catch((error) => {
+  //         console.error("Failed to fetch data:", error);
+  //         setLoading(false);
+  //       });
+  //   }, 2000);
+  // }, [user?.email, userlogout]);
   useEffect(() => {
-    setTimeout(() => {
-      fetch(`${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`, {
+    fetch(
+      `${process.env.REACT_APP_URL}/mycartproduct?email=${user?.email}&page=${currentpage}&size=${datasize}`,
+      {
         headers: {
           authorization: `Beare ${localStorage.getItem("garments-token")}`,
         },
+      }
+    )
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          return userlogout();
+        }
+        return res.json();
       })
-        .then((res) => {
-          if (res.status === 401 || res.status === 403) {
-            return userlogout();
-          }
-          return res.json();
-        })
-        .then((jsonData) => {
-          setcartproducts(jsonData);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Failed to fetch data:", error);
-          setLoading(false);
-        });
-    }, 2000);
-  }, [user?.email, userlogout]);
-
+      .then((jsonData) => {
+        setcartproducts(jsonData.product);
+        setcount(jsonData.count);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch data:", error);
+        setLoading(false);
+      });
+  }, [user?.email, userlogout, currentpage, datasize]);
   const handleallselect = () => {
     if (selectall === true) {
       setselectall(false);
@@ -228,6 +257,35 @@ const CartProductsPages = () => {
       setmessae(true);
     }
   };
+  const handlesearch = (e) => {
+    e.preventDefault();
+    const search = e.target.search.value;
+    console.log(search);
+    // fetch(
+    //   `${process.env.REACT_APP_URL}/idodrders?email=${user?.email}&page=${currentpage}&size=${datasize}&search=${search}`,
+    //   {
+    //     headers: {
+    //       authorization: `Beare ${localStorage.getItem("garments-token")}`,
+    //     },
+    //   }
+    // )
+    //   .then((res) => {
+    //     if (res.status === 401 || res.status === 403) {
+    //       return userlogout();
+    //     }
+    //     return res.json();
+    //   })
+    //   .then((jsonData) => {
+    //     setorders(jsonData.product);
+    //     setcount(jsonData.count);
+    //     setLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Failed to fetch data:", error);
+    //     setLoading(false);
+    //   });
+  };
+
   console.log(selectproducts);
   return (
     <div className="cartproduct-container">
@@ -269,6 +327,26 @@ const CartProductsPages = () => {
                   <RiDeleteBin5Line className="cart-delete-icon"></RiDeleteBin5Line>
                 </button>
               </div>
+
+              <div className="order-quenty-con">
+                <select
+                  onChange={(e) => setdatasize(e.target.value)}
+                  className="select1 select-bordered "
+                >
+                  <option value="2">2</option>
+                  <option value="5" selected>
+                    5
+                  </option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                </select>
+                <Form onSubmit={handlesearch} className="search-con">
+                  <input name="search" placeholder="Search by product name" />
+                  <button type="submit">Search</button>
+                </Form>
+              </div>
+
               <div className="cart-product-con">
                 {cartproducts?.map((product) => (
                   <div className="cart-product">
@@ -309,6 +387,19 @@ const CartProductsPages = () => {
                     </div>
                   </div>
                 ))}
+
+                <div className="pagination-con mb-6">
+                  {[...Array(page).keys()].map((number) => (
+                    <button
+                      key={number}
+                      className={currentpage === number && "selected-page-btn"}
+                      id="paginationbtn"
+                      onClick={() => setcurrentpage(number)}
+                    >
+                      {number}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
             <div className="col col-12 col-lg-4 col-md-12 col-sm-12">

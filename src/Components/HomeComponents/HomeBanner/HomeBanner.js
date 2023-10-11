@@ -3,7 +3,17 @@ import "./HomeBanner.css";
 import icon1 from "../../../Images/Icon-1.png";
 import icon2 from "../../../Images/Icon-2.png";
 import icon3 from "../../../Images/Icon-3.png";
+import { useState } from "react";
 const HomeBanner = () => {
+  const [isFixed, setIsFixed] = useState(false);
+  const handleScroll = () => {
+    if (window.scrollY > 60) {
+      setIsFixed(true);
+    } else {
+      setIsFixed(false);
+    }
+  };
+  window.addEventListener("scroll", handleScroll);
   return (
     <div className="home-banner-hole">
       <div className="home-banner-con">
@@ -21,7 +31,10 @@ const HomeBanner = () => {
         </div>
       </div>
 
-      <div className="banner-bottom-con">
+      <div
+        className="banner-bottom-con"
+        id={isFixed ? "banner-bottom-fixed" : ""}
+      >
         <div className="banner-bottom-1 bg-neutral">
           <img src={icon1} alt="not found" />
           <div className="banner-bottom-right">

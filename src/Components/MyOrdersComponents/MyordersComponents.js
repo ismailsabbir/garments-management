@@ -122,7 +122,13 @@ const MyordersComponents = () => {
                     </button>
                   )}
 
-                  <button className="ml-6">Manage</button>
+                  <Link
+                    to="/manage_account/order/manage"
+                    state={order}
+                    className="ml-6 no-underline"
+                  >
+                    Manage
+                  </Link>
                 </div>
               </div>
               {order?.productinfo?.map((aproduct) => (

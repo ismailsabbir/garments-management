@@ -1,0 +1,42 @@
+.Error-page-con {
+    width: 100%;
+    height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(236, 235, 235);
+}
+
+.error-message-con {
+    width: 80%;
+    height: 100%;
+    /* border: 1px solid brown; */
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.error-message-con img {
+    width: 100%;
+    height: 65%;
+    /* border: 1px solid black; */
+    margin-bottom: 20px;
+}
+
+.back-home-btn {
+    border: 1px solid #0e9f6e;
+    text-decoration: none;
+    color: white;
+    background-color: #0e9f6e;
+    font-size: 1.1rem;
+    padding: 8px 30px;
+    margin-bottom: 40px;
+}
+
+.error-message-con h1 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: black;
+}

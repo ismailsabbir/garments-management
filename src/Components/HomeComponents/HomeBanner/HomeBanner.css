@@ -41,10 +41,14 @@
 .banner-bottom-con {
     display: flex;
     align-items: center;
-    /* justify-content: space-around; */
     position: absolute;
-    bottom: -55px;
-    left: 10%;
+    bottom: -0px;
+    left: 15%;
+}
+
+#banner-bottom-fixed {
+    position: absolute;
+    bottom: 150px;
 }
 
 .banner-bottom-1 {

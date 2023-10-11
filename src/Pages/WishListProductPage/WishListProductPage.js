@@ -10,9 +10,11 @@ import { BsBagDash } from "react-icons/bs";
 import AccountMenu from "../../Components/AccountMenu/AccountMenu";
 import { ToastContainer, toast } from "react-toastify";
 import Modal from "../../Hooks/Modal/Modal";
+import { Form } from "react-bootstrap";
+import LeftManageAccounts from "../../Components/AccountComponents/LeftManageAccounts/LeftManageAccounts";
 
 const WishListProductPage = () => {
-  const { user } = useContext(AuthContext);
+  const { user, userlogout } = useContext(AuthContext);
   const email = user?.email;
   const [cartproducts, setcartproducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,21 +22,52 @@ const WishListProductPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [detlets, setdelete] = useState(false);
   const [quentuty, setquentity] = useState(1);
+  const [currentpage, setcurrentpage] = useState(0);
+  const [datasize, setdatasize] = useState(5);
+  const [count, setcount] = useState(0);
+  const page = Math.ceil(count / datasize);
   console.log(cartproducts);
+
   useEffect(() => {
-    setTimeout(() => {
-      fetch(`${process.env.REACT_APP_URL}/wishlistproduct?email=${user?.email}`)
-        .then((res) => res.json())
-        .then((jsonData) => {
-          setcartproducts(jsonData);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Failed to fetch data:", error);
-          setLoading(false);
-        });
-    }, 2000);
-  }, [user?.email]);
+    fetch(
+      `${process.env.REACT_APP_URL}/mywishproduct?email=${user?.email}&page=${currentpage}&size=${datasize}`,
+      {
+        headers: {
+          authorization: `Beare ${localStorage.getItem("garments-token")}`,
+        },
+      }
+    )
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          return userlogout();
+        }
+        return res.json();
+      })
+      .then((jsonData) => {
+        setcartproducts(jsonData.product);
+        setcount(jsonData.count);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch data:", error);
+        setLoading(false);
+      });
+  }, [user?.email, userlogout, currentpage, datasize]);
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     fetch(`${process.env.REACT_APP_URL}/wishlistproduct?email=${user?.email}`)
+  //       .then((res) => res.json())
+  //       .then((jsonData) => {
+  //         setcartproducts(jsonData);
+  //         setLoading(false);
+  //       })
+  //       .catch((error) => {
+  //         console.error("Failed to fetch data:", error);
+  //         setLoading(false);
+  //       });
+  //   }, 2000);
+  // }, [user?.email]);
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -157,6 +190,34 @@ const WishListProductPage = () => {
         }
       });
   };
+  const handlesearch = (e) => {
+    e.preventDefault();
+    const search = e.target.search.value;
+    console.log(search);
+    // fetch(
+    //   `${process.env.REACT_APP_URL}/idodrders?email=${user?.email}&page=${currentpage}&size=${datasize}&search=${search}`,
+    //   {
+    //     headers: {
+    //       authorization: `Beare ${localStorage.getItem("garments-token")}`,
+    //     },
+    //   }
+    // )
+    //   .then((res) => {
+    //     if (res.status === 401 || res.status === 403) {
+    //       return userlogout();
+    //     }
+    //     return res.json();
+    //   })
+    //   .then((jsonData) => {
+    //     setorders(jsonData.product);
+    //     setcount(jsonData.count);
+    //     setLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Failed to fetch data:", error);
+    //     setLoading(false);
+    //   });
+  };
   return (
     <div>
       <Modal
@@ -204,6 +265,26 @@ const WishListProductPage = () => {
             <div className="row">
               <div className="col col-12 col-lg-9 col-md-12 col-sm-12 wishlist-left">
                 <h4>My Wish List</h4>
+
+                <div className="order-quenty-con mb-6 mt-6">
+                  <select
+                    onChange={(e) => setdatasize(e.target.value)}
+                    className="select1 select-bordered "
+                  >
+                    <option value="2">2</option>
+                    <option value="5" selected>
+                      5
+                    </option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                  </select>
+                  <Form onSubmit={handlesearch} className="search-con">
+                    <input name="search" placeholder="Search by product name" />
+                    <button type="submit">Search</button>
+                  </Form>
+                </div>
+
                 {cartproducts?.map((product) => (
                   <div className="wishlisst-product">
                     <img src={product?.Product_image} alt="not found" />
@@ -229,9 +310,22 @@ const WishListProductPage = () => {
                     </div>
                   </div>
                 ))}
+                <div className="pagination-con mb-6">
+                  {[...Array(page).keys()].map((number) => (
+                    <button
+                      key={number}
+                      className={currentpage === number && "selected-page-btn"}
+                      id="paginationbtn"
+                      onClick={() => setcurrentpage(number)}
+                    >
+                      {number}
+                    </button>
+                  ))}
+                </div>
               </div>
               <div className="col col-12 col-lg-3 col-md-12 col-sm-12 wishlist-right">
-                <AccountMenu></AccountMenu>
+                <LeftManageAccounts></LeftManageAccounts>
+                {/* <AccountMenu></AccountMenu> */}
               </div>
             </div>
           </div>

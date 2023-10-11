@@ -7,14 +7,15 @@
 }
 
 .wishlist-left {
-    border: 1px solid gainsboro;
+    /* border: 1px solid gainsboro; */
     padding: 10px 15px;
+    background-color: aliceblue;
 
 }
 
 .wishlist-right {
     /* border: 1px solid yellow; */
-    /* padding-left: 30px; */
+    padding-left: 50px;
 }
 
 .wishlisst-product {
@@ -22,6 +23,8 @@
     align-items: center;
     justify-content: space-between;
     margin-top: 20px;
+    background-color: white;
+    padding: 6px 6px;
 }
 
 .wishlisst-product img {

@@ -1,0 +1,14 @@
+.dashbord-layut-con {
+    /* margin-bottom: 20px; */
+}
+
+.dashbord-layout-left {
+    /* border: 1px solid brown; */
+    padding: 25px;
+}
+
+.dashbordlayout-right {
+    /* border: 1px solid green; */
+    padding: 15px;
+    background-color: rgb(245, 245, 245);
+}

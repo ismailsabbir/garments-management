@@ -49,6 +49,19 @@ import MyReviewsPages from "./Components/AccountComponents/MyReviewsPages/MyRevi
 import MyCancellOrderPage from "./Components/AccountComponents/MyCancellOrderPage/MyCancellOrderPage";
 import AccountCheckoutPages from "./Components/AccountComponents/AccountCheckoutPages/AccountCheckoutPages";
 import ScrollToTop from "./Hooks/ScrollToTop";
+import ManageOrderPage from "./Components/AccountComponents/ManageOrderPage/ManageOrderPage";
+import DashbordLayouts from "./Layouts/DashbordLayouts/DashbordLayouts";
+import { Elements } from "@stripe/react-stripe-js";
+import DashbordHome from "./Components/DashbordComponents/DashbordHome/DashbordHome";
+import DashbordShopProducts from "./Components/DashbordComponents/DashbordShopProducts/DashbordShopProducts";
+import DashbordShopCategory from "./Components/DashbordComponents/DashbordShopCategory/DashbordShopCategory";
+import DashbordCustomizedProduct from "./Components/DashbordComponents/DashbordCustomizedProduct/DashbordCustomizedProduct";
+import DashbordCustomizedCategory from "./Components/DashbordComponents/DashbordCustomizedCategory/DashbordCustomizedCategory";
+import DashbordOrders from "./Components/DashbordComponents/DashbordOrders/DashbordOrders";
+import DashbordCustomers from "./Components/DashbordComponents/DashbordCustomers/DashbordCustomers";
+import DashbordStaffs from "./Components/DashbordComponents/DashbordStaffs/DashbordStaffs";
+import DashbordSeeting from "./Components/DashbordComponents/DashbordSeeting/DashbordSeeting";
+import DashbordCommingPage from "./Components/DashbordComponents/DashbordCommingPage/DashbordCommingPage";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -298,7 +311,10 @@ function App() {
       path: "/manage_account",
       element: (
         <PrivetRoutes>
-          <AccountsLayouts></AccountsLayouts>
+          <>
+            <ScrollToTop></ScrollToTop>
+            <AccountsLayouts></AccountsLayouts>
+          </>
         </PrivetRoutes>
       ),
       children: [
@@ -319,6 +335,14 @@ function App() {
           element: (
             <PrivetRoutes>
               <MyordersComponents></MyordersComponents>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/manage_account/order/manage",
+          element: (
+            <PrivetRoutes>
+              <ManageOrderPage></ManageOrderPage>
             </PrivetRoutes>
           ),
         },
@@ -383,6 +407,108 @@ function App() {
           element: (
             <PrivetRoutes>
               <MyAddressEdit></MyAddressEdit>
+            </PrivetRoutes>
+          ),
+        },
+      ],
+    },
+    {
+      path: "/dashbord",
+      element: (
+        <PrivetRoutes>
+          <>
+            {" "}
+            <DashbordLayouts></DashbordLayouts>
+            <ScrollToTop />
+          </>
+        </PrivetRoutes>
+      ),
+      children: [
+        {
+          path: "/dashbord/",
+          element: (
+            <PrivetRoutes>
+              <DashbordHome></DashbordHome>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/shop-product",
+          element: (
+            <PrivetRoutes>
+              <DashbordShopProducts></DashbordShopProducts>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/shop-category",
+          element: (
+            <PrivetRoutes>
+              <DashbordShopCategory></DashbordShopCategory>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/customized-product",
+          element: (
+            <PrivetRoutes>
+              <DashbordCustomizedProduct></DashbordCustomizedProduct>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/customized-category",
+          element: (
+            <PrivetRoutes>
+              <DashbordCustomizedCategory></DashbordCustomizedCategory>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/orders",
+          element: (
+            <PrivetRoutes>
+              <DashbordOrders></DashbordOrders>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/customized-orders",
+          element: (
+            <PrivetRoutes>
+              <DashbordOrders></DashbordOrders>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/customers",
+          element: (
+            <PrivetRoutes>
+              <DashbordCustomers></DashbordCustomers>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/staff",
+          element: (
+            <PrivetRoutes>
+              <DashbordStaffs></DashbordStaffs>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/setting",
+          element: (
+            <PrivetRoutes>
+              <DashbordSeeting></DashbordSeeting>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/comming-soon",
+          element: (
+            <PrivetRoutes>
+              <DashbordCommingPage></DashbordCommingPage>
             </PrivetRoutes>
           ),
         },

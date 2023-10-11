@@ -56,7 +56,7 @@ const MainNavbar = () => {
   };
 
   const handleScroll = () => {
-    if (window.scrollY > 100) {
+    if (window.scrollY > 60) {
       setIsFixed(true);
     } else {
       setIsFixed(false);
@@ -73,11 +73,15 @@ const MainNavbar = () => {
         className="bg-neutral"
         id={isFixed ? "mainnav-color" : ""}
       >
-        <Container>
-          <Navbar.Brand href="#home">
-            <img className="h-14" src={logo} alt="not found" />
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <div className="main-nav-con">
+          <div className="nav-brand-tab">
+            <Navbar.Brand href="#home" className="navbar-brand-imaage">
+              <img src={logo} alt="not found" />
+            </Navbar.Brand>
+
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          </div>
+
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className=" nav-items">
               <NavLink
@@ -144,6 +148,15 @@ const MainNavbar = () => {
               >
                 ContactUs
               </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "new-item-color" : undefined
+                }
+                id="nav-item"
+                to="/dashbord"
+              >
+                Dashboard
+              </NavLink>
 
               {user?.uid ? (
                 <button
@@ -168,22 +181,107 @@ const MainNavbar = () => {
               )}
             </Nav>
             <Navbar.Collapse className="justify-content-end navbar-end-con">
-              {/* <Navbar.Text>
-                <Link
-                  to="/make-project"
-                  className="button"
-                  id="make-project-btn"
-                >
-                  Customized
-                </Link>
-                <div>
-                  <h1>dd</h1>
-                </div>
-              </Navbar.Text> */}
               <Link to="/make-project" className="button" id="make-project-btn">
                 Customized
               </Link>
-              <div className="nav-useer dropdown dropdown-hover">
+
+              {/* jdfhdfdkd */}
+              <div className="account-wishlist-cart-con">
+                <div className="nav-useer dropdown dropdown-hover">
+                  <FaUserPlus
+                    tabIndex={0}
+                    className="nav-user-icon"
+                  ></FaUserPlus>
+                  <div className="nav-login-register account">
+                    <p tabIndex={0}>Account</p>
+                    <Link to="/login" className="nav-login">
+                      Login
+                    </Link>
+                    <>/</>
+                    <Link to="/signup" className="nav-login">
+                      Register
+                    </Link>
+                  </div>
+                  <ul
+                    tabIndex={0}
+                    className="dropdown-content z-[1] menu p-2 shadow bg-base-100  w-52 dropdrown-menu ml-20"
+                  >
+                    <li>
+                      <Link to="/manage_account" className="nav-account">
+                        <BsEmojiSmile></BsEmojiSmile> <>Manage My Account</>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/manage_account/shop_orders"
+                        className="nav-account"
+                      >
+                        <AiOutlineInbox></AiOutlineInbox> <>My Orders</>
+                      </Link>
+                      <Link
+                        to="/manage_account/customized_orders"
+                        className="nav-account"
+                      >
+                        <AiOutlineInbox></AiOutlineInbox>{" "}
+                        <>My Customized Orders</>
+                      </Link>
+                      <Link
+                        to="/manage_account/cartproduct"
+                        className="nav-account"
+                      >
+                        <BsBagDash></BsBagDash>
+                        <>My Shoping cart</>
+                      </Link>
+                      <Link
+                        to="/manage_account/wishlist"
+                        className="nav-account"
+                      >
+                        <GrFavorite></GrFavorite>
+                        <>My Wishlist & Followed Stores</>
+                      </Link>
+                      <Link to="/manage_account/review" className="nav-account">
+                        <GoCodeReview></GoCodeReview>
+                        <>My Reviews</>
+                      </Link>
+                      <button onClick={handlelogout} className="nav-account">
+                        <BiLogOut></BiLogOut>
+                        <>Logout</>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+
+                <Link to={`/wishlistproduct`} className="nav-useer">
+                  <RiDislikeLine className="favarite-icon"></RiDislikeLine>
+                  <Link
+                    to="/wishlistproduct"
+                    className="nav-login-register no-underline"
+                  >
+                    <p> Wishlist</p>
+                    <Link
+                      to={`/wishlistproduct`}
+                      className="nav-login no-underline"
+                    >
+                      Edit your wishlist
+                    </Link>
+                  </Link>
+                </Link>
+
+                <Link to="/cartproduct" className="indicator nav-cart-con">
+                  <span className="indicator-item badge badge-secondary">
+                    {cartproducts?.length}
+                    <sup>+</sup>{" "}
+                  </span>
+                  <Link
+                    to="/cartproduct"
+                    className="grid w-5 h-5  place-items-center"
+                  >
+                    <BsBagDash className="nav-cart-icon"></BsBagDash>
+                  </Link>
+                </Link>
+              </div>
+
+              {/* <div className="nav-useer dropdown dropdown-hover">
                 <FaUserPlus tabIndex={0} className="nav-user-icon"></FaUserPlus>
                 <div className="nav-login-register account">
                   <p tabIndex={0}>Account</p>
@@ -240,6 +338,7 @@ const MainNavbar = () => {
                   </li>
                 </ul>
               </div>
+
               <Link to={`/wishlistproduct`} className="nav-useer">
                 <RiDislikeLine className="favarite-icon"></RiDislikeLine>
                 <Link
@@ -255,10 +354,7 @@ const MainNavbar = () => {
                   </Link>
                 </Link>
               </Link>
-              {/* <div className="nav-cart-con">
-                <BsBagDash className="nav-cart-icon"></BsBagDash>
-                <span className="cartproduct-q">dd</span>
-              </div> */}
+
               <Link to="/cartproduct" className="indicator nav-cart-con">
                 <span className="indicator-item badge badge-secondary">
                   {cartproducts?.length}
@@ -270,10 +366,10 @@ const MainNavbar = () => {
                 >
                   <BsBagDash className="nav-cart-icon"></BsBagDash>
                 </Link>
-              </Link>
+              </Link> */}
             </Navbar.Collapse>
           </Navbar.Collapse>
-        </Container>
+        </div>
       </Navbar>
     </div>
   );
