@@ -1,0 +1,47 @@
+.dash-chirt-con {
+
+    /* width: 97%; */
+    margin: 0 auto;
+    margin-bottom: 40px;
+
+}
+
+.chart-container {
+    background-color: white;
+    margin-top: 15px;
+    padding: 15px 10px;
+    border-radius: 8px;
+}
+
+.groth-text {
+    font-size: 1.1rem;
+    color: blue;
+    font-weight: 500;
+}
+
+.progressratio {
+    color: gold;
+    margin-bottom: 10px;
+}
+
+.areachart {
+    background-color: aliceblue;
+    border-radius: 10px;
+}
+
+.piechart {
+    width: 100%;
+    height: 100%;
+    border: 1px black;
+    background-color: aliceblue;
+    border-radius: 10px;
+}
+
+/* 
+Mobile Responsivr
+*/
+@media only screen and (max-width:688px) {
+    .areachart {
+        width: 100px;
+    }
+}

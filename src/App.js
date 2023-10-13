@@ -62,6 +62,7 @@ import DashbordCustomers from "./Components/DashbordComponents/DashbordCustomers
 import DashbordStaffs from "./Components/DashbordComponents/DashbordStaffs/DashbordStaffs";
 import DashbordSeeting from "./Components/DashbordComponents/DashbordSeeting/DashbordSeeting";
 import DashbordCommingPage from "./Components/DashbordComponents/DashbordCommingPage/DashbordCommingPage";
+import DashbordCustomizedOrders from "./Components/DashbordComponents/DashbordCustomizedOrders/DashbordCustomizedOrders";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -476,7 +477,7 @@ function App() {
           path: "/dashbord/customized-orders",
           element: (
             <PrivetRoutes>
-              <DashbordOrders></DashbordOrders>
+              <DashbordCustomizedOrders></DashbordCustomizedOrders>
             </PrivetRoutes>
           ),
         },

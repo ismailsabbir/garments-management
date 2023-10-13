@@ -1,0 +1,105 @@
+.dashbord-shop-product-con {
+    padding: 0px 20px;
+}
+
+.import-update-delete-btn-con {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 25px 15px;
+    border-radius: 10px;
+}
+
+.select-json-btn {
+    /* border: 1px dotted green; */
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 400;
+    transition: all 1s;
+}
+
+.select-json-btn:hover {
+    border: none;
+    background-color: #55efc4;
+    border: 1px solid #55efc4;
+    color: white;
+}
+
+.bulk-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bulk-action button {
+    /* border: 1px solid gainsboro; */
+    padding: 9px 15px;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(204, 229, 251);
+    border-radius: 4px;
+    color: rgb(87, 87, 87);
+}
+
+.bulk-icon {
+    margin-right: 8px;
+    font-size: 1.2rem;
+    /* color: rgb(88, 87, 87); */
+}
+
+#pro-delete-btn {
+    background-color: #be5184;
+    color: white;
+}
+
+#pro-delete-btn:hover {
+    background-color: #9e3566;
+}
+
+#add-product-btn {
+    background-color: #55efc4;
+}
+
+#add-product-btn:hover {
+    background-color: #3ccea5;
+    color: white;
+}
+
+.product-search-con {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 15px;
+    background-color: white;
+    margin-top: 20px;
+    border-radius: 6px;
+}
+
+.product-search-con input {
+    border: 1px solid rgb(195, 221, 244);
+    padding: 15px 8px;
+    border-radius: 4px;
+    width: 32%;
+    background-color: aliceblue;
+    font-size: 1.1rem;
+}
+
+.product-search-con select {
+    border: 1px solid rgb(207, 228, 246);
+    padding: 15px 8px;
+    border-radius: 4px;
+    width: 32%;
+    background-color: aliceblue;
+    font-size: 1.1rem;
+    color: rgb(121, 120, 120);
+    font-weight: 500;
+}

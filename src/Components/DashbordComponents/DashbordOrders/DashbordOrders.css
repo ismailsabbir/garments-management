@@ -1,0 +1,47 @@
+.order-search-con {
+    background-color: white;
+    padding: 10px;
+}
+
+.order-status-limit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.order-status-limit input {
+    border: 1px solid rgb(195, 221, 244);
+    padding: 15px 8px;
+    border-radius: 4px;
+    width: 32%;
+    background-color: aliceblue;
+    font-size: 1.1rem;
+}
+
+.order-status-limit select {
+    border: 1px solid rgb(195, 221, 244);
+    padding: 15px 8px;
+    border-radius: 4px;
+    width: 32%;
+    background-color: aliceblue;
+    font-size: 1.1rem;
+}
+
+.download-btn {
+    font-size: 1.5rem;
+    margin-right: 8px;
+}
+
+.download-order-btn {
+    display: flex;
+    padding: 15px;
+    align-items: center;
+    justify-content: center;
+    width: 32%;
+    background-color: #20bf6b;
+    border: 1px solid #20bf6b;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+}

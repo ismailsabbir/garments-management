@@ -7,7 +7,7 @@ import { BsArrowRight } from "react-icons/bs";
 import "./WishListProductPage.css";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { BsBagDash } from "react-icons/bs";
-import AccountMenu from "../../Components/AccountMenu/AccountMenu";
+// import AccountMenu from "../../Components/AccountMenu/AccountMenu";
 import { ToastContainer, toast } from "react-toastify";
 import Modal from "../../Hooks/Modal/Modal";
 import { Form } from "react-bootstrap";

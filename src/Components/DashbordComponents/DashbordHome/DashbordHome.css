@@ -1,0 +1,114 @@
+.dashbord-home-first-con {
+    padding: 20px;
+}
+
+.dashbord-home-first-hole {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dashbord-first-card {
+    /* border: 1px solid brown; */
+    width: 24%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+    background-color: #0097e6;
+    color: white;
+    border-radius: 6px;
+    height: 200px;
+}
+
+#mid-card-dash {
+    background-color: #55E6C1;
+    /* background-color: #e67e22; */
+}
+
+#mid1-card-dash {
+    background-color: #1abc9c;
+}
+
+#mid2-card-dash {
+    background-color: #6ab04c;
+}
+
+.payment-logo {
+    font-size: 2.1rem;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.payment-tit-das {
+    font-size: 1.1rem;
+}
+
+.dashbord-payment-typ {
+    margin-top: 10px;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dashbord-payment-typ div h6 {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.number-of-orders {
+    margin-top: 50px;
+}
+
+.number-of-orders {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.first-num-order {
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid rgb(230, 229, 229);
+    background-color: white;
+    width: 24%;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+.das-order-div {
+    background-color: rgb(195, 221, 245);
+    padding: 10px;
+    /* border: 1px solid brown; */
+    border-radius: 100%;
+    margin-right: 25px;
+}
+
+
+
+.das-order-logo {
+    font-size: 1.2rem;
+    color: rgb(43, 155, 253);
+    margin: 6px;
+    /* border: 1px solid brown; */
+    /* background-color: aliceblue; */
+    /* padding: 6px; */
+
+
+}
+
+.order-num-info span {
+    font-size: 1.1rem;
+    color: gray;
+    font-weight: 500;
+}
+
+.order-num-info h3 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: rgb(66, 66, 66);
+}

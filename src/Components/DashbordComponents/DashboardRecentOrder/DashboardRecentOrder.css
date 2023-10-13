@@ -1,0 +1,51 @@
+.das-recent-order-con {
+    padding: 0px 20px;
+}
+
+.recent-order-table {
+    margin-top: 20px;
+    border-radius: 8px;
+
+}
+
+.recent-order-tr {
+    height: 70px;
+    background-color: #e4f8f9;
+
+}
+
+.recent-order-hed {
+    font-size: 1rem;
+}
+
+.das-order-data {
+    height: 60px;
+}
+
+.das-order-data span {
+    height: 60px;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: rgb(73, 73, 73);
+    /* border: 1px solid brown; */
+}
+
+.status-select {
+    border: 1px solid gainsboro;
+    padding: 4px 2px;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.print-serach {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.printlogo {
+    font-size: 1.3rem;
+    color: rgb(86, 85, 85);
+    margin-right: 8px;
+}
