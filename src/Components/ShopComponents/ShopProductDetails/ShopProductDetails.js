@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { servcontext } from "../../../App";
 import { Link, useLocation } from "react-router-dom";
 import ReactImageMagnify from "react-image-magnify";
-
 import { AiOutlineStar } from "react-icons/ai";
 import logo from "../../../Images/Logo.png";
 import "./ShopProductDetails.css";
@@ -15,7 +14,10 @@ import { MdCompareArrows } from "react-icons/md";
 import { IoHeartDislikeOutline } from "react-icons/io5";
 import { AuthContext } from "../../../Context/UserContext";
 import { ToastContainer, toast } from "react-toastify";
+import { useEffect } from "react";
+import ShopRelatedProducts from "../ShopRelatedProducts/ShopRelatedProducts";
 const ShopProductDetails = () => {
+  // const [productss, setproductss] = useState([]);
   const { user } = useContext(AuthContext);
   const email = user?.email;
   const { shopproduct } = useContext(servcontext);
@@ -32,9 +34,15 @@ const ShopProductDetails = () => {
   const productss = singlproduct?.filter(
     (products) => products.product_id === id
   );
+
   const oneproduct = productss?.[0];
   const [dressimage, setdressimage] = useState(oneproduct?.Product_image);
-  console.log(oneproduct?.dress_size);
+  const [products, setproducts] = useState([]);
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_URL}/shopproduct/${oneproduct?.category_id}`)
+      .then((req) => req.json())
+      .then((data) => setproducts(data));
+  }, []);
   const handleincress = () => {
     const newquentity = quentuty + 1;
     setquentity(newquentity);
@@ -325,6 +333,8 @@ const ShopProductDetails = () => {
       </div>
       <ShopDetailsInfo oneproduct={oneproduct}></ShopDetailsInfo>
       <ProductReviewsFrom oneproduct={oneproduct}></ProductReviewsFrom>
+
+      <ShopRelatedProducts oneproduct={products}></ShopRelatedProducts>
       <ToastContainer />
     </div>
   );

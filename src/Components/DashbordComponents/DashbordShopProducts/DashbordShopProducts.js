@@ -15,16 +15,50 @@ const DashbordShopProducts = () => {
     fetch(`${process.env.REACT_APP_URL}/shopproduct`)
       .then((res) => res.json())
       .then((data) => setproducts(data));
-  });
+  }, []);
   console.log(products);
+  const handleFileUpload = (event) => {
+    console.log("click");
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        try {
+          const fileContents = JSON.parse(e.target.result);
+          // Handle the JSON data (e.g., save it to state or send it to the server)
+          console.log(fileContents);
+        } catch (error) {
+          console.error("Invalid JSON file:", error);
+        }
+      };
+
+      reader.readAsText(file);
+    }
+  };
   return (
     <div className="dashbord-shop-product-con">
       <h5>Shop Products</h5>
       <div className="import-update-delete-btn-con">
-        <button className="select-json-btn border-dashed border-2 border-green-700">
-          <LuImport className="mr-4 text-2xl"></LuImport>Select Your JSON
-          Products File
-        </button>
+        <label
+          for="input-file1"
+          id="file"
+          className="select-json-btn border-dashed border-2 border-green-700"
+        >
+          <div className="json-input-div">
+            <LuImport className="mr-4 text-2xl"></LuImport>
+            <p>Select Your JSON Products File</p>
+          </div>
+
+          <input
+            id="input-file1"
+            className="fileinput"
+            type="file"
+            // accept=".json"
+            onChange={handleFileUpload}
+          />
+        </label>
+
         <div className="bulk-action">
           <button>
             <LuClipboardEdit className="bulk-icon"></LuClipboardEdit>Bulk Action

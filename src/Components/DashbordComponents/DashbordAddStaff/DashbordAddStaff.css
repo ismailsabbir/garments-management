@@ -1,0 +1,77 @@
+.add-staff-con {
+    padding: 0px 20px;
+}
+
+.add-staff-form {
+    background-color: white;
+    padding: 15px;
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+}
+
+.staff-image-con {
+    /* border: 1px solid brown; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 4px;
+}
+
+
+.fileinput {
+    display: none;
+}
+
+#file {
+    /* border: 1px solid rgb(105, 103, 103); */
+    padding: 15px;
+    margin-right: 10px;
+    border-radius: 8px;
+    padding-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#file p {
+    color: gray;
+    font-weight: 400;
+}
+
+.staff-first-name-lastname {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.firstname-staff {
+    width: 48%;
+}
+
+.staff-input {
+    padding: 12px;
+    border: 1px solid brown;
+}
+
+#staf-select {
+    border: 1px solid gainsboro;
+    padding: 12px;
+    border-radius: 4px;
+}
+
+.add-staf--btn {
+    border: 1px solid #be5184;
+    background-color: #be5184;
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 10px;
+    width: 48%;
+    border-radius: 6px;
+}

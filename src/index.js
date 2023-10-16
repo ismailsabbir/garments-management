@@ -5,13 +5,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import UserContext from "./Context/UserContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const queryclient = new QueryClient();
 root.render(
   <React.StrictMode>
-    <UserContext>
-      {" "}
-      <App />
-    </UserContext>
+    <QueryClientProvider client={queryclient}>
+      <UserContext>
+        {" "}
+        <App />
+      </UserContext>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

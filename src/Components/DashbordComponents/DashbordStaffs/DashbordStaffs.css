@@ -1,0 +1,105 @@
+.staff-search-con {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 20px 10px;
+    border: 1px solid gainsboro;
+    border-radius: 6px;
+}
+
+
+
+.email-input-staff {
+    padding: 10px;
+    width: 24%;
+    border: 1px solid gainsboro;
+    border-radius: 6px;
+    background-color: aliceblue;
+}
+
+.name-search {
+    width: 24%;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.name-input-staff {
+    height: 100%;
+    width: 80%;
+    padding: 10px;
+    border: 1px solid gainsboro;
+    background-color: aliceblue;
+    border-radius: 6px 0px 0px 6px;
+}
+
+.name-search button {
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    background-color: #be5184;
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0px 6px 6px 0px;
+}
+
+.staff-search-con select {
+    padding: 10px;
+    width: 24%;
+    border: 1px solid gainsboro;
+    border-radius: 6px;
+    background-color: aliceblue;
+}
+
+.staff-image-name {
+    display: flex;
+    text-align: center;
+}
+
+.staff-image-name img {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border: 1px solid gainsboro;
+    margin-right: 10px;
+}
+
+.staff-image-name p {
+    margin-top: 20px;
+}
+
+.active-staff {
+    border: 1px solid #55efc4;
+    background-color: #55efc4;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: green;
+    padding: 3px 6px;
+}
+
+.make-admin-btn {
+    border: 1px solid #1dd1a1;
+    background-color: #1dd1a1;
+    color: rgb(251, 251, 251);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+#add-staff-btn {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #be5184;
+    font-size: 1.1rem;
+    padding: 8px 20px;
+    color: white;
+    font-weight: 500;
+    border-radius: 6px;
+}

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BsArrowRightShort } from "react-icons/bs";
 import { GoDotFill } from "react-icons/go";
 import "./ShopDetailsInfo.css";
 const ShopDetailsInfo = ({ oneproduct }) => {
-  console.log(oneproduct);
+  console.log(oneproduct?.category_id);
   return (
     <div className="details-info-con">
       <div className="details-info-hole row">

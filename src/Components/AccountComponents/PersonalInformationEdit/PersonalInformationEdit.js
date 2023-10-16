@@ -2,15 +2,13 @@ import React from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../../Context/UserContext";
 import { Form } from "react-bootstrap";
-import { useEffect } from "react";
 import { useState } from "react";
 import Loading from "../../../CommonComponents/Loading/Loading";
 import "./PersonalInformationEdit.css";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const PersonalInformationEdit = () => {
-  const { user, userlogout } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  // const [userinfo, setuser] = useState();
   const [loading, setLoading] = useState(false);
   const day = [
     "01",
@@ -133,9 +131,6 @@ const PersonalInformationEdit = () => {
                   name="month"
                   className="selectm select-bordered w-full max-w-xs"
                 >
-                  {/* <option disabled selected>
-                    Month
-                  </option> */}
                   <option>January</option>
                   <option>February</option>
                   <option>March</option>
@@ -153,9 +148,6 @@ const PersonalInformationEdit = () => {
                   name="day"
                   className="selectm select-bordered w-full max-w-xs"
                 >
-                  {/* <option disabled selected>
-                    Day
-                  </option> */}
                   {day?.map((aday) => (
                     <option>{aday}</option>
                   ))}
@@ -164,9 +156,6 @@ const PersonalInformationEdit = () => {
                   name="year"
                   className="selectm select-bordered w-full max-w-xs"
                 >
-                  {/* <option disabled selected>
-                    Year
-                  </option> */}
                   {years?.map((ayear) => (
                     <option>{ayear}</option>
                   ))}
@@ -179,9 +168,6 @@ const PersonalInformationEdit = () => {
                 name="gender"
                 className="selectgrnder select-bordered w-full max-w-xs"
               >
-                {/* <option disabled selected>
-                  Gender
-                </option> */}
                 <option>Male</option>
                 <option>Female</option>
               </select>

@@ -30,6 +30,10 @@
     color: white;
 }
 
+.json-input-div {
+    display: flex;
+}
+
 .bulk-action {
     display: flex;
     align-items: center;

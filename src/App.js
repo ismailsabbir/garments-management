@@ -63,6 +63,9 @@ import DashbordStaffs from "./Components/DashbordComponents/DashbordStaffs/Dashb
 import DashbordSeeting from "./Components/DashbordComponents/DashbordSeeting/DashbordSeeting";
 import DashbordCommingPage from "./Components/DashbordComponents/DashbordCommingPage/DashbordCommingPage";
 import DashbordCustomizedOrders from "./Components/DashbordComponents/DashbordCustomizedOrders/DashbordCustomizedOrders";
+import DashbordAddStaff from "./Components/DashbordComponents/DashbordAddStaff/DashbordAddStaff";
+import DashbordEditStaff from "./Components/DashbordComponents/DashbordEditStaff/DashbordEditStaff";
+import AdminRoutes from "./Routes/AdminRoutes/AdminRoutes";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -428,89 +431,105 @@ function App() {
         {
           path: "/dashbord/",
           element: (
-            <PrivetRoutes>
+            <AdminRoutes>
               <DashbordHome></DashbordHome>
-            </PrivetRoutes>
+            </AdminRoutes>
           ),
         },
         {
           path: "/dashbord/shop-product",
           element: (
-            <PrivetRoutes>
+            <AdminRoutes>
               <DashbordShopProducts></DashbordShopProducts>
-            </PrivetRoutes>
+            </AdminRoutes>
           ),
         },
         {
           path: "/dashbord/shop-category",
           element: (
-            <PrivetRoutes>
+            <AdminRoutes>
               <DashbordShopCategory></DashbordShopCategory>
-            </PrivetRoutes>
+            </AdminRoutes>
           ),
         },
         {
           path: "/dashbord/customized-product",
           element: (
-            <PrivetRoutes>
+            <AdminRoutes>
               <DashbordCustomizedProduct></DashbordCustomizedProduct>
-            </PrivetRoutes>
+            </AdminRoutes>
           ),
         },
         {
           path: "/dashbord/customized-category",
           element: (
-            <PrivetRoutes>
+            <AdminRoutes>
               <DashbordCustomizedCategory></DashbordCustomizedCategory>
-            </PrivetRoutes>
+            </AdminRoutes>
           ),
         },
         {
           path: "/dashbord/orders",
           element: (
-            <PrivetRoutes>
+            <AdminRoutes>
               <DashbordOrders></DashbordOrders>
-            </PrivetRoutes>
+            </AdminRoutes>
           ),
         },
         {
           path: "/dashbord/customized-orders",
           element: (
-            <PrivetRoutes>
+            <AdminRoutes>
               <DashbordCustomizedOrders></DashbordCustomizedOrders>
-            </PrivetRoutes>
+            </AdminRoutes>
           ),
         },
         {
           path: "/dashbord/customers",
           element: (
-            <PrivetRoutes>
+            <AdminRoutes>
               <DashbordCustomers></DashbordCustomers>
-            </PrivetRoutes>
+            </AdminRoutes>
           ),
         },
         {
           path: "/dashbord/staff",
           element: (
-            <PrivetRoutes>
+            <AdminRoutes>
               <DashbordStaffs></DashbordStaffs>
-            </PrivetRoutes>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/staff/add-staff",
+          element: (
+            <AdminRoutes>
+              <DashbordAddStaff></DashbordAddStaff>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/staff/edit-staff",
+          element: (
+            <AdminRoutes>
+              <DashbordEditStaff></DashbordEditStaff>
+            </AdminRoutes>
           ),
         },
         {
           path: "/dashbord/setting",
           element: (
-            <PrivetRoutes>
+            <AdminRoutes>
               <DashbordSeeting></DashbordSeeting>
-            </PrivetRoutes>
+            </AdminRoutes>
           ),
         },
         {
           path: "/dashbord/comming-soon",
           element: (
-            <PrivetRoutes>
+            <AdminRoutes>
               <DashbordCommingPage></DashbordCommingPage>
-            </PrivetRoutes>
+            </AdminRoutes>
           ),
         },
       ],

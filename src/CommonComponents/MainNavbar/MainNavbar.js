@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import logo from "../../Images/Logo.png";
@@ -17,15 +16,17 @@ import { AiOutlineInbox } from "react-icons/ai";
 import { GrFavorite } from "react-icons/gr";
 import { GoCodeReview } from "react-icons/go";
 import { BiLogOut } from "react-icons/bi";
+import useAdmin from "../../Hooks/useAdmin";
 
 const MainNavbar = () => {
   const { user, userlogout } = useContext(AuthContext);
   const [cartproducts, setcartproducts] = useState([]);
   const [isFixed, setIsFixed] = useState(false);
+  const [isAdmin] = useAdmin(user?.email);
   useEffect(() => {
-    fetchData();
+    fetchData(user?.email);
   });
-  const fetchData = async () => {
+  const fetchData = async (email) => {
     try {
       const response = await fetch(
         `${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`,
@@ -56,13 +57,14 @@ const MainNavbar = () => {
   };
 
   const handleScroll = () => {
-    if (window.scrollY > 60) {
+    if (window.scrollY > 50) {
       setIsFixed(true);
     } else {
       setIsFixed(false);
     }
   };
   window.addEventListener("scroll", handleScroll);
+
   return (
     <div className="print:hidden" id={isFixed ? "fixed" : ""}>
       <div id={isFixed ? "topnone" : ""}>
@@ -148,15 +150,19 @@ const MainNavbar = () => {
               >
                 ContactUs
               </NavLink>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "new-item-color" : undefined
-                }
-                id="nav-item"
-                to="/dashbord"
-              >
-                Dashboard
-              </NavLink>
+              {isAdmin && user?.uid ? (
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "new-item-color" : undefined
+                  }
+                  id="nav-item"
+                  to="/dashbord"
+                >
+                  Dashboard
+                </NavLink>
+              ) : (
+                <></>
+              )}
 
               {user?.uid ? (
                 <button
@@ -267,7 +273,7 @@ const MainNavbar = () => {
                   </Link>
                 </Link>
 
-                <Link to="/cartproduct" className="indicator nav-cart-con">
+                <Link to="/cartproduct" className="indicator nav-cart-con mr-4">
                   <span className="indicator-item badge badge-secondary">
                     {cartproducts?.length}
                     <sup>+</sup>{" "}
