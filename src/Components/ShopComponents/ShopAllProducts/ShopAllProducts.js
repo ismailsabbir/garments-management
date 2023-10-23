@@ -21,6 +21,8 @@ const ShopAllProducts = ({ product, categoryid }) => {
   const email = user?.email;
   const allproduct = product?.products;
 
+  console.log(product);
+
   const handleincress = () => {
     const newquentity = quentuty + 1;
     setquentity(newquentity);
@@ -171,7 +173,7 @@ const ShopAllProducts = ({ product, categoryid }) => {
         console.log(err.message);
       });
   };
-  console.log(products);
+
   return (
     <div className="all-products-con">
       <Modal

@@ -9,3 +9,173 @@
     margin-bottom: 8px;
     padding-bottom: 8px;
 }
+
+.all-cata-con {
+    border: 1px solid rgb(208, 207, 207);
+    padding: 20px;
+    border-radius: 6px;
+}
+
+.all-cata-con h5 {
+    margin-bottom: 25px;
+}
+
+.price-color-con {
+    border: 1px solid rgb(208, 207, 207);
+    padding-top: 10px;
+    border-radius: 6px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.color-con {
+    padding: 10px;
+}
+
+.price-range-con h5 {
+    margin-bottom: 15px;
+
+
+}
+
+.price-range-con h5 {
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+
+.multi-range-slider {
+    display: flex;
+    position: relative;
+    border: none;
+    border-radius: 10px;
+    padding: 20px 10px;
+    box-shadow: 1px 1px 4px black;
+    flex-direction: column;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.multi-range-slider .bar-inner-left {
+    width: 50%;
+    color: black;
+    background-color: black;
+}
+
+.multi-range-slider .bar-inner-right {
+    width: 50%;
+    background-color: black;
+}
+
+.multi-range-slider .bar {
+    display: flex;
+    height: 2px;
+    color: gray;
+}
+
+.multi-range-slider .thumb {
+    background-color: white;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.color-con {
+    margin-top: 80px;
+}
+
+.color-form {
+    margin-top: 10px;
+}
+
+.new-product-con {
+    margin-top: 20px;
+    border: 1px solid gainsboro;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.new-product-con h6 {
+    margin-bottom: 25px;
+
+}
+
+.new-product-hole {
+    width: 100%;
+    /* border: 1px solid rgb(124, 86, 86); */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-bottom: 1px dotted gainsboro;
+    padding-bottom: 6px;
+    margin-bottom: 20px;
+}
+
+.new-product-info {
+    width: 70px;
+    height: 70px;
+    /* border: 1px solid blueviolet; */
+    margin-right: 6px;
+}
+
+.new-product-info img {
+    width: 100%;
+    height: 100%;
+}
+
+.star-con {
+    display: flex;
+}
+
+.new-product-info-start {
+    line-height: 3px;
+    /* border: 1px solid brown; */
+}
+
+.new-product-info-start p {
+    font-size: 1rem;
+    color: rgb(75, 74, 74);
+    font-weight: 400;
+}
+
+.new-pro-star {
+    color: gold;
+}
+
+.offer-con {
+    margin-top: 20px;
+    height: 360px;
+    width: 100%;
+    border: 1px solid gainsboro;
+    position: relative;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    /* background-image: url(../../../Images/offer.jpg); */
+}
+
+.offer-con img {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+}
+
+.offer-info {
+    position: absolute;
+    top: 100px;
+    left: 6px;
+}
+
+.offer-info h5 {
+    margin-top: 10px;
+}
+
+.offer-shop-link {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    text-decoration: none;
+    color: #be5184;
+    font-size: 1rem;
+    font-weight: 500;
+}

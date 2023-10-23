@@ -11,7 +11,7 @@ const ShopCategory = () => {
         {shopcategory?.map((category) => (
           <Link
             to={`/shop-product/${category?.category_id}`}
-            className="shopcategory-image col col-12 col-lg-4 col-md-12 col-sm12"
+            className="shopcategory-image col col-12 col-lg-2 col-md-12 col-sm-12"
           >
             <div className="shopcategory-image">
               <img src={category?.category_image} alt="not" />

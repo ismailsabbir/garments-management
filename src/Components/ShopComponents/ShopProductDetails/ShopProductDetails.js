@@ -21,6 +21,7 @@ const ShopProductDetails = () => {
   const { user } = useContext(AuthContext);
   const email = user?.email;
   const { shopproduct } = useContext(servcontext);
+  // console.log(shopproduct);
   const [size, setsize] = useState("S");
   const [quentuty, setquentity] = useState(1);
   const location = useLocation();
@@ -36,6 +37,7 @@ const ShopProductDetails = () => {
   );
 
   const oneproduct = productss?.[0];
+  console.log(oneproduct);
   const [dressimage, setdressimage] = useState(oneproduct?.Product_image);
   const [products, setproducts] = useState([]);
   useEffect(() => {

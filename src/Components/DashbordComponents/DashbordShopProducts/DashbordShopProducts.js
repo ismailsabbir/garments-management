@@ -22,12 +22,29 @@ const DashbordShopProducts = () => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-
       reader.onload = (e) => {
         try {
           const fileContents = JSON.parse(e.target.result);
-          // Handle the JSON data (e.g., save it to state or send it to the server)
           console.log(fileContents);
+          for (let i = 0; i < fileContents.length; i++) {
+            console.log(fileContents[i]);
+
+            fetch(`${process.env.REACT_APP_URL}/shopproduct`, {
+              method: "POST",
+              body: JSON.stringify(fileContents[i]),
+              headers: {
+                "Content-type": "application/json",
+              },
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                console.log(data);
+                // Handle data
+              })
+              .catch((err) => {
+                console.log(err.message);
+              });
+          }
         } catch (error) {
           console.error("Invalid JSON file:", error);
         }

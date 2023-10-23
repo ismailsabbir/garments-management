@@ -1,5 +1,5 @@
 .shopproduct-con {
-    width: 90%;
+    width: 95%;
     /* border: 1px solid brown; */
     margin: 0 auto;
     /* margin-top: 50px; */
@@ -38,6 +38,6 @@
 }
 
 .shop-product-right {
-    border-left: 1px solid gainsboro;
+    /* border-left: 1px solid gainsboro; */
     padding-left: 50px;
 }

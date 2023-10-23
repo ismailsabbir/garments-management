@@ -51,7 +51,6 @@ import AccountCheckoutPages from "./Components/AccountComponents/AccountCheckout
 import ScrollToTop from "./Hooks/ScrollToTop";
 import ManageOrderPage from "./Components/AccountComponents/ManageOrderPage/ManageOrderPage";
 import DashbordLayouts from "./Layouts/DashbordLayouts/DashbordLayouts";
-import { Elements } from "@stripe/react-stripe-js";
 import DashbordHome from "./Components/DashbordComponents/DashbordHome/DashbordHome";
 import DashbordShopProducts from "./Components/DashbordComponents/DashbordShopProducts/DashbordShopProducts";
 import DashbordShopCategory from "./Components/DashbordComponents/DashbordShopCategory/DashbordShopCategory";
@@ -82,7 +81,7 @@ function App() {
   const projects = projectss?.data;
   const member = memberss?.data;
   const category = categorys.data;
-
+  console.log(shopproduct);
   const alldata = {
     data,
     projects,
@@ -179,6 +178,14 @@ function App() {
           element: <ShopPages></ShopPages>,
         },
         {
+          path: `/shop-product/:id`,
+          element: <ShopProducts></ShopProducts>,
+        },
+        {
+          path: `/shop-details/:categoryid/:id`,
+          element: <ShopProductDetails></ShopProductDetails>,
+        },
+        {
           path: "/shoppayment",
           element: (
             <PrivetRoutes>
@@ -242,14 +249,7 @@ function App() {
             </PrivetRoutes>
           ),
         },
-        {
-          path: `/shop-product/:id`,
-          element: <ShopProducts></ShopProducts>,
-        },
-        {
-          path: `/shop-details/:categoryid/:id`,
-          element: <ShopProductDetails></ShopProductDetails>,
-        },
+
         {
           path: "/checkout",
           element: (

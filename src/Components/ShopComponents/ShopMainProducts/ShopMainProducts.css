@@ -1,0 +1,47 @@
+.shopmain-product-con {
+    width: 95%;
+    /* border: 1px solid brown; */
+    margin: 0 auto;
+}
+
+.droupdrown {
+    /* display: flex;
+    align-items: center;
+    justify-content: space-between */
+    border: 1px solid rgb(131, 130, 130);
+    padding: 6px;
+}
+
+.droupdrown:hover {
+    background-color: white;
+}
+
+.main-product-fil-con {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid gainsboro;
+    padding: 10px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.product-num {
+    color: #be5184;
+    font-weight: 500;
+}
+
+.main-product-fil-con p {
+    font-size: 1rem;
+    color: rgb(90, 89, 89);
+}
+
+.data-price-filter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.data-price-filter select {
+    margin-right: 15px;
+}
