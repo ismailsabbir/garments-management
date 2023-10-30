@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "./Modal.css";
 import { AiOutlineClose } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/UserContext";
 function Modal({ isOpen, closeModal, product }) {
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [quentuty, setquentity] = useState(1);
   const email = user?.email;
@@ -23,20 +24,31 @@ function Modal({ isOpen, closeModal, product }) {
     }
   };
   const handleaddtocart = (e) => {
+    const newObj = { ...product };
+    if ("_id" in newObj) {
+      delete newObj._id;
+    }
     const productinfo = {
-      ...product,
+      ...newObj,
       quentuty,
       size,
       email,
     };
-    fetch(`${process.env.REACT_APP_URL}/cartproduct`, {
+    fetch(`${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
+        authorization: `Beare ${localStorage.getItem("garments-token")}`,
       },
       body: JSON.stringify(productinfo),
     })
-      .then((response) => response.json())
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          navigate("/signup");
+        }
+        return res.json();
+      })
+      // .then((response) => response.json())
       .then((data) => {
         if (data?._id) {
           closeModal();

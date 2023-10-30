@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { servcontext } from "../../../App";
 import { FaHome } from "react-icons/fa";
 import { BsArrowRight, BsArrowRightShort } from "react-icons/bs";
-import "./ShopProducts.css";
 import ShopProductRight from "../ShopProductRight/ShopProductRight";
 import ShopAllProducts from "../ShopAllProducts/ShopAllProducts";
+import "./ShopProducts.css";
 import { AiFillStar, AiOutlineShopping } from "react-icons/ai";
 import { Form } from "react-bootstrap";
 import { useState } from "react";
@@ -19,7 +19,9 @@ import { MdCompareArrows, MdFavoriteBorder } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../../../Context/UserContext";
 import { useEffect } from "react";
+import Loading from "../../../CommonComponents/Loading/Loading";
 const ShopProducts = () => {
+  const navigate = useNavigate();
   const [shopallproduct, setshopallproduct] = useState([]);
   const { shopproduct } = useContext(servcontext);
   const { shopcategory } = useContext(servcontext);
@@ -31,7 +33,7 @@ const ShopProducts = () => {
   const [maxprice, setmaxprice] = useState(1000);
   const [color, setcolor] = useState("not");
   const [currentpage, setcurrentpage] = useState(0);
-  const [datasize, setdatasize] = useState(12);
+  const [datasize, setdatasize] = useState(9);
   const [count, setcount] = useState(0);
   const page = Math.ceil(count / datasize);
   const [size, setsize] = useState("S");
@@ -39,6 +41,7 @@ const ShopProducts = () => {
   const [modalproduct, setmodalproduct] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isshopModalOpen, setIsshopModalOpen] = useState(false);
+  const [loading, setloading] = useState(true);
   const { user } = useContext(AuthContext);
   const email = user?.email;
   const handlecolorsubmit = (event) => {
@@ -53,7 +56,6 @@ const ShopProducts = () => {
     (products) => products.category_id === id
   );
   const singlproduct = singleproducts?.[0];
-  console.log(singleproducts);
   const sortProductsByPrice = (e) => {
     console.log(e, typeof e);
     if (e === "norm") {
@@ -79,10 +81,21 @@ const ShopProducts = () => {
       .then((data) => {
         setshopallproduct(data?.product);
         setcount(data?.count);
+        setloading(false);
       });
   }, [id, currentpage, datasize, minprice, maxprice, color]);
-  console.log(shopallproduct);
-  console.log(singlproduct);
+  const categoryNames = shopallproduct.map((product) => product.category_name);
+  const firstCategoryName = categoryNames[0];
+  console.log(firstCategoryName);
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_URL}/usercategory?email=${user?.email}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ firstCategoryName }),
+    });
+  });
   const handleincress = () => {
     const newquentity = quentuty + 1;
     setquentity(newquentity);
@@ -112,8 +125,12 @@ const ShopProducts = () => {
   };
   const handleaddtocart = (product) => {
     setmodalproduct(product);
+    const newObj = { ...product };
+    if ("_id" in newObj) {
+      delete newObj._id;
+    }
     const productinfo = {
-      ...product,
+      ...newObj,
       quentuty,
       size,
       email,
@@ -121,14 +138,21 @@ const ShopProducts = () => {
     if (product?.dress_size) {
       openModal();
     } else {
-      fetch(`${process.env.REACT_APP_URL}/cartproduct`, {
+      fetch(`${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
+          authorization: `Beare ${localStorage.getItem("garments-token")}`,
         },
         body: JSON.stringify(productinfo),
       })
-        .then((response) => response.json())
+        .then((res) => {
+          if (res.status === 401 || res.status === 403) {
+            navigate("/signup");
+          }
+          return res.json();
+        })
+        // .then((response) => response.json())
         .then((data) => {
           if (data?._id) {
             toast(
@@ -185,18 +209,29 @@ const ShopProducts = () => {
   };
 
   const handleaddwishlist = (product) => {
+    const newObj = { ...product };
+    if ("_id" in newObj) {
+      delete newObj._id;
+    }
     const productinfo = {
-      ...product,
+      ...newObj,
       email,
     };
-    fetch(`${process.env.REACT_APP_URL}/wishlistproduct`, {
+    fetch(`${process.env.REACT_APP_URL}/wishlistproduct?email=${user?.email}`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
+        authorization: `Beare ${localStorage.getItem("garments-token")}`,
       },
       body: JSON.stringify(productinfo),
     })
-      .then((response) => response.json())
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          navigate("/signup");
+        }
+        return res.json();
+      })
+      // .then((response) => response.json())
       .then((data) => {
         if (data?._id) {
           toast(
@@ -261,12 +296,12 @@ const ShopProducts = () => {
                 onChange={(e) => setdatasize(e.target.value)}
                 className="select1 select-bordered "
               >
-                <option value="12" selected>
-                  12
+                <option value="9" selected>
+                  9
                 </option>
+                <option value="12">12</option>
+                <option value="18">18</option>
                 <option value="24">24</option>
-                <option value="36">36</option>
-                <option value="48">48</option>
               </select>
               <select
                 onChange={(e) => sortProductsByPrice(e.target.value)}
@@ -297,7 +332,98 @@ const ShopProducts = () => {
                 closeModal={closeshopModal}
                 product={modalproduct}
               />
-              <div className="row">
+              {loading ? (
+                <Loading></Loading>
+              ) : (
+                <>
+                  <div className="row">
+                    {shopallproduct?.map((product) => (
+                      <div className=" shop-single-product col col-12 col-lg-4 col-sm-12 col-md-6">
+                        <div className="shop-product-inner">
+                          <Link
+                            to={`/shop-details/${product?.category_id}/${product?.product_id}`}
+                          >
+                            {" "}
+                            <img
+                              className="original-image"
+                              src={product?.Product_image}
+                              alt=""
+                            />
+                          </Link>
+                          <Link
+                            to={`/shop-details/${product?.category_id}/${product?.product_id}`}
+                          >
+                            <img
+                              className="hover-image"
+                              src={product?.daisplay_image}
+                              alt=""
+                            />
+                          </Link>
+
+                          <div className="add-to-cart-con">
+                            <div className="number-input" id="product-quen">
+                              <button
+                                className="quen-icress"
+                                onClick={handleincress}
+                              >
+                                +
+                              </button>
+                              <span>{quentuty}</span>
+                              <button
+                                className="quen-icress"
+                                onClick={handledecress}
+                              >
+                                -
+                              </button>
+                            </div>
+                            <button
+                              className="add-to-cart-button"
+                              onClick={() => handleaddtocart(product)}
+                            >
+                              <LiaShoppingBagSolid className="mr-2 text-lg"></LiaShoppingBagSolid>
+                              Add to cart
+                            </button>
+                            <MdFavoriteBorder
+                              onClick={() => handleaddwishlist(product)}
+                              className="product-fava"
+                            ></MdFavoriteBorder>
+                            <MdCompareArrows className="product-fava1"></MdCompareArrows>
+                          </div>
+                        </div>
+
+                        <div className="shop-product-information">
+                          <h6>{product?.product_name}</h6>
+                          <p>Tk:{product?.product_price}</p>
+
+                          <Link
+                            onClick={() => handlebuynow(product)}
+                            className="buy-now-button"
+                          >
+                            <AiOutlineShopping></AiOutlineShopping>{" "}
+                            <span className="ml-2">Buy Now</span>
+                          </Link>
+                        </div>
+                      </div>
+                    ))}
+
+                    <div className="pagination-con">
+                      {[...Array(page).keys()].map((number) => (
+                        <button
+                          key={number}
+                          className={
+                            currentpage === number && "selected-page-btn"
+                          }
+                          id="paginationbtn"
+                          onClick={() => setcurrentpage(number)}
+                        >
+                          {number}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
+              {/* <div className="row">
                 {shopallproduct?.map((product) => (
                   <div className=" shop-single-product col col-12 col-lg-4 col-sm-12 col-md-6">
                     <div className="shop-product-inner">
@@ -379,7 +505,7 @@ const ShopProducts = () => {
                     </button>
                   ))}
                 </div>
-              </div>
+              </div> */}
               <ToastContainer />
             </div>
           </div>

@@ -21,7 +21,6 @@ const ShopProductDetails = () => {
   const { user } = useContext(AuthContext);
   const email = user?.email;
   const { shopproduct } = useContext(servcontext);
-  // console.log(shopproduct);
   const [size, setsize] = useState("S");
   const [quentuty, setquentity] = useState(1);
   const location = useLocation();
@@ -35,16 +34,18 @@ const ShopProductDetails = () => {
   const productss = singlproduct?.filter(
     (products) => products.product_id === id
   );
-
   const oneproduct = productss?.[0];
   console.log(oneproduct);
   const [dressimage, setdressimage] = useState(oneproduct?.Product_image);
   const [products, setproducts] = useState([]);
+  console.log(products);
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_URL}/shopproduct/${oneproduct?.category_id}`)
+    fetch(
+      `${process.env.REACT_APP_URL}/shopproduct/${oneproduct?.category_id}?email=${user?.email}&category=${oneproduct?.category_name}`
+    )
       .then((req) => req.json())
       .then((data) => setproducts(data));
-  }, []);
+  }, [oneproduct?.category_id, user?.email, oneproduct?.category_name]);
   const handleincress = () => {
     const newquentity = quentuty + 1;
     setquentity(newquentity);

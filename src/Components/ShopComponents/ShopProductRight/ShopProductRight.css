@@ -145,7 +145,7 @@
 
 .offer-con {
     margin-top: 20px;
-    height: 360px;
+    height: 260px;
     width: 100%;
     border: 1px solid gainsboro;
     position: relative;
@@ -162,7 +162,7 @@
 
 .offer-info {
     position: absolute;
-    top: 100px;
+    top: 60px;
     left: 6px;
 }
 

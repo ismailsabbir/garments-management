@@ -9,8 +9,8 @@ const CartCheckoutPages = () => {
   const { user, userlogout } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-
   const shopinfo = location.state.selectproducts;
+  console.log(shopinfo);
   const [name, setfirstname] = useState();
   const [lastname, setlastname] = useState();
   const [country, setcountry] = useState();
@@ -20,14 +20,35 @@ const CartCheckoutPages = () => {
   const [phone, setmobile] = useState();
   const [note, setmesssage] = useState();
   const [errorinfo, seterrorinfo] = useState(false);
-  console.log(shopinfo);
   const [shoporder, setorders] = useState([]);
   const [cartorder, setcartorder] = useState([]);
   const [customized, setcustomized] = useState([]);
   const [addresss, setaddres] = useState([]);
   const [loading, setLoading] = useState(true);
-  // const { user, userlogout } = useContext(AuthContext);
   const [showorder, setshoworder] = useState([]);
+  const [userinfo, setuserinfo] = useState([]);
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_URL}/singleuser?email=${user?.email}`, {
+      headers: {
+        authorization: `Beare ${localStorage.getItem("garments-token")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          return userlogout();
+        }
+        return res.json();
+      })
+      .then((jsonData) => {
+        setuserinfo(jsonData);
+        // setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch data:", error);
+        setLoading(false);
+      });
+  }, [user?.email, userlogout]);
+  console.log(userinfo);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/address?email=${user?.email}`, {
       headers: {
@@ -138,8 +159,6 @@ const CartCheckoutPages = () => {
       ]);
     }
   }, [addresss, shoporder, cartorder, customized]);
-  console.log(showorder);
-
   useEffect(() => {
     if (!shopinfo) {
       navigate("/shop");
@@ -196,7 +215,6 @@ const CartCheckoutPages = () => {
     const order = "not paid";
     const transiction_id = "";
     const orderconfirm = {
-      // shopinfo,
       productinfo,
       name,
       lastname,
@@ -218,7 +236,7 @@ const CartCheckoutPages = () => {
       seterrorinfo(true);
       return;
     }
-    fetch(`${process.env.REACT_APP_URL}/shoporder`, {
+    fetch(`${process.env.REACT_APP_URL}/shoporder?userid=${userinfo?._id}`, {
       // fetch(`${process.env.REACT_APP_URL}/cartorder`, {
       method: "POST",
       headers: {
@@ -238,7 +256,6 @@ const CartCheckoutPages = () => {
       });
   };
 
-  console.log("abc");
   return (
     <div className="checkout-container-hole">
       <div className="checkoutlogin">

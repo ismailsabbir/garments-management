@@ -26,6 +26,28 @@ const CheckOutPages = () => {
   const [loading, setLoading] = useState(true);
   const { user, userlogout } = useContext(AuthContext);
   const [showorder, setshoworder] = useState([]);
+  const [userinfo, setuserinfo] = useState([]);
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_URL}/singleuser?email=${user?.email}`, {
+      headers: {
+        authorization: `Beare ${localStorage.getItem("garments-token")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          return userlogout();
+        }
+        return res.json();
+      })
+      .then((jsonData) => {
+        setuserinfo(jsonData);
+        // setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch data:", error);
+        setLoading(false);
+      });
+  }, [user?.email, userlogout]);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/address?email=${user?.email}`, {
       headers: {
@@ -234,7 +256,7 @@ const CheckOutPages = () => {
       seterrorinfo(true);
       return;
     }
-    fetch(`${process.env.REACT_APP_URL}/shoporder`, {
+    fetch(`${process.env.REACT_APP_URL}/shoporder?userid=${userinfo?._id}`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",

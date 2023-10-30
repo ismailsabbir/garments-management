@@ -11,14 +11,18 @@ import { MdCompareArrows, MdFavoriteBorder } from "react-icons/md";
 import { AiFillStar, AiOutlineShopping } from "react-icons/ai";
 import { useEffect } from "react";
 import { servcontext } from "../../../App";
-import ShopProductRight from "../ShopProductRight/ShopProductRight";
-import "./ShopMainProducts.css";
-import { Dropdown, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import Loading from "../../../CommonComponents/Loading/Loading";
 import { BsArrowRight, BsArrowRightShort } from "react-icons/bs";
 import MultiRangeSlider from "../MultiRangeSlider/MultiRangeSlider";
+import { IconName, ImSearch } from "react-icons/im";
 import imagea from "../../../Images/ban.jpg";
 import offer from "../../../Images/offer.jpg";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import ShopProductRight from "../ShopProductRight/ShopProductRight";
+import "./ShopMainProducts.css";
+
 const ShopMainProducts = ({ product, categoryid }) => {
   const navigate = useNavigate();
   const [size, setsize] = useState("S");
@@ -26,49 +30,76 @@ const ShopMainProducts = ({ product, categoryid }) => {
   const [modalproduct, setmodalproduct] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isshopModalOpen, setIsshopModalOpen] = useState(false);
-  const [products, setproducts] = useState([]);
-  const { user } = useContext(AuthContext);
+  const { user, userlogout } = useContext(AuthContext);
   const [currentpage, setcurrentpage] = useState(0);
-  const [datasize, setdatasize] = useState(12);
+  const [datasize, setdatasize] = useState(9);
   const [count, setcount] = useState(0);
   const page = Math.ceil(count / datasize);
   const email = user?.email;
   const [allproduct, setallproduct] = useState([]);
   const [loading, setloading] = useState(true);
-  // const [order, setorder] = useState("norm");
   const { shopcategory } = useContext(servcontext);
   const [minprice, setminprice] = useState(100);
   const [maxprice, setmaxprice] = useState(1000);
   const [color, setcolor] = useState("not");
+  const [isClicked, setIsClicked] = useState(false);
+  const [search, setsearch] = useState("");
+  const [userinfo, setuserinfo] = useState([]);
+  const [interastedproducts, setinterastedproduct] = useState([]);
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_URL}/singleuser?email=${user?.email}`, {
+      headers: {
+        authorization: `Beare ${localStorage.getItem("garments-token")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          return userlogout();
+        }
+        return res.json();
+      })
+      .then((jsonData) => {
+        setuserinfo(jsonData);
+        // setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch data:", error);
+        // setLoading(false);
+      });
+  }, [user?.email, userlogout]);
+  console.log(userinfo);
   const handlecolorsubmit = (event) => {
     const selectedValue = event.target.value;
     if (color === selectedValue) {
-      // If the same checkbox is clicked again, unselect it.
       setcolor("not");
     } else {
       setcolor(selectedValue);
     }
   };
-  console.log(color);
-  // useEffect(() => {
-  //   fetch(
-  //     `${process.env.REACT_APP_URL}/shopmainproduct?page=${currentpage}&size=${datasize}`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setallproduct(data?.product);
-  //       setcount(data?.count);
-  //       setloading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Failed to fetch data:", error);
-  //       setloading(false);
-  //     });
-  // }, [currentpage, datasize]);
-
+  const handlesearchitem = (e) => {
+    e.preventDefault();
+    const serach = e.target.search.value;
+    setsearch(serach);
+    console.log(serach);
+  };
+  console.log(userinfo);
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_URL}/shop/recommend?email=${user?.email}`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(userinfo),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setinterastedproduct(data);
+      });
+  }, [userinfo, user?.email]);
   useEffect(() => {
     fetch(
-      `${process.env.REACT_APP_URL}/shopmainproduct/priceproduct?minprice=${minprice}&maxprice=${maxprice}&page=${currentpage}&size=${datasize}&color=${color}`
+      `${process.env.REACT_APP_URL}/shopmainproduct/priceproduct?minprice=${minprice}&maxprice=${maxprice}&page=${currentpage}&size=${datasize}&color=${color}&serach=${search}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -76,7 +107,7 @@ const ShopMainProducts = ({ product, categoryid }) => {
         setcount(data?.count);
         setloading(false);
       });
-  }, [currentpage, datasize, minprice, maxprice, color]);
+  }, [currentpage, datasize, minprice, maxprice, color, search]);
 
   const sortProductsByPrice = (e) => {
     console.log(e, typeof e);
@@ -124,8 +155,12 @@ const ShopMainProducts = ({ product, categoryid }) => {
   };
   const handleaddtocart = (product) => {
     setmodalproduct(product);
+    const newObj = { ...product };
+    if ("_id" in newObj) {
+      delete newObj._id;
+    }
     const productinfo = {
-      ...product,
+      ...newObj,
       quentuty,
       size,
       email,
@@ -133,14 +168,21 @@ const ShopMainProducts = ({ product, categoryid }) => {
     if (product?.dress_size) {
       openModal();
     } else {
-      fetch(`${process.env.REACT_APP_URL}/cartproduct`, {
+      fetch(`${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
+          authorization: `Beare ${localStorage.getItem("garments-token")}`,
         },
         body: JSON.stringify(productinfo),
       })
-        .then((response) => response.json())
+        .then((res) => {
+          if (res.status === 401 || res.status === 403) {
+            navigate("/signup");
+          }
+          return res.json();
+        })
+        // .then((response) => response.json())
         .then((data) => {
           if (data?._id) {
             toast(
@@ -182,33 +224,37 @@ const ShopMainProducts = ({ product, categoryid }) => {
   };
   const handlebuynow = (product) => {
     setmodalproduct(product);
-    const productinfo = {
-      ...product,
-      quentuty,
-      size,
-      email,
-    };
     if (product?.dress_size) {
       openshopModal();
     } else {
-      // navigate("/checkout", { state: { productinfo } });
       openshopModal();
     }
   };
 
   const handleaddwishlist = (product) => {
+    const newObj = { ...product };
+    if ("_id" in newObj) {
+      delete newObj._id;
+    }
     const productinfo = {
-      ...product,
+      ...newObj,
       email,
     };
-    fetch(`${process.env.REACT_APP_URL}/wishlistproduct`, {
+    fetch(`${process.env.REACT_APP_URL}/wishlistproduct?email=${user?.email}`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
+        authorization: `Beare ${localStorage.getItem("garments-token")}`,
       },
       body: JSON.stringify(productinfo),
     })
-      .then((response) => response.json())
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          navigate("/signup");
+        }
+        return res.json();
+      })
+      // .then((response) => response.json())
       .then((data) => {
         if (data?._id) {
           toast(
@@ -245,17 +291,25 @@ const ShopMainProducts = ({ product, categoryid }) => {
         console.log(err.message);
       });
   };
-  const lowtohigh = () => {
-    // fetch(`${process.env.REACT_APP_HOST_LINK}/asending`)
-    //   .then((req) => req.json())
-    //   .then((data) => setservices(data));
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
   };
-  const hightolow = () => {
-    // fetch(`${process.env.REACT_APP_HOST_LINK}/dsending`)
-    //   .then((req) => req.json())
-    //   .then((data) => setservices(data));
-  };
-  console.log(allproduct);
   return (
     <div className="all-products-con">
       <Modal
@@ -277,17 +331,28 @@ const ShopMainProducts = ({ product, categoryid }) => {
                   We found <span className="product-num">{count}</span> items
                   for you!
                 </p>
+                <Form onSubmit={handlesearchitem} className="search-by-item">
+                  <input
+                    name="search"
+                    type="text"
+                    placeholder="Search for items"
+                    required
+                  />
+                  <button type="submit">
+                    <ImSearch></ImSearch>
+                  </button>
+                </Form>
                 <div className="data-price-filter">
                   <select
                     onChange={(e) => setdatasize(e.target.value)}
                     className="select1 select-bordered "
                   >
-                    <option value="12" selected>
-                      12
+                    <option value="9" selected>
+                      9
                     </option>
+                    <option value="12">12</option>
+                    <option value="18">18</option>
                     <option value="24">24</option>
-                    <option value="36">36</option>
-                    <option value="48">48</option>
                   </select>
                   <select
                     onChange={(e) => sortProductsByPrice(e.target.value)}
@@ -379,7 +444,25 @@ const ShopMainProducts = ({ product, categoryid }) => {
               )}
 
               <div className="pagination-con">
-                {[...Array(page).keys()].map((number) => (
+                {isClicked ? (
+                  <></>
+                ) : (
+                  <>
+                    {[...Array(page).keys()].map((number) => (
+                      <button
+                        key={number}
+                        className={
+                          currentpage === number && "selected-page-btn"
+                        }
+                        id="paginationbtn"
+                        onClick={() => setcurrentpage(number)}
+                      >
+                        {number}
+                      </button>
+                    ))}
+                  </>
+                )}
+                {/* {[...Array(page).keys()].map((number) => (
                   <button
                     key={number}
                     className={currentpage === number && "selected-page-btn"}
@@ -388,13 +471,11 @@ const ShopMainProducts = ({ product, categoryid }) => {
                   >
                     {number}
                   </button>
-                ))}
+                ))} */}
               </div>
             </div>
           </div>
           <div className="shop-product-right col col-12 col-lg-2 col-sm-12 col-md-12">
-            {/* <ShopProductRight></ShopProductRight> */}
-
             <div>
               <div className="all-cata-con">
                 <h5>All Categories</h5>
@@ -546,7 +627,79 @@ const ShopMainProducts = ({ product, categoryid }) => {
                   </Form>
                 </div>
               </div>
-              <div className="new-product-con">
+              {allproduct?.length > 6 ? (
+                <>
+                  <div className="new-product-con">
+                    <h6>NEW PRODUCTS</h6>
+                    <div className="new-product-hole">
+                      <div className="new-product-info">
+                        <img src={imagea} alt="not found" />
+                      </div>
+
+                      <div className="new-product-info-start">
+                        <p>Chen Cardigan</p>
+                        <p>$99.50</p>
+                        <div className="star-con">
+                          <AiFillStar className="new-pro-star"></AiFillStar>
+                          <AiFillStar className="new-pro-star"></AiFillStar>
+                          <AiFillStar className="new-pro-star"></AiFillStar>
+                          <AiFillStar className="new-pro-star"></AiFillStar>
+                          <AiFillStar className="new-pro-star"></AiFillStar>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="new-product-hole">
+                      <div className="new-product-info">
+                        <img src={imagea} alt="not found" />
+                      </div>
+
+                      <div className="new-product-info-start">
+                        <p>Chen Cardigan</p>
+                        <p>$99.50</p>
+                        <div className="star-con">
+                          <AiFillStar className="new-pro-star"></AiFillStar>
+                          <AiFillStar className="new-pro-star"></AiFillStar>
+                          <AiFillStar className="new-pro-star"></AiFillStar>
+                          <AiFillStar className="new-pro-star"></AiFillStar>
+                          <AiFillStar className="new-pro-star"></AiFillStar>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="new-product-hole">
+                      <div className="new-product-info">
+                        <img src={imagea} alt="not found" />
+                      </div>
+
+                      <div className="new-product-info-start">
+                        <p>Chen Cardigan</p>
+                        <p>$99.50</p>
+                        <div className="star-con">
+                          <AiFillStar className="new-pro-star"></AiFillStar>
+                          <AiFillStar className="new-pro-star"></AiFillStar>
+                          <AiFillStar className="new-pro-star"></AiFillStar>
+                          <AiFillStar className="new-pro-star"></AiFillStar>
+                          <AiFillStar className="new-pro-star"></AiFillStar>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="offer-con">
+                    <img src={offer} alt="not found" />
+                    <div className="offer-info">
+                      <span>Women Zone</span>
+                      <h5>
+                        Save 17% on <br /> Office Dress
+                      </h5>
+                      <Link className="offer-shop-link">
+                        <BsArrowRight></BsArrowRight>Shop Now
+                      </Link>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
+              {/* <div className="new-product-con">
                 <h6>NEW PRODUCTS</h6>
                 <div className="new-product-hole">
                   <div className="new-product-info">
@@ -611,12 +764,106 @@ const ShopMainProducts = ({ product, categoryid }) => {
                     <BsArrowRight></BsArrowRight>Shop Now
                   </Link>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
-      </div>
+        {interastedproducts?.length >= 1 ? (
+          <>
+            <div className="interasted-product-con">
+              <h5 className="mb-2">
+                Just For You ({interastedproducts?.length}) Products
+              </h5>
+              <Carousel
+                swipeable={false}
+                responsive={responsive}
+                ssr={true}
+                infinite={true}
+                autoPlay={true}
+                autoPlaySpeed={1000}
+                keyBoardControl={true}
+                customTransition="all .5"
+                transitionDuration={500}
+                containerClass="carousel-container"
+                removeArrowOnDeviceType={["tablet", "mobile"]}
+                dotListClass="custom-dot-list-style"
+                itemClass="carousel-item-padding-40-px"
+              >
+                {interastedproducts?.map((product) => (
+                  <div className=" shop-single-product" id="interastedproduct">
+                    <div className="shop-product-inner">
+                      <Link
+                        to={`/shop-details/${product?.category_id}/${product?.product_id}`}
+                      >
+                        {" "}
+                        <img
+                          className="original-image"
+                          src={product?.Product_image}
+                          alt=""
+                        />
+                      </Link>
+                      <Link
+                        to={`/shop-details/${product?.category_id}/${product?.product_id}`}
+                      >
+                        <img
+                          className="hover-image"
+                          src={product?.daisplay_image}
+                          alt=""
+                        />
+                      </Link>
 
+                      <div className="add-to-cart-con">
+                        <div className="number-input" id="product-quen">
+                          <button
+                            className="quen-icress"
+                            onClick={handleincress}
+                          >
+                            +
+                          </button>
+                          <span>{quentuty}</span>
+                          <button
+                            className="quen-icress"
+                            onClick={handledecress}
+                          >
+                            -
+                          </button>
+                        </div>
+                        <button
+                          className="add-to-cart-button"
+                          onClick={() => handleaddtocart(product)}
+                        >
+                          <LiaShoppingBagSolid className="mr-2 text-lg"></LiaShoppingBagSolid>
+                          Add to cart
+                        </button>
+                        <MdFavoriteBorder
+                          onClick={() => handleaddwishlist(product)}
+                          className="product-fava"
+                        ></MdFavoriteBorder>
+                        <MdCompareArrows className="product-fava1"></MdCompareArrows>
+                      </div>
+                    </div>
+
+                    <div className="shop-product-information">
+                      <h6>{product?.product_name}</h6>
+                      <p>Tk:{product?.product_price}</p>
+
+                      <Link
+                        onClick={() => handlebuynow(product)}
+                        className="buy-now-button"
+                      >
+                        <AiOutlineShopping></AiOutlineShopping>{" "}
+                        <span className="ml-2">Buy Now</span>
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </Carousel>
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
+      </div>
       <ToastContainer />
     </div>
   );

@@ -228,6 +228,7 @@ const CartProductsPages = () => {
     }
   };
   const [selectproducts, setselectproduct] = useState([]);
+  console.log(selectproducts);
 
   const handlesetproduct = (product) => {
     setmessae(false);
