@@ -88,16 +88,25 @@
     border-radius: 6px;
 }
 
-.product-search-con input {
+/* .product-search-con input {
     border: 1px solid rgb(195, 221, 244);
     padding: 15px 8px;
     border-radius: 4px;
     width: 32%;
     background-color: aliceblue;
     font-size: 1.1rem;
+} */
+
+.product-search {
+    border: 1px solid rgb(195, 221, 244);
+    padding: 15px 8px;
+    border-radius: 4px;
+    width: 25%;
+    background-color: aliceblue;
+    font-size: 1.1rem;
 }
 
-.product-search-con select {
+/* .product-search-con select {
     border: 1px solid rgb(207, 228, 246);
     padding: 15px 8px;
     border-radius: 4px;
@@ -106,4 +115,70 @@
     font-size: 1.1rem;
     color: rgb(121, 120, 120);
     font-weight: 500;
+} */
+
+.product-category-search {
+    border: 1px solid rgb(207, 228, 246);
+    padding: 15px 8px;
+    border-radius: 4px;
+    width: 25%;
+    background-color: aliceblue;
+    font-size: 1.1rem;
+    color: rgb(121, 120, 120);
+    font-weight: 500;
+}
+
+.product-filter {
+    border: 1px solid #be5184;
+    background-color: #be5184;
+    color: white;
+    padding: 10px 6px;
+    border-radius: 3px;
+    width: 8%;
+    font-weight: 500;
+}
+
+.product-reset {
+    border: 1px solid rgb(166, 210, 248);
+    background-color: rgb(166, 210, 248);
+    color: rgb(89, 88, 88);
+    padding: 10px 6px;
+    border-radius: 3px;
+    width: 8%;
+    font-weight: 500;
+}
+
+.dashbord-product {
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+    border-radius: 50%;
+    /* border: 0.8px solid gainsboro; */
+}
+
+.dashbord-product-image {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.product-sell {
+    width: 50px;
+    font-size: 0.8rem;
+    border: 1px solid rgb(175, 215, 251);
+    background-color: rgb(180, 219, 252);
+    text-align: center;
+    border-radius: 4px;
+    color: gray;
+}
+
+#disablecss {
+    background-color: #efa2c6;
+    color: white;
+    /* border: 1px solid gray; */
+}
+
+.add-product-link {
+    text-decoration: none;
+    color: white;
 }

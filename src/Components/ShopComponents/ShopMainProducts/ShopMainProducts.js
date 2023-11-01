@@ -97,6 +97,7 @@ const ShopMainProducts = ({ product, categoryid }) => {
         setinterastedproduct(data);
       });
   }, [userinfo, user?.email]);
+  console.log(interastedproducts);
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_URL}/shopmainproduct/priceproduct?minprice=${minprice}&maxprice=${maxprice}&page=${currentpage}&size=${datasize}&color=${color}&serach=${search}`
@@ -108,7 +109,7 @@ const ShopMainProducts = ({ product, categoryid }) => {
         setloading(false);
       });
   }, [currentpage, datasize, minprice, maxprice, color, search]);
-
+  console.log(allproduct);
   const sortProductsByPrice = (e) => {
     console.log(e, typeof e);
     if (e === "norm") {
@@ -336,7 +337,7 @@ const ShopMainProducts = ({ product, categoryid }) => {
                     name="search"
                     type="text"
                     placeholder="Search for items"
-                    required
+                    // required
                   />
                   <button type="submit">
                     <ImSearch></ImSearch>

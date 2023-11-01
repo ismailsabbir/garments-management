@@ -65,6 +65,9 @@ import DashbordCustomizedOrders from "./Components/DashbordComponents/DashbordCu
 import DashbordAddStaff from "./Components/DashbordComponents/DashbordAddStaff/DashbordAddStaff";
 import DashbordEditStaff from "./Components/DashbordComponents/DashbordEditStaff/DashbordEditStaff";
 import AdminRoutes from "./Routes/AdminRoutes/AdminRoutes";
+import DashbordProductView from "./Components/DashbordComponents/DashbordProductView/DashbordProductView";
+import DashbordProductEdit from "./Components/DashbordComponents/DashbordProductEdit/DashbordProductEdit";
+import DashbordAddProduct from "./Components/DashbordComponents/DashbordAddProduct/DashbordAddProduct";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -441,6 +444,30 @@ function App() {
           element: (
             <AdminRoutes>
               <DashbordShopProducts></DashbordShopProducts>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/shop-product-add",
+          element: (
+            <AdminRoutes>
+              <DashbordAddProduct></DashbordAddProduct>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/shop-product-edit",
+          element: (
+            <AdminRoutes>
+              <DashbordProductEdit></DashbordProductEdit>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/shop-product-view",
+          element: (
+            <AdminRoutes>
+              <DashbordProductView></DashbordProductView>
             </AdminRoutes>
           ),
         },

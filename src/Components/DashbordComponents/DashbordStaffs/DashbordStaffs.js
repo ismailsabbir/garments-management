@@ -19,17 +19,11 @@ const DashbordStaffs = () => {
   const [searchvalue, setsearchvalue] = useState("");
   const [staff, setstaff] = useState("");
   const [staffemail, setstaffemail] = useState("");
-  const {
-    data: products = [],
-    isLoading,
-    refetch,
-  } = useQuery({
+  const { data: products = [], refetch } = useQuery({
     queryKey: [
       "staff",
       {
         search: searchvalue,
-        // email: staffemail,
-        // role: staff,
         page: cuscurrentpage,
         size: datasize,
       },
