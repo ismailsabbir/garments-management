@@ -46,6 +46,7 @@ const ShopMainProducts = ({ product, categoryid }) => {
   const [search, setsearch] = useState("");
   const [userinfo, setuserinfo] = useState([]);
   const [interastedproducts, setinterastedproduct] = useState([]);
+  console.log(count);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/singleuser?email=${user?.email}`, {
       headers: {

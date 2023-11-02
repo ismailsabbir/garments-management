@@ -15,9 +15,10 @@ const DashbordProductEdit = () => {
     setUserData(product);
   }, {});
   console.log(userData);
+  const imagebb = process.env.REACT_APP_IMGBB;
   const [Product_image, setphoto1] = useState(product?.Product_image);
   const [daisplay_image, setdaisplayimage] = useState(product?.daisplay_image);
-  const imagebb = process.env.REACT_APP_IMGBB;
+
   const handleimage2 = (e) => {
     console.log("click1");
     const image1 = e.target.files[0];
@@ -33,6 +34,10 @@ const DashbordProductEdit = () => {
         if (data.success) {
           console.log(data.data.url);
           setdaisplayimage(data.data.url);
+          toast("Image Uplode sucessfully !!!", {
+            position: "top-center",
+            autoClose: 1000,
+          });
         }
       });
   };
@@ -50,6 +55,10 @@ const DashbordProductEdit = () => {
       .then((data) => {
         if (data.success) {
           setphoto1(data.data.url);
+          toast("Image Uplode sucessfully !!!", {
+            position: "top-center",
+            autoClose: 1000,
+          });
         }
       });
   };
@@ -57,14 +66,14 @@ const DashbordProductEdit = () => {
   console.log(Product_image, daisplay_image);
   const handlestaffedit = (e) => {
     e.preventDefault();
-    const product_name = e.target.productname.value;
-    const category_name = e.target.category.value;
-    const product_price = e.target.price.value;
-    const availavle = e.target.quantity.value;
-    const description = e.target.description.value;
-    const brand = e.target.brand.value;
-    const fabric = e.target.fabric.value;
-    const stock = e.target.status.value;
+    const product_name = e.target.productname.value.toString();
+    const category_name = e.target.category.value.toString();
+    const product_price = parseInt(e.target.price.value);
+    const availavle = e.target.quantity.value.toString();
+    const description = e.target.description.value.toString();
+    const brand = e.target.brand.value.toString();
+    const fabric = e.target.fabric.value.toString();
+    const stock = e.target.status.value.toString();
     const staffinfo = {
       Product_image,
       daisplay_image,
@@ -135,7 +144,7 @@ const DashbordProductEdit = () => {
                   id="input-file2"
                   className="fileinput"
                   name="image"
-                  onClick={handleimage2}
+                  onChange={handleimage2}
                 />
               </label>
             </Form.Group>

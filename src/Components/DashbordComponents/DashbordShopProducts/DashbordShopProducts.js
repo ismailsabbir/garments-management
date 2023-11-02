@@ -9,6 +9,7 @@ import Loading from "../../../CommonComponents/Loading/Loading";
 import { Link, json } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { useQuery } from "@tanstack/react-query";
+import { ToastContainer, toast } from "react-toastify";
 const DashbordShopProducts = () => {
   const [products, setproducts] = useState([]);
   const [cuscurrentpage, setcuscurrentpage] = useState(0);
@@ -42,6 +43,12 @@ const DashbordShopProducts = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        if (data?.deletedCount > 0) {
+          toast("Product delete sucessfully !!!", {
+            position: "top-center",
+            autoClose: 1000,
+          });
+        }
         refetch();
       });
   };
@@ -87,6 +94,7 @@ const DashbordShopProducts = () => {
   // }, [cuscurrentpage, datasize]);
 
   console.log(products);
+  console.log(cuscount);
   const handleFileUpload = (event) => {
     console.log("click");
     const file = event.target.files[0];
@@ -158,7 +166,11 @@ const DashbordShopProducts = () => {
             <RiDeleteBinLine className="bulk-icon"></RiDeleteBinLine>Delete
             Product
           </button>
-          <Link to="/dashbord/shop-product-add" className="add-product-link">
+          <Link
+            to="/dashbord/shop-product-add"
+            state={cuscount}
+            className="add-product-link"
+          >
             <button id="add-product-btn">
               <IoMdAdd className="bulk-icon"></IoMdAdd> Add Producat
             </button>
@@ -309,6 +321,7 @@ const DashbordShopProducts = () => {
           </div>
         </>
       )}
+      <ToastContainer></ToastContainer>
     </div>
   );
 };

@@ -17,24 +17,23 @@ import { ToastContainer, toast } from "react-toastify";
 import { useEffect } from "react";
 import ShopRelatedProducts from "../ShopRelatedProducts/ShopRelatedProducts";
 const ShopProductDetails = () => {
-  // const [productss, setproductss] = useState([]);
   const { user } = useContext(AuthContext);
   const email = user?.email;
-  const { shopproduct } = useContext(servcontext);
   const [size, setsize] = useState("S");
   const [quentuty, setquentity] = useState(1);
   const location = useLocation();
   const { pathname } = location;
   const categoryid = pathname.split("/")[2];
   const id = pathname.split("/")[3];
-  const singleproducts = shopproduct?.filter(
-    (products) => products.category_id === categoryid
-  );
-  const singlproduct = singleproducts?.[0]?.products;
-  const productss = singlproduct?.filter(
-    (products) => products.product_id === id
-  );
-  const oneproduct = productss?.[0];
+  const [oneproduct, setoneproduct] = useState();
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_URL}/detailsproduct/${categoryid}/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setoneproduct(data);
+      });
+  });
   console.log(oneproduct);
   const [dressimage, setdressimage] = useState(oneproduct?.Product_image);
   const [products, setproducts] = useState([]);
@@ -46,6 +45,7 @@ const ShopProductDetails = () => {
       .then((req) => req.json())
       .then((data) => setproducts(data));
   }, [oneproduct?.category_id, user?.email, oneproduct?.category_name]);
+
   const handleincress = () => {
     const newquentity = quentuty + 1;
     setquentity(newquentity);
