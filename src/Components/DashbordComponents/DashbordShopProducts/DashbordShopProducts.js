@@ -10,6 +10,8 @@ import { Link, json } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
+import { Form } from "react-bootstrap";
+import NotFound from "../../../CommonComponents/NotFound/NotFound";
 const DashbordShopProducts = () => {
   const [products, setproducts] = useState([]);
   const [cuscurrentpage, setcuscurrentpage] = useState(0);
@@ -18,6 +20,11 @@ const DashbordShopProducts = () => {
   const custompage = Math.ceil(cuscount / datasize);
   const [loading, setloading] = useState(true);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [search, setsearch] = useState("");
+  const [category, setcategory] = useState();
+  const [allcategory, setallcategory] = useState([]);
+  const [reset, setreset] = useState(false);
+  const [status, setstatus] = useState("");
   const handleOptionClick = (product) => {
     if (!selectedOptions.includes(product)) {
       setSelectedOptions([...selectedOptions, product]);
@@ -25,10 +32,17 @@ const DashbordShopProducts = () => {
       setSelectedOptions(selectedOptions.filter((item) => item !== product));
     }
   };
-  console.log(selectedOptions);
+  console.log(status);
   const isDeleteButtonDisabled = selectedOptions.length === 0;
   const productid = selectedOptions.map((item) => item._id);
   console.log(productid);
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_URL}/shopcategory`)
+      .then((res) => res.json())
+      .then((data) => {
+        setallcategory(data);
+      });
+  }, []);
   const handledeleteproduct = () => {
     console.log(selectedOptions);
     fetch(`${process.env.REACT_APP_URL}/delete-products`, {
@@ -57,14 +71,17 @@ const DashbordShopProducts = () => {
     queryKey: [
       "shopallproduct",
       {
-        // search: searchvalue,
+        category: category,
+        search: search,
         page: cuscurrentpage,
         size: datasize,
+        reset: reset,
+        status: status,
       },
     ],
     queryFn: () =>
       fetch(
-        `${process.env.REACT_APP_URL}/shopallproduct?page=${cuscurrentpage}&size=${datasize}`,
+        `${process.env.REACT_APP_URL}/shopallproduct?page=${cuscurrentpage}&size=${datasize}&search=${search}&category=${category}&reset=${reset}&status=${status}`,
         {
           headers: {
             authorization: `Beare ${localStorage.getItem("garments-token")}`,
@@ -80,19 +97,6 @@ const DashbordShopProducts = () => {
           return data;
         }),
   });
-
-  // useEffect(() => {
-  //   fetch(
-  //     `${process.env.REACT_APP_URL}/shopallproduct?page=${cuscurrentpage}&size=${datasize}`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setproducts(data?.product);
-  //       setcuscount(data?.count);
-  //       setloading(false);
-  //     });
-  // }, [cuscurrentpage, datasize]);
-
   console.log(products);
   console.log(cuscount);
   const handleFileUpload = (event) => {
@@ -117,6 +121,10 @@ const DashbordShopProducts = () => {
               .then((response) => response.json())
               .then((data) => {
                 console.log(data);
+                toast("Product add sucessfully !!!", {
+                  position: "top-center",
+                  autoClose: 1000,
+                });
                 refetch();
               })
               .catch((err) => {
@@ -130,6 +138,50 @@ const DashbordShopProducts = () => {
 
       reader.readAsText(file);
     }
+  };
+  const handleproductsearch = (e) => {
+    e.preventDefault();
+    const serchvalue = e.target.searchproduct.value;
+    setcategory("");
+    setreset(false);
+    setsearch(serchvalue);
+  };
+  const handlecategory = (e) => {
+    const category = e.target.value;
+    setreset(false);
+    setcategory(category);
+  };
+  const sortProductsByPrice = (e) => {
+    console.log(e, typeof e);
+    if (e === "norm") {
+      setproducts(products);
+    } else if (e === "sell") {
+      setstatus(e);
+    } else if (e === "IN STOCK") {
+      setreset(false);
+      setsearch("");
+      setcategory("");
+      setstatus(e);
+    } else if (e === "STOCK OUT") {
+      setreset(false);
+      setsearch("");
+      setcategory("");
+      setstatus(e);
+    } else if (e === "assc") {
+      const sortedProducts = [...products].sort(
+        (a, b) => parseInt(a.product_price) - parseInt(b.product_price)
+      );
+      setproducts(sortedProducts);
+    } else {
+      const sortedProducts = [...products].sort(
+        (a, b) => parseInt(b.product_price) - parseInt(a.product_price)
+      );
+      setproducts(sortedProducts);
+    }
+  };
+  const handlereset = () => {
+    setsearch(false);
+    setreset(true);
   };
   return (
     <div className="dashbord-shop-product-con">
@@ -181,33 +233,52 @@ const DashbordShopProducts = () => {
         </div>
       </div>
       <div className="product-search-con">
-        <input
-          className="product-search"
-          type="text"
-          placeholder="Search Product"
-        />
+        <Form onSubmit={handleproductsearch} className="serch-form">
+          <input
+            className="product-search"
+            type="text"
+            placeholder="Search Product"
+            name="searchproduct"
+          />
+        </Form>
+
         <select
+          // onChange={(e) => setcategory(e.target.value)}
+          onChange={handlecategory}
           className="product-category-search"
           id="cars"
           placeholder="Category"
+          name="categoryname"
+          value={category}
         >
-          <option value="" disabled selected>
+          <option value="" selected>
             Category
           </option>
-          <option value="saab">Shari</option>
-          <option value="vw">T-shirt</option>
-          <option value="audi">Panjabi</option>
+          {allcategory?.map((category) => (
+            <option value={category?.category_name}>
+              {category?.category_name}
+            </option>
+          ))}
         </select>
-        <select className="product-category-search" id="cars">
-          <option value="" disabled selected>
-            Price
+
+        <select
+          className="product-category-search"
+          id="cars"
+          onChange={(e) => sortProductsByPrice(e.target.value)}
+        >
+          <option value="norm" selected>
+            Sorting by price
           </option>
-          <option value="saab">Low To High</option>
-          <option value="vw">Processing</option>
-          <option value="audi">Audi</option>
+          <option value="assc">Sort by Price:Low to High</option>
+          <option value="desc">Sort by Price:High to Low</option>
+          <option value="IN STOCK">Status-Selling</option>
+          <option value="STOCK OUT">Status-Out Of Stock</option>
         </select>
-        <button className="product-filter">Filter</button>
-        <button className="product-reset">ReSet</button>
+
+        {/* <button className="product-filter">Filter</button> */}
+        <button onClick={handlereset} className="product-reset">
+          ReSet
+        </button>
       </div>
 
       {loading ? (
@@ -216,109 +287,117 @@ const DashbordShopProducts = () => {
         </>
       ) : (
         <>
-          <div className="all-product-con">
-            <div className="overflow-x-auto">
-              <div className="overflow-x-auto">
-                <table className="table recent-order-table">
-                  {/* <thead> */}
-                  <tr className="recent-order-tr">
-                    <th>Select</th>
-                    <th className="recent-order-hed">PRODUCT NAME</th>
-                    <th className="recent-order-hed">CATEGORY</th>
-                    <th className="recent-order-hed">PRICE</th>
-                    <th className="recent-order-hed">SALE PRICE</th>
-                    <th className="recent-order-hed">STOCK</th>
-                    <th className="recent-order-hed">STATUS</th>
-                    <th className="recent-order-hed">VIEW</th>
-                    <th className="recent-order-hed">ACTIONS</th>
-                  </tr>
-                  {/* </thead> */}
-                  <tbody>
-                    {products?.map((order) => (
-                      <tr>
-                        <th>
-                          <label>
-                            <input
-                              onClick={() => handleOptionClick(order)}
-                              type="checkbox"
-                              className="checkbox"
-                            />
-                          </label>
-                        </th>
-                        <td className="das-order-data">
-                          <span className="dashbord-product-image">
-                            <img
-                              className="dashbord-product"
-                              src={order?.Product_image}
-                              alt="not"
-                            />
-                            {order?.product_name}
-                          </span>{" "}
-                        </td>
-                        <td className="das-order-data">
-                          <span>{order?.category_name}</span>{" "}
-                        </td>
-                        <td className="das-order-data">
-                          <span>Tk: {order?.product_price}</span>{" "}
-                        </td>
-                        <td className="das-order-data">
-                          <span>Tk: {order?.product_price}</span>{" "}
-                        </td>
-                        <td className="das-order-data">
-                          <span>{order?.availavle}</span>{" "}
-                        </td>
-                        <td className="das-order-data">
-                          <span>
-                            <p className="product-sell">Selling</p>
-                          </span>{" "}
-                        </td>
-                        <td className="das-order-data">
-                          <span>
-                            <Link
-                              to="/dashbord/shop-product-view"
-                              state={order}
-                            >
-                              <FaSearchPlus className="printlogo"></FaSearchPlus>
-                            </Link>
-                          </span>{" "}
-                        </td>
-                        <td className="das-order-data">
-                          <div className="print-serach">
-                            <Link
-                              to="/dashbord/shop-product-edit"
-                              state={order}
-                            >
-                              <FiEdit className="printlogo"></FiEdit>
-                            </Link>
-
-                            <RiDeleteBinLine
-                              // onClick={() => handledelete(order)}
-                              className="printlogo"
-                            ></RiDeleteBinLine>
-                          </div>
-                        </td>
+          {products.length < 1 ? (
+            <>
+              <NotFound></NotFound>
+            </>
+          ) : (
+            <>
+              <div className="all-product-con">
+                <div className="overflow-x-auto">
+                  <div className="overflow-x-auto">
+                    <table className="table recent-order-table">
+                      {/* <thead> */}
+                      <tr className="recent-order-tr">
+                        <th>Select</th>
+                        <th className="recent-order-hed">PRODUCT NAME</th>
+                        <th className="recent-order-hed">CATEGORY</th>
+                        <th className="recent-order-hed">PRICE</th>
+                        <th className="recent-order-hed">SALE PRICE</th>
+                        <th className="recent-order-hed">STOCK</th>
+                        <th className="recent-order-hed">STATUS</th>
+                        <th className="recent-order-hed">VIEW</th>
+                        <th className="recent-order-hed">ACTIONS</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                      {/* </thead> */}
+                      <tbody>
+                        {products?.map((order) => (
+                          <tr>
+                            <th>
+                              <label>
+                                <input
+                                  onClick={() => handleOptionClick(order)}
+                                  type="checkbox"
+                                  className="checkbox"
+                                />
+                              </label>
+                            </th>
+                            <td className="das-order-data">
+                              <span className="dashbord-product-image">
+                                <img
+                                  className="dashbord-product"
+                                  src={order?.Product_image}
+                                  alt="not"
+                                />
+                                {order?.product_name}
+                              </span>{" "}
+                            </td>
+                            <td className="das-order-data">
+                              <span>{order?.category_name}</span>{" "}
+                            </td>
+                            <td className="das-order-data">
+                              <span>Tk: {order?.product_price}</span>{" "}
+                            </td>
+                            <td className="das-order-data">
+                              <span>Tk: {order?.product_price}</span>{" "}
+                            </td>
+                            <td className="das-order-data">
+                              <span>{order?.availavle}</span>{" "}
+                            </td>
+                            <td className="das-order-data">
+                              <span>
+                                <p className="product-sell">Selling</p>
+                              </span>{" "}
+                            </td>
+                            <td className="das-order-data">
+                              <span>
+                                <Link
+                                  to="/dashbord/shop-product-view"
+                                  state={order}
+                                >
+                                  <FaSearchPlus className="printlogo"></FaSearchPlus>
+                                </Link>
+                              </span>{" "}
+                            </td>
+                            <td className="das-order-data">
+                              <div className="print-serach">
+                                <Link
+                                  to="/dashbord/shop-product-edit"
+                                  state={order}
+                                >
+                                  <FiEdit className="printlogo"></FiEdit>
+                                </Link>
 
-                <div className="pagination-con">
-                  {[...Array(custompage).keys()].map((number) => (
-                    <button
-                      key={number}
-                      className={
-                        cuscurrentpage === number && "selected-page-btn"
-                      }
-                      id="paginationbtn"
-                      onClick={() => setcuscurrentpage(number)}
-                    >
-                      {number}
-                    </button>
-                  ))}
+                                <RiDeleteBinLine
+                                  // onClick={() => handledelete(order)}
+                                  className="printlogo"
+                                ></RiDeleteBinLine>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+
+                    <div className="pagination-con">
+                      {[...Array(custompage).keys()].map((number) => (
+                        <button
+                          key={number}
+                          className={
+                            cuscurrentpage === number && "selected-page-btn"
+                          }
+                          id="paginationbtn"
+                          onClick={() => setcuscurrentpage(number)}
+                        >
+                          {number}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </>
+          )}
         </>
       )}
       <ToastContainer></ToastContainer>

@@ -98,7 +98,6 @@ const ShopMainProducts = ({ product, categoryid }) => {
         setinterastedproduct(data);
       });
   }, [userinfo, user?.email]);
-  console.log(interastedproducts);
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_URL}/shopmainproduct/priceproduct?minprice=${minprice}&maxprice=${maxprice}&page=${currentpage}&size=${datasize}&color=${color}&serach=${search}`
