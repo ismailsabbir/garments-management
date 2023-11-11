@@ -32,8 +32,7 @@ const DashbordShopProducts = () => {
       setSelectedOptions(selectedOptions.filter((item) => item !== product));
     }
   };
-  console.log(status);
-  const isDeleteButtonDisabled = selectedOptions.length === 0;
+  const isDeleteButtonDisabled = selectedOptions?.length === 0;
   const productid = selectedOptions.map((item) => item._id);
   console.log(productid);
   useEffect(() => {
@@ -97,11 +96,9 @@ const DashbordShopProducts = () => {
           return data;
         }),
   });
-  console.log(products);
-  console.log(cuscount);
   const handleFileUpload = (event) => {
-    console.log("click");
-    const file = event.target.files[0];
+    const fileInput = event.target;
+    const file = fileInput.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -133,6 +130,8 @@ const DashbordShopProducts = () => {
           }
         } catch (error) {
           console.error("Invalid JSON file:", error);
+        } finally {
+          fileInput.value = "";
         }
       };
 
@@ -183,6 +182,29 @@ const DashbordShopProducts = () => {
     setsearch(false);
     setreset(true);
   };
+  const handledeletecategory = (product) => {
+    const productid = [product?._id];
+    fetch(`${process.env.REACT_APP_URL}/delete-single-product`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        authorization: `Beare ${localStorage.getItem("garments-token")}`,
+      },
+
+      body: JSON.stringify(productid),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data?.deletedCount > 0) {
+          toast("product delete sucessfully !!!", {
+            position: "top-center",
+            autoClose: 1000,
+          });
+        }
+        refetch();
+      });
+  };
   return (
     <div className="dashbord-shop-product-con">
       <h5>Shop Products</h5>
@@ -207,9 +229,6 @@ const DashbordShopProducts = () => {
         </label>
 
         <div className="bulk-action">
-          {/* <button>
-            <LuClipboardEdit className="bulk-icon"></LuClipboardEdit>Bulk Action
-          </button> */}
           <button
             onClick={handledeleteproduct}
             id={isDeleteButtonDisabled ? "disablecss" : "pro-delete-btn"}
@@ -232,6 +251,7 @@ const DashbordShopProducts = () => {
           </button> */}
         </div>
       </div>
+
       <div className="product-search-con">
         <Form onSubmit={handleproductsearch} className="serch-form">
           <input
@@ -297,7 +317,6 @@ const DashbordShopProducts = () => {
                 <div className="overflow-x-auto">
                   <div className="overflow-x-auto">
                     <table className="table recent-order-table">
-                      {/* <thead> */}
                       <tr className="recent-order-tr">
                         <th>Select</th>
                         <th className="recent-order-hed">PRODUCT NAME</th>
@@ -309,7 +328,6 @@ const DashbordShopProducts = () => {
                         <th className="recent-order-hed">VIEW</th>
                         <th className="recent-order-hed">ACTIONS</th>
                       </tr>
-                      {/* </thead> */}
                       <tbody>
                         {products?.map((order) => (
                           <tr>
@@ -369,7 +387,7 @@ const DashbordShopProducts = () => {
                                 </Link>
 
                                 <RiDeleteBinLine
-                                  // onClick={() => handledelete(order)}
+                                  onClick={() => handledeletecategory(order)}
                                   className="printlogo"
                                 ></RiDeleteBinLine>
                               </div>

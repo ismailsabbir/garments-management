@@ -8,3 +8,34 @@
 #category-search input {
     width: 100%;
 }
+
+#category-search-form {
+    width: 70%;
+    /* border: 1px solid gainsboro; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#category-search-form input {
+    width: 70%;
+    /* margin-right: 5%; */
+}
+
+#category-filt-btn1 {
+    width: 25%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+#category-filt-btn {
+    width: 20%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+#category-delete-btn:hover {
+    cursor: pointer;
+    color: #9e3566;
+    font-size: 1.6rem;
+}

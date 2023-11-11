@@ -5,6 +5,7 @@ import useFetch from "../../../Hooks/useFetch";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const SingleCustomize = ({ category }) => {
+  console.log(category);
   const navigate = useNavigate();
   const imagebb = process.env.REACT_APP_IMAGEBB;
   const [singlequality, settargetquality] = useState();

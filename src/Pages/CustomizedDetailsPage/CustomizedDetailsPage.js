@@ -5,6 +5,7 @@ import SingleCustomize from "../../Components/CustomizeDetailsComponent/SingleCu
 
 const CustomizedDetailsPage = () => {
   const category = useLoaderData();
+  console.log(category);
   return (
     <div>
       <CustomizeDetailsBanner></CustomizeDetailsBanner>

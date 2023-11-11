@@ -7,16 +7,43 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { IoMdAdd } from "react-icons/io";
 import { BiPrinter } from "react-icons/bi";
 import { FaSearchPlus } from "react-icons/fa";
+import { useQuery } from "@tanstack/react-query";
 const DashbordCustomizedCategory = () => {
   const [products, setproducts] = useState([]);
   const [cuscurrentpage, setcuscurrentpage] = useState(0);
+  const [loading, setloading] = useState(true);
   const [datasize, setdatasize] = useState(5);
   const [cuscount, setcuscount] = useState(0);
   const custompage = Math.ceil(cuscount / datasize);
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_URL}/project-category`)
-      .then((res) => res.json())
-      .then((data) => setproducts(data));
+  const { data: productall = [], refetch } = useQuery({
+    queryKey: [
+      "customized-details-all",
+      {
+        // category: category,
+        // search: search,
+        page: cuscurrentpage,
+        size: datasize,
+        // reset: reset,
+        // status: status,
+      },
+    ],
+    queryFn: () =>
+      fetch(
+        `${process.env.REACT_APP_URL}/customized-details-all?page=${cuscurrentpage}&size=${datasize}`,
+        {
+          headers: {
+            authorization: `Beare ${localStorage.getItem("garments-token")}`,
+          },
+        }
+      )
+        .then((req) => req.json())
+        .then((data) => {
+          console.log(data);
+          setproducts(data?.category);
+          setcuscount(data?.count);
+          setloading(false);
+          return data;
+        }),
   });
   console.log(products);
   return (

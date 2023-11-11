@@ -68,7 +68,6 @@ const ShopMainProducts = ({ product, categoryid }) => {
         // setLoading(false);
       });
   }, [user?.email, userlogout]);
-  console.log(userinfo);
   const handlecolorsubmit = (event) => {
     const selectedValue = event.target.value;
     if (color === selectedValue) {
@@ -81,9 +80,7 @@ const ShopMainProducts = ({ product, categoryid }) => {
     e.preventDefault();
     const serach = e.target.search.value;
     setsearch(serach);
-    console.log(serach);
   };
-  console.log(userinfo);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/shop/recommend?email=${user?.email}`, {
       method: "POST",
@@ -94,7 +91,6 @@ const ShopMainProducts = ({ product, categoryid }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setinterastedproduct(data);
       });
   }, [userinfo, user?.email]);

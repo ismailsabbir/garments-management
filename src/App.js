@@ -68,6 +68,12 @@ import AdminRoutes from "./Routes/AdminRoutes/AdminRoutes";
 import DashbordProductView from "./Components/DashbordComponents/DashbordProductView/DashbordProductView";
 import DashbordProductEdit from "./Components/DashbordComponents/DashbordProductEdit/DashbordProductEdit";
 import DashbordAddProduct from "./Components/DashbordComponents/DashbordAddProduct/DashbordAddProduct";
+import DashbordCategoryView from "./Components/DashbordComponents/DashbordCategoryView/DashbordCategoryView";
+import DashbordCategoryEdit from "./Components/DashbordComponents/DashbordCategoryEdit/DashbordCategoryEdit";
+import DashbordAddCategory from "./Components/DashbordComponents/DashbordAddCategory/DashbordAddCategory";
+import DashbordCustomProductEdit from "./Components/DashbordComponents/DashbordCustomProductEdit/DashbordCustomProductEdit";
+import DashbordCustomProductAdd from "./Components/DashbordComponents/DashbordCustomProductAdd/DashbordCustomProductAdd";
+import DashbordCutomProductView from "./Components/DashbordComponents/DashbordCutomProductView/DashbordCutomProductView";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -471,11 +477,61 @@ function App() {
             </AdminRoutes>
           ),
         },
+
+        {
+          path: "/dashbord/custom-product-add",
+          element: (
+            <AdminRoutes>
+              <DashbordCustomProductAdd></DashbordCustomProductAdd>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/custom-product-edit",
+          element: (
+            <AdminRoutes>
+              <DashbordCustomProductEdit></DashbordCustomProductEdit>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/custom-product-view",
+          element: (
+            <AdminRoutes>
+              <DashbordCutomProductView></DashbordCutomProductView>
+            </AdminRoutes>
+          ),
+        },
+
         {
           path: "/dashbord/shop-category",
           element: (
             <AdminRoutes>
               <DashbordShopCategory></DashbordShopCategory>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/shop-category-add",
+          element: (
+            <AdminRoutes>
+              <DashbordAddCategory></DashbordAddCategory>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/shop-category-view",
+          element: (
+            <AdminRoutes>
+              <DashbordCategoryView></DashbordCategoryView>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/shop-category-edit",
+          element: (
+            <AdminRoutes>
+              <DashbordCategoryEdit></DashbordCategoryEdit>
             </AdminRoutes>
           ),
         },
