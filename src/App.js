@@ -74,6 +74,8 @@ import DashbordAddCategory from "./Components/DashbordComponents/DashbordAddCate
 import DashbordCustomProductEdit from "./Components/DashbordComponents/DashbordCustomProductEdit/DashbordCustomProductEdit";
 import DashbordCustomProductAdd from "./Components/DashbordComponents/DashbordCustomProductAdd/DashbordCustomProductAdd";
 import DashbordCutomProductView from "./Components/DashbordComponents/DashbordCutomProductView/DashbordCutomProductView";
+import DashbordCustomizedCategoryView from "./Components/DashbordComponents/DashbordCustomizedCategoryView/DashbordCustomizedCategoryView";
+import DashbordCustomizedCategoryEdit from "./Components/DashbordComponents/DashbordCustomizedCategoryEdit/DashbordCustomizedCategoryEdit";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -548,6 +550,22 @@ function App() {
           element: (
             <AdminRoutes>
               <DashbordCustomizedCategory></DashbordCustomizedCategory>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/customized-category-view",
+          element: (
+            <AdminRoutes>
+              <DashbordCustomizedCategoryView></DashbordCustomizedCategoryView>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/customized-category-edit",
+          element: (
+            <AdminRoutes>
+              <DashbordCustomizedCategoryEdit></DashbordCustomizedCategoryEdit>
             </AdminRoutes>
           ),
         },

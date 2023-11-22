@@ -27,11 +27,10 @@ const DashbordCustomizedProduct = () => {
   const [category, setcategory] = useState();
   const [allcategory, setallcategory] = useState([]);
   const alldata = useContext(servcontext);
+  console.log(selectedOptions);
   useEffect(() => {
     setallcategory(alldata?.category);
   }, []);
-  console.log(alldata);
-
   const [reset, setreset] = useState(false);
   const [status, setstatus] = useState("");
   const { data: productall = [], refetch } = useQuery({
@@ -64,7 +63,7 @@ const DashbordCustomizedProduct = () => {
           return data;
         }),
   });
-  console.log(products);
+
   const handleFileUpload = (event) => {
     const fileInput = event.target;
     const file = fileInput.files[0];
@@ -108,17 +107,19 @@ const DashbordCustomizedProduct = () => {
     }
   };
   const handleOptionClick = (product) => {
-    if (!selectedOptions.includes(product)) {
-      setSelectedOptions([...selectedOptions, product]);
+    const isSelected = selectedOptions.includes(product);
+    if (isSelected) {
+      setSelectedOptions((prevOptions) =>
+        prevOptions.filter((option) => option !== product)
+      );
     } else {
-      setSelectedOptions(selectedOptions.filter((item) => item !== product));
+      setSelectedOptions((prevOptions) => [...prevOptions, product]);
     }
   };
   const isDeleteButtonDisabled = selectedOptions?.length === 0;
   const productid = selectedOptions.map((item) => item._id);
   const handledeleteproduct = () => {
     console.log(selectedOptions);
-    console.log(productid);
     fetch(`${process.env.REACT_APP_URL}/delete-customized-products`, {
       method: "DELETE",
       headers: {
@@ -141,16 +142,20 @@ const DashbordCustomizedProduct = () => {
       });
   };
   const handledeletecategory = (product) => {
+    console.log(product);
     const productid = [product?._id];
-    fetch(`${process.env.REACT_APP_URL}/delete-single-custom-product`, {
-      method: "DELETE",
-      headers: {
-        "Content-type": "application/json",
-        authorization: `Beare ${localStorage.getItem("garments-token")}`,
-      },
+    fetch(
+      `${process.env.REACT_APP_URL}/delete-single-custom-product?product_category=${product?.category_id}&product_color=${product?.color_id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Beare ${localStorage.getItem("garments-token")}`,
+        },
 
-      body: JSON.stringify(productid),
-    })
+        body: JSON.stringify(productid),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

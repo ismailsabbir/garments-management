@@ -96,6 +96,7 @@ const DashbordShopCategory = () => {
         refetch();
       });
   };
+
   const handleFileUpload = (event) => {
     const fileInput = event.target;
     const file = fileInput.files[0];
@@ -139,6 +140,7 @@ const DashbordShopCategory = () => {
       reader.readAsText(file);
     }
   };
+
   const handleproductsearch = (e) => {
     e.preventDefault();
     const search = e.target.searchproduct.value;
@@ -146,7 +148,6 @@ const DashbordShopCategory = () => {
     setreset(false);
     setsearch(search);
   };
-  console.log(search);
   const handlereset = () => {
     setreset(true);
   };

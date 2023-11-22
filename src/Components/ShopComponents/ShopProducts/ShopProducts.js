@@ -124,28 +124,182 @@ const ShopProducts = () => {
     setIsshopModalOpen(false);
   };
   const handleaddtocart = (product) => {
-    setmodalproduct(product);
-    const newObj = { ...product };
-    if ("_id" in newObj) {
-      delete newObj._id;
+    if (email) {
+      setmodalproduct(product);
+      const newObj = { ...product };
+      if ("_id" in newObj) {
+        delete newObj._id;
+      }
+      const productinfo = {
+        ...newObj,
+        quentuty,
+        size,
+        email,
+      };
+      if (product?.dress_size) {
+        openModal();
+      } else {
+        fetch(`${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            authorization: `Beare ${localStorage.getItem("garments-token")}`,
+          },
+          body: JSON.stringify(productinfo),
+        })
+          .then((res) => {
+            if (res.status === 401 || res.status === 403) {
+              navigate("/signup");
+            }
+            return res.json();
+          })
+          // .then((response) => response.json())
+          .then((data) => {
+            if (data?._id) {
+              toast(
+                <div>
+                  <div className="toast-top">
+                    <img src={data?.Product_image} alt="not found" />
+                    <div className="toast-message">
+                      <h6>{data?.product_name}</h6>
+                      <p>
+                        <span>succeed:</span> You have add{" "}
+                        <span id="toast-name">{data?.product_name}</span>
+                      </p>
+                    </div>
+                  </div>
+                  <div className="toast-button">
+                    <Link to="/cartproduct" className="toast-cart-btn">
+                      View Cart
+                    </Link>
+                    <Link className="toast-cart-btn1">CheckOut</Link>
+                  </div>
+                </div>,
+                {
+                  position: "top-right",
+                  autoClose: 10000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: false,
+                  progress: undefined,
+                  theme: "light",
+                }
+              );
+            }
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
+      }
+    } else {
+      navigate("/login");
     }
+    // setmodalproduct(product);
+    // const newObj = { ...product };
+    // if ("_id" in newObj) {
+    //   delete newObj._id;
+    // }
+    // const productinfo = {
+    //   ...newObj,
+    //   quentuty,
+    //   size,
+    //   email,
+    // };
+    // if (product?.dress_size) {
+    //   openModal();
+    // } else {
+    //   fetch(`${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`, {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-type": "application/json",
+    //       authorization: `Beare ${localStorage.getItem("garments-token")}`,
+    //     },
+    //     body: JSON.stringify(productinfo),
+    //   })
+    //     .then((res) => {
+    //       if (res.status === 401 || res.status === 403) {
+    //         navigate("/signup");
+    //       }
+    //       return res.json();
+    //     })
+    //     // .then((response) => response.json())
+    //     .then((data) => {
+    //       if (data?._id) {
+    //         toast(
+    //           <div>
+    //             <div className="toast-top">
+    //               <img src={data?.Product_image} alt="not found" />
+    //               <div className="toast-message">
+    //                 <h6>{data?.product_name}</h6>
+    //                 <p>
+    //                   <span>succeed:</span> You have add{" "}
+    //                   <span id="toast-name">{data?.product_name}</span>
+    //                 </p>
+    //               </div>
+    //             </div>
+    //             <div className="toast-button">
+    //               <Link to="/cartproduct" className="toast-cart-btn">
+    //                 View Cart
+    //               </Link>
+    //               <Link className="toast-cart-btn1">CheckOut</Link>
+    //             </div>
+    //           </div>,
+    //           {
+    //             position: "top-right",
+    //             autoClose: 10000,
+    //             hideProgressBar: false,
+    //             closeOnClick: true,
+    //             pauseOnHover: true,
+    //             draggable: false,
+    //             progress: undefined,
+    //             theme: "light",
+    //           }
+    //         );
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       console.log(err.message);
+    //     });
+    // }
+  };
+  const handlebuynow = (product) => {
+    setmodalproduct(product);
     const productinfo = {
-      ...newObj,
+      ...product,
       quentuty,
       size,
       email,
     };
     if (product?.dress_size) {
-      openModal();
+      openshopModal();
     } else {
-      fetch(`${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-          authorization: `Beare ${localStorage.getItem("garments-token")}`,
-        },
-        body: JSON.stringify(productinfo),
-      })
+      // navigate("/checkout", { state: { productinfo } });
+      openshopModal();
+    }
+  };
+
+  const handleaddwishlist = (product) => {
+    if (email) {
+      const newObj = { ...product };
+      if ("_id" in newObj) {
+        delete newObj._id;
+      }
+      const productinfo = {
+        ...newObj,
+        email,
+      };
+      fetch(
+        `${process.env.REACT_APP_URL}/wishlistproduct?email=${user?.email}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            authorization: `Beare ${localStorage.getItem("garments-token")}`,
+          },
+          body: JSON.stringify(productinfo),
+        }
+      )
         .then((res) => {
           if (res.status === 401 || res.status === 403) {
             navigate("/signup");
@@ -168,10 +322,8 @@ const ShopProducts = () => {
                   </div>
                 </div>
                 <div className="toast-button">
-                  <Link to="/cartproduct" className="toast-cart-btn">
-                    View Cart
-                  </Link>
-                  <Link className="toast-cart-btn1">CheckOut</Link>
+                  To your
+                  <Link to="/wishlistproduct">WishList</Link>
                 </div>
               </div>,
               {
@@ -190,83 +342,9 @@ const ShopProducts = () => {
         .catch((err) => {
           console.log(err.message);
         });
-    }
-  };
-  const handlebuynow = (product) => {
-    setmodalproduct(product);
-    const productinfo = {
-      ...product,
-      quentuty,
-      size,
-      email,
-    };
-    if (product?.dress_size) {
-      openshopModal();
     } else {
-      // navigate("/checkout", { state: { productinfo } });
-      openshopModal();
+      navigate("/login");
     }
-  };
-
-  const handleaddwishlist = (product) => {
-    const newObj = { ...product };
-    if ("_id" in newObj) {
-      delete newObj._id;
-    }
-    const productinfo = {
-      ...newObj,
-      email,
-    };
-    fetch(`${process.env.REACT_APP_URL}/wishlistproduct?email=${user?.email}`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        authorization: `Beare ${localStorage.getItem("garments-token")}`,
-      },
-      body: JSON.stringify(productinfo),
-    })
-      .then((res) => {
-        if (res.status === 401 || res.status === 403) {
-          navigate("/signup");
-        }
-        return res.json();
-      })
-      // .then((response) => response.json())
-      .then((data) => {
-        if (data?._id) {
-          toast(
-            <div>
-              <div className="toast-top">
-                <img src={data?.Product_image} alt="not found" />
-                <div className="toast-message">
-                  <h6>{data?.product_name}</h6>
-                  <p>
-                    <span>succeed:</span> You have add{" "}
-                    <span id="toast-name">{data?.product_name}</span>
-                  </p>
-                </div>
-              </div>
-              <div className="toast-button">
-                To your
-                <Link to="/wishlistproduct">WishList</Link>
-              </div>
-            </div>,
-            {
-              position: "top-right",
-              autoClose: 10000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: false,
-              progress: undefined,
-              theme: "light",
-            }
-          );
-        }
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
   };
 
   return (

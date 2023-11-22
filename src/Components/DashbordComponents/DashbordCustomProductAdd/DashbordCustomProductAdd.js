@@ -81,10 +81,17 @@ const DashbordCustomProductAdd = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        toast("Product Added sucessfully !!!", {
-          position: "top-center",
-          autoClose: 1000,
-        });
+        if (data.message) {
+          toast("This product is already present in your DB", {
+            position: "top-center",
+            autoClose: 1000,
+          });
+        } else {
+          toast("Product Added sucessfully !!!", {
+            position: "top-center",
+            autoClose: 1000,
+          });
+        }
       });
   };
   return (

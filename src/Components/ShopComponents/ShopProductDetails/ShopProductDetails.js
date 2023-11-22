@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { servcontext } from "../../../App";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ReactImageMagnify from "react-image-magnify";
 import { AiOutlineStar } from "react-icons/ai";
 import logo from "../../../Images/Logo.png";
@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import ShopRelatedProducts from "../ShopRelatedProducts/ShopRelatedProducts";
 const ShopProductDetails = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const email = user?.email;
   const [size, setsize] = useState("S");
   const [quentuty, setquentity] = useState(1);
@@ -33,7 +34,8 @@ const ShopProductDetails = () => {
         console.log(data);
         setoneproduct(data);
       });
-  });
+  }, []);
+
   console.log(oneproduct);
   const [dressimage, setdressimage] = useState(oneproduct?.Product_image);
   const [products, setproducts] = useState([]);
@@ -63,108 +65,212 @@ const ShopProductDetails = () => {
     size,
     quentuty,
   };
-  const productinfo = {
+  const productinfoid = {
     ...oneproduct,
     email,
     quentuty,
     size,
   };
-  const handlecartadd = () => {
-    fetch(`${process.env.REACT_APP_URL}/cartproduct`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(productinfo),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data?._id) {
-          toast(
-            <div>
-              <div className="toast-top">
-                <img src={data?.Product_image} alt="not found" />
-                <div className="toast-message">
-                  <h6>{data?.product_name}</h6>
-                  <p>
-                    <span>succeed:</span> You have add{" "}
-                    <span id="toast-name">{data?.product_name}</span>
-                  </p>
-                </div>
-              </div>
-              <div className="toast-button">
-                <Link to="/cartproduct" className="toast-cart-btn">
-                  View Cart
-                </Link>
-                <Link className="toast-cart-btn1">CheckOut</Link>
-              </div>
-            </div>,
-            {
-              position: "top-right",
-              autoClose: 10000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            }
-          );
-        }
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+
+  if ("_id" in productinfoid) {
+    delete productinfoid._id;
+  }
+  const productinfo = {
+    ...productinfoid,
+    // email,
   };
-  const handleaddwishlist = () => {
-    // const productinfo = {
-    //   ...product,
-    //   email,
-    // };
-    console.log("add");
-    fetch(`${process.env.REACT_APP_URL}/wishlistproduct`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(productinfo),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data?._id) {
-          toast(
-            <div>
-              <div className="toast-top">
-                <img src={data?.Product_image} alt="not found" />
-                <div className="toast-message">
-                  <h6>{data?.product_name}</h6>
-                  <p>
-                    <span>succeed:</span> You have add{" "}
-                    <span id="toast-name">{data?.product_name}</span>
-                  </p>
-                </div>
-              </div>
-              <div className="toast-button">
-                To your
-                <Link to="/wishlistproduct">WishList</Link>
-              </div>
-            </div>,
-            {
-              position: "top-right",
-              autoClose: 10000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: false,
-              progress: undefined,
-              theme: "light",
-            }
-          );
-        }
+  const handlecartadd = () => {
+    if (email) {
+      console.log("click cart");
+      fetch(`${process.env.REACT_APP_URL}/cartproduct`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(productinfo),
       })
-      .catch((err) => {
-        console.log(err.message);
-      });
+        .then((response) => response.json())
+        .then((data) => {
+          if (data?._id) {
+            toast(
+              <div>
+                <div className="toast-top">
+                  <img src={data?.Product_image} alt="not found" />
+                  <div className="toast-message">
+                    <h6>{data?.product_name}</h6>
+                    <p>
+                      <span>succeed:</span> You have add{" "}
+                      <span id="toast-name">{data?.product_name}</span>
+                    </p>
+                  </div>
+                </div>
+                <div className="toast-button">
+                  <Link to="/cartproduct" className="toast-cart-btn">
+                    View Cart
+                  </Link>
+                  <Link className="toast-cart-btn1">CheckOut</Link>
+                </div>
+              </div>,
+              {
+                position: "top-right",
+                autoClose: 10000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              }
+            );
+          }
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    } else {
+      navigate("/login");
+    }
+
+    // console.log("click cart");
+    // fetch(`${process.env.REACT_APP_URL}/cartproduct`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(productinfo),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     if (data?._id) {
+    //       toast(
+    //         <div>
+    //           <div className="toast-top">
+    //             <img src={data?.Product_image} alt="not found" />
+    //             <div className="toast-message">
+    //               <h6>{data?.product_name}</h6>
+    //               <p>
+    //                 <span>succeed:</span> You have add{" "}
+    //                 <span id="toast-name">{data?.product_name}</span>
+    //               </p>
+    //             </div>
+    //           </div>
+    //           <div className="toast-button">
+    //             <Link to="/cartproduct" className="toast-cart-btn">
+    //               View Cart
+    //             </Link>
+    //             <Link className="toast-cart-btn1">CheckOut</Link>
+    //           </div>
+    //         </div>,
+    //         {
+    //           position: "top-right",
+    //           autoClose: 10000,
+    //           hideProgressBar: false,
+    //           closeOnClick: true,
+    //           pauseOnHover: true,
+    //           draggable: true,
+    //           progress: undefined,
+    //           theme: "light",
+    //         }
+    //       );
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.message);
+    //   });
+  };
+
+  const handleaddwishlist = () => {
+    if (email) {
+      fetch(`${process.env.REACT_APP_URL}/wishlistproduct`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(productinfo),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data?._id) {
+            toast(
+              <div>
+                <div className="toast-top">
+                  <img src={data?.Product_image} alt="not found" />
+                  <div className="toast-message">
+                    <h6>{data?.product_name}</h6>
+                    <p>
+                      <span>succeed:</span> You have add{" "}
+                      <span id="toast-name">{data?.product_name}</span>
+                    </p>
+                  </div>
+                </div>
+                <div className="toast-button">
+                  To your
+                  <Link to="/wishlistproduct">WishList</Link>
+                </div>
+              </div>,
+              {
+                position: "top-right",
+                autoClose: 10000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+            );
+          }
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    } else {
+      navigate("/login");
+    }
+
+    // fetch(`${process.env.REACT_APP_URL}/wishlistproduct`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(productinfo),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     if (data?._id) {
+    //       toast(
+    //         <div>
+    //           <div className="toast-top">
+    //             <img src={data?.Product_image} alt="not found" />
+    //             <div className="toast-message">
+    //               <h6>{data?.product_name}</h6>
+    //               <p>
+    //                 <span>succeed:</span> You have add{" "}
+    //                 <span id="toast-name">{data?.product_name}</span>
+    //               </p>
+    //             </div>
+    //           </div>
+    //           <div className="toast-button">
+    //             To your
+    //             <Link to="/wishlistproduct">WishList</Link>
+    //           </div>
+    //         </div>,
+    //         {
+    //           position: "top-right",
+    //           autoClose: 10000,
+    //           hideProgressBar: false,
+    //           closeOnClick: true,
+    //           pauseOnHover: true,
+    //           draggable: false,
+    //           progress: undefined,
+    //           theme: "light",
+    //         }
+    //       );
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.message);
+    //   });
   };
   console.log(size);
   return (
