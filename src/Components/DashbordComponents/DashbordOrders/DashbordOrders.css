@@ -32,12 +32,17 @@
     margin-right: 8px;
 }
 
+#order-reset-btn {
+    padding: 15px;
+    width: 10%;
+}
+
 .download-order-btn {
     display: flex;
     padding: 15px;
     align-items: center;
     justify-content: center;
-    width: 32%;
+    width: 20%;
     background-color: #20bf6b;
     border: 1px solid #20bf6b;
     border-radius: 6px;

@@ -246,9 +246,6 @@ const DashbordShopProducts = () => {
               <IoMdAdd className="bulk-icon"></IoMdAdd> Add Producat
             </button>
           </Link>
-          {/* <button  id="add-product-btn">
-            <IoMdAdd className="bulk-icon"></IoMdAdd> Add Producat
-          </button> */}
         </div>
       </div>
 
@@ -295,7 +292,6 @@ const DashbordShopProducts = () => {
           <option value="STOCK OUT">Status-Out Of Stock</option>
         </select>
 
-        {/* <button className="product-filter">Filter</button> */}
         <button onClick={handlereset} className="product-reset">
           ReSet
         </button>
