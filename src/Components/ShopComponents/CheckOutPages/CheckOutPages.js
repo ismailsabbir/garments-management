@@ -226,7 +226,8 @@ const CheckOutPages = () => {
     const dress_photo = Product_image;
     const backphoto = daisplay_image;
     const qualityname = "Premium";
-
+    const status = "Pending";
+    const createdAt = new Date();
     const orderconfirm = {
       name,
       lastname,
@@ -251,6 +252,8 @@ const CheckOutPages = () => {
       transiction_id,
       orderid,
       productinfo,
+      status,
+      createdAt,
     };
     if (!name || !lastname || !email || !phone || !address || !postcode) {
       seterrorinfo(true);

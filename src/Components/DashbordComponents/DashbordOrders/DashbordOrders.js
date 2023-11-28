@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Form } from "react-bootstrap";
 import Loading from "../../../CommonComponents/Loading/Loading";
 import NotFound from "../../../CommonComponents/NotFound/NotFound";
+import { ToastContainer, toast } from "react-toastify";
 const DashbordOrders = () => {
   const [orders, setorders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,6 +22,18 @@ const DashbordOrders = () => {
   const [search, setsearch] = useState("");
   const [reset, setreset] = useState(false);
   const [orderDate, setorderDate] = useState();
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+
+  const handleStartDateChange = (event) => {
+    // setreset(false);
+    setStartDate(event.target.value);
+  };
+
+  const handleEndDateChange = (event) => {
+    setreset(false);
+    setEndDate(event.target.value);
+  };
   // &category=${category}&status=${status}
   const { data: productall = [], refetch } = useQuery({
     queryKey: [
@@ -31,12 +44,14 @@ const DashbordOrders = () => {
         page: currentpage,
         size: datasize,
         reset: reset,
+        startDate: startDate,
+        endDate: endDate,
         // status: status,
       },
     ],
     queryFn: () =>
       fetch(
-        `${process.env.REACT_APP_URL}/allshoporders?email=${user?.email}&page=${currentpage}&size=${datasize}&search=${search}&reset=${reset}&orderDate=${orderDate}`,
+        `${process.env.REACT_APP_URL}/allshoporders?email=${user?.email}&page=${currentpage}&size=${datasize}&search=${search}&reset=${reset}&orderDate=${orderDate}&startDate=${startDate}&endDate=${endDate}`,
         {
           headers: {
             authorization: `Beare ${localStorage.getItem("garments-token")}`,
@@ -63,6 +78,8 @@ const DashbordOrders = () => {
   });
   const handlereset = () => {
     setorderDate();
+    setStartDate("");
+    setEndDate("");
     setsearch(false);
     setreset(true);
   };
@@ -71,13 +88,28 @@ const DashbordOrders = () => {
     console.log(orderDate);
     setreset(false);
     setorderDate();
+    setStartDate("");
+    setEndDate("");
     setorderDate(orderDate);
+  };
+  const searchOrders = () => {
+    if (startDate && endDate) {
+      console.log("Start Date:", startDate);
+      console.log("End Date:", endDate);
+    } else {
+      toast("Please select both start and end dates.", {
+        position: "top-center",
+        autoClose: 1000,
+      });
+    }
   };
   const handlecustomersearch = (event) => {
     event.preventDefault();
     const customerName = event.target.name.value;
     setreset(false);
     setorderDate();
+    setStartDate("");
+    setEndDate("");
     setsearch(customerName);
     console.log(customerName);
   };
@@ -99,9 +131,10 @@ const DashbordOrders = () => {
               <option value="" disabled selected>
                 Status
               </option>
-              <option value="saab">Shari</option>
-              <option value="vw">T-shirt</option>
-              <option value="audi">Panjabi</option>
+              <option value="saab">Delivered</option>
+              <option value="vw">Pending</option>
+              <option value="vw">Processing</option>
+              <option value="audi">Cancle</option>
             </select>
             <select id="cars" onChange={handlecategory}>
               <option value="" disabled selected>
@@ -112,6 +145,8 @@ const DashbordOrders = () => {
               <option value="7">Last 7 days orders</option>
               <option value="15">Last 15 days orders</option>
               <option value="30">Last 30 days orders</option>
+              <option value="60">Last 2 month orders</option>
+              <option value="365">Last 1 Years orders</option>
             </select>
           </Form>
           <div className="order-status-limit">
@@ -119,12 +154,20 @@ const DashbordOrders = () => {
               className="date-chose"
               type="date"
               placeholder="Search Product"
+              value={startDate}
+              onChange={handleStartDateChange}
             />
             <input
               className="date-chose"
               type="date"
               placeholder="Search Product"
+              value={endDate}
+              onChange={handleEndDateChange}
             />
+            {/* <button onClick={searchOrders} className="download-order-btn">
+              <FaSearchPlus className="order-search-btn"></FaSearchPlus>
+              search Orders
+            </button> */}
             <button
               onClick={handlereset}
               className="product-reset"
@@ -134,7 +177,7 @@ const DashbordOrders = () => {
             </button>
             <button className="download-order-btn">
               <AiOutlineCloudDownload className="download-btn"></AiOutlineCloudDownload>
-              Download All Orders
+              Download Orders
             </button>
           </div>
         </div>
@@ -224,6 +267,7 @@ const DashbordOrders = () => {
           </>
         )}
       </div>
+      <ToastContainer></ToastContainer>
     </div>
   );
 };
