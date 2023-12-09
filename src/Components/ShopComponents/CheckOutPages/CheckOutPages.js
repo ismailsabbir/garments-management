@@ -26,6 +26,7 @@ const CheckOutPages = () => {
   const [loading, setLoading] = useState(true);
   const { user, userlogout } = useContext(AuthContext);
   const [showorder, setshoworder] = useState([]);
+  const [showorder1, setshoworder1] = useState([]);
   const [userinfo, setuserinfo] = useState([]);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/singleuser?email=${user?.email}`, {
@@ -135,17 +136,22 @@ const CheckOutPages = () => {
         setLoading(false);
       });
   }, [user?.email, userlogout]);
+
   useEffect(() => {
     if (addresss?.length >= 1) {
       setshoworder(addresss);
+      setshoworder1(addresss);
     } else if (cartorder?.length >= 1) {
       setshoworder(cartorder);
+      setshoworder1(cartorder);
       setLoading(false);
     } else if (customized.length >= 1) {
       setshoworder(customized);
+      setshoworder1(customized);
       setLoading(false);
     } else if (shoporder.length >= 1) {
       setshoworder(shoporder);
+      setshoworder1(shoporder);
       setLoading(false);
     } else {
       setshoworder([
@@ -156,9 +162,17 @@ const CheckOutPages = () => {
           email: "Enter Email",
         },
       ]);
+      setshoworder1([
+        {
+          name: "Enter Name",
+          address: "House Number/Road Name/City/District",
+          phone: "Mobile Number",
+          email: "Enter Email",
+        },
+      ]);
     }
   }, [addresss, shoporder, cartorder, customized]);
-  console.log(showorder);
+  console.log(showorder1);
 
   useEffect(() => {
     if (!shopinfo) {
@@ -357,6 +371,7 @@ const CheckOutPages = () => {
               </select>
               <input
                 type="text"
+                name="address"
                 // placeholder="House Number, Road Name,City,District"
                 placeholder={order?.address}
                 className="company-input"
@@ -364,6 +379,7 @@ const CheckOutPages = () => {
               />
               <input
                 type="text"
+                name="code"
                 placeholder="PostCode/ZIP"
                 className="company-input"
                 onChange={postcodehander}
@@ -372,6 +388,7 @@ const CheckOutPages = () => {
 
               <input
                 type="email"
+                name="email"
                 placeholder={order?.email}
                 className="company-input"
                 onChange={emailhander}
@@ -379,6 +396,7 @@ const CheckOutPages = () => {
               />
               <input
                 type="text"
+                name="mobile"
                 placeholder={order?.phone}
                 className="company-input"
                 onChange={mobilrhandler}

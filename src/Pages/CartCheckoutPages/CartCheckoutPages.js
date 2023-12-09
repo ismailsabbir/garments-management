@@ -208,6 +208,8 @@ const CartCheckoutPages = () => {
   const nextdate = new Date(today.setDate(today.getDate() + 4));
   const delivery_date = nextdate.toLocaleDateString("en-GB");
   const productinfo = shopinfo;
+  const status = "Pending";
+  const createdAt = new Date();
   console.log(productinfo);
   const handleorderconfirm = (e) => {
     e.preventDefault();
@@ -231,6 +233,8 @@ const CartCheckoutPages = () => {
       transiction_id,
       orderid,
       total_price,
+      status,
+      createdAt,
     };
     if (!name || !lastname || !email || !phone || !address || !postcode) {
       seterrorinfo(true);
@@ -337,12 +341,14 @@ const CartCheckoutPages = () => {
               <input
                 type="text"
                 // placeholder="House Number, Road Name,City,District"
+                name="address"
                 placeholder={order?.address}
                 className="company-input"
                 onChange={cityhandler}
               />
               <input
                 type="text"
+                name="code"
                 placeholder="PostCode/ZIP"
                 className="company-input"
                 onChange={postcodehander}
@@ -351,6 +357,7 @@ const CartCheckoutPages = () => {
 
               <input
                 type="email"
+                name="email"
                 placeholder={order?.email}
                 className="company-input"
                 onChange={emailhander}
@@ -358,6 +365,7 @@ const CartCheckoutPages = () => {
               />
               <input
                 type="text"
+                name="mobile"
                 placeholder={order?.phone}
                 className="company-input"
                 onChange={mobilrhandler}

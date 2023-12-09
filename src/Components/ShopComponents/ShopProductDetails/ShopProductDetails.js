@@ -273,6 +273,23 @@ const ShopProductDetails = () => {
     //   });
   };
   console.log(size);
+
+  const isButtonEnabled = oneproduct?.availavle > 1;
+  const handleButtonClick = () => {
+    if (isButtonEnabled) {
+    } else {
+      toast("This product is Out of stock!", {
+        position: "top-center",
+        autoClose: 120,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
   return (
     <div className="shop-details-container">
       <div className="cart-modal">
@@ -353,7 +370,9 @@ const ShopProductDetails = () => {
               <h6>
                 {" "}
                 <BsArrowRight className="stock-icon"></BsArrowRight> stock:
-                <span>In stock</span>
+                <span>
+                  {oneproduct?.availavle === 0 ? "Stock Out" : "In stock"}
+                </span>
               </h6>
               <p>
                 <GoDotFill className="stock-icon"></GoDotFill> Model:
@@ -424,9 +443,28 @@ const ShopProductDetails = () => {
               <LiaShoppingBagSolid className="cart-add-icon"></LiaShoppingBagSolid>
               ADD TO CART
             </button>
-            <Link to={`/checkout`} state={shopinfo} className="buy-button-now">
-              BUY NOW
-            </Link>
+
+            {oneproduct?.availavle <= 0 ? (
+              <Link
+                to={isButtonEnabled ? `/checkout` : "#"}
+                state={shopinfo}
+                className={`buy-button-now ${
+                  isButtonEnabled ? "" : "disabled"
+                }`}
+                disabled={!isButtonEnabled}
+                onClick={handleButtonClick}
+              >
+                BUY NOW
+              </Link>
+            ) : (
+              <Link
+                to={`/checkout`}
+                state={shopinfo}
+                className="buy-button-now"
+              >
+                BUY NOW
+              </Link>
+            )}
           </div>
           <div className="wishlist-compare">
             <button onClick={handleaddwishlist} className="add-wishlist">

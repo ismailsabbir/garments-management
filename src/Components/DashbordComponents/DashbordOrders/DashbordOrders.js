@@ -24,6 +24,8 @@ const DashbordOrders = () => {
   const [orderDate, setorderDate] = useState();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [orderStatus, setOrderStatus] = useState("");
+  console.log(orderStatus);
 
   const handleStartDateChange = (event) => {
     // setreset(false);
@@ -34,7 +36,6 @@ const DashbordOrders = () => {
     setreset(false);
     setEndDate(event.target.value);
   };
-  // &category=${category}&status=${status}
   const { data: productall = [], refetch } = useQuery({
     queryKey: [
       "allshoporders",
@@ -46,12 +47,12 @@ const DashbordOrders = () => {
         reset: reset,
         startDate: startDate,
         endDate: endDate,
-        // status: status,
+        status: orderStatus,
       },
     ],
     queryFn: () =>
       fetch(
-        `${process.env.REACT_APP_URL}/allshoporders?email=${user?.email}&page=${currentpage}&size=${datasize}&search=${search}&reset=${reset}&orderDate=${orderDate}&startDate=${startDate}&endDate=${endDate}`,
+        `${process.env.REACT_APP_URL}/allshoporders?email=${user?.email}&page=${currentpage}&size=${datasize}&search=${search}&reset=${reset}&orderDate=${orderDate}&startDate=${startDate}&endDate=${endDate}&status=${orderStatus}`,
         {
           headers: {
             authorization: `Beare ${localStorage.getItem("garments-token")}`,
@@ -80,6 +81,7 @@ const DashbordOrders = () => {
     setorderDate();
     setStartDate("");
     setEndDate("");
+    setOrderStatus("");
     setsearch(false);
     setreset(true);
   };
@@ -90,7 +92,18 @@ const DashbordOrders = () => {
     setorderDate();
     setStartDate("");
     setEndDate("");
+    setOrderStatus("");
     setorderDate(orderDate);
+  };
+  const handlordereStatus = (event) => {
+    event.preventDefault();
+    const orderStatus = event.target.value;
+    setreset(false);
+    setorderDate();
+    setStartDate("");
+    setEndDate("");
+    setsearch("");
+    setOrderStatus(orderStatus);
   };
   const searchOrders = () => {
     if (startDate && endDate) {
@@ -110,9 +123,34 @@ const DashbordOrders = () => {
     setorderDate();
     setStartDate("");
     setEndDate("");
+    setOrderStatus("");
     setsearch(customerName);
     console.log(customerName);
   };
+  const handleOrderStatusChange = async (event, order) => {
+    const status = event.target.value;
+    console.log(status);
+    await fetch(
+      `${process.env.REACT_APP_URL}/update_order_status/${order?._id}?status=${status}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(order),
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        refetch();
+        toast("Update sucessfully !!!", {
+          position: "top-center",
+          autoClose: 1000,
+        });
+      });
+  };
+
   return (
     <div>
       <div className="das-recent-order-con">
@@ -127,14 +165,18 @@ const DashbordOrders = () => {
               name="name"
               placeholder="Search order by Customer name"
             />
-            <select id="cars" placeholder="Category">
+            <select
+              id="cars"
+              placeholder="Category"
+              onChange={handlordereStatus}
+            >
               <option value="" disabled selected>
                 Status
               </option>
-              <option value="saab">Delivered</option>
-              <option value="vw">Pending</option>
-              <option value="vw">Processing</option>
-              <option value="audi">Cancle</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Pending">Pending</option>
+              <option value="Processing">Processing</option>
+              <option value="canceled">canceled</option>
             </select>
             <select id="cars" onChange={handlecategory}>
               <option value="" disabled selected>
@@ -219,20 +261,32 @@ const DashbordOrders = () => {
                               <span>{order?.name}</span>{" "}
                             </td>
                             <td className="das-order-data">
-                              <span>Online</span>{" "}
+                              <span>
+                                {order?.order === "paid"
+                                  ? "online Payment"
+                                  : order?.order}
+                              </span>{" "}
                             </td>
                             <td className="das-order-data">
                               <span>Tk: {order?.total_price}</span>{" "}
                             </td>
                             <td className="das-order-data">
-                              <span>{order?.order}</span>
+                              <span>{order?.status}</span>
                             </td>
                             <td className="das-order-data">
-                              <select className="status-select">
-                                <option value="">Delivered</option>
-                                <option value="">Pending</option>
-                                <option value="">Processing</option>
-                                <option value="cancel">Cancel</option>
+                              <select
+                                className="status-select"
+                                onChange={(event) =>
+                                  handleOrderStatusChange(event, order)
+                                }
+                              >
+                                <option selected value={order?.status} disabled>
+                                  {order?.status}
+                                </option>
+                                <option value="Delivered">Delivered</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Processing">Processing</option>
+                                <option value="canceled">canceled</option>
                               </select>
                             </td>
                             <td className="das-order-data">
@@ -259,6 +313,21 @@ const DashbordOrders = () => {
                           {number}
                         </button>
                       ))}
+                      <select
+                        onChange={(e) => setdatasize(e.target.value)}
+                        className="select1 select-bordered "
+                        id="datasize-select-btn"
+                      >
+                        <option value="2" selected>
+                          2
+                        </option>
+                        <option value="5" selected>
+                          5
+                        </option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                      </select>
                     </div>
                   </div>
                 </div>
