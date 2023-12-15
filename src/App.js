@@ -76,6 +76,7 @@ import DashbordCustomProductAdd from "./Components/DashbordComponents/DashbordCu
 import DashbordCutomProductView from "./Components/DashbordComponents/DashbordCutomProductView/DashbordCutomProductView";
 import DashbordCustomizedCategoryView from "./Components/DashbordComponents/DashbordCustomizedCategoryView/DashbordCustomizedCategoryView";
 import DashbordCustomizedCategoryEdit from "./Components/DashbordComponents/DashbordCustomizedCategoryEdit/DashbordCustomizedCategoryEdit";
+import DashbordOrdersInvoise from "./Components/DashbordComponents/DashbordOrdersInvoise/DashbordOrdersInvoise";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -574,6 +575,14 @@ function App() {
           element: (
             <AdminRoutes>
               <DashbordOrders></DashbordOrders>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/orders/invoice",
+          element: (
+            <AdminRoutes>
+              <DashbordOrdersInvoise></DashbordOrdersInvoise>
             </AdminRoutes>
           ),
         },

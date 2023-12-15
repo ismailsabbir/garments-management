@@ -225,6 +225,8 @@ const OrderConfirmPages = () => {
     const order_status = "confirm";
     const order = "not paid";
     const transiction_id = "";
+    const status = "Pending";
+    const createdAt = new Date();
     if (parseInt(orderinfo?.pices) < sum || sum === 0) {
       seterrormessage(true);
       return;
@@ -247,7 +249,10 @@ const OrderConfirmPages = () => {
       order_status,
       order,
       transiction_id,
+      status,
+      createdAt,
     };
+    console.log(orderconfirm);
     fetch(`${process.env.REACT_APP_URL}/requesed_order`, {
       method: "POST",
       headers: {

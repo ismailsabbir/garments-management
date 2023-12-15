@@ -10,6 +10,8 @@ import { Form } from "react-bootstrap";
 import Loading from "../../../CommonComponents/Loading/Loading";
 import NotFound from "../../../CommonComponents/NotFound/NotFound";
 import { ToastContainer, toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import jsPDF from "jspdf";
 const DashbordOrders = () => {
   const [orders, setorders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,6 +27,7 @@ const DashbordOrders = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [orderStatus, setOrderStatus] = useState("");
+
   console.log(orderStatus);
 
   const handleStartDateChange = (event) => {
@@ -151,6 +154,147 @@ const DashbordOrders = () => {
       });
   };
 
+  // const generateInvoiceContent = (order) => {
+  //   const pdf = new jsPDF();
+  //   pdf.setFont("Arial", "normal");
+  //   pdf.setFontSize(16);
+  //   pdf.setTextColor(0, 0, 0);
+  //   const titleWidth =
+  //     (pdf.getStringUnitWidth("Invoice Information") *
+  //       pdf.internal.getFontSize()) /
+  //     pdf.internal.scaleFactor;
+  //   const centerX = (pdf.internal.pageSize.width - titleWidth) / 2;
+  //   pdf.text("Invoice Information", centerX, 10);
+  //   pdf.setFontSize(12);
+  //   pdf.setTextColor(0, 0, 0);
+  //   pdf.text(`Date: ${order?.order_date}`, 10, 20);
+  //   pdf.text(`Invoice No: ${order?.orderid}`, 10, 30);
+  //   pdf.text(`Customer: ${order?.name}`, 10, 40);
+  //   pdf.text(`Email: ${order?.email}`, 10, 50);
+  //   pdf.text(`Phone: ${order?.phone}`, 10, 60);
+  //   pdf.text(`Address: ${order?.address}`, 10, 70);
+  //   pdf.setFontSize(14);
+  //   pdf.setTextColor(0, 0, 255);
+  //   pdf.text("Products:", 10, 90);
+  //   pdf.setFontSize(12);
+  //   pdf.setTextColor(0, 0, 0);
+  //   const productInfoYPosition = 100;
+  //   const columnWidth = 80;
+  //   order?.productinfo?.forEach((product, index) => {
+  //     const xPosition = 10 + (index % 2) * columnWidth;
+  //     const yPosition = productInfoYPosition + Math.floor(index / 2) * 40;
+  //     pdf.text(`Product: ${product?.product_name}`, xPosition, yPosition);
+  //     pdf.text(`Quantity: ${product?.quantity}`, xPosition, yPosition + 10);
+  //     pdf.text(
+  //       `Item Price: ${product?.product_price}`,
+  //       xPosition,
+  //       yPosition + 20
+  //     );
+  //     pdf.text(`Amount: ${order?.total_price}`, xPosition, yPosition + 30);
+  //   });
+  //   pdf.setFontSize(14);
+  //   pdf.setTextColor(255, 0, 0);
+  //   const totalPriceYPosition =
+  //     productInfoYPosition +
+  //     Math.ceil((order?.productinfo?.length || 0) / 2) * 40 +
+  //     20;
+  //   pdf.text(`Total Price: ${order?.total_price}`, 10, totalPriceYPosition);
+  //   return pdf;
+  // };
+
+  const generateInvoiceContent = (order) => {
+    const pdf = new jsPDF();
+
+    // Set background color
+    pdf.setFillColor(228, 228, 208); // RGB values for a light yellow color
+    pdf.rect(
+      0,
+      0,
+      pdf.internal.pageSize.width,
+      pdf.internal.pageSize.height,
+      "F"
+    );
+
+    // Set font styles
+    pdf.setFont("Arial", "normal");
+
+    // Set font size and color for the title
+    pdf.setFontSize(16);
+    pdf.setTextColor(0, 0, 0); // Black color
+
+    // Calculate x-position to center the text
+    const titleWidth =
+      (pdf.getStringUnitWidth("Invoice Information") *
+        pdf.internal.getFontSize()) /
+      pdf.internal.scaleFactor;
+    const centerX = (pdf.internal.pageSize.width - titleWidth) / 2;
+
+    // Add centered "Invoice Information" text
+    pdf.text("Invoice Information", centerX, 10);
+
+    // Set font size and color for the details
+    pdf.setFontSize(12);
+    pdf.setTextColor(0, 0, 0); // Black color
+
+    // Add invoice details
+    pdf.text(`Date: ${order?.order_date}`, 10, 20);
+    pdf.text(`Invoice No: ${order?.orderid}`, 10, 30);
+    pdf.text(`Customer: ${order?.name}`, 10, 40);
+    pdf.text(`Email: ${order?.email}`, 10, 50);
+    pdf.text(`Phone: ${order?.phone}`, 10, 60);
+    pdf.text(`Address: ${order?.address}`, 10, 70);
+
+    // Set font size and color for the products section
+    pdf.setFontSize(14);
+    pdf.setTextColor(0, 0, 255); // Blue color
+    pdf.text("Products:", 10, 90);
+
+    // Set font size and color for product details
+    pdf.setFontSize(12);
+    pdf.setTextColor(0, 0, 0); // Black color
+
+    // Add product details with flex display
+    const productInfoYPosition = 100;
+    const columnWidth = 80;
+
+    order?.productinfo?.forEach((product, index) => {
+      const xPosition = 10 + (index % 2) * columnWidth;
+      const yPosition = productInfoYPosition + Math.floor(index / 2) * 40;
+
+      pdf.text(`Product: ${product?.product_name}`, xPosition, yPosition);
+      pdf.text(`Quantity: ${product?.quantity}`, xPosition, yPosition + 10);
+      pdf.text(
+        `Item Price: ${product?.product_price}`,
+        xPosition,
+        yPosition + 20
+      );
+      pdf.text(`Amount: ${order?.total_price}`, xPosition, yPosition + 30);
+    });
+
+    // Set font size, color, and display flex for the total price
+    pdf.setFontSize(14);
+    pdf.setTextColor(255, 0, 0); // Red color
+    const totalPriceYPosition =
+      productInfoYPosition +
+      Math.ceil((order?.productinfo?.length || 0) / 2) * 40 +
+      20;
+    pdf.text(`Total Price: ${order?.total_price}`, 10, totalPriceYPosition);
+
+    // Return the generated content
+    return pdf;
+  };
+
+  const handleDownloadClick = (order) => {
+    const pdf = generateInvoiceContent(order);
+    const blob = pdf.output("blob");
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `invoice_${order?.orderid}.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   return (
     <div>
       <div className="das-recent-order-con">
@@ -291,8 +435,16 @@ const DashbordOrders = () => {
                             </td>
                             <td className="das-order-data">
                               <div className="print-serach">
-                                <BiPrinter className="printlogo"></BiPrinter>
-                                <FaSearchPlus className="printlogo"></FaSearchPlus>
+                                <BiPrinter
+                                  onClick={() => handleDownloadClick(order)}
+                                  className="printlogo"
+                                ></BiPrinter>
+                                <Link
+                                  to="/dashbord/orders/invoice"
+                                  state={order}
+                                >
+                                  <FaSearchPlus className="printlogo"></FaSearchPlus>
+                                </Link>
                               </div>
                             </td>
                           </tr>

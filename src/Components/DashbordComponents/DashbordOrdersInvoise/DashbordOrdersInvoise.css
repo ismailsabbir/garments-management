@@ -1,0 +1,118 @@
+.invoice-all-container {
+    padding: 18px;
+}
+
+.invoice-container {
+    margin-top: 10px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 6px;
+}
+
+.invoice-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 4px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid gainsboro;
+}
+
+.invoice-top-left {
+    width: 50%;
+}
+
+.invoice-top-right {
+    width: 50%;
+}
+
+.invoice-top-left h5 {
+    font-weight: 700;
+}
+
+.invoice-top-left p {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgb(66, 66, 66);
+}
+
+.invoice-top-left p span {
+    /* border: 1px solid rgb(178, 248, 178);
+    background-color: rgb(178, 248, 178); */
+    color: black;
+    border-radius: 8px;
+    padding: 2px 4px;
+    font-size: 0.9rem;
+}
+
+.invoice-top-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    line-height: 4px;
+}
+
+.invoice-top-right img {
+    height: 60px;
+    margin-bottom: 4px;
+}
+
+.invoice-top-right p {
+    color: rgb(70, 69, 69);
+}
+
+.invoice-mid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.invoice-mid-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    line-height: 10px;
+}
+
+.invoice-mid-left h6 {
+    color: rgb(1, 1, 55);
+}
+
+.invoice-mid-left p {
+    font-size: 1rem;
+    color: rgb(90, 88, 88);
+    font-weight: 500;
+}
+
+.invoice-mid-mid h6 {
+    color: rgb(1, 1, 55);
+}
+
+.invoice-mid-mid p {
+    font-size: 1rem;
+    color: rgb(90, 88, 88);
+    font-weight: 500;
+}
+
+.invoice-mid-right h6 {
+    color: rgb(1, 1, 55);
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+
+.invoice-mid-right p {
+    color: rgb(81, 80, 80);
+    font-weight: 400;
+}
+
+.invoice-print-download {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#invoice-print {
+    width: 30%;
+}

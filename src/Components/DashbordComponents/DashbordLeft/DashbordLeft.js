@@ -10,7 +10,7 @@ import { TbCategory } from "react-icons/tb";
 import { LuCompass } from "react-icons/lu";
 const DashbordLeft = () => {
   return (
-    <div className="dashbord-left-con">
+    <div className="dashbord-left-con print:hidden">
       <NavLink
         className={({ isActive }) =>
           isActive ? "dashbord-active-link" : "dashbord-link"
