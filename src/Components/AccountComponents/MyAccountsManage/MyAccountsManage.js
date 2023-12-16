@@ -7,30 +7,6 @@ import MyordersComponents from "../../MyOrdersComponents/MyordersComponents";
 import Loading from "./../../../CommonComponents/Loading/Loading";
 import { Link } from "react-router-dom";
 const MyAccountsManage = () => {
-  // const { user, userlogout } = useContext(AuthContext);
-  // const [orders, setorders] = useState([]);
-  // const [loading, setLoading] = useState(true);
-  // useEffect(() => {
-  //   fetch(`${process.env.REACT_APP_URL}/shoporder?email=${user?.email}`, {
-  //     headers: {
-  //       authorization: `Beare ${localStorage.getItem("garments-token")}`,
-  //     },
-  //   })
-  //     .then((res) => {
-  //       if (res.status === 401 || res.status === 403) {
-  //         return userlogout();
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((jsonData) => {
-  //       setorders(jsonData);
-  //       setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Failed to fetch data:", error);
-  //       setLoading(false);
-  //     });
-  // }, [user?.email, userlogout]);
   const [shoporder, setorders] = useState([]);
   const [cartorder, setcartorder] = useState([]);
   const [customized, setcustomized] = useState([]);
@@ -52,7 +28,7 @@ const MyAccountsManage = () => {
       })
       .then((jsonData) => {
         setaddres(jsonData);
-        // setLoading(false);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -73,7 +49,6 @@ const MyAccountsManage = () => {
       })
       .then((jsonData) => {
         setorders(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -94,7 +69,6 @@ const MyAccountsManage = () => {
       })
       .then((jsonData) => {
         setcartorder(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -118,7 +92,6 @@ const MyAccountsManage = () => {
       })
       .then((jsonData) => {
         setcustomized(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -141,7 +114,8 @@ const MyAccountsManage = () => {
       setLoading(false);
     }
   }, [shoporder, cartorder, customized, address]);
-  console.log(shoporder);
+  console.log(shoporder, address, customized, cartorder, loading);
+  console.log(user);
 
   return (
     <div className="manage-account-con">

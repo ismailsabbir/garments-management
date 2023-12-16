@@ -67,8 +67,12 @@ const Footer = () => {
           </p>
           <p className="flex">
             <FaArrowRightLong className="footer-right-arwo"></FaArrowRightLong>
-            <Link className="link link-hover text-white text-base font-medium">
-              Pricing
+            <Link
+              to="/employee"
+              // to="/employee/Login"
+              className="link link-hover text-white text-base font-medium"
+            >
+              Employee
             </Link>
           </p>
           <p className="flex">

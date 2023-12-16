@@ -11,6 +11,7 @@ const LoginPages = () => {
   let location = useLocation();
   const { userlogin, signinwithgoogle, resetpassword, facebooksignup, user } =
     useContext(AuthContext);
+  console.log(user);
   const [errormessage, seterrormessage] = useState("");
   const [sucessmessage, setsucessmessage] = useState(false);
   const [email1, setemail] = useState("");
@@ -132,7 +133,6 @@ const LoginPages = () => {
   const handlefacebooksign = () => {
     facebooksignup()
       .then((req) => {
-        // console.log(req.user);
         const user = req.user;
         const currentuser = {
           email: user.email,

@@ -1,10 +1,9 @@
 import React from "react";
-import "./DashbordOrdersInvoise.css";
 import { useLocation } from "react-router-dom";
 import logo from "../../../Images/logodark.png";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
-const DashbordOrdersInvoise = () => {
+const DashbordCustomizedOrdersInvoice = () => {
   const location = useLocation();
   const order = location.state;
   console.log(order);
@@ -27,7 +26,6 @@ const DashbordOrdersInvoise = () => {
       console.error("Error converting to PDF:", error);
     }
   };
-
   return (
     <div className="invoice-all-container">
       <h4>Invoice</h4>
@@ -75,26 +73,24 @@ const DashbordOrdersInvoise = () => {
               <th className="recent-order-hed">AMOUNT</th>
             </tr>
             <tbody>
-              {order?.productinfo?.map((product) => (
-                <tr>
-                  <td className="das-order-data">
-                    <span>1</span>{" "}
-                  </td>
-                  <td className="das-order-data">
-                    <span>{product?.product_name}</span>{" "}
-                  </td>
-                  <td className="das-order-data">
-                    <span>{product?.quentuty}</span>{" "}
-                  </td>
-                  <td className="das-order-data">
-                    <span>{product?.product_price}</span>{" "}
-                  </td>
+              <tr>
+                <td className="das-order-data">
+                  <span>1</span>{" "}
+                </td>
+                <td className="das-order-data">
+                  <span>{order?.category_name}</span>{" "}
+                </td>
+                <td className="das-order-data">
+                  <span>{order?.pices}</span>{" "}
+                </td>
+                <td className="das-order-data">
+                  <span>{order?.price}</span>{" "}
+                </td>
 
-                  <td className="das-order-data">
-                    <span>{order?.total_price}</span>{" "}
-                  </td>
-                </tr>
-              ))}
+                <td className="das-order-data">
+                  <span>{order?.total_price}</span>{" "}
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -115,4 +111,4 @@ const DashbordOrdersInvoise = () => {
   );
 };
 
-export default DashbordOrdersInvoise;
+export default DashbordCustomizedOrdersInvoice;

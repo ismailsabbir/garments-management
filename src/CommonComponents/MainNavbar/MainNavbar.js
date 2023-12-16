@@ -45,6 +45,7 @@ const MainNavbar = () => {
       console.error("Failed to fetch data:", error);
     }
   };
+
   const handlelogout = () => {
     console.log("sub");
     userlogout()

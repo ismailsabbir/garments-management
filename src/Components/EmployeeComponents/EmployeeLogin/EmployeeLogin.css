@@ -1,0 +1,42 @@
+.employss-login-con {
+    height: 600px;
+    width: 100%;
+    margin-bottom: 50px;
+    background-image: linear-gradient(rgba(54, 50, 73, 0.699), rgba(77, 74, 92, 0.699)), url(../../../Images/lastbanner.webp);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+#employee-login {
+    width: 30%;
+    position: absolute;
+    left: 20%;
+    border-radius: 4px;
+}
+
+@media only screen and (max-width: 600px) {
+    .employss-login-con {
+        height: 600px;
+        width: 100%;
+        margin-bottom: 50px;
+        background-image: linear-gradient(rgba(54, 50, 73, 0.699), rgba(77, 74, 92, 0.699)), url(../../../Images/lastbanner.webp);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    #employee-login {
+        width: 85%;
+        left: 7%;
+        border-radius: 4px;
+        margin: 0 auto;
+    }
+}

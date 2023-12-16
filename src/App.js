@@ -77,6 +77,13 @@ import DashbordCutomProductView from "./Components/DashbordComponents/DashbordCu
 import DashbordCustomizedCategoryView from "./Components/DashbordComponents/DashbordCustomizedCategoryView/DashbordCustomizedCategoryView";
 import DashbordCustomizedCategoryEdit from "./Components/DashbordComponents/DashbordCustomizedCategoryEdit/DashbordCustomizedCategoryEdit";
 import DashbordOrdersInvoise from "./Components/DashbordComponents/DashbordOrdersInvoise/DashbordOrdersInvoise";
+import DashbordCustomizedOrdersInvoice from "./Components/DashbordComponents/DashbordCustomizedOrdersInvoice/DashbordCustomizedOrdersInvoice";
+import EmployeeLayouts from "./Layouts/EmployeeLayouts/EmployeeLayouts";
+import EmployeeHome from "./Components/EmployeeComponents/EmployeeHome/EmployeeHome";
+import EmployeeLogin from "./Components/EmployeeComponents/EmployeeLogin/EmployeeLogin";
+import EmployeeSignup from "./Components/EmployeeComponents/EmployeeSignup/EmployeeSignup";
+import EmployeeRoutes from "./Routes/EmployeeRoutes/EmployeeRoutes";
+import EmployeePrivetRoutes from "./Routes/EmployeePrivetRoutes";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -303,6 +310,14 @@ function App() {
         {
           path: "/Login",
           element: <LoginPages></LoginPages>,
+        },
+        {
+          path: "/employee/Login",
+          element: <EmployeeLogin></EmployeeLogin>,
+        },
+        {
+          path: "/employee/signup",
+          element: <EmployeeSignup></EmployeeSignup>,
         },
         {
           path: "/make-project",
@@ -587,6 +602,14 @@ function App() {
           ),
         },
         {
+          path: "/dashbord/customized/orders/invoice",
+          element: (
+            <AdminRoutes>
+              <DashbordCustomizedOrdersInvoice></DashbordCustomizedOrdersInvoice>
+            </AdminRoutes>
+          ),
+        },
+        {
           path: "/dashbord/customized-orders",
           element: (
             <AdminRoutes>
@@ -640,6 +663,28 @@ function App() {
             <AdminRoutes>
               <DashbordCommingPage></DashbordCommingPage>
             </AdminRoutes>
+          ),
+        },
+      ],
+    },
+
+    {
+      path: "/employee",
+      element: (
+        <>
+          <EmployeePrivetRoutes>
+            <EmployeeLayouts></EmployeeLayouts>
+            <ScrollToTop />
+          </EmployeePrivetRoutes>
+        </>
+      ),
+      children: [
+        {
+          path: "/employee/",
+          element: (
+            <EmployeeRoutes>
+              <EmployeeHome></EmployeeHome>
+            </EmployeeRoutes>
           ),
         },
       ],

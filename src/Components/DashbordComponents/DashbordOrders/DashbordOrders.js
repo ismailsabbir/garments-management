@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import "./DashbordOrders.css";
 import { AuthContext } from "../../../Context/UserContext";
 import { BiPrinter } from "react-icons/bi";
@@ -16,7 +16,6 @@ const DashbordOrders = () => {
   const [orders, setorders] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user, userlogout } = useContext(AuthContext);
-  const email = user?.email;
   const [currentpage, setcurrentpage] = useState(0);
   const [datasize, setdatasize] = useState(5);
   const [count, setcount] = useState(0);
@@ -28,10 +27,7 @@ const DashbordOrders = () => {
   const [endDate, setEndDate] = useState("");
   const [orderStatus, setOrderStatus] = useState("");
 
-  console.log(orderStatus);
-
   const handleStartDateChange = (event) => {
-    // setreset(false);
     setStartDate(event.target.value);
   };
 
@@ -39,6 +35,7 @@ const DashbordOrders = () => {
     setreset(false);
     setEndDate(event.target.value);
   };
+
   const { data: productall = [], refetch } = useQuery({
     queryKey: [
       "allshoporders",
@@ -80,6 +77,7 @@ const DashbordOrders = () => {
           setLoading(false);
         }),
   });
+
   const handlereset = () => {
     setorderDate();
     setStartDate("");
@@ -153,60 +151,9 @@ const DashbordOrders = () => {
         });
       });
   };
-
-  // const generateInvoiceContent = (order) => {
-  //   const pdf = new jsPDF();
-  //   pdf.setFont("Arial", "normal");
-  //   pdf.setFontSize(16);
-  //   pdf.setTextColor(0, 0, 0);
-  //   const titleWidth =
-  //     (pdf.getStringUnitWidth("Invoice Information") *
-  //       pdf.internal.getFontSize()) /
-  //     pdf.internal.scaleFactor;
-  //   const centerX = (pdf.internal.pageSize.width - titleWidth) / 2;
-  //   pdf.text("Invoice Information", centerX, 10);
-  //   pdf.setFontSize(12);
-  //   pdf.setTextColor(0, 0, 0);
-  //   pdf.text(`Date: ${order?.order_date}`, 10, 20);
-  //   pdf.text(`Invoice No: ${order?.orderid}`, 10, 30);
-  //   pdf.text(`Customer: ${order?.name}`, 10, 40);
-  //   pdf.text(`Email: ${order?.email}`, 10, 50);
-  //   pdf.text(`Phone: ${order?.phone}`, 10, 60);
-  //   pdf.text(`Address: ${order?.address}`, 10, 70);
-  //   pdf.setFontSize(14);
-  //   pdf.setTextColor(0, 0, 255);
-  //   pdf.text("Products:", 10, 90);
-  //   pdf.setFontSize(12);
-  //   pdf.setTextColor(0, 0, 0);
-  //   const productInfoYPosition = 100;
-  //   const columnWidth = 80;
-  //   order?.productinfo?.forEach((product, index) => {
-  //     const xPosition = 10 + (index % 2) * columnWidth;
-  //     const yPosition = productInfoYPosition + Math.floor(index / 2) * 40;
-  //     pdf.text(`Product: ${product?.product_name}`, xPosition, yPosition);
-  //     pdf.text(`Quantity: ${product?.quantity}`, xPosition, yPosition + 10);
-  //     pdf.text(
-  //       `Item Price: ${product?.product_price}`,
-  //       xPosition,
-  //       yPosition + 20
-  //     );
-  //     pdf.text(`Amount: ${order?.total_price}`, xPosition, yPosition + 30);
-  //   });
-  //   pdf.setFontSize(14);
-  //   pdf.setTextColor(255, 0, 0);
-  //   const totalPriceYPosition =
-  //     productInfoYPosition +
-  //     Math.ceil((order?.productinfo?.length || 0) / 2) * 40 +
-  //     20;
-  //   pdf.text(`Total Price: ${order?.total_price}`, 10, totalPriceYPosition);
-  //   return pdf;
-  // };
-
   const generateInvoiceContent = (order) => {
     const pdf = new jsPDF();
-
-    // Set background color
-    pdf.setFillColor(228, 228, 208); // RGB values for a light yellow color
+    pdf.setFillColor(228, 228, 208);
     pdf.rect(
       0,
       0,
@@ -214,53 +161,33 @@ const DashbordOrders = () => {
       pdf.internal.pageSize.height,
       "F"
     );
-
-    // Set font styles
     pdf.setFont("Arial", "normal");
-
-    // Set font size and color for the title
     pdf.setFontSize(16);
-    pdf.setTextColor(0, 0, 0); // Black color
-
-    // Calculate x-position to center the text
+    pdf.setTextColor(0, 0, 0);
     const titleWidth =
       (pdf.getStringUnitWidth("Invoice Information") *
         pdf.internal.getFontSize()) /
       pdf.internal.scaleFactor;
     const centerX = (pdf.internal.pageSize.width - titleWidth) / 2;
-
-    // Add centered "Invoice Information" text
     pdf.text("Invoice Information", centerX, 10);
-
-    // Set font size and color for the details
     pdf.setFontSize(12);
-    pdf.setTextColor(0, 0, 0); // Black color
-
-    // Add invoice details
+    pdf.setTextColor(0, 0, 0);
     pdf.text(`Date: ${order?.order_date}`, 10, 20);
     pdf.text(`Invoice No: ${order?.orderid}`, 10, 30);
     pdf.text(`Customer: ${order?.name}`, 10, 40);
     pdf.text(`Email: ${order?.email}`, 10, 50);
     pdf.text(`Phone: ${order?.phone}`, 10, 60);
     pdf.text(`Address: ${order?.address}`, 10, 70);
-
-    // Set font size and color for the products section
     pdf.setFontSize(14);
-    pdf.setTextColor(0, 0, 255); // Blue color
+    pdf.setTextColor(0, 0, 255);
     pdf.text("Products:", 10, 90);
-
-    // Set font size and color for product details
     pdf.setFontSize(12);
-    pdf.setTextColor(0, 0, 0); // Black color
-
-    // Add product details with flex display
+    pdf.setTextColor(0, 0, 0);
     const productInfoYPosition = 100;
     const columnWidth = 80;
-
     order?.productinfo?.forEach((product, index) => {
       const xPosition = 10 + (index % 2) * columnWidth;
       const yPosition = productInfoYPosition + Math.floor(index / 2) * 40;
-
       pdf.text(`Product: ${product?.product_name}`, xPosition, yPosition);
       pdf.text(`Quantity: ${product?.quantity}`, xPosition, yPosition + 10);
       pdf.text(
@@ -270,17 +197,13 @@ const DashbordOrders = () => {
       );
       pdf.text(`Amount: ${order?.total_price}`, xPosition, yPosition + 30);
     });
-
-    // Set font size, color, and display flex for the total price
     pdf.setFontSize(14);
-    pdf.setTextColor(255, 0, 0); // Red color
+    pdf.setTextColor(255, 0, 0);
     const totalPriceYPosition =
       productInfoYPosition +
       Math.ceil((order?.productinfo?.length || 0) / 2) * 40 +
       20;
     pdf.text(`Total Price: ${order?.total_price}`, 10, totalPriceYPosition);
-
-    // Return the generated content
     return pdf;
   };
 

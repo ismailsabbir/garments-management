@@ -33,6 +33,7 @@ const DashbordAddStaff = () => {
     const password = e.target.password.value;
     const role = e.target.role.value;
     const join_date = e.target.join.value;
+    const isEmployee = true;
     const staffinfo = {
       name,
       email,
@@ -42,6 +43,7 @@ const DashbordAddStaff = () => {
       password,
       role,
       join_date,
+      isEmployee,
     };
     console.log(staffinfo);
     fetch(`${process.env.REACT_APP_URL}/addstaff`, {
