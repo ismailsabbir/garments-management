@@ -1,0 +1,23 @@
+.employee-info {
+    /* border: 1px solid brown; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.employee-info img {
+    width: 90px;
+    height: 80px;
+    margin-bottom: 6px;
+    border: 1px solid gainsboro;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.employee-info span {
+    font-size: 1.1rem;
+    color: rgb(72, 71, 71);
+    font-weight: 500;
+}

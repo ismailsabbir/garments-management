@@ -9,14 +9,14 @@ import {
   Pie,
   ResponsiveContainer,
 } from "recharts";
-import "./DashbordChirts.css";
 const data = [
-  { name: "Taskstats", uv: 90, pv: 100, amt: 100 },
-  { name: "AI project", uv: 20, pv: 100, amt: 100 },
-  { name: "Mobile App", uv: 100, pv: 100, amt: 100 },
-  { name: "UI Design", uv: 40, pv: 100, amt: 100 },
-  { name: "Software", uv: 10, pv: 100, amt: 100 },
-  { name: "Machine", uv: 40, pv: 100, amt: 100 },
+  { name: "Taskstats", uv: 0, pv: 100, amt: 100 },
+  { name: "Saturday", uv: 50, pv: 100, amt: 100 },
+  { name: "Sunday", uv: 20, pv: 100, amt: 100 },
+  { name: "Monday", uv: 40, pv: 100, amt: 100 },
+  { name: "Tuesday", uv: 20, pv: 100, amt: 100 },
+  { name: "Wednesday", uv: 40, pv: 100, amt: 100 },
+  { name: "Thursday", uv: 5, pv: 100, amt: 100 },
 ];
 const data01 = [
   { name: "Taskstats", value: 90 },
@@ -26,12 +26,11 @@ const data01 = [
   { name: "Software", value: 10 },
   { name: "Machine", value: 40 },
 ];
-
-const DashbordChirts = () => {
+const EmployeeChirsts = () => {
   return (
     <div className="dash-chirt-con">
       <div className="chart-container">
-        <p className="groth-text">Weekly Working Hours</p>
+        <p className="groth-text">Task Groth</p>
         <h6 className="progressratio">70% progress</h6>
         <div className="row">
           <div className="col col-12 col-sm-12 col-md-6 col-lg-6">
@@ -84,4 +83,4 @@ const DashbordChirts = () => {
   );
 };
 
-export default DashbordChirts;
+export default EmployeeChirsts;

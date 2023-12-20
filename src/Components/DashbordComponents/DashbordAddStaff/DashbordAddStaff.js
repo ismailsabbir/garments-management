@@ -20,10 +20,20 @@ const DashbordAddStaff = () => {
       .then((data) => {
         if (data.success) {
           setphoto1(data.data.url);
+          toast("Profile Image uploded sucessfully !!!", {
+            position: "top-center",
+            autoClose: 1000,
+          });
         }
+      })
+      .catch((error) => {
+        toast("Profile Image not uploded!!!", {
+          position: "top-center",
+          autoClose: 1000,
+        });
       });
   };
-  console.log(photo);
+
   const handlestaffadd = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -34,6 +44,7 @@ const DashbordAddStaff = () => {
     const role = e.target.role.value;
     const join_date = e.target.join.value;
     const isEmployee = true;
+
     const staffinfo = {
       name,
       email,
@@ -62,11 +73,11 @@ const DashbordAddStaff = () => {
         });
       });
   };
+
   return (
     <div className="add-staff-con">
       <h5>Add Staff</h5>
       <p>Add your staff necessary information from here</p>
-
       <Form onSubmit={handlestaffadd} className="add-staff-form">
         <div className="staff-image-con">
           <Form.Group className="mb-3">
@@ -88,6 +99,7 @@ const DashbordAddStaff = () => {
             </label>
           </Form.Group>
         </div>
+
         <div className="staff-first-name-lastname mt-4">
           <Form.Group className="mb-3 firstname-staff">
             <Form.Label>First Name</Form.Label>
@@ -152,7 +164,7 @@ const DashbordAddStaff = () => {
           <select className="mb-3 firstname-staff" id="staf-select" name="role">
             <option value="Manager">Manager</option>
             <option value="Driver">Driver</option>
-            <option value="Admin">Admin</option>
+            <option value="admin">Admin</option>
           </select>
           <button className="add-staf--btn" variant="primary" type="submit">
             ADD STAFF

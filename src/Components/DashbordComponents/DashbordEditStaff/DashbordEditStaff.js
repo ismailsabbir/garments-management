@@ -12,8 +12,9 @@ const DashbordEditStaff = () => {
   useEffect(() => {
     setUserData(staff);
   }, {});
+  console.log(userData?.photo);
 
-  const [photo, setphoto1] = useState();
+  const [photo, setphoto1] = useState(userData?.photo);
   const imagebb = process.env.REACT_APP_IMGBB;
   const handleimage1 = (e) => {
     const image1 = e.target.files[0];
@@ -28,7 +29,17 @@ const DashbordEditStaff = () => {
       .then((data) => {
         if (data.success) {
           setphoto1(data.data.url);
+          toast("Staff profile image upload sucessfully !!!", {
+            position: "top-center",
+            autoClose: 1000,
+          });
         }
+      })
+      .catch((error) => {
+        toast("Staff profile image is not upload  !!!", {
+          position: "top-center",
+          autoClose: 1000,
+        });
       });
   };
   console.log(photo);
@@ -180,7 +191,7 @@ const DashbordEditStaff = () => {
           >
             <option value="Manager">Manager</option>
             <option value="Driver">Driver</option>
-            <option value="Admin">Admin</option>
+            <option value="admin">Admin</option>
           </select>
           <button className="add-staf--btn" variant="primary" type="submit">
             UPDATE STAFF INFORMATION

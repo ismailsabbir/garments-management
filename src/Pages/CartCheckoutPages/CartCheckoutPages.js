@@ -28,7 +28,7 @@ const CartCheckoutPages = () => {
   const [showorder, setshoworder] = useState([]);
   const [userinfo, setuserinfo] = useState([]);
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_URL}/singleuser?email=${user?.email}`, {
+    fetch(`${process.env.REACT_APP_URL}/single/employee?email=${user?.email}`, {
       headers: {
         authorization: `Beare ${localStorage.getItem("garments-token")}`,
       },

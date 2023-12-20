@@ -47,7 +47,6 @@ const MainNavbar = () => {
   };
 
   const handlelogout = () => {
-    console.log("sub");
     userlogout()
       .then(() => {
         console.log("Log Out Sucessfully");

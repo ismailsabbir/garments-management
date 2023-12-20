@@ -8,6 +8,7 @@ import "./DashbordLeft.css";
 import { MdProductionQuantityLimits } from "react-icons/md";
 import { TbCategory } from "react-icons/tb";
 import { LuCompass } from "react-icons/lu";
+import { MdOutlineNoteAlt } from "react-icons/md";
 const DashbordLeft = () => {
   return (
     <div className="dashbord-left-con print:hidden">
@@ -19,6 +20,24 @@ const DashbordLeft = () => {
       >
         <PiSquaresFourDuotone className="dashbord-icon"></PiSquaresFourDuotone>{" "}
         Dashboard
+      </NavLink>
+      <NavLink
+        to="/dashbord/attendance"
+        className={({ isActive }) =>
+          isActive ? "dashbord-active-link" : "dashbord-link"
+        }
+      >
+        <MdOutlineNoteAlt className="dashbord-icon"></MdOutlineNoteAlt>
+        Take Attendance
+      </NavLink>
+      <NavLink
+        to="/dashbord/today/attendance"
+        className={({ isActive }) =>
+          isActive ? "dashbord-active-link" : "dashbord-link"
+        }
+      >
+        <MdOutlineNoteAlt className="dashbord-icon"></MdOutlineNoteAlt>
+        Today Attendance
       </NavLink>
 
       <NavLink

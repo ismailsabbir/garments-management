@@ -75,7 +75,7 @@ const DashbordhomeFirst = () => {
           </div>
 
           <div className="order-num-info">
-            <span>Orders Pending (70034.62)</span>
+            <span>Orders Pending</span>
             <h3>396</h3>
           </div>
         </div>

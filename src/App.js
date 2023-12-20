@@ -84,6 +84,13 @@ import EmployeeLogin from "./Components/EmployeeComponents/EmployeeLogin/Employe
 import EmployeeSignup from "./Components/EmployeeComponents/EmployeeSignup/EmployeeSignup";
 import EmployeeRoutes from "./Routes/EmployeeRoutes/EmployeeRoutes";
 import EmployeePrivetRoutes from "./Routes/EmployeePrivetRoutes";
+import EmployeeAttendance from "./Components/EmployeeComponents/EmployeeAttendance/EmployeeAttendance";
+import EmployeeLeaves from "./Components/EmployeeComponents/EmployeeLeaves/EmployeeLeaves";
+import EmployeeSetting from "./Components/EmployeeComponents/EmployeeSetting/EmployeeSetting";
+import DashbordAttendance from "./Components/DashbordComponents/DashbordAttendance/DashbordAttendance";
+import ManagerRoutes from "./Routes/ManagerRoutes/ManagerRoutes";
+import EmployeeTakeAttendance from "./Components/EmployeeComponents/EmployeeTakeAttendance/EmployeeTakeAttendance";
+import DashbordTodayAttendance from "./Components/DashbordComponents/DashbordTodayAttendance/DashbordTodayAttendance";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -464,6 +471,22 @@ function App() {
           ),
         },
         {
+          path: "/dashbord/attendance",
+          element: (
+            <AdminRoutes>
+              <DashbordAttendance></DashbordAttendance>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/today/attendance",
+          element: (
+            <AdminRoutes>
+              <DashbordTodayAttendance></DashbordTodayAttendance>
+            </AdminRoutes>
+          ),
+        },
+        {
           path: "/dashbord/shop-product",
           element: (
             <AdminRoutes>
@@ -684,6 +707,38 @@ function App() {
           element: (
             <EmployeeRoutes>
               <EmployeeHome></EmployeeHome>
+            </EmployeeRoutes>
+          ),
+        },
+        {
+          path: "/employee/attendance",
+          element: (
+            <EmployeeRoutes>
+              <EmployeeAttendance></EmployeeAttendance>
+            </EmployeeRoutes>
+          ),
+        },
+        {
+          path: "/employee/take_attendance/attendance",
+          element: (
+            <ManagerRoutes>
+              <EmployeeTakeAttendance></EmployeeTakeAttendance>
+            </ManagerRoutes>
+          ),
+        },
+        {
+          path: "/employee/leaves",
+          element: (
+            <EmployeeRoutes>
+              <EmployeeLeaves></EmployeeLeaves>
+            </EmployeeRoutes>
+          ),
+        },
+        {
+          path: "/employee/setting",
+          element: (
+            <EmployeeRoutes>
+              <EmployeeSetting></EmployeeSetting>
             </EmployeeRoutes>
           ),
         },

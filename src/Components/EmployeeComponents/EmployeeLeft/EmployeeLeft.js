@@ -1,15 +1,35 @@
-import React from "react";
-import { BiErrorCircle, BiHomeAlt } from "react-icons/bi";
-import { FiSettings, FiUser, FiUsers } from "react-icons/fi";
-import { LuCompass } from "react-icons/lu";
+import React, { useContext } from "react";
+import { FiSettings, FiUser } from "react-icons/fi";
 import { PiSquaresFourDuotone } from "react-icons/pi";
-import { RiPagesLine } from "react-icons/ri";
-import { TbCategory } from "react-icons/tb";
 import { NavLink } from "react-router-dom";
-import { MdProductionQuantityLimits } from "react-icons/md";
+import { IoLogOutOutline } from "react-icons/io5";
+import "./EmployeeLeft.css";
+import { SlNote } from "react-icons/sl";
+import { CgNotes } from "react-icons/cg";
+import { EmployeeContext } from "../../../Layouts/EmployeeLayouts/EmployeeLayouts";
+import { AuthContext } from "../../../Context/UserContext";
+import { MdOutlineNoteAlt } from "react-icons/md";
 const EmployeeLeft = () => {
+  const employee = useContext(EmployeeContext);
+  const { userlogout } = useContext(AuthContext);
+  console.log(employee);
+  const handleLogOut = () => {
+    userlogout()
+      .then(() => {
+        console.log("Log Out Sucessfully");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  console.log(employee);
   return (
     <div className="dashbord-left-con print:hidden">
+      <div className="employee-info">
+        <img src={employee?.photo} alt="" />
+        <span>{employee?.name}</span>
+        <>{employee?.role}</>
+      </div>
       <NavLink
         className={({ isActive }) =>
           isActive ? "dashbord-active-link" : "dashbord-link"
@@ -17,68 +37,39 @@ const EmployeeLeft = () => {
         to="/employee/"
       >
         <PiSquaresFourDuotone className="dashbord-icon"></PiSquaresFourDuotone>{" "}
-        Employee Dashboard
+        Dashboard
       </NavLink>
 
       <NavLink
-        to="/dashbord/shop-product"
+        to="/employee/attendance"
         className={({ isActive }) =>
           isActive ? "dashbord-active-link" : "dashbord-link"
         }
       >
-        <MdProductionQuantityLimits className="dashbord-icon"></MdProductionQuantityLimits>
-        Shop Products
+        <SlNote className="dashbord-icon"></SlNote>
+        Attendance
       </NavLink>
-      <NavLink
-        to="/dashbord/shop-category"
-        className={({ isActive }) =>
-          isActive ? "dashbord-active-link" : "dashbord-link"
-        }
-      >
-        <TbCategory className="dashbord-icon"></TbCategory>Shop Category
-      </NavLink>
+      {employee?.role === "admin" || employee?.role === "Manager" ? (
+        <NavLink
+          to="/employee/take_attendance/attendance"
+          className={({ isActive }) =>
+            isActive ? "dashbord-active-link" : "dashbord-link"
+          }
+        >
+          <MdOutlineNoteAlt className="dashbord-icon"></MdOutlineNoteAlt>
+          Take Attendance
+        </NavLink>
+      ) : (
+        <></>
+      )}
 
       <NavLink
-        to="/dashbord/customized-product"
+        to="/employee/leaves"
         className={({ isActive }) =>
           isActive ? "dashbord-active-link" : "dashbord-link"
         }
       >
-        <MdProductionQuantityLimits className="dashbord-icon"></MdProductionQuantityLimits>
-        Customized Products
-      </NavLink>
-      <NavLink
-        to="/dashbord/customized-category"
-        className={({ isActive }) =>
-          isActive ? "dashbord-active-link" : "dashbord-link"
-        }
-      >
-        <TbCategory className="dashbord-icon"></TbCategory>Customized Category
-      </NavLink>
-      <NavLink
-        to="/dashbord/orders"
-        className={({ isActive }) =>
-          isActive ? "dashbord-active-link" : "dashbord-link"
-        }
-      >
-        <RiPagesLine className="dashbord-icon"></RiPagesLine> Orders
-      </NavLink>
-      <NavLink
-        to="/dashbord/customized-orders"
-        className={({ isActive }) =>
-          isActive ? "dashbord-active-link" : "dashbord-link"
-        }
-      >
-        <LuCompass className="dashbord-icon"></LuCompass>Customized Orders
-      </NavLink>
-
-      <NavLink
-        to="/dashbord/customers"
-        className={({ isActive }) =>
-          isActive ? "dashbord-active-link" : "dashbord-link"
-        }
-      >
-        <FiUsers className="dashbord-icon"></FiUsers> Customers
+        <CgNotes className="dashbord-icon"></CgNotes>My Leaves
       </NavLink>
       <NavLink
         to="/dashbord/staff"
@@ -92,33 +83,12 @@ const EmployeeLeft = () => {
         className={({ isActive }) =>
           isActive ? "dashbord-active-link" : "dashbord-link"
         }
-        to="/dashbord/setting"
+        to="/employee/setting"
       >
         <FiSettings className="dashbord-icon"></FiSettings>Settings
       </NavLink>
-      <NavLink
-        className={({ isActive }) =>
-          isActive ? "dashbord-active-link" : "dashbord-link"
-        }
-        to="/home"
-      >
-        <BiHomeAlt className="dashbord-icon"></BiHomeAlt>Online Store
-      </NavLink>
-      <NavLink
-        className={({ isActive }) =>
-          isActive ? "dashbord-active-link" : "dashbord-link"
-        }
-        to="/dashbord/error-page"
-      >
-        <BiErrorCircle className="dashbord-icon"></BiErrorCircle> 404 Pages
-      </NavLink>
-      <NavLink
-        className={({ isActive }) =>
-          isActive ? "dashbord-active-link" : "dashbord-link"
-        }
-        to="/dashbord/comming-soon"
-      >
-        <LuCompass className="dashbord-icon"></LuCompass> Coming Soon
+      <NavLink onClick={handleLogOut} className="dashbord-link">
+        <IoLogOutOutline className="dashbord-icon"></IoLogOutOutline>Log Out
       </NavLink>
     </div>
   );

@@ -114,6 +114,7 @@ const MyAccountsManage = () => {
       setLoading(false);
     }
   }, [shoporder, cartorder, customized, address]);
+
   console.log(shoporder, address, customized, cartorder, loading);
   console.log(user);
 
