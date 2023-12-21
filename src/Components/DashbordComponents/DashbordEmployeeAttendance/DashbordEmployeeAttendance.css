@@ -1,0 +1,22 @@
+.employee-info-con-admin {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.employee-img-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.employee-img-name img {
+    width: 60px;
+    height: 60px;
+}
+
+.employee-working-time-con {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

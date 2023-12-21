@@ -4,7 +4,6 @@ import { AuthContext } from "../../../Context/UserContext";
 import { BiPrinter } from "react-icons/bi";
 import { FaSearchPlus } from "react-icons/fa";
 import { AiOutlineCloudDownload } from "react-icons/ai";
-import { useEffect } from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -15,14 +14,10 @@ import { Form } from "react-bootstrap";
 import { useQuery } from "@tanstack/react-query";
 import jsPDF from "jspdf";
 const DashbordCustomizedOrders = () => {
-  const [customizesorders, setcustomizedorders] = useState([]);
   const [orders, setorders] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user, userlogout } = useContext(AuthContext);
-  const email = user?.email;
-  const [cuscurrentpage, setcuscurrentpage] = useState(0);
-  // const [datasize, setdatasize] = useState(5);
-  const [cuscount, setcuscount] = useState(0);
+
   const [currentpage, setcurrentpage] = useState(0);
   const [datasize, setdatasize] = useState(5);
   const [count, setcount] = useState(0);
@@ -33,35 +28,6 @@ const DashbordCustomizedOrders = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [orderStatus, setOrderStatus] = useState("");
-
-  const custompage = Math.ceil(cuscount / datasize);
-
-  // useEffect(() => {
-  //   fetch(
-  //     `${process.env.REACT_APP_URL}/allcustomizedorders?email=${user?.email}&page=${cuscurrentpage}&size=${datasize}`,
-  //     {
-  //       headers: {
-  //         authorization: `Beare ${localStorage.getItem("garments-token")}`,
-  //       },
-  //     }
-  //   )
-  //     .then((res) => {
-  //       if (res.status === 401 || res.status === 403) {
-  //         return userlogout();
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((jsonData) => {
-  //       setcustomizedorders(jsonData.product);
-  //       setcuscount(jsonData.count);
-  //       setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Failed to fetch data:", error);
-  //       setLoading(false);
-  //     });
-  // }, [user?.email, userlogout, cuscurrentpage, datasize]);
-  // console.log(customizesorders);
 
   const { data: productall = [], refetch } = useQuery({
     queryKey: [

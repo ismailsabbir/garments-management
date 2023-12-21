@@ -91,6 +91,8 @@ import DashbordAttendance from "./Components/DashbordComponents/DashbordAttendan
 import ManagerRoutes from "./Routes/ManagerRoutes/ManagerRoutes";
 import EmployeeTakeAttendance from "./Components/EmployeeComponents/EmployeeTakeAttendance/EmployeeTakeAttendance";
 import DashbordTodayAttendance from "./Components/DashbordComponents/DashbordTodayAttendance/DashbordTodayAttendance";
+import DashbordAttendanceSheet from "./Components/DashbordComponents/DashbordAttendanceSheet/DashbordAttendanceSheet";
+import DashbordEmployeeAttendance from "./Components/DashbordComponents/DashbordEmployeeAttendance/DashbordEmployeeAttendance";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -486,6 +488,23 @@ function App() {
             </AdminRoutes>
           ),
         },
+        {
+          path: "/dashbord/sheet/attendance",
+          element: (
+            <AdminRoutes>
+              <DashbordAttendanceSheet></DashbordAttendanceSheet>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/employee/attendance",
+          element: (
+            <AdminRoutes>
+              <DashbordEmployeeAttendance></DashbordEmployeeAttendance>
+            </AdminRoutes>
+          ),
+        },
+
         {
           path: "/dashbord/shop-product",
           element: (

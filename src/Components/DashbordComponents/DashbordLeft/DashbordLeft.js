@@ -39,6 +39,24 @@ const DashbordLeft = () => {
         <MdOutlineNoteAlt className="dashbord-icon"></MdOutlineNoteAlt>
         Today Attendance
       </NavLink>
+      <NavLink
+        to="/dashbord/sheet/attendance"
+        className={({ isActive }) =>
+          isActive ? "dashbord-active-link" : "dashbord-link"
+        }
+      >
+        <MdOutlineNoteAlt className="dashbord-icon"></MdOutlineNoteAlt>
+        Attendance Sheet
+      </NavLink>
+      <NavLink
+        to="/dashbord/employee/attendance"
+        className={({ isActive }) =>
+          isActive ? "dashbord-active-link" : "dashbord-link"
+        }
+      >
+        <MdOutlineNoteAlt className="dashbord-icon"></MdOutlineNoteAlt>
+        Employee Attendance
+      </NavLink>
 
       <NavLink
         to="/dashbord/shop-product"

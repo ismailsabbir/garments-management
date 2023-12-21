@@ -1,0 +1,29 @@
+.absence-btn-con {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.attendance-btn1 {
+    width: 30%;
+    border: 1px solid rgb(70, 142, 205);
+    background-color: rgb(84, 145, 199);
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 11px;
+    color: white;
+    border-radius: 4px;
+}
+
+.attendance-btn1:hover {
+    background-color: rgb(68, 138, 200);
+}
+
+.addendance-staff-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+
+}

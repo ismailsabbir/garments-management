@@ -1,0 +1,13 @@
+.present-style {
+    border: 1px solid green;
+    padding: 2px 4px;
+    border-radius: 4px;
+    color: green;
+}
+
+.absence-style {
+    border: 1px solid brown;
+    padding: 2px 4px;
+    border-radius: 4px;
+    color: brown;
+}
