@@ -93,6 +93,10 @@ import EmployeeTakeAttendance from "./Components/EmployeeComponents/EmployeeTake
 import DashbordTodayAttendance from "./Components/DashbordComponents/DashbordTodayAttendance/DashbordTodayAttendance";
 import DashbordAttendanceSheet from "./Components/DashbordComponents/DashbordAttendanceSheet/DashbordAttendanceSheet";
 import DashbordEmployeeAttendance from "./Components/DashbordComponents/DashbordEmployeeAttendance/DashbordEmployeeAttendance";
+import DashbordEmployeeAttendanceEdit from "./Components/DashbordComponents/DashbordEmployeeAttendanceEdit/DashbordEmployeeAttendanceEdit";
+import DashbordEmployeeSalaryMake from "./Components/DashbordComponents/DashbordEmployeeSalaryMake/DashbordEmployeeSalaryMake";
+import DashbordEmployeeSalaryAdd from "./Components/DashbordComponents/DashbordEmployeeSalaryAdd/DashbordEmployeeSalaryAdd";
+import DashbordEmployeeSalaryInvoice from "./Components/DashbordComponents/DashbordEmployeeSalaryInvoice/DashbordEmployeeSalaryInvoice";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -504,7 +508,38 @@ function App() {
             </AdminRoutes>
           ),
         },
-
+        {
+          path: "/dashbord/employee/attendance/edit",
+          element: (
+            <AdminRoutes>
+              <DashbordEmployeeAttendanceEdit></DashbordEmployeeAttendanceEdit>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/employee/salary/make",
+          element: (
+            <AdminRoutes>
+              <DashbordEmployeeSalaryMake></DashbordEmployeeSalaryMake>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/employee/salary/add",
+          element: (
+            <AdminRoutes>
+              <DashbordEmployeeSalaryAdd></DashbordEmployeeSalaryAdd>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/employee/salary/invoice",
+          element: (
+            <AdminRoutes>
+              <DashbordEmployeeSalaryInvoice></DashbordEmployeeSalaryInvoice>
+            </AdminRoutes>
+          ),
+        },
         {
           path: "/dashbord/shop-product",
           element: (

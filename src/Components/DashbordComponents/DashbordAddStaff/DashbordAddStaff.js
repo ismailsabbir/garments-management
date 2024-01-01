@@ -43,7 +43,9 @@ const DashbordAddStaff = () => {
     const password = e.target.password.value;
     const role = e.target.role.value;
     const join_date = e.target.join.value;
+    const salary = e.target.salary.value;
     const isEmployee = true;
+    const cardId = e.target.cardId.value;
 
     const staffinfo = {
       name,
@@ -54,7 +56,9 @@ const DashbordAddStaff = () => {
       password,
       role,
       join_date,
+      salary,
       isEmployee,
+      cardId,
     };
     console.log(staffinfo);
     fetch(`${process.env.REACT_APP_URL}/addstaff`, {
@@ -166,6 +170,26 @@ const DashbordAddStaff = () => {
             <option value="Driver">Driver</option>
             <option value="admin">Admin</option>
           </select>
+          <Form.Group className="mb-3 firstname-staff">
+            <Form.Label>Salary</Form.Label>
+            <Form.Control
+              className="staff-input"
+              type="text"
+              placeholder="salary"
+              name="salary"
+            />
+          </Form.Group>
+        </div>
+        <div className="staff-first-name-lastname mt-4">
+          <Form.Group className="mb-3 firstname-staff">
+            <Form.Label>Card Number</Form.Label>
+            <Form.Control
+              className="staff-input"
+              type="text"
+              placeholder="Card Id"
+              name="cardId"
+            />
+          </Form.Group>
           <button className="add-staf--btn" variant="primary" type="submit">
             ADD STAFF
           </button>

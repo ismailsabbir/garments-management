@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import bkash from "../../../Images/bkash.png";
 import card from "../../../Images/cred.png";
 import nogod from "../../../Images/nogod.avif";

@@ -13,17 +13,7 @@ const ShopCheckoutForm = ({ paymentinfo }) => {
   const [payprocessing, setpayprocessing] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
-  // const [paymentinfos, setpaymentinfos] = useState();
 
-  // useEffect(() => {
-  //   if (paymentinfo) {
-  //     setpaymentinfos(paymentinfo);
-  //     console.log(" payments");
-  //   } else {
-  //     navigate("/shop");
-  //     console.log("not payments");
-  //   }
-  // }, [paymentinfo, navigate]);
   console.log(paymentinfo);
   const { email, orderid } = paymentinfo;
   useEffect(() => {

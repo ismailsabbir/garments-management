@@ -2,12 +2,26 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 30px;
 }
 
 .employee-img-name {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+}
+
+.employee-img-name img {
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+.employee_informationss {
+    /* text-align: center; */
+}
+
+.employee_informationss p {
+    /* color: #be5184; */
 }
 
 .employee-img-name img {
@@ -19,4 +33,33 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.employee-time-chart {
+    text-align: center;
+}
+
+.employee-time-chart h3 {
+    color: green;
+}
+
+.employee-time-chart p {
+    color: rgb(86, 85, 85);
+}
+
+.printlogo:hover {
+    color: #be5184;
+    cursor: pointer;
+}
+
+.employee-attendance-search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    margin-top: 10px;
 }

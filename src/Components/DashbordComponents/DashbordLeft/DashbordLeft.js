@@ -5,7 +5,7 @@ import { BiErrorCircle, BiHomeAlt } from "react-icons/bi";
 import { RiPagesLine } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
 import "./DashbordLeft.css";
-import { MdProductionQuantityLimits } from "react-icons/md";
+import { MdOutlinePayments, MdProductionQuantityLimits } from "react-icons/md";
 import { TbCategory } from "react-icons/tb";
 import { LuCompass } from "react-icons/lu";
 import { MdOutlineNoteAlt } from "react-icons/md";
@@ -56,6 +56,15 @@ const DashbordLeft = () => {
       >
         <MdOutlineNoteAlt className="dashbord-icon"></MdOutlineNoteAlt>
         Employee Attendance
+      </NavLink>
+      <NavLink
+        to="/dashbord/employee/salary/make"
+        className={({ isActive }) =>
+          isActive ? "dashbord-active-link" : "dashbord-link"
+        }
+      >
+        <MdOutlinePayments className="dashbord-icon"></MdOutlinePayments>
+        Employee Salary
       </NavLink>
 
       <NavLink

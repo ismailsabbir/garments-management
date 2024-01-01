@@ -1,0 +1,31 @@
+.employee_salary_form {
+    /* border: 1px solid gainsboro; */
+    width: 60%;
+    margin: 0 auto;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+}
+
+.employee_salary_form h5 {
+    color: #be5184;
+    text-align: center;
+    padding-bottom: 6px;
+    border-bottom: 1px solid gainsboro;
+}
+
+.employee_information {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    /* flex-direction: column; */
+    border-bottom: 1px solid gainsboro;
+    padding: 8px;
+    margin-bottom: 15px;
+
+}
+
+.employee_information img {
+    width: 80px;
+    height: 80px;
+}

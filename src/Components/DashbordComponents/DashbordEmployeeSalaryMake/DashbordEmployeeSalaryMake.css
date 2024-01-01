@@ -1,0 +1,16 @@
+#make-slip-btn {
+    text-decoration: none;
+    background-color: #be5184;
+    border: 1px solid #be5184;
+}
+
+#make-salary-btn {
+    text-decoration: none;
+}
+
+.salary-add-done {
+    border: 1px solid rgb(164, 207, 244);
+    background-color: rgb(220, 235, 248);
+    border-radius: 4px;
+    padding: 2px 32px;
+}

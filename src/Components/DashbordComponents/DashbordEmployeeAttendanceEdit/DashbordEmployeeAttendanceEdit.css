@@ -1,0 +1,24 @@
+.edit-employee-attendance {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-employee-attendance img {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+}
+
+.edit-employee-attendance h6 {
+    color: #be5184;
+}
+
+.edit-employee-attendance p {
+    color: rgb(83, 82, 82);
+    font-size: 1rem;
+    font-weight: 500;
+
+}

@@ -14,7 +14,7 @@ const DashbordEditStaff = () => {
   }, {});
   console.log(userData?.photo);
 
-  const [photo, setphoto1] = useState(userData?.photo);
+  const [photo, setphoto1] = useState(staff?.photo);
   const imagebb = process.env.REACT_APP_IMGBB;
   const handleimage1 = (e) => {
     const image1 = e.target.files[0];
@@ -52,6 +52,8 @@ const DashbordEditStaff = () => {
     const password = e.target.password.value;
     const role = e.target.role.value;
     const join_date = e.target.join.value;
+    const salary = e.target.salary.value;
+    const cardId = e.target.cardId.value;
     const staffinfo = {
       name,
       email,
@@ -61,6 +63,8 @@ const DashbordEditStaff = () => {
       password,
       role,
       join_date,
+      salary,
+      cardId,
     };
     console.log(staffinfo);
     fetch(`${process.env.REACT_APP_URL}/edit_staff/${staff?._id}`, {
@@ -193,6 +197,34 @@ const DashbordEditStaff = () => {
             <option value="Driver">Driver</option>
             <option value="admin">Admin</option>
           </select>
+          <Form.Group className="mb-3 firstname-staff">
+            <Form.Label>Salary</Form.Label>
+            <Form.Control
+              className="staff-input"
+              type="text"
+              placeholder="salary"
+              name="salary"
+              value={userData?.salary}
+              onChange={(e) =>
+                setUserData({ ...userData, salary: e.target.value })
+              }
+            />
+          </Form.Group>
+        </div>
+        <div className="staff-first-name-lastname mt-4">
+          <Form.Group className="mb-3 firstname-staff">
+            <Form.Label>Card Number</Form.Label>
+            <Form.Control
+              className="staff-input"
+              type="text"
+              placeholder="Card Id"
+              value={userData?.cardId}
+              name="cardId"
+              onChange={(e) =>
+                setUserData({ ...userData, cardId: e.target.value })
+              }
+            />
+          </Form.Group>
           <button className="add-staf--btn" variant="primary" type="submit">
             UPDATE STAFF INFORMATION
           </button>

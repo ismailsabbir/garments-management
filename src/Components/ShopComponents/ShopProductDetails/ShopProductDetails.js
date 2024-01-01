@@ -60,6 +60,15 @@ const ShopProductDetails = () => {
       return;
     }
   };
+  console.log(quentuty);
+  const handleQuentity = (e) => {
+    console.log(e.target.value);
+    if (parseInt(e.target.value) > 1) {
+      setquentity(parseInt(e.target.value));
+    } else {
+      setquentity(1);
+    }
+  };
   const shopinfo = {
     ...oneproduct,
     size,
@@ -436,7 +445,8 @@ const ShopProductDetails = () => {
           <div className="number-cart-buy">
             <div className="number-input">
               <button onClick={handleincress}>+</button>
-              <span>{quentuty}</span>
+              {/* <span>{quentuty}</span> */}
+              <input value={quentuty} type="text" onChange={handleQuentity} />
               <button onClick={handledecress}>-</button>
             </div>
             <button onClick={handlecartadd} className="add-button-cart">

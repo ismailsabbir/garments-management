@@ -1,0 +1,51 @@
+.salary-invoice-hed {
+    width: auto;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.salary-invoice-hed h5 {
+    padding-bottom: 4px;
+    border-bottom: 2px solid rgb(56, 55, 55);
+}
+
+#employee-salary-invoice-mid {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+}
+
+#employee-salary-invoice-mid p {
+    font-weight: 500;
+    color: rgb(37, 36, 36);
+}
+
+.invoice-last {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.invoice-left {
+    width: 48%;
+}
+
+.invoice-left h6 {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.list {
+    list-style: none;
+    padding: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid rgb(53, 52, 52);
+}

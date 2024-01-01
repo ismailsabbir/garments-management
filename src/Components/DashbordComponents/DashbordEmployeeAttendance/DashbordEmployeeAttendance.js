@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import "./DashbordEmployeeAttendance.css";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { Form } from "react-bootstrap";
 import NotFound from "../../../CommonComponents/NotFound/NotFound";
 import Loading from "../../../CommonComponents/Loading/Loading";
@@ -9,24 +9,23 @@ import { AdminContext } from "../../../Layouts/DashbordLayouts/DashbordLayouts";
 import { Link } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { BsSearch } from "react-icons/bs";
 const DashbordEmployeeAttendance = () => {
+  const employee = useContext(AdminContext);
   const [Attendance, setAttendance] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const employee = useContext(AdminContext);
-  console.log(employee);
+  const [employeeid, setemployeeid] = useState(employee?.employee_id);
 
   const { data: productall = [], refetch } = useQuery({
-    //  employee_id=${employee_id}
     queryKey: [
       "specificAttendance",
       {
-        employee_id: employee?.employee_id,
+        employee_id: employeeid,
       },
     ],
     queryFn: () =>
       fetch(
-        `${process.env.REACT_APP_URL}/specificAttendance?employee_id=${employee?.employee_id}`
+        `${process.env.REACT_APP_URL}/specificAttendance?employee_id=${employeeid}`
       )
         .then((res) => {
           return res.json();
@@ -43,45 +42,94 @@ const DashbordEmployeeAttendance = () => {
         }),
   });
   console.log(Attendance);
+  const handledeleteAttendance = (attendance) => {
+    console.log(attendance);
+    fetch(
+      `${process.env.REACT_APP_URL}/delete-employee-attendance/${attendance?._id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Beare ${localStorage.getItem("garments-token")}`,
+        },
+
+        body: JSON.stringify(attendance),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data?.deletedCount > 0) {
+          toast("Attendance delete sucessfully !!!", {
+            position: "top-center",
+            autoClose: 1000,
+          });
+        }
+        refetch();
+      });
+  };
+  const handleEmployIdSearch = (e) => {
+    e.preventDefault();
+    console.log(e.target.employeeId.value);
+    setemployeeid(e.target.employeeId.value);
+    // refetch();
+  };
   return (
     <div>
       <div className="das-recent-order-con">
-        <h5>Employee Attendance</h5>
+        <div className="employee-attendance-search">
+          <h5>Employee Attendance</h5>
+          <Form onSubmit={handleEmployIdSearch} className="name-search">
+            <input
+              className="name-input-staff"
+              type="text"
+              placeholder="Search by Employee_id"
+              name="employeeId"
+            />
+            <button type="submit">
+              <BsSearch></BsSearch>
+            </button>
+          </Form>
+        </div>
 
         <div className="product-search-con employee-info-con-admin">
           <div className="employee-img-name">
             <img src={Attendance?.employeeinfo?.photo} alt="" />
-            <div>
+            <div className="employee_informationss">
               <h6>{Attendance?.employeeinfo?.name}</h6>
               <p>{Attendance?.employeeinfo?.role}</p>
             </div>
           </div>
           <div>
-            <h4>Employee ID</h4>
+            <h6>Employee ID</h6>
             <p>{Attendance?.employeeinfo?.employee_id}</p>
           </div>
           <div>
-            <h4>Joining Date</h4>
+            <h6>Joining Date</h6>
             <p>{Attendance?.employeeinfo?.join_date}</p>
           </div>
           <div>
-            <h4>Department</h4>
+            <h6>Department</h6>
             <p>Garments</p>
           </div>
         </div>
         <div className="employee-working-time-con">
-          <div>
+          <div className="employee-time-chart">
             {/* averageInTime, averageOutTime, averageWorkingTime */}
-            <h1>{Attendance?.averageWorkingTime}</h1>
+            <h3>{Attendance?.averageWorkingTime}</h3>
             <p>Average Working Hours</p>
           </div>
-          <div>
-            <h1>{Attendance?.averageInTime}PM</h1>
+          <div className="employee-time-chart">
+            <h3>{Attendance?.averageInTime}PM</h3>
             <p>Average In Time</p>
           </div>
-          <div>
-            <h1>{Attendance?.averageOutTime}AM</h1>
+          <div className="employee-time-chart">
+            <h3>{Attendance?.averageOutTime}AM</h3>
             <p>Average Out Time</p>
+          </div>
+          <div className="employee-time-chart">
+            <h3>01:00</h3>
+            <p>Average Break Time</p>
           </div>
         </div>
 
@@ -141,14 +189,16 @@ const DashbordEmployeeAttendance = () => {
                             <td className="das-order-data">
                               <div className="print-serach">
                                 <Link
-                                //   to="/dashbord/shop-product-edit"
-                                //   state={order}
+                                  to="/dashbord/employee/attendance/edit"
+                                  state={attendance}
                                 >
                                   <FiEdit className="printlogo"></FiEdit>
                                 </Link>
 
                                 <RiDeleteBinLine
-                                  //   onClick={() => handledeletecategory(order)}
+                                  onClick={() =>
+                                    handledeleteAttendance(attendance)
+                                  }
                                   className="printlogo"
                                 ></RiDeleteBinLine>
                               </div>
