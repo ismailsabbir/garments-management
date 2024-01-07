@@ -18,7 +18,6 @@ const CheckOutPages = () => {
   const [phone, setmobile] = useState();
   const [note, setmesssage] = useState();
   const [errorinfo, seterrorinfo] = useState(false);
-
   const [shoporder, setorders] = useState([]);
   const [cartorder, setcartorder] = useState([]);
   const [customized, setcustomized] = useState([]);
@@ -29,6 +28,7 @@ const CheckOutPages = () => {
   const [showorder1, setshoworder1] = useState([]);
   const [userinfo, setuserinfo] = useState([]);
   console.log(userinfo);
+
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/singleuser?email=${user?.email}`, {
       headers: {
@@ -50,6 +50,7 @@ const CheckOutPages = () => {
         setLoading(false);
       });
   }, [user?.email, userlogout]);
+
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/address?email=${user?.email}`, {
       headers: {
@@ -137,7 +138,6 @@ const CheckOutPages = () => {
         setLoading(false);
       });
   }, [user?.email, userlogout]);
-
   useEffect(() => {
     if (addresss?.length >= 1) {
       setshoworder(addresss);
@@ -174,7 +174,6 @@ const CheckOutPages = () => {
     }
   }, [addresss, shoporder, cartorder, customized]);
   console.log(showorder1);
-
   useEffect(() => {
     if (!shopinfo) {
       navigate("/shop");
@@ -215,8 +214,19 @@ const CheckOutPages = () => {
   };
   const productinfo = [{ ...shopinfo }];
   console.log(productinfo);
-  const total_price =
-    parseFloat(shopinfo?.product_price) * parseFloat(shopinfo?.quentuty) + 20;
+  let total_price = 0;
+  if (userinfo?.role === "Premium") {
+    total_price =
+      parseFloat(shopinfo?.product_price) * parseFloat(shopinfo?.quentuty) -
+      (parseFloat(shopinfo?.product_price) *
+        parseFloat(shopinfo?.quentuty) *
+        20) /
+        100 +
+      20;
+  } else {
+    total_price =
+      parseFloat(shopinfo?.product_price) * parseFloat(shopinfo?.quentuty) + 20;
+  }
   const today = new Date();
   const orderid = Math.floor(Math.random() * 90000) + 10000;
   const order_date = new Date().toLocaleDateString("en-GB");
@@ -270,6 +280,7 @@ const CheckOutPages = () => {
       status,
       createdAt,
     };
+    console.log("orderconfirm", orderconfirm);
     if (!name || !lastname || !email || !phone || !address || !postcode) {
       seterrorinfo(true);
       return;
@@ -434,18 +445,25 @@ const CheckOutPages = () => {
                       parseFloat(shopinfo?.quentuty)}
                   </h6>
                 </div>
-                <div className="checkout-subtotla">
-                  <p>Hole sale discount(10%)</p>
-                  <h6>
-                    $
-                    {parseFloat(shopinfo?.product_price) *
-                      parseFloat(shopinfo?.quentuty) -
-                      (parseFloat(shopinfo?.product_price) *
-                        parseFloat(shopinfo?.quentuty) *
-                        10) /
-                        100}
-                  </h6>
-                </div>
+                {userinfo?.role === "Premium" ? (
+                  <div className="checkout-subtotla">
+                    <p className="whole-sale-discount">
+                      Discount (20%) For WholeSale
+                    </p>
+                    <h6 className="discount-amount">
+                      $
+                      {parseFloat(shopinfo?.product_price) *
+                        parseFloat(shopinfo?.quentuty) -
+                        (parseFloat(shopinfo?.product_price) *
+                          parseFloat(shopinfo?.quentuty) *
+                          20) /
+                          100}
+                    </h6>
+                  </div>
+                ) : (
+                  <></>
+                )}
+
                 <h6>Shipping</h6>
                 <div className="checkout-shipping">
                   <p>Delivery Fee:</p>
@@ -453,12 +471,31 @@ const CheckOutPages = () => {
                 </div>
                 <div className="checkout-totla">
                   <p>Total:</p>
-                  <p>
+                  {userinfo?.role === "Premium" ? (
+                    <p>
+                      $
+                      {parseFloat(shopinfo?.product_price) *
+                        parseFloat(shopinfo?.quentuty) -
+                        (parseFloat(shopinfo?.product_price) *
+                          parseFloat(shopinfo?.quentuty) *
+                          20) /
+                          100 +
+                        20}
+                    </p>
+                  ) : (
+                    <p>
+                      $
+                      {parseFloat(shopinfo?.product_price) *
+                        parseFloat(shopinfo?.quentuty) +
+                        20}
+                    </p>
+                  )}
+                  {/* <p>
                     $
                     {parseFloat(shopinfo?.product_price) *
                       parseFloat(shopinfo?.quentuty) +
                       20}
-                  </p>
+                  </p> */}
                 </div>
                 <p className="checkout-personal">
                   Your personal data will be used to process your order, support

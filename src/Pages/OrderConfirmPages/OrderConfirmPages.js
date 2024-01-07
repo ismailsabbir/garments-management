@@ -326,6 +326,16 @@ const OrderConfirmPages = () => {
         </div>
         <div className="confirm-left">
           <p>Order Id:{orderinfo?.orderid}</p>
+          {orderinfo?.isprimum ? (
+            <>
+              <p className="discount-text">Discount (20%) For WholeSale </p>
+              <p className="discount-amount">
+                Discount Amount: {orderinfo?.discount}
+              </p>
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
       <div className="order-info-con">

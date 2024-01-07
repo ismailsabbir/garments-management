@@ -99,6 +99,7 @@ import DashbordEmployeeSalaryAdd from "./Components/DashbordComponents/DashbordE
 import DashbordEmployeeSalaryInvoice from "./Components/DashbordComponents/DashbordEmployeeSalaryInvoice/DashbordEmployeeSalaryInvoice";
 import DashbordAddCustomer from "./Components/DashbordAddCustomer/DashbordAddCustomer";
 import PremiumCustomerSignup from "./Pages/PremiumCustomerSignup/PremiumCustomerSignup";
+import PremiumCustomerLogin from "./Pages/PremiumCustomerLogin/PremiumCustomerLogin";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -325,6 +326,10 @@ function App() {
         {
           path: "/premium/customer/signup",
           element: <PremiumCustomerSignup></PremiumCustomerSignup>,
+        },
+        {
+          path: "/premium/customer/login",
+          element: <PremiumCustomerLogin></PremiumCustomerLogin>,
         },
         {
           path: "/Login",

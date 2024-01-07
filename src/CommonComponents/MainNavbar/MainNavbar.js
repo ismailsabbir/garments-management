@@ -23,6 +23,29 @@ const MainNavbar = () => {
   const [cartproducts, setcartproducts] = useState([]);
   const [isFixed, setIsFixed] = useState(false);
   const [isAdmin] = useAdmin(user?.email);
+  const [userinfo, setuserinfo] = useState([]);
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_URL}/singleuser?email=${user?.email}`, {
+      headers: {
+        authorization: `Beare ${localStorage.getItem("garments-token")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          return userlogout();
+        }
+        return res.json();
+      })
+      .then((jsonData) => {
+        setuserinfo(jsonData);
+        // setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch data:", error);
+        // setLoading(false);
+      });
+  }, [user?.email, userlogout]);
   useEffect(() => {
     fetchData(user?.email);
   });
@@ -45,7 +68,6 @@ const MainNavbar = () => {
       console.error("Failed to fetch data:", error);
     }
   };
-
   const handlelogout = () => {
     userlogout()
       .then(() => {
@@ -55,7 +77,6 @@ const MainNavbar = () => {
         console.log(error);
       });
   };
-
   const handleScroll = () => {
     if (window.scrollY > 50) {
       setIsFixed(true);
@@ -64,7 +85,6 @@ const MainNavbar = () => {
     }
   };
   window.addEventListener("scroll", handleScroll);
-
   return (
     <div className="print:hidden" id={isFixed ? "fixed" : ""}>
       <div id={isFixed ? "topnone" : ""}>
@@ -185,13 +205,17 @@ const MainNavbar = () => {
                   Login
                 </NavLink>
               )}
-              <Link
-                to="/premium/customer/signup"
-                className="button1 ml-4"
-                id="make-wholesale-btn"
-              >
-                Login For Wholesale
-              </Link>
+              {/* {userinfo?.role === "Premium" ? (
+                <></>
+              ) : (
+                <Link
+                  to="/premium/customer/login"
+                  className="button1 ml-4"
+                  id="make-wholesale-btn"
+                >
+                  Login For Wholesale
+                </Link>
+              )} */}
             </Nav>
             <Navbar.Collapse className="justify-content-end navbar-end-con">
               {/* <Link to="/make-project" className="button" id="make-project-btn">

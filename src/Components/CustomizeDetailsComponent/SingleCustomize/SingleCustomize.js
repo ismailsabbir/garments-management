@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./SingleCustomize.css";
 import { Form } from "react-bootstrap";
 import useFetch from "../../../Hooks/useFetch";
 import { NavLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../Context/UserContext";
 
 const SingleCustomize = ({ category }) => {
   console.log(category);
@@ -33,6 +34,29 @@ const SingleCustomize = ({ category }) => {
   const nextTenDays = new Date(today.setDate(today.getDate() + 10));
   const qualityss = useFetch(`${process.env.REACT_APP_URL}/quality`);
   const qualitys = qualityss.data;
+  const { user, userlogout } = useContext(AuthContext);
+  const [userinfo, setuserinfo] = useState([]);
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_URL}/singleuser?email=${user?.email}`, {
+      headers: {
+        authorization: `Beare ${localStorage.getItem("garments-token")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          return userlogout();
+        }
+        return res.json();
+      })
+      .then((jsonData) => {
+        setuserinfo(jsonData);
+        // setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch data:", error);
+        // setLoading(false);
+      });
+  }, [user?.email, userlogout]);
   const qualityinfo = (id, quality_name) => {
     const targetquality = qualitys.find(
       (quality) => quality?.quality_id === id
@@ -54,7 +78,6 @@ const SingleCustomize = ({ category }) => {
     setcolorclik(false);
     setprice(category?.default_price);
   };
-
   const colorproducthandle = (cate_id, color_id, colorName) => {
     fetch(
       `${process.env.REACT_APP_URL}/colorproducts?category_id=${cate_id}&colorid=${color_id}`
@@ -143,7 +166,17 @@ const SingleCustomize = ({ category }) => {
     var dress_photo;
     var delivery_date;
     const orderid = Math.floor(Math.random() * 90000) + 10000;
-    const total_price = price * pices;
+    let total_price = price * pices;
+    let discount = 0;
+    let isprimum = false;
+    if (userinfo?.role === "Premium") {
+      total_price = price * pices - (price * pices * 20) / 100 + 20;
+      discount = (price * pices * 20) / 100;
+      isprimum = true;
+    } else {
+      total_price = price * pices;
+    }
+
     const category_name = category?.name;
 
     if (photoupload === false && colorclick === false) {
@@ -187,6 +220,8 @@ const SingleCustomize = ({ category }) => {
       pices,
       price,
       total_price,
+      discount,
+      isprimum,
       dress_photo,
       frontphoto,
       backphoto,

@@ -12,3 +12,19 @@
 .forget:hover {
     color: #be5184;
 }
+
+.whole-sale-link {
+    width: 100%;
+}
+
+.make-wholesale-btn {
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+    border: 1px so #be5184;
+    background-color: #be5184;
+    padding: 6px;
+    width: 100%;
+    border-radius: 6px;
+    cursor: pointer;
+}

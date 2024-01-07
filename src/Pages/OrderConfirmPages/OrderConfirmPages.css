@@ -5,6 +5,14 @@
     margin-bottom: 50px;
 }
 
+.discount-text {
+    color: green;
+}
+
+.discount-amount {
+    color: #be5184
+}
+
 .order-confirm-top {
     width: 100;
     border: 1px solid aliceblue;

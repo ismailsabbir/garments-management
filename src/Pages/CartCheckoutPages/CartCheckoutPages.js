@@ -27,6 +27,29 @@ const CartCheckoutPages = () => {
   const [loading, setLoading] = useState(true);
   const [showorder, setshoworder] = useState([]);
   const [userinfo, setuserinfo] = useState([]);
+  const [userinfos, setuserinfos] = useState([]);
+  console.log(userinfo);
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_URL}/singleuser?email=${user?.email}`, {
+      headers: {
+        authorization: `Beare ${localStorage.getItem("garments-token")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          return userlogout();
+        }
+        return res.json();
+      })
+      .then((jsonData) => {
+        setuserinfos(jsonData);
+        // setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch data:", error);
+        setLoading(false);
+      });
+  }, [user?.email, userlogout]);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/single/employee?email=${user?.email}`, {
       headers: {
@@ -41,7 +64,6 @@ const CartCheckoutPages = () => {
       })
       .then((jsonData) => {
         setuserinfo(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -196,12 +218,38 @@ const CartCheckoutPages = () => {
     const message = e.target.value;
     setmesssage(message);
   };
-
-  const total_price = shopinfo.reduce((total, currentObject) => {
+  const total_price_main = shopinfo.reduce((total, currentObject) => {
     return (
       total + parseInt(currentObject?.product_price) * currentObject?.quentuty
     );
   }, 0);
+  let total_price = shopinfo.reduce((total, currentObject) => {
+    return (
+      total + parseInt(currentObject?.product_price) * currentObject?.quentuty
+    );
+  }, 0);
+  console.log(total_price);
+  if (userinfos?.role === "Premium") {
+    total_price = shopinfo.reduce((total, currentObject) => {
+      return (
+        total +
+        parseInt(currentObject?.product_price) * currentObject?.quentuty -
+        (parseFloat(currentObject?.product_price) *
+          parseFloat(currentObject?.quentuty) *
+          20) /
+          100 +
+        20
+      );
+    }, 0);
+    console.log(total_price);
+  } else {
+    total_price = shopinfo.reduce((total, currentObject) => {
+      return (
+        total + parseInt(currentObject?.product_price) * currentObject?.quentuty
+      );
+    }, 0);
+  }
+
   const today = new Date();
   const orderid = Math.floor(Math.random() * 90000) + 10000;
   const order_date = new Date().toLocaleDateString("en-GB");
@@ -404,16 +452,26 @@ const CartCheckoutPages = () => {
                 </div>
                 <div className="checkout-subtotla">
                   <p>Subtotal</p>
-                  <h6>Tk {total_price}</h6>
+                  <h6>Tk {total_price_main} </h6>
                 </div>
+                {userinfos?.role === "Premium" ? (
+                  <div className="checkout-subtotla">
+                    <p className="whole-sale-discount">
+                      Discount (20%) For WholeSale
+                    </p>
+                    <h6 className="discount-amount">{total_price - 20}</h6>
+                  </div>
+                ) : (
+                  <></>
+                )}
                 <h6>Shipping</h6>
                 <div className="checkout-shipping">
                   <p>Delivery Fee:</p>
-                  <h6>60</h6>
+                  <h6>20</h6>
                 </div>
                 <div className="checkout-totla">
                   <p>Total:</p>
-                  <p>Tk {total_price + 60}</p>
+                  <p>Tk {total_price}</p>
                 </div>
                 <p className="checkout-personal">
                   Your personal data will be used to process your order, support

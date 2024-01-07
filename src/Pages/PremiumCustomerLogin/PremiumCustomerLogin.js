@@ -1,25 +1,21 @@
 import React, { useContext, useState } from "react";
-import logo from "../../Images/Logo.png";
-import { CgGoogle } from "react-icons/cg";
-import { BiLogoFacebook, BiLogoGmail } from "react-icons/bi";
-import "./LoginPages.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/UserContext";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Form } from "react-bootstrap";
+import { BiLogoGmail } from "react-icons/bi";
+import logo from "../../Images/Logo.png";
+import "./PremiumCustomerLogin.css";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-const LoginPages = () => {
-  let location = useLocation();
-  const { userlogin, signinwithgoogle, resetpassword, facebooksignup, user } =
-    useContext(AuthContext);
-  console.log(user);
+const PremiumCustomerLogin = () => {
+  const { userlogin, resetpassword } = useContext(AuthContext);
   const [errormessage, seterrormessage] = useState("");
   const [sucessmessage, setsucessmessage] = useState(false);
   const [email1, setemail] = useState("");
-  const name = user?.displayName;
-  const email = user?.email;
-  const userdata = { name, email };
   const navigate = useNavigate();
+  let location = useLocation();
   let from = location.state?.from?.pathname || "/";
+
+  console.log(email1);
   const loginuser = (e) => {
     e.preventDefault();
     setsucessmessage(false);
@@ -49,46 +45,6 @@ const LoginPages = () => {
             localStorage.setItem("garments-token", data?.token);
             navigate(from, { replace: true });
           });
-      })
-      .catch((error) => {
-        console.log(error);
-        seterrormessage(error.message);
-      });
-  };
-  const handlegooglesignin = () => {
-    signinwithgoogle()
-      .then((req) => {
-        const user = req.user;
-        const currentuser = {
-          email: user.email,
-        };
-        console.log(user);
-        setsucessmessage(true);
-        fetch(`${process.env.REACT_APP_URL}/users`, {
-          method: "POST",
-          body: JSON.stringify(userdata),
-          headers: {
-            "Content-type": "application/json",
-          },
-        })
-          .then((req) => req.json())
-          .then((data) => {
-            console.log(data);
-            fetch(`${process.env.REACT_APP_URL}/jwt`, {
-              method: "POST",
-              headers: {
-                "Content-type": "application/json",
-              },
-              body: JSON.stringify(currentuser),
-            })
-              .then((req) => req.json())
-              .then((data) => {
-                console.log(data);
-                localStorage.setItem("garments-token", data?.token);
-                navigate(from, { replace: true });
-              });
-          });
-        navigate("/login");
       })
       .catch((error) => {
         console.log(error);
@@ -130,75 +86,37 @@ const LoginPages = () => {
         console.log(error);
       });
   };
-  const handlefacebooksign = () => {
-    facebooksignup()
-      .then((req) => {
-        const user = req.user;
-        const currentuser = {
-          email: user.email,
-        };
-        fetch(`${process.env.REACT_APP_URL}/users`, {
-          method: "POST",
-          body: JSON.stringify(userdata),
-          headers: {
-            "Content-type": "application/json",
-          },
-        })
-          .then((req) => req.json())
-          .then((data) => {
-            console.log(data);
-            fetch(`${process.env.REACT_APP_URL}/jwt`, {
-              method: "POST",
-              headers: {
-                "Content-type": "application/json",
-              },
-              body: JSON.stringify(currentuser),
-            })
-              .then((req) => req.json())
-              .then((data) => {
-                console.log(data);
-                localStorage.setItem("garments-token", data?.token);
-                navigate(from, { replace: true });
-              });
-          });
-        navigate("/login");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
   return (
-    <div className="sign-page-con">
-      <div className="signup-con">
-        <div className="signup-left bg-neutral">
+    <div className="employss-login-con">
+      <div className="premium-login-container">
+        <div className="prmium-login-info bg-neutral">
           <img src={logo} alt="not" />
-          <p>Login using social media to get quick access</p>
-          <button
-            onClick={handlegooglesignin}
-            className="google-btn"
-            id="google"
-          >
-            <CgGoogle className="signup-icon"></CgGoogle>
-            Signin with Google
-          </button>
-          <button onClick={handlefacebooksign} className="google-btn">
-            <BiLogoFacebook className="signup-icon"></BiLogoFacebook>
-            Signin with Facebook
-          </button>
-          <Link to="/premium/customer/login" className="whole-sale-link">
-            <button className="make-wholesale-btn">Login For Wholesale</button>
+          <p className="premium-info-hed">
+            To purchase wholesale products, first create an account from the
+            Garmen authority
+          </p>
+          <p className="please-premium-login">
+            If you already have an account, Please login.
+          </p>
+          <div className="premium-information">
+            <h6>Contact information:</h6>
+            <p>Mobile:+0018854602347</p>
+            <p>Email:garman.ltd@gmail.com</p>
+          </div>
+          <Link to="/contactus">
+            <button className="go-contact-btn">Go to Contact Page</button>{" "}
           </Link>
         </div>
-        <div className="signup-right">
+        <div className="signup-right" id="premium-login">
           <div className="alreday-link">
-            <Link className="signup-link" to="/Login">
+            <Link className="signup-link" to="/premium/customer/login">
               ALREADY A MEMBER
             </Link>
-            <Link className="signup-link" to="/SignUp">
+            <Link className="signup-link" to="/premium/customer/signup">
               I AM NEW HERE
             </Link>
           </div>
-          <form onSubmit={loginuser}>
+          <Form onSubmit={loginuser}>
             {sucessmessage ? (
               <div className="alert alert-success">
                 <svg
@@ -270,12 +188,12 @@ const LoginPages = () => {
               <BiLogoGmail className="gmail-icon"></BiLogoGmail>
               Log In with email
             </button>
-          </form>
+          </Form>
         </div>
       </div>
-      <ToastContainer />
+      <ToastContainer></ToastContainer>
     </div>
   );
 };
 
-export default LoginPages;
+export default PremiumCustomerLogin;
