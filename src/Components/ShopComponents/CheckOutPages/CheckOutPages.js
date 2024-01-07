@@ -28,6 +28,7 @@ const CheckOutPages = () => {
   const [showorder, setshoworder] = useState([]);
   const [showorder1, setshoworder1] = useState([]);
   const [userinfo, setuserinfo] = useState([]);
+  console.log(userinfo);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/singleuser?email=${user?.email}`, {
       headers: {
@@ -431,6 +432,18 @@ const CheckOutPages = () => {
                     $
                     {parseFloat(shopinfo?.product_price) *
                       parseFloat(shopinfo?.quentuty)}
+                  </h6>
+                </div>
+                <div className="checkout-subtotla">
+                  <p>Hole sale discount(10%)</p>
+                  <h6>
+                    $
+                    {parseFloat(shopinfo?.product_price) *
+                      parseFloat(shopinfo?.quentuty) -
+                      (parseFloat(shopinfo?.product_price) *
+                        parseFloat(shopinfo?.quentuty) *
+                        10) /
+                        100}
                   </h6>
                 </div>
                 <h6>Shipping</h6>

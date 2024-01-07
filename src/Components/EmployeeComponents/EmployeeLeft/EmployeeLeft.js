@@ -8,7 +8,7 @@ import { SlNote } from "react-icons/sl";
 import { CgNotes } from "react-icons/cg";
 import { EmployeeContext } from "../../../Layouts/EmployeeLayouts/EmployeeLayouts";
 import { AuthContext } from "../../../Context/UserContext";
-import { MdOutlineNoteAlt } from "react-icons/md";
+import { MdOutlineNoteAlt, MdOutlinePayments } from "react-icons/md";
 const EmployeeLeft = () => {
   const employee = useContext(EmployeeContext);
   const { userlogout } = useContext(AuthContext);
@@ -58,6 +58,19 @@ const EmployeeLeft = () => {
         >
           <MdOutlineNoteAlt className="dashbord-icon"></MdOutlineNoteAlt>
           Take Attendance
+        </NavLink>
+      ) : (
+        <></>
+      )}
+      {employee?.role === "admin" || employee?.role === "Manager" ? (
+        <NavLink
+          to="/dashbord/employee/salary/make"
+          className={({ isActive }) =>
+            isActive ? "dashbord-active-link" : "dashbord-link"
+          }
+        >
+          <MdOutlinePayments className="dashbord-icon"></MdOutlinePayments>
+          Employee Salary
         </NavLink>
       ) : (
         <></>

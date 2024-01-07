@@ -1,5 +1,5 @@
 .nav-items {
-    width: 60%;
+    width: 65%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -184,6 +184,20 @@
     align-items: center;
     justify-content: space-between;
 }
+
+
+.button1 {
+    border: 1px solid #be5184;
+    padding: 4px 8px;
+    text-decoration: none;
+    color: white;
+    border-radius: 4px;
+}
+
+.button1:hover {
+    background-color: #be5184;
+}
+
 
 @media only screen and (max-width: 600px) {
     .nav-brand-tab {

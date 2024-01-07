@@ -97,6 +97,8 @@ import DashbordEmployeeAttendanceEdit from "./Components/DashbordComponents/Dash
 import DashbordEmployeeSalaryMake from "./Components/DashbordComponents/DashbordEmployeeSalaryMake/DashbordEmployeeSalaryMake";
 import DashbordEmployeeSalaryAdd from "./Components/DashbordComponents/DashbordEmployeeSalaryAdd/DashbordEmployeeSalaryAdd";
 import DashbordEmployeeSalaryInvoice from "./Components/DashbordComponents/DashbordEmployeeSalaryInvoice/DashbordEmployeeSalaryInvoice";
+import DashbordAddCustomer from "./Components/DashbordAddCustomer/DashbordAddCustomer";
+import PremiumCustomerSignup from "./Pages/PremiumCustomerSignup/PremiumCustomerSignup";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -319,6 +321,10 @@ function App() {
         {
           path: "/SignUp",
           element: <SignupPages></SignupPages>,
+        },
+        {
+          path: "/premium/customer/signup",
+          element: <PremiumCustomerSignup></PremiumCustomerSignup>,
         },
         {
           path: "/Login",
@@ -718,6 +724,15 @@ function App() {
             </AdminRoutes>
           ),
         },
+        {
+          path: "/dashbord/customers/add-customer",
+          element: (
+            <AdminRoutes>
+              <DashbordAddCustomer></DashbordAddCustomer>
+            </AdminRoutes>
+          ),
+        },
+
         {
           path: "/dashbord/staff/edit-staff",
           element: (

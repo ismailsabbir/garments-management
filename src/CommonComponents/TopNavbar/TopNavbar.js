@@ -8,6 +8,7 @@ import {
   AiOutlineInstagram,
   AiFillYoutube,
 } from "react-icons/ai";
+import { Link } from "react-router-dom";
 const TopNavbar = () => {
   return (
     <div className="top-navbar-con">
@@ -26,6 +27,9 @@ const TopNavbar = () => {
         </div>
       </div>
       <div className="top-navbar-right">
+        {/* <Link to="/make-project" className="button" id="make-project-btn">
+        wholesale
+        </Link> */}
         <p className="socila-icon-p">
           <FaFacebookF className="socila-icon"></FaFacebookF>
         </p>

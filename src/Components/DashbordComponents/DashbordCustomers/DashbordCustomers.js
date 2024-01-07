@@ -7,43 +7,105 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { IoMdAdd } from "react-icons/io";
 import { BiPrinter } from "react-icons/bi";
 import { FaSearchPlus } from "react-icons/fa";
+import { ToastContainer } from "react-toastify";
+import { Link } from "react-router-dom";
+import { FiEdit } from "react-icons/fi";
+import { BsSearch } from "react-icons/bs";
+import { Form } from "react-bootstrap";
+import { useQuery } from "@tanstack/react-query";
+import { FaUserTie } from "react-icons/fa6";
 const DashbordCustomers = () => {
   const [products, setproducts] = useState([]);
   const [cuscurrentpage, setcuscurrentpage] = useState(0);
-  const [datasize, setdatasize] = useState(5);
+  const [datasize, setdatasize] = useState(10);
   const [cuscount, setcuscount] = useState(0);
   const custompage = Math.ceil(cuscount / datasize);
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_URL}/allusers`)
-      .then((res) => res.json())
-      .then((data) => setproducts(data));
-  }, []);
+  const [searchvalue, setsearchvalue] = useState("");
+  // useEffect(() => {
+  //   fetch(`${process.env.REACT_APP_URL}/allusers`)
+  //     .then((res) => res.json())
+  //     .then((data) => setproducts(data));
+  // }, []);
+  const { data: productss = [], refetch } = useQuery({
+    queryKey: [
+      "staff",
+      {
+        search: searchvalue,
+        page: cuscurrentpage,
+        size: datasize,
+      },
+    ],
+    queryFn: () =>
+      fetch(
+        `${process.env.REACT_APP_URL}/allusers?search=${searchvalue}&&page=${cuscurrentpage}&&size=${datasize}`,
+        {
+          headers: {
+            authorization: `Beare ${localStorage.getItem("garments-token")}`,
+          },
+        }
+      )
+        .then((req) => req.json())
+        .then((data) => {
+          setproducts(data.result);
+          setcuscount(data?.count);
+          return data;
+        }),
+  });
   console.log(products);
   return (
     <div className="dashbord-shop-product-con">
-      <h5>Shop Products</h5>
-      <div className="import-update-delete-btn-con">
-        <button className="select-json-btn border-dashed border-2 border-green-700">
-          <LuImport className="mr-4 text-2xl"></LuImport>Select Your JSON
-          Products Category File
-        </button>
-        {/* <div className="bulk-action">
-          <button>
-            <LuClipboardEdit className="bulk-icon"></LuClipboardEdit>Bulk Action
+      <h5>Our Staff</h5>
+      <div className="staff-search-con">
+        <Form
+          // onSubmit={handlenamesearch}
+          className="name-search"
+        >
+          <input
+            className="name-input-staff"
+            type="text"
+            placeholder="Search by name"
+            name="name"
+          />
+          <button type="submit">
+            <BsSearch></BsSearch>
           </button>
-          <button id="pro-delete-btn">
-            <RiDeleteBinLine className="bulk-icon"></RiDeleteBinLine>Delete
-            Product
+        </Form>
+
+        <Form
+          // onSubmit={handleemailsearch}
+          className="name-search"
+        >
+          <input
+            className="name-input-staff"
+            type="email"
+            placeholder="Search by Email"
+            name="email"
+          />
+          <button type="submit">
+            <BsSearch></BsSearch>
           </button>
-          <button id="add-product-btn">
-            <IoMdAdd className="bulk-icon"></IoMdAdd> Add Producat
-          </button>
-        </div> */}
-      </div>
-      <div className="product-search-con">
-        <div id="category-search">
-          <input type="text" placeholder="Search Product" />
-        </div>
+        </Form>
+
+        {/* <input
+          className="email-input-staff"
+          onChange={handleemailsearch}
+          type="email"
+          placeholder="Search by Email"
+        /> */}
+        <select
+          // onChange={handlerole}
+          id="cars"
+          placeholder="Category"
+        >
+          <option value="" disabled selected>
+            Customer Role
+          </option>
+          <option value="premium">Premium</option>
+          <option value="normal">Normal</option>
+        </select>
+        <Link to="/dashbord/customers/add-customer" id="add-staff-btn">
+          <IoMdAdd className="bulk-icon"></IoMdAdd> Add customers
+        </Link>
       </div>
       <div className="all-product-con">
         <div className="overflow-x-auto">
@@ -51,55 +113,76 @@ const DashbordCustomers = () => {
             <table className="table recent-order-table">
               {/* <thead> */}
               <tr className="recent-order-tr">
-                <th>Select</th>
-                <th className="recent-order-hed">INVOICE NO</th>
-                <th className="recent-order-hed">ORDER TIME</th>
-                <th className="recent-order-hed">CUSTOMER NAME</th>
-                <th className="recent-order-hed">METHOD</th>
-                <th className="recent-order-hed">AMOUNT</th>
+                <th className="recent-order-hed">NAME</th>
+                <th className="recent-order-hed">EMAIL</th>
+                <th className="recent-order-hed">CONTACT</th>
+                <th className="recent-order-hed">JOINING DATE</th>
+                <th className="recent-order-hed">ROLE</th>
                 <th className="recent-order-hed">STATUS</th>
+                <th className="recent-order-hed">PUBLISHED</th>
                 <th className="recent-order-hed">ACTION</th>
-                <th className="recent-order-hed">INVOICE</th>
               </tr>
               {/* </thead> */}
               <tbody>
                 {products?.map((order) => (
                   <tr>
-                    <th>
-                      <label>
-                        <input type="checkbox" className="checkbox" />
-                      </label>
-                    </th>
                     <td className="das-order-data">
-                      <span>{order?.orderid}</span>{" "}
+                      <span className="staff-image-name">
+                        {order?.photo ? (
+                          <img src={order?.photo} alt="" />
+                        ) : (
+                          <p className="fauser-con">
+                            <FaUserTie className="fauser" />
+                          </p>
+                        )}
+                        {order?.name ? <p>{order?.name}</p> : <p>XX:YYY</p>}
+                      </span>
                     </td>
                     <td className="das-order-data">
-                      <span>{order?.order_date}</span>{" "}
+                      <span>{order?.email}</span>{" "}
                     </td>
                     <td className="das-order-data">
-                      <span>{order?.name}</span>{" "}
+                      {order?.phone ? (
+                        <span>{order?.phone}</span>
+                      ) : (
+                        <span>0100000000</span>
+                      )}
                     </td>
                     <td className="das-order-data">
-                      <span>Online</span>{" "}
+                      {order?.join_date ? (
+                        <span>{order?.join_date}</span>
+                      ) : (
+                        <span>00/00/00</span>
+                      )}
                     </td>
                     <td className="das-order-data">
-                      <span>Tk: {order?.total_price}</span>{" "}
+                      {order?.role ? (
+                        <span> {order?.role}</span>
+                      ) : (
+                        <span> Normal</span>
+                      )}
                     </td>
                     <td className="das-order-data">
-                      <span>{order?.order}</span>
+                      <button className="active-staff">Active</button>
                     </td>
                     <td className="das-order-data">
-                      <select className="status-select">
-                        <option value="">Delivered</option>
-                        <option value="">Pending</option>
-                        <option value="">Processing</option>
-                        <option value="cancel">Cancel</option>
-                      </select>
+                      <button
+                        // onClick={() => handleadmin(order?._id)}
+                        className="make-admin-btn"
+                      >
+                        Make Premium
+                      </button>
                     </td>
                     <td className="das-order-data">
                       <div className="print-serach">
-                        <BiPrinter className="printlogo"></BiPrinter>
-                        <FaSearchPlus className="printlogo"></FaSearchPlus>
+                        <Link to="/dashbord/staff/edit-staff" state={order}>
+                          <FiEdit className="printlogo"></FiEdit>
+                        </Link>
+
+                        <RiDeleteBinLine
+                          // onClick={() => handledelete(order)}
+                          className="printlogo"
+                        ></RiDeleteBinLine>
                       </div>
                     </td>
                   </tr>
@@ -122,6 +205,7 @@ const DashbordCustomers = () => {
           </div>
         </div>
       </div>
+      <ToastContainer></ToastContainer>
     </div>
   );
 };

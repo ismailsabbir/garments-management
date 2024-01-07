@@ -185,8 +185,18 @@ const MainNavbar = () => {
                   Login
                 </NavLink>
               )}
+              <Link
+                to="/premium/customer/signup"
+                className="button1 ml-4"
+                id="make-wholesale-btn"
+              >
+                Login For Wholesale
+              </Link>
             </Nav>
             <Navbar.Collapse className="justify-content-end navbar-end-con">
+              {/* <Link to="/make-project" className="button" id="make-project-btn">
+                wholesale
+              </Link> */}
               <Link to="/make-project" className="button" id="make-project-btn">
                 Customized
               </Link>

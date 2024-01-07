@@ -50,7 +50,15 @@ const ShopProductDetails = () => {
 
   const handleincress = () => {
     const newquentity = quentuty + 1;
+    const decrese = quentuty + 1 - 1;
     setquentity(newquentity);
+    if (quentuty >= oneproduct?.availavle) {
+      toast(`${quentuty + 1} products not available`, {
+        position: "top-center",
+        autoClose: 1000,
+      });
+      setquentity(decrese);
+    }
   };
   const handledecress = () => {
     if (quentuty > 1) {
@@ -60,11 +68,19 @@ const ShopProductDetails = () => {
       return;
     }
   };
-  console.log(quentuty);
-  const handleQuentity = (e) => {
-    console.log(e.target.value);
+
+  const handleQuentity = async (e) => {
     if (parseInt(e.target.value) > 1) {
-      setquentity(parseInt(e.target.value));
+      await setquentity(parseInt(e.target.value));
+      console.log(e.target.value);
+      console.log("quentuty", quentuty);
+      if (parseInt(e.target.value) > oneproduct?.availavle) {
+        toast(`${parseInt(e.target.value)} products not available`, {
+          position: "top-center",
+          autoClose: 1000,
+        });
+        setquentity(oneproduct?.availavle);
+      }
     } else {
       setquentity(1);
     }
@@ -281,7 +297,6 @@ const ShopProductDetails = () => {
     //     console.log(err.message);
     //   });
   };
-  console.log(size);
 
   const isButtonEnabled = oneproduct?.availavle > 1;
   const handleButtonClick = () => {
@@ -384,6 +399,10 @@ const ShopProductDetails = () => {
                 </span>
               </h6>
               <p>
+                <GoDotFill className="stock-icon"></GoDotFill> Available:
+                {oneproduct?.availavle}
+              </p>
+              <p>
                 <GoDotFill className="stock-icon"></GoDotFill> Model:
                 {oneproduct?.product_name}
               </p>
@@ -406,37 +425,6 @@ const ShopProductDetails = () => {
                   {asize?.size}
                 </button>
               ))}
-
-              {/* <button
-                className={size === 38 ? "select_size-btn" : "size_btn"}
-                onClick={() => setsize(38)}
-              >
-                38
-              </button>
-              <button
-                className={size === 40 ? "select_size-btn" : "size_btn"}
-                onClick={() => setsize(40)}
-              >
-                40
-              </button>
-              <button
-                className={size === 42 ? "select_size-btn" : "size_btn"}
-                onClick={() => setsize(42)}
-              >
-                42
-              </button>
-              <button
-                className={size === 44 ? "select_size-btn" : "size_btn"}
-                onClick={() => setsize(44)}
-              >
-                44
-              </button>
-              <button
-                className={size === 46 ? "select_size-btn" : "size_btn"}
-                onClick={() => setsize(46)}
-              >
-                46
-              </button> */}
             </div>
           ) : (
             <></>
