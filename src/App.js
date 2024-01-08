@@ -100,6 +100,10 @@ import DashbordEmployeeSalaryInvoice from "./Components/DashbordComponents/Dashb
 import DashbordAddCustomer from "./Components/DashbordAddCustomer/DashbordAddCustomer";
 import PremiumCustomerSignup from "./Pages/PremiumCustomerSignup/PremiumCustomerSignup";
 import PremiumCustomerLogin from "./Pages/PremiumCustomerLogin/PremiumCustomerLogin";
+import EmployeeLeavesRequest from "./Components/EmployeeComponents/EmployeeLeavesRequest/EmployeeLeavesRequest";
+import EmployeeLeavesRequestEdit from "./Components/EmployeeComponents/EmployeeLeavesRequestEdit/EmployeeLeavesRequestEdit";
+import DashbordLeaveManage from "./Components/DashbordComponents/DashbordLeaveManage/DashbordLeaveManage";
+import DashbordLeaveResponse from "./Components/DashbordComponents/DashbordLeaveResponse/DashbordLeaveResponse";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -730,6 +734,23 @@ function App() {
           ),
         },
         {
+          path: "/dashbord/employee/leaves",
+          element: (
+            <AdminRoutes>
+              <DashbordLeaveManage></DashbordLeaveManage>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/employee/leaves/response",
+          element: (
+            <AdminRoutes>
+              <DashbordLeaveResponse></DashbordLeaveResponse>
+            </AdminRoutes>
+          ),
+        },
+
+        {
           path: "/dashbord/customers/add-customer",
           element: (
             <AdminRoutes>
@@ -805,6 +826,22 @@ function App() {
           element: (
             <EmployeeRoutes>
               <EmployeeLeaves></EmployeeLeaves>
+            </EmployeeRoutes>
+          ),
+        },
+        {
+          path: "/employee/leaves/request",
+          element: (
+            <EmployeeRoutes>
+              <EmployeeLeavesRequest></EmployeeLeavesRequest>
+            </EmployeeRoutes>
+          ),
+        },
+        {
+          path: "/employee/leaves/request/edit",
+          element: (
+            <EmployeeRoutes>
+              <EmployeeLeavesRequestEdit></EmployeeLeavesRequestEdit>
             </EmployeeRoutes>
           ),
         },

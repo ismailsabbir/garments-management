@@ -1,17 +1,16 @@
 import React, { useContext, useState } from "react";
-import "./EmployeeLeaves.css";
-import { ToastContainer, toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import { EmployeeContext } from "../../../Layouts/EmployeeLayouts/EmployeeLayouts";
 import { useQuery } from "@tanstack/react-query";
+import { ToastContainer, toast } from "react-toastify";
 import { Form } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
+import { Link } from "react-router-dom";
 import { IoMdAdd } from "react-icons/io";
+import Loading from "../../../CommonComponents/Loading/Loading";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { EmployeeContext } from "../../../Layouts/EmployeeLayouts/EmployeeLayouts";
-import Loading from "../../../CommonComponents/Loading/Loading";
-import "./EmployeeLeaves.css";
-const EmployeeLeaves = () => {
+import "./DashbordLeaveManage.css";
+const DashbordLeaveManage = () => {
   const employee = useContext(EmployeeContext);
   const [staffs, setstaffs] = useState([]);
   const [cuscurrentpage, setcuscurrentpage] = useState(0);
@@ -23,7 +22,7 @@ const EmployeeLeaves = () => {
   console.log(staffs);
   const { data: products = [], refetch } = useQuery({
     queryKey: [
-      "my_leave_requests",
+      "all_leave_requests",
       {
         page: cuscurrentpage,
         size: datasize,
@@ -31,7 +30,7 @@ const EmployeeLeaves = () => {
     ],
     queryFn: () =>
       fetch(
-        `${process.env.REACT_APP_URL}/my_leave_requests?page=${cuscurrentpage}&&size=${datasize}&&email=${employee?.email}`,
+        `${process.env.REACT_APP_URL}/all_leave_requests?page=${cuscurrentpage}&&size=${datasize}&&email=${employee?.email}`,
         {
           headers: {
             authorization: `Beare ${localStorage.getItem("garments-token")}`,
@@ -136,7 +135,6 @@ const EmployeeLeaves = () => {
         setcuscount(data?.count);
       });
   };
-
   return (
     <div className="dashbord-shop-product-con">
       <h5>My Leaves</h5>
@@ -154,16 +152,16 @@ const EmployeeLeaves = () => {
         </Form>
 
         {/* <Form onSubmit={handleemailsearch} className="name-search">
-          <input
-            className="name-input-staff"
-            type="email"
-            placeholder="Search by Email"
-            name="email"
-          />
-          <button type="submit">
-            <BsSearch></BsSearch>
-          </button>
-        </Form> */}
+            <input
+              className="name-input-staff"
+              type="email"
+              placeholder="Search by Email"
+              name="email"
+            />
+            <button type="submit">
+              <BsSearch></BsSearch>
+            </button>
+          </Form> */}
 
         <select onChange={handlerole} id="cars" placeholder="Category">
           <option value="" disabled selected>
@@ -187,6 +185,7 @@ const EmployeeLeaves = () => {
                 <th className="recent-order-hed">Apply Date</th>
                 <th className="recent-order-hed">From Date</th>
                 <th className="recent-order-hed">To Date</th>
+                <th className="recent-order-hed">No Of Days</th>
                 <th className="recent-order-hed">Half Day</th>
                 <th className="recent-order-hed">Type</th>
                 <th className="recent-order-hed">Status</th>
@@ -215,6 +214,13 @@ const EmployeeLeaves = () => {
                         <span> {order?.to_date}</span>{" "}
                       </td>
                       <td className="das-order-data">
+                        <span className="no-of-day">
+                          {(new Date(order?.to_date) -
+                            new Date(order?.from_date)) /
+                            (1000 * 60 * 60 * 24)}
+                        </span>
+                      </td>
+                      <td className="das-order-data">
                         <span> {order?.half_day}</span>{" "}
                       </td>
                       <td className="das-order-data">
@@ -236,7 +242,7 @@ const EmployeeLeaves = () => {
                       <td className="das-order-data">
                         <div className="print-serach">
                           <Link
-                            to="/employee/leaves/request/edit"
+                            to="/dashbord/employee/leaves/response"
                             state={order}
                           >
                             <FiEdit className="printlogo"></FiEdit>
@@ -274,4 +280,4 @@ const EmployeeLeaves = () => {
   );
 };
 
-export default EmployeeLeaves;
+export default DashbordLeaveManage;

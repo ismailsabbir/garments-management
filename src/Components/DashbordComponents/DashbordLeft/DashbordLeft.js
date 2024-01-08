@@ -66,6 +66,15 @@ const DashbordLeft = () => {
         <MdOutlinePayments className="dashbord-icon"></MdOutlinePayments>
         Employee Salary
       </NavLink>
+      <NavLink
+        to="/dashbord/employee/leaves"
+        className={({ isActive }) =>
+          isActive ? "dashbord-active-link" : "dashbord-link"
+        }
+      >
+        <MdOutlinePayments className="dashbord-icon"></MdOutlinePayments>
+        Leave Management
+      </NavLink>
 
       <NavLink
         to="/dashbord/shop-product"

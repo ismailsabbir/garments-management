@@ -1,0 +1,13 @@
+.leave_status {
+    border: 2px solid green;
+    padding: 1px 2px;
+    color: green;
+    border-radius: 4px;
+}
+
+.rejected {
+    border: 2px solid brown;
+    padding: 1px 2px;
+    color: green;
+    border-radius: 4px;
+}

@@ -16,6 +16,7 @@ import { AuthContext } from "../../../Context/UserContext";
 import { ToastContainer, toast } from "react-toastify";
 import { useEffect } from "react";
 import ShopRelatedProducts from "../ShopRelatedProducts/ShopRelatedProducts";
+import Rating from "react-rating-stars-component";
 const ShopProductDetails = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -378,12 +379,20 @@ const ShopProductDetails = () => {
             {oneproduct?.product_name}
           </h2>
           <div className="review-stars">
-            <p>Reviews : </p>
-            <AiOutlineStar className="review-star"></AiOutlineStar>
-            <AiOutlineStar className="review-star"></AiOutlineStar>
-            <AiOutlineStar className="review-star"></AiOutlineStar>
-            <AiOutlineStar className="review-star"></AiOutlineStar>
-            <AiOutlineStar className="review-star"></AiOutlineStar>
+            {/* <p className="mt-4 mr-4">Ratting({oneproduct?.averageRating}): </p>
+            <Rating value={oneproduct?.averageRating} size={30} edit={false} /> */}
+            {oneproduct && oneproduct.averageRating && (
+              <>
+                <p className="mt-4 mr-4">
+                  Rating ({oneproduct.averageRating}):{" "}
+                </p>
+                <Rating
+                  value={oneproduct.averageRating}
+                  size={30}
+                  edit={false}
+                />
+              </>
+            )}
           </div>
           <div className="taka-stock-brand">
             <div>
