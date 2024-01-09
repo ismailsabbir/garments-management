@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { PiSquaresFourDuotone } from "react-icons/pi";
 import { FiSettings, FiUser, FiUsers } from "react-icons/fi";
 import { BiErrorCircle, BiHomeAlt } from "react-icons/bi";
@@ -9,7 +9,16 @@ import { MdOutlinePayments, MdProductionQuantityLimits } from "react-icons/md";
 import { TbCategory } from "react-icons/tb";
 import { LuCompass } from "react-icons/lu";
 import { MdOutlineNoteAlt } from "react-icons/md";
+import { NavDropdown } from "react-bootstrap";
+import { FaAngleDown, FaBars } from "react-icons/fa";
+import { HiBars2 } from "react-icons/hi2";
+import { FaChevronRight } from "react-icons/fa";
 const DashbordLeft = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <div className="dashbord-left-con print:hidden">
       <NavLink
@@ -21,6 +30,7 @@ const DashbordLeft = () => {
         <PiSquaresFourDuotone className="dashbord-icon"></PiSquaresFourDuotone>{" "}
         Dashboard
       </NavLink>
+
       <NavLink
         to="/dashbord/attendance"
         className={({ isActive }) =>
@@ -144,6 +154,44 @@ const DashbordLeft = () => {
       >
         <FiUser className="dashbord-icon"></FiUser> Our Staff
       </NavLink>
+      <div className="dropdown-con">
+        <button
+          id="dashbord-drop-drown"
+          className="dashbord-link"
+          onClick={toggleDropdown}
+        >
+          <FaBars className="dashbord-icon" />
+          {/* <HiBars2 className="dashbord-icon" /> */}
+          <div className="menu-bar-flex">
+            <span>Contents</span> <FaAngleDown />
+          </div>
+        </button>
+        {isOpen && (
+          <div className="dropdown-content" style={{ height: "auto" }}>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "dashbord-active-link" : "dashbord-link"
+              }
+              to="/dashbord/missions"
+            >
+              <FaChevronRight className="dashbord-icon" />
+              {/* <PiSquaresFourDuotone className="dashbord-icon"></PiSquaresFourDuotone>{" "} */}
+              Missions
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "dashbord-active-link" : "dashbord-link"
+              }
+              to="/dashbord/vissions"
+            >
+              <FaChevronRight className="dashbord-icon" />
+              {/* <PiSquaresFourDuotone className="dashbord-icon"></PiSquaresFourDuotone>{" "} */}
+              Vissions
+            </NavLink>
+          </div>
+        )}
+      </div>
+
       <NavLink
         className={({ isActive }) =>
           isActive ? "dashbord-active-link" : "dashbord-link"

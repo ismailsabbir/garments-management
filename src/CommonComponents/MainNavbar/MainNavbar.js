@@ -39,11 +39,9 @@ const MainNavbar = () => {
       })
       .then((jsonData) => {
         setuserinfo(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
-        // setLoading(false);
       });
   }, [user?.email, userlogout]);
   useEffect(() => {
@@ -97,7 +95,7 @@ const MainNavbar = () => {
       >
         <div className="main-nav-con">
           <div className="nav-brand-tab">
-            <Navbar.Brand href="#home" className="navbar-brand-imaage">
+            <Navbar.Brand href="/" className="navbar-brand-imaage">
               <img src={logo} alt="not found" />
             </Navbar.Brand>
 

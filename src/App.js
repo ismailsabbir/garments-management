@@ -104,6 +104,12 @@ import EmployeeLeavesRequest from "./Components/EmployeeComponents/EmployeeLeave
 import EmployeeLeavesRequestEdit from "./Components/EmployeeComponents/EmployeeLeavesRequestEdit/EmployeeLeavesRequestEdit";
 import DashbordLeaveManage from "./Components/DashbordComponents/DashbordLeaveManage/DashbordLeaveManage";
 import DashbordLeaveResponse from "./Components/DashbordComponents/DashbordLeaveResponse/DashbordLeaveResponse";
+import DashbordMission from "./Components/DashbordComponents/DashbordMission/DashbordMission";
+import DashbordVission from "./Components/DashbordComponents/DashbordVission/DashbordVission";
+import DashbordVissionEdit from "./Components/DashbordComponents/DashbordVissionEdit/DashbordVissionEdit";
+import DashbordAddVission from "./Components/DashbordComponents/DashbordAddVission/DashbordAddVission";
+import DashbordMissionAdd from "./Components/DashbordComponents/DashbordMissionAdd/DashbordMissionAdd";
+import DashbordMissionEdit from "./Components/DashbordComponents/DashbordMissionEdit/DashbordMissionEdit";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -113,6 +119,8 @@ function App() {
   const categorys = useFetch(`${process.env.REACT_APP_URL}/project-category`);
   const shopcategorys = useFetch(`${process.env.REACT_APP_URL}/shopcategory`);
   const shopproducts = useFetch(`${process.env.REACT_APP_URL}/shopproduct`);
+  const missionss = useFetch(`${process.env.REACT_APP_URL}/missions`);
+  const vissionss = useFetch(`${process.env.REACT_APP_URL}/vissions`);
 
   const shopproduct = shopproducts?.data;
   const shopcategory = shopcategorys?.data;
@@ -120,7 +128,10 @@ function App() {
   const projects = projectss?.data;
   const member = memberss?.data;
   const category = categorys.data;
-  console.log(shopproduct);
+  const missions = missionss?.data;
+  const vissions = vissionss?.data;
+
+  console.log(missions, vissions);
   const alldata = {
     data,
     projects,
@@ -129,6 +140,8 @@ function App() {
     category,
     shopcategory,
     shopproduct,
+    missions,
+    vissions,
   };
 
   const router = createBrowserRouter([
@@ -767,6 +780,55 @@ function App() {
             </AdminRoutes>
           ),
         },
+        {
+          path: "/dashbord/missions",
+          element: (
+            <AdminRoutes>
+              <DashbordMission></DashbordMission>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/vissions",
+          element: (
+            <AdminRoutes>
+              <DashbordVission></DashbordVission>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/vissions/edit",
+          element: (
+            <AdminRoutes>
+              <DashbordVissionEdit></DashbordVissionEdit>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/vissions/add",
+          element: (
+            <AdminRoutes>
+              <DashbordAddVission></DashbordAddVission>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/missions/add",
+          element: (
+            <AdminRoutes>
+              <DashbordMissionAdd></DashbordMissionAdd>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/missions/edit",
+          element: (
+            <AdminRoutes>
+              <DashbordMissionEdit></DashbordMissionEdit>
+            </AdminRoutes>
+          ),
+        },
+
         {
           path: "/dashbord/setting",
           element: (

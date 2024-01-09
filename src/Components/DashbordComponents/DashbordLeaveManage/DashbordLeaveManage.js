@@ -151,18 +151,6 @@ const DashbordLeaveManage = () => {
           </button>
         </Form>
 
-        {/* <Form onSubmit={handleemailsearch} className="name-search">
-            <input
-              className="name-input-staff"
-              type="email"
-              placeholder="Search by Email"
-              name="email"
-            />
-            <button type="submit">
-              <BsSearch></BsSearch>
-            </button>
-          </Form> */}
-
         <select onChange={handlerole} id="cars" placeholder="Category">
           <option value="" disabled selected>
             Leave Status

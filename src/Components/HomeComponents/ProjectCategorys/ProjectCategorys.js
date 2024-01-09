@@ -15,20 +15,22 @@ const ProjectCategorys = () => {
         <div className="all-category row">
           {category?.map((cate) => (
             <div className="category col col-12 col-sm-12 col-md-12 col-lg-3">
-              <div className="category-image">
-                <img src={cate?.image} alt="n" />
-                <div className="category-text">
-                  <h3>{cate?.name}</h3>
-                  <p>{cate?.text}</p>
-                  <Link
-                    to={`/customized-details/${cate?.category_id}`}
-                    className="button"
-                    id="custom-btn"
-                  >
-                    Customized
-                  </Link>
+              <Link to={`/customized-details/${cate?.category_id}`}>
+                <div className="category-image">
+                  <img src={cate?.image} alt="n" />
+                  <div className="category-text">
+                    <h3>{cate?.name}</h3>
+                    <p>{cate?.text}</p>
+                    <Link
+                      to={`/customized-details/${cate?.category_id}`}
+                      className="button"
+                      id="custom-btn"
+                    >
+                      Customized
+                    </Link>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
           ))}
         </div>

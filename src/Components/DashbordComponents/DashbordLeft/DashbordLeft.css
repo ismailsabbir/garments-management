@@ -38,3 +38,20 @@
     border-left: 6px solid #be5184;
     /* border-radius: 2px; */
 }
+
+.dropdown-con {
+    /* border: 1px solid brown; */
+}
+
+#dashbord-drop-drown {
+    /* border: 1px solid green; */
+    width: 100%;
+
+}
+
+.menu-bar-flex {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./MissionVission.css";
 import mission from "../../../Images/mission.jpg";
 import vission from "../../../Images/vission.jpg";
 import { AiOutlineDownCircle } from "react-icons/ai";
+import { Link } from "react-router-dom";
+import { servcontext } from "../../../App";
 const MissionVission = () => {
+  const { missions, vissions } = useContext(servcontext);
+  console.log(typeof missions, vissions);
   return (
     <div className="mission-vission-con">
       <div className="mission-vission-left">
@@ -27,50 +31,26 @@ const MissionVission = () => {
         <div className="mission-vission">
           <div className="vission">
             <h4>Our Visions</h4>
-            <p className="vission1">
-              <AiOutlineDownCircle className="circel-icon"></AiOutlineDownCircle>
-              Integer consectetur tincidunt.
-            </p>
-            <p className="vission1">
-              <AiOutlineDownCircle className="circel-icon"></AiOutlineDownCircle>
-              Integer consectetur tincidunt.
-            </p>
-            <p className="vission1">
-              <AiOutlineDownCircle className="circel-icon"></AiOutlineDownCircle>
-              Integer consectetur tincidunt.
-            </p>
-            <p className="vission1">
-              <AiOutlineDownCircle className="circel-icon"></AiOutlineDownCircle>
-              Integer consectetur tincidunt.
-            </p>
-            <p className="vission1">
-              <AiOutlineDownCircle className="circel-icon"></AiOutlineDownCircle>
-              Integer consectetur tincidunt.
-            </p>
+            {vissions?.vission?.map((vission) => (
+              <p className="vission1">
+                <AiOutlineDownCircle className="circel-icon"></AiOutlineDownCircle>
+                {vission?.vision}
+              </p>
+            ))}
           </div>
           <div className="mission">
             <h4>Our Mission</h4>
-            <p className="vission1">
-              <AiOutlineDownCircle className="circel-icon"></AiOutlineDownCircle>
-              Integer consectetur tincidunt.
-            </p>
-            <p className="vission1">
-              <AiOutlineDownCircle className="circel-icon"></AiOutlineDownCircle>
-              Integer consectetur tincidunt.
-            </p>
-            <p className="vission1">
-              <AiOutlineDownCircle className="circel-icon"></AiOutlineDownCircle>
-              Integer consectetur tincidunt.
-            </p>
-            <p className="vission1">
-              <AiOutlineDownCircle className="circel-icon"></AiOutlineDownCircle>
-              Integer consectetur tincidunt.
-            </p>
+            {missions?.mission?.map((mission) => (
+              <p className="vission1">
+                <AiOutlineDownCircle className="circel-icon"></AiOutlineDownCircle>
+                {mission?.mission}
+              </p>
+            ))}
           </div>
         </div>
-        <button className="button" id="discover-btn">
+        <Link to="/aboutus" className="button" id="discover-btn">
           MORE ABOUT US
-        </button>
+        </Link>
       </div>
     </div>
   );

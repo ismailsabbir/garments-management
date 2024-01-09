@@ -4,6 +4,7 @@ import icon1 from "../../../Images/Icon-1.png";
 import icon2 from "../../../Images/Icon-2.png";
 import icon3 from "../../../Images/Icon-3.png";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 const HomeBanner = () => {
   const [isFixed, setIsFixed] = useState(false);
   const handleScroll = () => {
@@ -25,9 +26,9 @@ const HomeBanner = () => {
             dignissim. Metus aenean vulputate ex sed sem aliquet dapibus. Mauris
             imperdiet.
           </p>
-          <button className="button" id="discover-btn">
+          <Link to="/shop" className="button" id="discover-btn">
             DISCOVER MORE
-          </button>
+          </Link>
         </div>
       </div>
 
