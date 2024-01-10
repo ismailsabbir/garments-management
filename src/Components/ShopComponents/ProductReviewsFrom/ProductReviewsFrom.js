@@ -6,7 +6,6 @@ import { AuthContext } from "../../../Context/UserContext";
 import { ToastContainer, toast } from "react-toastify";
 import Rating from "react-rating-stars-component";
 const ProductReviewsFrom = ({ oneproduct }) => {
-  console.log("one product", oneproduct);
   const { user } = useContext(AuthContext);
   const [userRating, setUserRating] = useState(0);
   const handleRatingChange = (newRating) => {

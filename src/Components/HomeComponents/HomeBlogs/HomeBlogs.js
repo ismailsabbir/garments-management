@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "./HomeBlogs.css";
 import { servcontext } from "../../../App";
 import SingleBlog from "../SingleBlog/SingleBlog";
+import { Link } from "react-router-dom";
 const HomeBlogs = () => {
   const { blogs } = useContext(servcontext);
   const newblogs = blogs?.slice(0, 3);
@@ -20,6 +21,11 @@ const HomeBlogs = () => {
         {newblogs?.map((blog) => (
           <SingleBlog blog={blog} key={blog?._id}></SingleBlog>
         ))}
+      </div>
+      <div className="view_all_blog_btn">
+        <Link to="/blog" className="view_all_blog_link">
+          VIEW ALL BLOGS
+        </Link>
       </div>
     </div>
   );

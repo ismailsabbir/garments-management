@@ -3,3 +3,22 @@
     margin-top: 60px;
 
 }
+
+.view_all_blog_btn {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.view_all_blog_link {
+    border: 1px solid #be5184;
+    background-color: #be5184;
+    border-radius: 4px;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+
+}

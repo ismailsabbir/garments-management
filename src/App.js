@@ -119,6 +119,11 @@ import DashbordProject from "./Components/DashbordComponents/DashbordProject/Das
 import DashbordProjectAdd from "./Components/DashbordComponents/DashbordProjectAdd/DashbordProjectAdd";
 import DashbordProjectEdit from "./Components/DashbordComponents/DashbordProjectEdit/DashbordProjectEdit";
 import DashbordProjectView from "./Components/DashbordComponents/DashbordProjectView/DashbordProjectView";
+import BlogDetailsPage from "./Pages/BlogDetailsPage/BlogDetailsPage";
+import DashbordBlogs from "./Components/DashbordComponents/DashbordBlogs/DashbordBlogs";
+import DashbordBlogsAdd from "./Components/DashbordComponents/DashbordBlogsAdd/DashbordBlogsAdd";
+import DashbordBlogsEdit from "./Components/DashbordComponents/DashbordBlogsEdit/DashbordBlogsEdit";
+import DashbordBlogsView from "./Components/DashbordComponents/DashbordBlogsView/DashbordBlogsView";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -173,6 +178,10 @@ function App() {
         {
           path: "/aboutus",
           element: <AboutUs></AboutUs>,
+        },
+        {
+          path: "/blog/details",
+          element: <BlogDetailsPage></BlogDetailsPage>,
         },
         {
           path: "/services",
@@ -906,6 +915,38 @@ function App() {
           element: (
             <AdminRoutes>
               <DashbordProjectView></DashbordProjectView>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/blog/content",
+          element: (
+            <AdminRoutes>
+              <DashbordBlogs></DashbordBlogs>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/blog/content/add",
+          element: (
+            <AdminRoutes>
+              <DashbordBlogsAdd></DashbordBlogsAdd>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/blog/content/edit",
+          element: (
+            <AdminRoutes>
+              <DashbordBlogsEdit></DashbordBlogsEdit>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/blog/content/view",
+          element: (
+            <AdminRoutes>
+              <DashbordBlogsView></DashbordBlogsView>
             </AdminRoutes>
           ),
         },

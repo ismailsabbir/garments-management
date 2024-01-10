@@ -209,6 +209,16 @@ const DashbordLeft = () => {
               {/* <PiSquaresFourDuotone className="dashbord-icon"></PiSquaresFourDuotone>{" "} */}
               Projects
             </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "dashbord-active-link" : "dashbord-link"
+              }
+              to="/dashbord/blog/content"
+            >
+              <FaChevronRight className="dashbord-icon" />
+              {/* <PiSquaresFourDuotone className="dashbord-icon"></PiSquaresFourDuotone>{" "} */}
+              Blogs
+            </NavLink>
           </div>
         )}
       </div>

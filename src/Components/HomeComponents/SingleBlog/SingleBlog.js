@@ -8,6 +8,8 @@ import "./SingleBlog.css";
 const SingleBlog = ({ blog }) => {
   return (
     <Link
+      to="/blog/details"
+      state={blog}
       className="blog-info col col-12 col-sm-12 col-md-4 col-lg-3 m-4"
       id="blog-info"
     >
