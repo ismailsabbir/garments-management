@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SiPowerpages } from "react-icons/si";
 import { BsCart, BsCartCheck, BsJournalBookmark } from "react-icons/bs";
 import { FaRotate } from "react-icons/fa6";
@@ -6,6 +6,73 @@ import { GrDeliver } from "react-icons/gr";
 import { TiTick } from "react-icons/ti";
 import DashbordChirts from "../DashbordComponents/DashbordChirts/DashbordChirts";
 const DashbordhomeFirst = () => {
+  const [todayshoporders, settodayshoporders] = useState([]);
+  const [todayCustomizedorders, settodayCustomizedorders] = useState([]);
+  const [todayshopordersPrice, settodayshopordersprice] = useState("");
+  const [todayCustomizedordersPrice, settodayCustomizedordersPrice] =
+    useState("");
+
+  const [monthshoporders, setmonthshoporders] = useState([]);
+  const [monthCustomizedorders, setmonthCustomizedorders] = useState([]);
+  const [monthshopordersPrice, setmonthshopordersprice] = useState("");
+  const [monthCustomizedordersPrice, setmonthCustomizedordersPrice] =
+    useState("");
+  const [yearhshoporders, setyearshoporders] = useState([]);
+  const [yearhCustomizedorders, setyearCustomizedorders] = useState([]);
+  const [yearhshopordersPrice, setyearshopordersprice] = useState("");
+  const [yearhCustomizedordersPrice, setyearCustomizedordersPrice] =
+    useState("");
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_URL}/today-orders`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("todaydata", data);
+        settodayshoporders(data?.todayOrders);
+        settodayCustomizedorders(data?.todycustomorders);
+        settodayshopordersprice(data?.totalPrice);
+        settodayCustomizedordersPrice(data?.totla_customized_price);
+      });
+  }, []);
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_URL}/currentMonthOrders`)
+      .then((res) => res.json())
+      .then((data) => {
+        setmonthshoporders(data?.orders);
+        setmonthCustomizedorders(data?.customizedorders);
+        setmonthshopordersprice(data?.totalPrice);
+        setmonthCustomizedordersPrice(data?.customizedPrice);
+      });
+  }, []);
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_URL}/currentYearOrders`)
+      .then((res) => res.json())
+      .then((data) => {
+        setyearshoporders(data?.orders);
+        setyearCustomizedorders(data?.customizedorders);
+        setyearshopordersprice(data?.totalPrice);
+        setyearCustomizedordersPrice(data?.customizedprice);
+      });
+  }, []);
+  console.log(
+    "Today",
+    todayshoporders,
+    todayCustomizedorders,
+    todayshopordersPrice,
+    todayCustomizedordersPrice
+  );
+  console.log(
+    "month",
+    monthshoporders,
+    monthCustomizedorders,
+    monthshopordersPrice,
+    monthCustomizedordersPrice
+  );
+  console.log(
+    yearhshoporders,
+    yearhCustomizedorders,
+    yearhshopordersPrice,
+    yearhCustomizedordersPrice
+  );
   return (
     <div className="dashbord-home-first-con">
       <div className=" dashbord-home-first-hole">
