@@ -109,6 +109,7 @@ const DashbordAddProduct = () => {
       "Machine Wash Cold, Tumble Dry Low",
     ];
     console.log(product_name);
+    console.log(process.env.REACT_APP_URL);
     const productinfo = {
       product_id,
       category_id,

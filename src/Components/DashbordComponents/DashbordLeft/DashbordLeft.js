@@ -13,6 +13,7 @@ import { NavDropdown } from "react-bootstrap";
 import { FaAngleDown, FaBars } from "react-icons/fa";
 import { HiBars2 } from "react-icons/hi2";
 import { FaChevronRight } from "react-icons/fa";
+import { FaPeopleGroup } from "react-icons/fa6";
 const DashbordLeft = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -188,10 +189,39 @@ const DashbordLeft = () => {
               {/* <PiSquaresFourDuotone className="dashbord-icon"></PiSquaresFourDuotone>{" "} */}
               Vissions
             </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "dashbord-active-link" : "dashbord-link"
+              }
+              to="/dashbord/services/content"
+            >
+              <FaChevronRight className="dashbord-icon" />
+              {/* <PiSquaresFourDuotone className="dashbord-icon"></PiSquaresFourDuotone>{" "} */}
+              Services
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "dashbord-active-link" : "dashbord-link"
+              }
+              to="/dashbord/project/content"
+            >
+              <FaChevronRight className="dashbord-icon" />
+              {/* <PiSquaresFourDuotone className="dashbord-icon"></PiSquaresFourDuotone>{" "} */}
+              Projects
+            </NavLink>
           </div>
         )}
       </div>
 
+      <NavLink
+        className={({ isActive }) =>
+          isActive ? "dashbord-active-link" : "dashbord-link"
+        }
+        to="/dashbord/partnership"
+      >
+        <FaPeopleGroup className="dashbord-icon" />
+        Partnerships
+      </NavLink>
       <NavLink
         className={({ isActive }) =>
           isActive ? "dashbord-active-link" : "dashbord-link"

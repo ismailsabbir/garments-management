@@ -110,6 +110,15 @@ import DashbordVissionEdit from "./Components/DashbordComponents/DashbordVission
 import DashbordAddVission from "./Components/DashbordComponents/DashbordAddVission/DashbordAddVission";
 import DashbordMissionAdd from "./Components/DashbordComponents/DashbordMissionAdd/DashbordMissionAdd";
 import DashbordMissionEdit from "./Components/DashbordComponents/DashbordMissionEdit/DashbordMissionEdit";
+import DashbordServicsContent from "./Components/DashbordComponents/DashbordServicsContent/DashbordServicsContent";
+import DashbordServicsContentAdd from "./Components/DashbordComponents/DashbordServicsContentAdd/DashbordServicsContentAdd";
+import DashbordServiceContentView from "./Components/DashbordComponents/DashbordServiceContentView/DashbordServiceContentView";
+import DashbordPartnership from "./Components/DashbordComponents/DashbordPartnership/DashbordPartnership";
+import DashbordPartnershipAdd from "./Components/DashbordComponents/DashbordPartnershipAdd/DashbordPartnershipAdd";
+import DashbordProject from "./Components/DashbordComponents/DashbordProject/DashbordProject";
+import DashbordProjectAdd from "./Components/DashbordComponents/DashbordProjectAdd/DashbordProjectAdd";
+import DashbordProjectEdit from "./Components/DashbordComponents/DashbordProjectEdit/DashbordProjectEdit";
+import DashbordProjectView from "./Components/DashbordComponents/DashbordProjectView/DashbordProjectView";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -825,6 +834,78 @@ function App() {
           element: (
             <AdminRoutes>
               <DashbordMissionEdit></DashbordMissionEdit>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/services/content",
+          element: (
+            <AdminRoutes>
+              <DashbordServicsContent></DashbordServicsContent>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/services/content/view",
+          element: (
+            <AdminRoutes>
+              <DashbordServiceContentView></DashbordServiceContentView>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/services/content/add",
+          element: (
+            <AdminRoutes>
+              <DashbordServicsContentAdd></DashbordServicsContentAdd>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/partnership",
+          element: (
+            <AdminRoutes>
+              <DashbordPartnership></DashbordPartnership>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/partnership/add",
+          element: (
+            <AdminRoutes>
+              <DashbordPartnershipAdd></DashbordPartnershipAdd>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/project/content",
+          element: (
+            <AdminRoutes>
+              <DashbordProject></DashbordProject>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/project/content/add",
+          element: (
+            <AdminRoutes>
+              <DashbordProjectAdd></DashbordProjectAdd>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/project/content/edit",
+          element: (
+            <AdminRoutes>
+              <DashbordProjectEdit></DashbordProjectEdit>
+            </AdminRoutes>
+          ),
+        },
+        {
+          path: "/dashbord/project/content/view",
+          element: (
+            <AdminRoutes>
+              <DashbordProjectView></DashbordProjectView>
             </AdminRoutes>
           ),
         },

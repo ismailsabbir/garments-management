@@ -1,0 +1,50 @@
+.service_add {
+    width: 48%;
+    border: 1px solid gainsboro;
+    padding: 20px;
+    border-radius: 4px;
+
+}
+
+/* .staff-first-name-lastname {
+    border: 1px solid green;
+} */
+
+.service-type-input {
+    width: 100%;
+    /* border: 1px solid gold; */
+}
+
+.add_type_btn {
+    border: 1px solid #DCF2F1;
+    background-color: #DCF2F1;
+    padding: 4px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-weight: 500;
+
+}
+
+
+.remove-process-btn {
+    border: 1px solid #C21292;
+    background-color: #C21292;
+
+}
+
+.service-process-controler {
+    width: 100%;
+
+}
+
+.remove-btn-con {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: white;
+    padding: 2px;
+    border-radius: 2px;
+}

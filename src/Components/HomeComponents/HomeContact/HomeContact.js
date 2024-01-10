@@ -1,5 +1,6 @@
 import React from "react";
 import "./HomeContact.css";
+import { Link } from "react-router-dom";
 const HomeContact = () => {
   return (
     <div className="homecontact-con">
@@ -9,7 +10,10 @@ const HomeContact = () => {
         felis vel orci iaculis tempor tristique sagittis urna. Phasellus ac ante
         in lacus tempor egestas.
       </p>
-      <button className="button"> Contact Us</button>
+      <Link to="/contactus" className="button">
+        {" "}
+        Contact Us
+      </Link>
     </div>
   );
 };

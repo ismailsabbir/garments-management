@@ -1,0 +1,26 @@
+.dashbord_partnership {
+    padding: 0px 20px;
+}
+
+.partnershi-con {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#partnership {
+    border: 1px solid #80BCBD;
+    background-color: #80BCBD;
+    margin: 20px;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 8px;
+}
+
+#partnership img {
+    width: 150px;
+    margin-bottom: 20px;
+}

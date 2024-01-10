@@ -1,0 +1,13 @@
+#service_view_con {
+
+    width: 90%;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px 50px;
+    border-radius: 10px;
+}
+
+#service_view_mid_img {
+
+    height: 300px;
+}
