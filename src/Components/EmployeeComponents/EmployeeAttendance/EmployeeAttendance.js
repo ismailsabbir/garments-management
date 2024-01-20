@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import "./EmployeeAttendance.css";
 import { Form, Table } from "react-bootstrap";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { FiEdit } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { RiDeleteBinLine } from "react-icons/ri";
@@ -10,11 +10,14 @@ import Loading from "../../../CommonComponents/Loading/Loading";
 import { EmployeeContext } from "./../../../Layouts/EmployeeLayouts/EmployeeLayouts";
 import { useQuery } from "@tanstack/react-query";
 import { BsSearch } from "react-icons/bs";
+import Swal from "sweetalert2";
+import { AdminContext } from "../../../Layouts/DashbordLayouts/DashbordLayouts";
 const EmployeeAttendance = () => {
   const employee = useContext(EmployeeContext);
   const [Attendance, setAttendance] = useState([]);
   const [loading, setLoading] = useState(true);
   const [employeeid, setemployeeid] = useState(employee?.employee_id);
+
   const { data: productall = [], refetch } = useQuery({
     queryKey: [
       "specificAttendance",
@@ -40,66 +43,109 @@ const EmployeeAttendance = () => {
           setLoading(false);
         }),
   });
+  console.log(Attendance);
+  const handledeleteAttendance = (attendance) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to delate this!",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "DELATE",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(attendance);
+        fetch(
+          `${process.env.REACT_APP_URL}/delete-employee-attendance/${attendance?._id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-type": "application/json",
+              authorization: `Beare ${localStorage.getItem("garments-token")}`,
+            },
+
+            body: JSON.stringify(attendance),
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data?.deletedCount > 0) {
+              toast("Attendance delete sucessfully !!!", {
+                position: "top-center",
+                autoClose: 1000,
+              });
+            }
+            refetch();
+          });
+      }
+    });
+  };
+  const handleEmployIdSearch = (e) => {
+    e.preventDefault();
+    console.log(e.target.employeeId.value);
+    setemployeeid(e.target.employeeId.value);
+    // refetch();
+  };
   return (
     <div>
-      <div className="employee-attendance-search">
-        <h5>Employee Attendance</h5>
-        <Form
-          // onSubmit={handleEmployIdSearch}
-          className="name-search"
-        >
-          <input
-            className="name-input-staff"
-            type="date"
-            placeholder="Search by Date"
-            name="employeeId"
-          />
-          <button type="submit">
-            <BsSearch></BsSearch>
-          </button>
-        </Form>
-      </div>
-      <div className="product-search-con employee-info-con-admin">
-        <div className="employee-img-name">
-          <img src={Attendance?.employeeinfo?.photo} alt="" />
-          <div className="employee_informationss">
-            <h6>{Attendance?.employeeinfo?.name}</h6>
-            <p>{Attendance?.employeeinfo?.role}</p>
+      <div className="das-recent-order-con">
+        <div className="employee-attendance-search">
+          <h5>Employee Attendance</h5>
+          <Form onSubmit={handleEmployIdSearch} className="name-search">
+            <input
+              className="name-input-staff"
+              type="text"
+              placeholder="Search by Employee_id"
+              name="employeeId"
+            />
+            <button type="submit">
+              <BsSearch></BsSearch>
+            </button>
+          </Form>
+        </div>
+
+        <div className="product-search-con employee-info-con-admin">
+          <div className="employee-img-name">
+            <img src={Attendance?.employeeinfo?.photo} alt="" />
+            <div className="employee_informationss">
+              <h6>{Attendance?.employeeinfo?.name}</h6>
+              <p>{Attendance?.employeeinfo?.role}</p>
+            </div>
+          </div>
+          <div>
+            <h6>Employee ID</h6>
+            <p>{Attendance?.employeeinfo?.employee_id}</p>
+          </div>
+          <div>
+            <h6>Joining Date</h6>
+            <p>{Attendance?.employeeinfo?.join_date}</p>
+          </div>
+          <div>
+            <h6>Department</h6>
+            <p>Garments</p>
           </div>
         </div>
-        <div>
-          <h6>Employee ID</h6>
-          <p>{Attendance?.employeeinfo?.employee_id}</p>
+        <div className="employee-working-time-con">
+          <div className="employee-time-chart">
+            {/* averageInTime, averageOutTime, averageWorkingTime */}
+            <h3>{Attendance?.averageWorkingTime}</h3>
+            <p>Average Working Hours</p>
+          </div>
+          <div className="employee-time-chart">
+            <h3>{Attendance?.averageInTime}PM</h3>
+            <p>Average In Time</p>
+          </div>
+          <div className="employee-time-chart">
+            <h3>{Attendance?.averageOutTime}AM</h3>
+            <p>Average Out Time</p>
+          </div>
+          <div className="employee-time-chart">
+            <h3>01:00</h3>
+            <p>Average Break Time</p>
+          </div>
         </div>
-        <div>
-          <h6>Joining Date</h6>
-          <p>{Attendance?.employeeinfo?.join_date}</p>
-        </div>
-        <div>
-          <h6>Department</h6>
-          <p>Garments</p>
-        </div>
-      </div>
-      <div className="employee-working-time-con">
-        <div className="employee-time-chart">
-          {/* averageInTime, averageOutTime, averageWorkingTime */}
-          <h3>{Attendance?.averageWorkingTime}</h3>
-          <p>Average Working Hours</p>
-        </div>
-        <div className="employee-time-chart">
-          <h3>{Attendance?.averageInTime}PM</h3>
-          <p>Average In Time</p>
-        </div>
-        <div className="employee-time-chart">
-          <h3>{Attendance?.averageOutTime}AM</h3>
-          <p>Average Out Time</p>
-        </div>
-        <div className="employee-time-chart">
-          <h3>01:00</h3>
-          <p>Average Break Time</p>
-        </div>
-      </div>
-      <div className="das-recent-order-con">
+
         {loading ? (
           <>
             <Loading></Loading>
@@ -163,9 +209,9 @@ const EmployeeAttendance = () => {
                                 </Link>
 
                                 <RiDeleteBinLine
-                                  // onClick={() =>
-                                  //   handledeleteAttendance(attendance)
-                                  // }
+                                  onClick={() =>
+                                    handledeleteAttendance(attendance)
+                                  }
                                   className="printlogo"
                                 ></RiDeleteBinLine>
                               </div>

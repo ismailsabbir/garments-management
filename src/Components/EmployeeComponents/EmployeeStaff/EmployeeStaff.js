@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import "./DashbordStaffs.css";
-import { FiEdit } from "react-icons/fi";
-import { RiDeleteBinLine } from "react-icons/ri";
 import { useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
+import { Form } from "react-bootstrap";
+import { BsSearch } from "react-icons/bs";
+import { FiEdit } from "react-icons/fi";
 import { IoMdAdd } from "react-icons/io";
+import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import { BsSearch } from "react-icons/bs";
-import { Form } from "react-bootstrap";
 import Swal from "sweetalert2";
-const DashbordStaffs = () => {
+
+const EmployeeStaff = () => {
   const [staffs, setstaffs] = useState([]);
   const [cuscurrentpage, setcuscurrentpage] = useState(0);
   const [datasize, setdatasize] = useState(5);
@@ -19,7 +19,7 @@ const DashbordStaffs = () => {
   const [staff, setstaff] = useState("");
   const { data: products = [], refetch } = useQuery({
     queryKey: [
-      "staff",
+      "single_employee_staff",
       {
         search: searchvalue,
         page: cuscurrentpage,
@@ -28,7 +28,7 @@ const DashbordStaffs = () => {
     ],
     queryFn: () =>
       fetch(
-        `${process.env.REACT_APP_URL}/staff_name?search=${searchvalue}&&page=${cuscurrentpage}&&size=${datasize}`,
+        `${process.env.REACT_APP_URL}/single_employee_staff?search=${searchvalue}&&page=${cuscurrentpage}&&size=${datasize}`,
         {
           headers: {
             authorization: `Beare ${localStorage.getItem("garments-token")}`,
@@ -286,4 +286,4 @@ const DashbordStaffs = () => {
   );
 };
 
-export default DashbordStaffs;
+export default EmployeeStaff;

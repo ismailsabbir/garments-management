@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import "./DashbordEmployeeSalaryMake.css";
-import { ToastContainer, toast } from "react-toastify";
-import { Link } from "react-router-dom";
-import { BsSearch } from "react-icons/bs";
-import { Form } from "react-bootstrap";
 import { useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
+import { Form } from "react-bootstrap";
+import { BsSearch } from "react-icons/bs";
+import { ToastContainer, toast } from "react-toastify";
 import Loading from "../../../CommonComponents/Loading/Loading";
 import NotFound from "../../../CommonComponents/NotFound/NotFound";
-const DashbordEmployeeSalaryMake = () => {
+import { Link } from "react-router-dom";
+
+const EmployeeSalaryMake = () => {
   const [staffs, setstaffs] = useState([]);
   const [loading, setloading] = useState(true);
   const [currentpage, setcurrentpage] = useState(0);
@@ -23,7 +23,7 @@ const DashbordEmployeeSalaryMake = () => {
   });
   const { data: products = [], refetch } = useQuery({
     queryKey: [
-      "staff",
+      "staff_information",
       {
         page: currentpage,
         size: datasize,
@@ -35,7 +35,7 @@ const DashbordEmployeeSalaryMake = () => {
     ],
     queryFn: () =>
       fetch(
-        `${process.env.REACT_APP_URL}/staff_name?search=${searchname}&&page=${currentpage}&&size=${datasize}&searchemail=${searchemail}&role=${role}&reset=${reset}`,
+        `${process.env.REACT_APP_URL}/staff_information?search=${searchname}&&page=${currentpage}&&size=${datasize}&searchemail=${searchemail}&role=${role}&reset=${reset}`,
         {
           headers: {
             authorization: `Beare ${localStorage.getItem("garments-token")}`,
@@ -44,7 +44,7 @@ const DashbordEmployeeSalaryMake = () => {
       )
         .then((req) => req.json())
         .then((data) => {
-          setstaffs(data.result);
+          setstaffs(data?.result);
           setcount(data?.count);
           setloading(false);
           return data;
@@ -285,4 +285,4 @@ const DashbordEmployeeSalaryMake = () => {
   );
 };
 
-export default DashbordEmployeeSalaryMake;
+export default EmployeeSalaryMake;

@@ -124,6 +124,11 @@ import DashbordBlogs from "./Components/DashbordComponents/DashbordBlogs/Dashbor
 import DashbordBlogsAdd from "./Components/DashbordComponents/DashbordBlogsAdd/DashbordBlogsAdd";
 import DashbordBlogsEdit from "./Components/DashbordComponents/DashbordBlogsEdit/DashbordBlogsEdit";
 import DashbordBlogsView from "./Components/DashbordComponents/DashbordBlogsView/DashbordBlogsView";
+import DashbordEditCustomer from "./Components/DashbordComponents/DashbordEditCustomer/DashbordEditCustomer";
+import EmployeeMyAttendances from "./Components/EmployeeComponents/EmployeeMyAttendances/EmployeeMyAttendances";
+import EmployeeMySalary from "./Components/EmployeeComponents/EmployeeMySalary/EmployeeMySalary";
+import EmployeeSalaryMake from "./Components/EmployeeComponents/EmployeeSalaryMake/EmployeeSalaryMake";
+import EmployeeStaff from "./Components/EmployeeComponents/EmployeeStaff/EmployeeStaff";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -749,6 +754,14 @@ function App() {
           ),
         },
         {
+          path: "/dashbord/customers/edit",
+          element: (
+            <AdminRoutes>
+              <DashbordEditCustomer></DashbordEditCustomer>
+            </AdminRoutes>
+          ),
+        },
+        {
           path: "/dashbord/staff",
           element: (
             <AdminRoutes>
@@ -992,8 +1005,24 @@ function App() {
         {
           path: "/employee/attendance",
           element: (
-            <EmployeeRoutes>
+            <ManagerRoutes>
               <EmployeeAttendance></EmployeeAttendance>
+            </ManagerRoutes>
+          ),
+        },
+        {
+          path: "/employee/my/attendance",
+          element: (
+            <EmployeeRoutes>
+              <EmployeeMyAttendances></EmployeeMyAttendances>
+            </EmployeeRoutes>
+          ),
+        },
+        {
+          path: "/employee/my/salary",
+          element: (
+            <EmployeeRoutes>
+              <EmployeeMySalary></EmployeeMySalary>
             </EmployeeRoutes>
           ),
         },
@@ -1002,6 +1031,38 @@ function App() {
           element: (
             <ManagerRoutes>
               <EmployeeTakeAttendance></EmployeeTakeAttendance>
+            </ManagerRoutes>
+          ),
+        },
+        {
+          path: "/employee/today/attendance",
+          element: (
+            <ManagerRoutes>
+              <DashbordTodayAttendance></DashbordTodayAttendance>
+            </ManagerRoutes>
+          ),
+        },
+        {
+          path: "/employee/sheet/attendance",
+          element: (
+            <ManagerRoutes>
+              <DashbordAttendanceSheet></DashbordAttendanceSheet>
+            </ManagerRoutes>
+          ),
+        },
+        {
+          path: "/employee/salary/make",
+          element: (
+            <ManagerRoutes>
+              <EmployeeSalaryMake></EmployeeSalaryMake>
+            </ManagerRoutes>
+          ),
+        },
+        {
+          path: "/employee/staff",
+          element: (
+            <ManagerRoutes>
+              <EmployeeStaff></EmployeeStaff>
             </ManagerRoutes>
           ),
         },

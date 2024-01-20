@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./DashbordShopCategory.css";
-import { LuClipboardEdit, LuImport } from "react-icons/lu";
+import { LuImport } from "react-icons/lu";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { IoMdAdd } from "react-icons/io";
-import { BiPrinter } from "react-icons/bi";
 import { FaSearchPlus } from "react-icons/fa";
-import { IconName } from "react-icons/lu";
-import { BsSearch } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { Form } from "react-bootstrap";
@@ -14,6 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
 import NotFound from "../../../CommonComponents/NotFound/NotFound";
 import Loading from "../../../CommonComponents/Loading/Loading";
+import Swal from "sweetalert2";
 const DashbordShopCategory = () => {
   const [products, setproducts] = useState([]);
   const [cuscurrentpage, setcuscurrentpage] = useState(0);
@@ -74,27 +72,36 @@ const DashbordShopCategory = () => {
 
   console.log(products);
   const handledeleteproduct = () => {
-    console.log(selectedOptions);
-    fetch(`${process.env.REACT_APP_URL}/delete-category`, {
-      method: "DELETE",
-      headers: {
-        "Content-type": "application/json",
-        authorization: `Beare ${localStorage.getItem("garments-token")}`,
-      },
-
-      body: JSON.stringify(productid),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data?.deletedCount > 0) {
-          toast("Category delete sucessfully !!!", {
-            position: "top-center",
-            autoClose: 1000,
+    Swal.fire({
+      title: "Are you sure ??",
+      text: "You want to delate the Category !!",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "DELATE",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${process.env.REACT_APP_URL}/delete-category`, {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json",
+            authorization: `Beare ${localStorage.getItem("garments-token")}`,
+          },
+          body: JSON.stringify(productid),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data?.deletedCount > 0) {
+              toast("Category delete sucessfully !!!", {
+                position: "top-center",
+                autoClose: 1000,
+              });
+            }
+            refetch();
           });
-        }
-        refetch();
-      });
+      }
+    });
   };
 
   const handleFileUpload = (event) => {
@@ -152,27 +159,38 @@ const DashbordShopCategory = () => {
     setreset(true);
   };
   const handledeletecategory = (product) => {
-    const productid = [product?._id];
-    fetch(`${process.env.REACT_APP_URL}/delete-category`, {
-      method: "DELETE",
-      headers: {
-        "Content-type": "application/json",
-        authorization: `Beare ${localStorage.getItem("garments-token")}`,
-      },
+    Swal.fire({
+      title: "Are you sure ??",
+      text: "You want to delate the Category !!",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "DELATE",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const productid = [product?._id];
+        fetch(`${process.env.REACT_APP_URL}/delete-category`, {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json",
+            authorization: `Beare ${localStorage.getItem("garments-token")}`,
+          },
 
-      body: JSON.stringify(productid),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data?.deletedCount > 0) {
-          toast("Category delete sucessfully !!!", {
-            position: "top-center",
-            autoClose: 1000,
+          body: JSON.stringify(productid),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data?.deletedCount > 0) {
+              toast("Category delete sucessfully !!!", {
+                position: "top-center",
+                autoClose: 1000,
+              });
+            }
+            refetch();
           });
-        }
-        refetch();
-      });
+      }
+    });
   };
   return (
     <div className="dashbord-shop-product-con">

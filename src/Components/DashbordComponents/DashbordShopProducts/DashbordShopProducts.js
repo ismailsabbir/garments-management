@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { LuClipboardEdit, LuImport } from "react-icons/lu";
+import { LuImport } from "react-icons/lu";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { IoMdAdd } from "react-icons/io";
 import "./DashbordShopProducts.css";
-import { BiPrinter } from "react-icons/bi";
 import { FaSearchPlus } from "react-icons/fa";
 import Loading from "../../../CommonComponents/Loading/Loading";
-import { Link, json } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import { Form } from "react-bootstrap";
 import NotFound from "../../../CommonComponents/NotFound/NotFound";
+import Swal from "sweetalert2";
 const DashbordShopProducts = () => {
   const [products, setproducts] = useState([]);
   const [cuscurrentpage, setcuscurrentpage] = useState(0);
-  const [datasize, setdatasize] = useState(20);
+  const [datasize, setdatasize] = useState(10);
   const [cuscount, setcuscount] = useState(0);
   const custompage = Math.ceil(cuscount / datasize);
   const [loading, setloading] = useState(true);
@@ -43,27 +43,38 @@ const DashbordShopProducts = () => {
       });
   }, []);
   const handledeleteproduct = () => {
-    console.log(selectedOptions);
-    fetch(`${process.env.REACT_APP_URL}/delete-products`, {
-      method: "DELETE",
-      headers: {
-        "Content-type": "application/json",
-        authorization: `Beare ${localStorage.getItem("garments-token")}`,
-      },
+    Swal.fire({
+      title: "Are you sure ??",
+      text: "You want to delate the product !!",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "DELATE",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(selectedOptions);
+        fetch(`${process.env.REACT_APP_URL}/delete-products`, {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json",
+            authorization: `Beare ${localStorage.getItem("garments-token")}`,
+          },
 
-      body: JSON.stringify(productid),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data?.deletedCount > 0) {
-          toast("Product delete sucessfully !!!", {
-            position: "top-center",
-            autoClose: 1000,
+          body: JSON.stringify(productid),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data?.deletedCount > 0) {
+              toast("Product delete sucessfully !!!", {
+                position: "top-center",
+                autoClose: 1000,
+              });
+            }
+            refetch();
           });
-        }
-        refetch();
-      });
+      }
+    });
   };
 
   const { data: productall = [], refetch } = useQuery({
@@ -183,27 +194,38 @@ const DashbordShopProducts = () => {
     setreset(true);
   };
   const handledeletecategory = (product) => {
-    const productid = [product?._id];
-    fetch(`${process.env.REACT_APP_URL}/delete-single-product`, {
-      method: "DELETE",
-      headers: {
-        "Content-type": "application/json",
-        authorization: `Beare ${localStorage.getItem("garments-token")}`,
-      },
+    Swal.fire({
+      title: "Are you sure ??",
+      text: "You want to delate the product !!",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "DELATE",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const productid = [product?._id];
+        fetch(`${process.env.REACT_APP_URL}/delete-single-product`, {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json",
+            authorization: `Beare ${localStorage.getItem("garments-token")}`,
+          },
 
-      body: JSON.stringify(productid),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data?.deletedCount > 0) {
-          toast("product delete sucessfully !!!", {
-            position: "top-center",
-            autoClose: 1000,
+          body: JSON.stringify(productid),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data?.deletedCount > 0) {
+              toast("product delete sucessfully !!!", {
+                position: "top-center",
+                autoClose: 1000,
+              });
+            }
+            refetch();
           });
-        }
-        refetch();
-      });
+      }
+    });
   };
   return (
     <div className="dashbord-shop-product-con">

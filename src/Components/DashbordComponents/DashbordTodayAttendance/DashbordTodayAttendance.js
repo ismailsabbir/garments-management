@@ -7,29 +7,22 @@ import NotFound from "../../../CommonComponents/NotFound/NotFound";
 import { AuthContext } from "../../../Context/UserContext";
 import { useQuery } from "@tanstack/react-query";
 import "./DashbordTodayAttendance.css";
+import { Link } from "react-router-dom";
+import { FiEdit } from "react-icons/fi";
+import { RiDeleteBinLine } from "react-icons/ri";
+import Swal from "sweetalert2";
 const DashbordTodayAttendance = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [todayAttendance, setTodayAttendance] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setsearch] = useState("");
   const [reset, setreset] = useState(false);
-  const [status, setstatus] = useState();
-  const [employeeId, setEmployeeID] = useState();
+  const [status, setstatus] = useState("");
+  const [employeeId, setEmployeeID] = useState("");
   const [currentpage, setcurrentpage] = useState(0);
-  const [datasize, setdatasize] = useState(5);
+  const [datasize, setdatasize] = useState(20);
   const [count, setcount] = useState(0);
   const page = Math.ceil(count / datasize);
-
-  // useEffect(() => {
-  //   fetch(`${process.env.REACT_APP_URL}/today/attendance`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setTodayAttendance(data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
   const { data: productall = [], refetch } = useQuery({
     // &search=${search}&reset=${reset}&status=${status}&employeeId=${employeeId}
     queryKey: [
@@ -45,7 +38,7 @@ const DashbordTodayAttendance = () => {
     ],
     queryFn: () =>
       fetch(
-        `${process.env.REACT_APP_URL}/todayAttendance?page=${currentpage}&size=${datasize}`
+        `${process.env.REACT_APP_URL}/todayAttendance?page=${currentpage}&size=${datasize}&employeeId=${employeeId}&search=${search}&status=${status}&reset=${reset}`
       )
         .then((res) => {
           return res.json();
@@ -107,18 +100,62 @@ const DashbordTodayAttendance = () => {
     e.preventDefault();
     const serchvalue = e.target.employeeName.value;
     setreset(false);
+    setstatus("");
+    setEmployeeID("");
     setsearch(serchvalue);
   };
   const handleEmployIdSearch = (e) => {
     e.preventDefault();
     const employeeId = e.target.employeeId.value;
+    setsearch("");
+    setstatus("");
     setEmployeeID(employeeId);
   };
   const handlereset = () => {
-    setsearch(false);
+    setstatus("");
+    setEmployeeID("");
+    setsearch("");
     setreset(true);
   };
   console.log(isSubmitting);
+
+  const handledeleteAttendance = (attendance) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to delate this!",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "DELATE",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(attendance);
+        fetch(
+          `${process.env.REACT_APP_URL}/delete-employee-attendance/${attendance?._id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-type": "application/json",
+              authorization: `Beare ${localStorage.getItem("garments-token")}`,
+            },
+
+            body: JSON.stringify(attendance),
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data?.deletedCount > 0) {
+              toast("Attendance delete sucessfully !!!", {
+                position: "top-center",
+                autoClose: 1000,
+              });
+            }
+            refetch();
+          });
+      }
+    });
+  };
   return (
     <div>
       <div className="das-recent-order-con">
@@ -163,6 +200,7 @@ const DashbordTodayAttendance = () => {
             </option>
             <option value="present">Present</option>
             <option value="absence">Absence</option>
+            {/* <option value="half">Half Day</option> */}
           </select>
 
           <button onClick={handlereset} className="product-reset">
@@ -195,7 +233,7 @@ const DashbordTodayAttendance = () => {
                         <th className="recent-order-hed">Status Out</th>
                         <th className="recent-order-hed">Total</th>
                         <th className="recent-order-hed">Status</th>
-                        <th className="recent-order-hed">Shift</th>
+                        <th className="recent-order-hed">Actions</th>
                       </tr>
                       <tbody>
                         {todayAttendance?.map((attendance) => (
@@ -263,7 +301,21 @@ const DashbordTodayAttendance = () => {
                               </span>
                             </td>
                             <td className="das-order-data">
-                              <span>Day Shift</span>
+                              <div className="print-serach">
+                                <Link
+                                  to="/dashbord/employee/attendance/edit"
+                                  state={attendance}
+                                >
+                                  <FiEdit className="printlogo"></FiEdit>
+                                </Link>
+
+                                <RiDeleteBinLine
+                                  onClick={() =>
+                                    handledeleteAttendance(attendance)
+                                  }
+                                  className="printlogo"
+                                ></RiDeleteBinLine>
+                              </div>
                             </td>
                           </tr>
                         ))}

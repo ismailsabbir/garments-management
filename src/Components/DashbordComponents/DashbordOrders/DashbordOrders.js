@@ -12,12 +12,13 @@ import NotFound from "../../../CommonComponents/NotFound/NotFound";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import jsPDF from "jspdf";
+import Swal from "sweetalert2";
 const DashbordOrders = () => {
   const [orders, setorders] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user, userlogout } = useContext(AuthContext);
   const [currentpage, setcurrentpage] = useState(0);
-  const [datasize, setdatasize] = useState(5);
+  const [datasize, setdatasize] = useState(10);
   const [count, setcount] = useState(0);
   const page = Math.ceil(count / datasize);
   const [search, setsearch] = useState("");
@@ -129,27 +130,38 @@ const DashbordOrders = () => {
     console.log(customerName);
   };
   const handleOrderStatusChange = async (event, order) => {
-    const status = event.target.value;
-    console.log(status);
-    await fetch(
-      `${process.env.REACT_APP_URL}/update_order_status/${order?._id}?status=${status}`,
-      {
-        method: "PUT",
-        body: JSON.stringify(order),
-        headers: {
-          "Content-type": "application/json",
-        },
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to update the status!",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Update Status",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const status = event.target.value;
+        console.log(status);
+        fetch(
+          `${process.env.REACT_APP_URL}/update_order_status/${order?._id}?status=${status}`,
+          {
+            method: "PUT",
+            body: JSON.stringify(order),
+            headers: {
+              "Content-type": "application/json",
+            },
+          }
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            refetch();
+            toast("Update sucessfully !!!", {
+              position: "top-center",
+              autoClose: 1000,
+            });
+          });
       }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        refetch();
-        toast("Update sucessfully !!!", {
-          position: "top-center",
-          autoClose: 1000,
-        });
-      });
+    });
   };
   const generateInvoiceContent = (order) => {
     const pdf = new jsPDF();

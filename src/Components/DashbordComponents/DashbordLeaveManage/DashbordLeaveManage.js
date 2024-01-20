@@ -10,6 +10,7 @@ import Loading from "../../../CommonComponents/Loading/Loading";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import "./DashbordLeaveManage.css";
+import Swal from "sweetalert2";
 const DashbordLeaveManage = () => {
   const employee = useContext(EmployeeContext);
   const [staffs, setstaffs] = useState([]);
@@ -18,6 +19,9 @@ const DashbordLeaveManage = () => {
   const [cuscount, setcuscount] = useState(0);
   const custompage = Math.ceil(cuscount / datasize);
   const [searchvalue, setsearchvalue] = useState("");
+  const [datesearch, setdatesearch] = useState("");
+  const [rolesearch, setrolesearch] = useState("");
+  const [reset, setreset] = useState(false);
   const [loading, setloading] = useState(true);
   console.log(staffs);
   const { data: products = [], refetch } = useQuery({
@@ -26,11 +30,15 @@ const DashbordLeaveManage = () => {
       {
         page: cuscurrentpage,
         size: datasize,
+        searchvalue: searchvalue,
+        datesearch: datesearch,
+        rolesearch: rolesearch,
+        reset: reset,
       },
     ],
     queryFn: () =>
       fetch(
-        `${process.env.REACT_APP_URL}/all_leave_requests?page=${cuscurrentpage}&&size=${datasize}&&email=${employee?.email}`,
+        `${process.env.REACT_APP_URL}/all_leave_requests?page=${cuscurrentpage}&&size=${datasize}&&searchvalue=${searchvalue}&&datesearch=${datesearch}&&rolesearch=${rolesearch}&&reset=${reset}`,
         {
           headers: {
             authorization: `Beare ${localStorage.getItem("garments-token")}`,
@@ -45,119 +53,103 @@ const DashbordLeaveManage = () => {
           return data;
         }),
   });
-
-  const handleadmin = (id) => {
-    fetch(`${process.env.REACT_APP_URL}/staff/admin/${id}`, {
-      headers: {
-        authorization: `Beare ${localStorage.getItem("garments-token")}`,
-      },
-      method: "PUT",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.message === "farbidden access") {
-          toast("farbidden access !!!", {
-            position: "top-center",
-            autoClose: 1000,
-          });
-        }
-        console.log(data);
-        refetch();
-      });
-  };
   const handledelete = (staff) => {
-    console.log(staff);
-    fetch(`${process.env.REACT_APP_URL}/delete-request/${staff?._id}`, {
-      headers: {
-        authorization: `Beare ${localStorage.getItem("garments-token")}`,
-      },
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        refetch();
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to delate this!",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "DELATE",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${process.env.REACT_APP_URL}/delete-request/${staff?._id}`, {
+          headers: {
+            authorization: `Beare ${localStorage.getItem("garments-token")}`,
+          },
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            refetch();
+            toast("Delate sucessfully !!!", {
+              position: "top-center",
+              autoClose: 1000,
+            });
+          });
+      }
+    });
   };
+
   const handlenamesearch = (e) => {
     e.preventDefault();
     const search = e.target.name.value;
+    setdatesearch("");
+    setrolesearch("");
     setsearchvalue(search);
-    fetch(
-      `${process.env.REACT_APP_URL}/staff_name?search=${searchvalue}&&page=${cuscurrentpage}&&size=${datasize}`,
-      {
-        headers: {
-          authorization: `Beare ${localStorage.getItem("garments-token")}`,
-        },
-      }
-    )
-      .then((req) => req.json())
-      .then((data) => {
-        console.log(data.result);
-        setstaffs(data.result);
-        setcuscount(data?.count);
-        // setcuscount(0);
-      });
   };
-  const handleemailsearch = (e) => {
+  const handledatesearch = (e) => {
     e.preventDefault();
-    const email = e.target.email.value;
-
-    fetch(
-      `${process.env.REACT_APP_URL}/single_staff?email=${email}&&page=${cuscurrentpage}&&size=${datasize}`,
-      {
-        headers: {
-          authorization: `Beare ${localStorage.getItem("garments-token")}`,
-        },
-      }
-    )
-      .then((req) => req.json())
-      .then((data) => {
-        console.log(data.result);
-        setstaffs(data.result);
-        setcuscount(data?.count);
-        // setcuscount(0);
-      });
+    const data = e.target.date.value;
+    setrolesearch("");
+    setsearchvalue("");
+    setdatesearch(data);
   };
   const handlerole = (e) => {
     const role = e.target.value;
-    fetch(
-      `${process.env.REACT_APP_URL}/single_staff_staff?staff=${role}&&page=${cuscurrentpage}&&size=${datasize}`,
-      {
-        headers: {
-          authorization: `Beare ${localStorage.getItem("garments-token")}`,
-        },
-      }
-    )
-      .then((req) => req.json())
-      .then((data) => {
-        setstaffs(data.result);
-        setcuscount(data?.count);
-      });
+    setsearchvalue("");
+    setdatesearch("");
+    setrolesearch(role);
+  };
+  const handlereset = () => {
+    setsearchvalue("");
+    setdatesearch("");
+    setrolesearch("");
+    setreset(true);
   };
   return (
     <div className="dashbord-shop-product-con">
-      <h5>My Leaves</h5>
+      <div className="leave_manage_hed">
+        <h5>All Leaves</h5>
+        <button
+          onClick={handlereset}
+          className="product-reset"
+          id="order-reset-btn"
+        >
+          ReSet
+        </button>
+      </div>
       <div className="staff-search-con">
+        <Form onSubmit={handledatesearch} className="name-search">
+          <input
+            className="name-input-staff"
+            type="date"
+            placeholder="Search by Date"
+            name="date"
+          />
+          <button type="submit">
+            <BsSearch></BsSearch>
+          </button>
+        </Form>
         <Form onSubmit={handlenamesearch} className="name-search">
           <input
             className="name-input-staff"
             type="text"
-            placeholder="Search by Date"
+            placeholder="Search by Name"
             name="name"
           />
           <button type="submit">
             <BsSearch></BsSearch>
           </button>
         </Form>
-
         <select onChange={handlerole} id="cars" placeholder="Category">
           <option value="" disabled selected>
             Leave Status
           </option>
-          <option value="admin">Admin</option>
-          <option value="Driver">Driver</option>
-          <option value="Manager">Manager</option>
+          <option value="Pending">Pending</option>
+          <option value="Rejected">Rejected</option>
+          <option value="Approved">Approved</option>
         </select>
         <Link to="/employee/leaves/request" id="add-staff-btn">
           <IoMdAdd className="bulk-icon"></IoMdAdd>Add Leave Request

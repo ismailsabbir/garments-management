@@ -39,16 +39,45 @@ const EmployeeLeft = () => {
         <PiSquaresFourDuotone className="dashbord-icon"></PiSquaresFourDuotone>{" "}
         Dashboard
       </NavLink>
-
       <NavLink
-        to="/employee/attendance"
+        className={({ isActive }) =>
+          isActive ? "dashbord-active-link" : "dashbord-link"
+        }
+        to="/employee/my/attendance"
+      >
+        <SlNote className="dashbord-icon"></SlNote>My Attendance
+      </NavLink>
+      <NavLink
+        className={({ isActive }) =>
+          isActive ? "dashbord-active-link" : "dashbord-link"
+        }
+        to="/employee/my/salary"
+      >
+        <SlNote className="dashbord-icon"></SlNote>My Salary
+      </NavLink>
+      <NavLink
+        to="/employee/leaves"
         className={({ isActive }) =>
           isActive ? "dashbord-active-link" : "dashbord-link"
         }
       >
-        <SlNote className="dashbord-icon"></SlNote>
-        Attendance
+        <CgNotes className="dashbord-icon"></CgNotes>My Leaves
       </NavLink>
+
+      {employee?.role === "admin" || employee?.role === "Manager" ? (
+        <NavLink
+          to="/employee/attendance"
+          className={({ isActive }) =>
+            isActive ? "dashbord-active-link" : "dashbord-link"
+          }
+        >
+          <SlNote className="dashbord-icon"></SlNote>
+          Attendance
+        </NavLink>
+      ) : (
+        <></>
+      )}
+
       {employee?.role === "admin" || employee?.role === "Manager" ? (
         <NavLink
           to="/employee/take_attendance/attendance"
@@ -62,9 +91,38 @@ const EmployeeLeft = () => {
       ) : (
         <></>
       )}
+
       {employee?.role === "admin" || employee?.role === "Manager" ? (
         <NavLink
-          to="/dashbord/employee/salary/make"
+          to="/employee/today/attendance"
+          className={({ isActive }) =>
+            isActive ? "dashbord-active-link" : "dashbord-link"
+          }
+        >
+          <SlNote className="dashbord-icon"></SlNote>
+          Today Attendance
+        </NavLink>
+      ) : (
+        <></>
+      )}
+
+      {employee?.role === "admin" || employee?.role === "Manager" ? (
+        <NavLink
+          to="/employee/sheet/attendance"
+          className={({ isActive }) =>
+            isActive ? "dashbord-active-link" : "dashbord-link"
+          }
+        >
+          <SlNote className="dashbord-icon"></SlNote>
+          Attendance Sheet
+        </NavLink>
+      ) : (
+        <></>
+      )}
+
+      {employee?.role === "admin" || employee?.role === "Manager" ? (
+        <NavLink
+          to="/employee/salary/make"
           className={({ isActive }) =>
             isActive ? "dashbord-active-link" : "dashbord-link"
           }
@@ -77,15 +135,7 @@ const EmployeeLeft = () => {
       )}
 
       <NavLink
-        to="/employee/leaves"
-        className={({ isActive }) =>
-          isActive ? "dashbord-active-link" : "dashbord-link"
-        }
-      >
-        <CgNotes className="dashbord-icon"></CgNotes>My Leaves
-      </NavLink>
-      <NavLink
-        to="/dashbord/staff"
+        to="/employee/staff"
         className={({ isActive }) =>
           isActive ? "dashbord-active-link" : "dashbord-link"
         }

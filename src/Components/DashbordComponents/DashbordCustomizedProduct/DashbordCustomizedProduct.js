@@ -1,13 +1,12 @@
 import React from "react";
-import { LuClipboardEdit, LuImport } from "react-icons/lu";
+import { LuImport } from "react-icons/lu";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { IoMdAdd } from "react-icons/io";
-import { BiPrinter } from "react-icons/bi";
 import { FaSearchPlus } from "react-icons/fa";
 import { useState } from "react";
 import { useEffect } from "react";
 import { FiEdit } from "react-icons/fi";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 import NotFound from "../../../CommonComponents/NotFound/NotFound";
 import Loading from "../../../CommonComponents/Loading/Loading";
 import { Form } from "react-bootstrap";
@@ -15,6 +14,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import { useContext } from "react";
 import { servcontext } from "../../../App";
+import Swal from "sweetalert2";
 const DashbordCustomizedProduct = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [search, setsearch] = useState("");
@@ -119,54 +119,74 @@ const DashbordCustomizedProduct = () => {
   const isDeleteButtonDisabled = selectedOptions?.length === 0;
   const productid = selectedOptions.map((item) => item._id);
   const handledeleteproduct = () => {
-    console.log(selectedOptions);
-    fetch(`${process.env.REACT_APP_URL}/delete-customized-products`, {
-      method: "DELETE",
-      headers: {
-        "Content-type": "application/json",
-        authorization: `Beare ${localStorage.getItem("garments-token")}`,
-      },
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to delate the product",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "DELATE",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${process.env.REACT_APP_URL}/delete-customized-products`, {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json",
+            authorization: `Beare ${localStorage.getItem("garments-token")}`,
+          },
 
-      body: JSON.stringify(productid),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data?.deletedCount > 0) {
-          toast("Product delete sucessfully !!!", {
-            position: "top-center",
-            autoClose: 1000,
+          body: JSON.stringify(productid),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data?.deletedCount > 0) {
+              toast("Product delete sucessfully !!!", {
+                position: "top-center",
+                autoClose: 1000,
+              });
+            }
+            refetch();
           });
-        }
-        refetch();
-      });
+      }
+    });
   };
   const handledeletecategory = (product) => {
-    console.log(product);
-    const productid = [product?._id];
-    fetch(
-      `${process.env.REACT_APP_URL}/delete-single-custom-product?product_category=${product?.category_id}&product_color=${product?.color_id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-type": "application/json",
-          authorization: `Beare ${localStorage.getItem("garments-token")}`,
-        },
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to delate the product",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "DELATE",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const productid = [product?._id];
+        fetch(
+          `${process.env.REACT_APP_URL}/delete-single-custom-product?product_category=${product?.category_id}&product_color=${product?.color_id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-type": "application/json",
+              authorization: `Beare ${localStorage.getItem("garments-token")}`,
+            },
 
-        body: JSON.stringify(productid),
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data?.deletedCount > 0) {
-          toast("product delete sucessfully !!!", {
-            position: "top-center",
-            autoClose: 1000,
+            body: JSON.stringify(productid),
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data?.deletedCount > 0) {
+              toast("product delete sucessfully !!!", {
+                position: "top-center",
+                autoClose: 1000,
+              });
+            }
+            refetch();
           });
-        }
-        refetch();
-      });
+      }
+    });
   };
   const handleproductsearch = (e) => {
     e.preventDefault();

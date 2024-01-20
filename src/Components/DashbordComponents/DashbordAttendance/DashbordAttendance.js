@@ -8,7 +8,7 @@ const DashbordAttendance = () => {
   const imagebb = process.env.REACT_APP_IMGBB;
   const webcamRef = useRef(null);
   const [capturedImage, setCapturedImage] = useState(null);
-  const [employee_id, setEmployeeId] = useState("E-00000");
+  const [employee_id, setEmployeeId] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const captureImage = (e) => {
     e.preventDefault();
@@ -106,7 +106,6 @@ const DashbordAttendance = () => {
             type="text"
             placeholder="Employee ID"
             name="employeeId"
-            value={employee_id}
             onChange={(e) => setEmployeeId(e.target.value)}
             required
           />

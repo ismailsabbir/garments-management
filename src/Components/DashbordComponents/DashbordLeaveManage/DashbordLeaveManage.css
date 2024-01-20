@@ -6,3 +6,10 @@
     justify-content: center;
     color: brown;
 }
+
+.leave_manage_hed {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

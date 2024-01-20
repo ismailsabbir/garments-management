@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { BsSearch } from "react-icons/bs";
+import Swal from "sweetalert2";
 const DashbordEmployeeAttendance = () => {
   const employee = useContext(AdminContext);
   const [Attendance, setAttendance] = useState([]);
@@ -43,30 +44,41 @@ const DashbordEmployeeAttendance = () => {
   });
   console.log(Attendance);
   const handledeleteAttendance = (attendance) => {
-    console.log(attendance);
-    fetch(
-      `${process.env.REACT_APP_URL}/delete-employee-attendance/${attendance?._id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-type": "application/json",
-          authorization: `Beare ${localStorage.getItem("garments-token")}`,
-        },
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to delate this!",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "DELATE",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(attendance);
+        fetch(
+          `${process.env.REACT_APP_URL}/delete-employee-attendance/${attendance?._id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-type": "application/json",
+              authorization: `Beare ${localStorage.getItem("garments-token")}`,
+            },
 
-        body: JSON.stringify(attendance),
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data?.deletedCount > 0) {
-          toast("Attendance delete sucessfully !!!", {
-            position: "top-center",
-            autoClose: 1000,
+            body: JSON.stringify(attendance),
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data?.deletedCount > 0) {
+              toast("Attendance delete sucessfully !!!", {
+                position: "top-center",
+                autoClose: 1000,
+              });
+            }
+            refetch();
           });
-        }
-        refetch();
-      });
+      }
+    });
   };
   const handleEmployIdSearch = (e) => {
     e.preventDefault();

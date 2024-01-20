@@ -1,0 +1,32 @@
+.salary_con {
+    border: 1px solid #7FC7D9;
+    background-color: #7FC7D9;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.salary_con h5 {
+    color: #030363;
+}
+
+.salary_con p {
+    color: #884A39;
+    font-weight: 500;
+}
+
+.salary_con span {
+    font-weight: 600;
+    color: #013344;
+}
+
+.salary_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}

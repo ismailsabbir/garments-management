@@ -9,24 +9,32 @@ import NotFound from "../../../CommonComponents/NotFound/NotFound";
 import Loading from "../../../CommonComponents/Loading/Loading";
 import { Form } from "react-bootstrap";
 import { RxCross2 } from "react-icons/rx";
+import { TbStarHalfFilled } from "react-icons/tb";
+import { FaCheck } from "react-icons/fa";
+
 const DashbordAttendanceSheet = () => {
   const [currentpage, setcurrentpage] = useState(0);
-  const [datasize, setdatasize] = useState(5);
+  const [datasize, setdatasize] = useState(10);
   const [count, setcount] = useState(0);
   const page = Math.ceil(count / datasize);
   const [loading, setLoading] = useState(true);
   const [attendanceSheet, setAttendanceSheet] = useState([]);
+  const [reset, setreset] = useState(false);
+  const [employeeId, setEmployeeID] = useState("");
+  const [firstday, setfirstday] = useState("");
   const { data: productall = [], refetch } = useQuery({
     queryKey: [
       "allcustomizedorders",
       {
         page: currentpage,
         size: datasize,
+        reset: reset,
+        employeeId: employeeId,
       },
     ],
     queryFn: () =>
       fetch(
-        `${process.env.REACT_APP_URL}/attendanceSheet?page=${currentpage}&size=${datasize}`
+        `${process.env.REACT_APP_URL}/attendanceSheet?page=${currentpage}&size=${datasize}&employeeId=${employeeId}&reset=${reset}`
       )
         .then((res) => {
           return res.json();
@@ -46,8 +54,23 @@ const DashbordAttendanceSheet = () => {
   const datesArray = attendanceSheet[0]?.attendance?.map((item) =>
     item?.date?.substring(0, 2)
   );
-
+  const handleEmployeesearch = (e) => {
+    e.preventDefault();
+    const serchvalue = e.target.employeeName.value;
+    setreset(false);
+    setEmployeeID(serchvalue);
+  };
+  const handlereset = () => {
+    setEmployeeID("");
+    setreset(true);
+  };
   console.log(datesArray);
+  const handleStartDateChange = (e) => {
+    console.log(e);
+    // const values = e.target.startday.value;
+    // console.log(values);
+    // setfirstday(values);
+  };
   return (
     <div>
       <div className="das-recent-order-con">
@@ -57,9 +80,9 @@ const DashbordAttendanceSheet = () => {
             <input
               className="date-chose"
               type="date"
+              name="startday"
               placeholder="Search Product"
-              // value={startDate}
-              // onChange={handleStartDateChange}
+              onChange={(e)=>handleStartDateChange(e.target.value)}
             />
             <input
               className="date-chose"
@@ -68,20 +91,17 @@ const DashbordAttendanceSheet = () => {
               // value={endDate}
               // onChange={handleEndDateChange}
             />
-            <Form
-              // onSubmit={handlecustomersearch}
-              className="employy-name"
-            >
+            <Form onSubmit={handleEmployeesearch} className="employy-name">
               <input
                 className="employee-name-input"
                 type="text"
-                name="name"
-                placeholder="Search Employee Name"
+                name="employeeName"
+                placeholder="Search Employee ID"
               />
             </Form>
 
             <button
-              // onClick={handlereset}
+              onClick={handlereset}
               className="product-reset"
               id="order-reset-btn"
             >
@@ -140,13 +160,13 @@ const DashbordAttendanceSheet = () => {
                                     case "P":
                                       return (
                                         <span>
-                                          <IoMdCheckmark className="attendance-present" />
+                                          <FaCheck className="attendance-present" />
                                         </span>
                                       );
                                     case "HP":
                                       return (
                                         <span>
-                                          <IoIosCheckmark />
+                                          <TbStarHalfFilled className="attendance_half" />
                                         </span>
                                       );
                                     default:

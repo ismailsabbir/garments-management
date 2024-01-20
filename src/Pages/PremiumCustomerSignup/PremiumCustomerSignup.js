@@ -8,7 +8,6 @@ const PremiumCustomerSignup = () => {
   const { createuser } = useContext(AuthContext);
   const [errormessage, seterrormessage] = useState("");
   const [sucessmessage, setsucessmessage] = useState(false);
-
   const handleregister = (e) => {
     e.preventDefault();
     setsucessmessage(false);

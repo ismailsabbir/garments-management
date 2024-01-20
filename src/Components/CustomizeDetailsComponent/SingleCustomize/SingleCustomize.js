@@ -4,6 +4,7 @@ import { Form } from "react-bootstrap";
 import useFetch from "../../../Hooks/useFetch";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Context/UserContext";
+import { ToastContainer, toast } from "react-toastify";
 
 const SingleCustomize = ({ category }) => {
   console.log(category);
@@ -50,11 +51,9 @@ const SingleCustomize = ({ category }) => {
       })
       .then((jsonData) => {
         setuserinfo(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
-        // setLoading(false);
       });
   }, [user?.email, userlogout]);
   const qualityinfo = (id, quality_name) => {
@@ -105,7 +104,6 @@ const SingleCustomize = ({ category }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          // setupload(false);
           setcolorclik(false);
           setcolordesign(false);
           setphoto(data.data.url);
@@ -231,6 +229,17 @@ const SingleCustomize = ({ category }) => {
       delivery_date,
     };
     navigate("/order-confirm", { state: { request_info } });
+  };
+  const quentityhandler = (data) => {
+    if (parseInt(data) > parseInt(category?.availavle)) {
+      toast(`${data} product is not available!!!`, {
+        position: "top-center",
+        autoClose: 1000,
+      });
+      setpices(0);
+      return;
+    }
+    setpices(data);
   };
   return (
     <div className="customize-con">
@@ -370,6 +379,7 @@ const SingleCustomize = ({ category }) => {
             or, choose {category?.name} color and design design
           </button>
           <div className="amount-con">
+            <h5>Available: {category?.availavle}</h5>
             {pices >= 5 ? (
               <>
                 {upload ? (
@@ -409,7 +419,8 @@ const SingleCustomize = ({ category }) => {
             <p>How many pieces do you want</p>
             <div className="pieces">
               <input
-                onChange={(e) => setpices(e.target.value)}
+                value={pices}
+                onChange={(e) => quentityhandler(e.target.value)}
                 type="text"
                 name="pices"
                 placeholder="0"
@@ -587,6 +598,7 @@ const SingleCustomize = ({ category }) => {
           </button>
         </form>
       </div>
+      <ToastContainer></ToastContainer>
     </div>
   );
 };

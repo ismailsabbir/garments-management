@@ -14,6 +14,7 @@ import { FiEdit } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import Loading from "../../../CommonComponents/Loading/Loading";
 import { Form } from "react-bootstrap";
+import Swal from "sweetalert2";
 const DashbordCustomizedCategory = () => {
   const [products, setproducts] = useState([]);
   const [cuscurrentpage, setcuscurrentpage] = useState(0);
@@ -101,27 +102,38 @@ const DashbordCustomizedCategory = () => {
   };
 
   const handledeletecategory = (product) => {
-    const productid = [product?._id];
-    fetch(`${process.env.REACT_APP_URL}/delete-customized-category`, {
-      method: "DELETE",
-      headers: {
-        "Content-type": "application/json",
-        authorization: `Beare ${localStorage.getItem("garments-token")}`,
-      },
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to delate the Category",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "DELATE",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const productid = [product?._id];
+        fetch(`${process.env.REACT_APP_URL}/delete-customized-category`, {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json",
+            authorization: `Beare ${localStorage.getItem("garments-token")}`,
+          },
 
-      body: JSON.stringify(productid),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data?.deletedCount > 0) {
-          toast("Category delete sucessfully !!!", {
-            position: "top-center",
-            autoClose: 1000,
+          body: JSON.stringify(productid),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data?.deletedCount > 0) {
+              toast("Category delete sucessfully !!!", {
+                position: "top-center",
+                autoClose: 1000,
+              });
+            }
+            refetch();
           });
-        }
-        refetch();
-      });
+      }
+    });
   };
   const handleOptionClick = (product) => {
     if (!selectedOptions.includes(product)) {
@@ -134,27 +146,38 @@ const DashbordCustomizedCategory = () => {
   const productid = selectedOptions.map((item) => item._id);
   console.log(productid);
   const handledeleteproduct = () => {
-    console.log(selectedOptions);
-    fetch(`${process.env.REACT_APP_URL}/delete-customized-category`, {
-      method: "DELETE",
-      headers: {
-        "Content-type": "application/json",
-        authorization: `Beare ${localStorage.getItem("garments-token")}`,
-      },
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to delate the Category",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "DELATE",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(selectedOptions);
+        fetch(`${process.env.REACT_APP_URL}/delete-customized-category`, {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json",
+            authorization: `Beare ${localStorage.getItem("garments-token")}`,
+          },
 
-      body: JSON.stringify(productid),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data?.deletedCount > 0) {
-          toast("Category delete sucessfully !!!", {
-            position: "top-center",
-            autoClose: 1000,
+          body: JSON.stringify(productid),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data?.deletedCount > 0) {
+              toast("Category delete sucessfully !!!", {
+                position: "top-center",
+                autoClose: 1000,
+              });
+            }
+            refetch();
           });
-        }
-        refetch();
-      });
+      }
+    });
   };
   const handleproductsearch = (e) => {
     e.preventDefault();

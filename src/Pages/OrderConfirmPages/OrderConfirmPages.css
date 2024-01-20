@@ -160,3 +160,27 @@
     font-weight: 500;
     margin-top: 30px;
 }
+
+.size_submit {
+    background-color: #3887BE;
+    border: 1px solid #3887BE;
+    width: 100%;
+    padding: 6px;
+    margin-top: 5px;
+    border-radius: 4px;
+    color: white;
+}
+
+.dress_size_con_hed {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.dress_size_con_hed button {
+    border: 1px solid #86A7FC;
+    background-color: #86A7FC;
+    padding: 4px 10px;
+    border-radius: 4px;
+}

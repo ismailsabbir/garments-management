@@ -14,3 +14,24 @@
     /* height: 40px; */
     /* height: auto; */
 }
+
+.dashbord_customer_hed {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.dashbord_customer_hed button {
+    border: 1px solid #86A7FC;
+    background-color: #86A7FC;
+    color: white;
+    font-weight: 500;
+    padding: 6px 18px;
+    border-radius: 4px;
+}
+
+#make-normal-btn {
+    background-color: #D63484;
+    border: 1px solid #D63484;
+}

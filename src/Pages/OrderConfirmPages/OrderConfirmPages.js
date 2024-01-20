@@ -8,7 +8,8 @@ import { useContext } from "react";
 const OrderConfirmPages = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const orderinfo = state.request_info;
+  const orderinfo = state?.request_info;
+  console.log("state?.request_info", state?.request_info);
   const [size_s, setsizes] = useState();
   const [size_m, setsizem] = useState();
   const [size_l, setsizel] = useState();
@@ -25,6 +26,12 @@ const OrderConfirmPages = () => {
   const [showorder, setshoworder] = useState([]);
   const [infoerror, setinfoerror] = useState(false);
   useEffect(() => {
+    if (state?.request_info === undefined) {
+      navigate("/home");
+    }
+  });
+
+  useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/address?email=${user?.email}`, {
       headers: {
         authorization: `Beare ${localStorage.getItem("garments-token")}`,
@@ -38,7 +45,6 @@ const OrderConfirmPages = () => {
       })
       .then((jsonData) => {
         setaddres(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -152,8 +158,29 @@ const OrderConfirmPages = () => {
       setsizes(sizes);
     }
   };
-  const handlesizem = (dress_number) => {
+  const handlesizesF = (e) => {
     seterrormessage(false);
+    const dress_number = e.target.size_s.value;
+    if (!dress_number) {
+      const newsum = 0;
+      setSum(newsum);
+    } else {
+      const newsum = parseInt(sum) + parseInt(dress_number);
+      setSum(newsum);
+      seterrormessage(false);
+      const sizes = {
+        size: "S",
+        dress_number,
+      };
+      setsizes(sizes);
+    }
+    e.preventDefault();
+    console.log("click");
+  };
+  const handlesizem = (e) => {
+    e.preventDefault();
+    seterrormessage(false);
+    const dress_number = e.target.size_m.value;
     if (!dress_number) {
       const newsum = 0;
       setSum(newsum);
@@ -168,7 +195,9 @@ const OrderConfirmPages = () => {
       setsizem(sizes);
     }
   };
-  const handlesizel = (dress_number) => {
+  const handlesizel = (e) => {
+    e.preventDefault();
+    const dress_number = e.target.size_l.value;
     seterrormessage(false);
     if (!dress_number) {
       const newsum = 0;
@@ -184,7 +213,9 @@ const OrderConfirmPages = () => {
       setsizel(sizes);
     }
   };
-  const handlesizexl = (dress_number) => {
+  const handlesizexl = (e) => {
+    e.preventDefault();
+    const dress_number = e.target.size_xl.value;
     seterrormessage(false);
     if (!dress_number) {
       const newsum = 0;
@@ -200,7 +231,9 @@ const OrderConfirmPages = () => {
       setsizexl(sizes);
     }
   };
-  const handlesizexxl = (dress_number) => {
+  const handlesizexxl = (e) => {
+    e.preventDefault();
+    const dress_number = e.target.size_xxl.value;
     seterrormessage(false);
     if (!dress_number) {
       const newsum = 0;
@@ -215,6 +248,10 @@ const OrderConfirmPages = () => {
       };
       setsizexxl(sizes);
     }
+  };
+  const handlereset = () => {
+    setSum(0);
+    setsizes();
   };
   console.log(size_s, size_m, size_l, size_xl, size_xxl);
   const handleorderconfirm = (e) => {
@@ -317,7 +354,7 @@ const OrderConfirmPages = () => {
         <></>
       )}
       <div className="order-confirm-top">
-        Your order has been Confirm.Thank you
+        Please Confirm your orders.Thank you !!!
       </div>
       <div className="order-confirm-hed">
         <div className="confirm-left">
@@ -372,7 +409,11 @@ const OrderConfirmPages = () => {
       </div>
 
       <div className="dress-size-con">
-        <h6 className="mb-6">you selected {sum} items.</h6>
+        <div className="dress_size_con_hed">
+          <h6 className="mb-6">you selected {sum} items.</h6>
+          <button onClick={handlereset}>Reset Size</button>
+        </div>
+
         <div className="dress-size-quen">
           <p>Size S: {size_s?.dress_number}</p>
           <p>Size M : {size_m?.dress_number}</p>
@@ -382,61 +423,81 @@ const OrderConfirmPages = () => {
         </div>
 
         <div className="dress-sizes">
-          <div className="size">
+          <Form onSubmit={handlesizesF} className="size">
             <h6>Size:S</h6>
             <p>Body:36-38</p>
             <p>Height:26-27</p>
             <input
               className="size-input"
-              onChange={(e) => handlesizes(e.target.value)}
+              // onChange={(e) => handlesizes(e.target.value)}
+              name="size_s"
               type="text"
               placeholder="...."
             />
-          </div>
-          <div className="size">
+            <button className="size_submit" type="submit">
+              Save
+            </button>
+          </Form>
+          <Form onSubmit={handlesizem} className="size">
             <h6>Size:M</h6>
             <p>Body:38-40</p>
             <p>Height:27-28</p>
             <input
               className="size-input"
-              onChange={(e) => handlesizem(e.target.value)}
+              name="size_m"
+              // onChange={(e) => handlesizem(e.target.value)}
               type="text"
               placeholder="...."
             />
-          </div>
-          <div className="size">
+            <button className="size_submit" type="submit">
+              Save
+            </button>
+          </Form>
+          <Form onSubmit={handlesizel} className="size">
             <h6>Size:L</h6>
             <p>Body:40-42</p>
             <p>Height:28-29</p>
             <input
               className="size-input"
-              onChange={(e) => handlesizel(e.target.value)}
+              name="size_l"
+              // onChange={(e) => handlesizel(e.target.value)}
               type="text"
               placeholder="...."
             />
-          </div>
-          <div className="size">
+            <button className="size_submit" type="submit">
+              Save
+            </button>
+          </Form>
+          <Form onSubmit={handlesizexl} className="size">
             <h6>Size:XL</h6>
             <p>Body:42-44</p>
             <p>Height:29-30</p>
             <input
               className="size-input"
-              onChange={(e) => handlesizexl(e.target.value)}
+              name="size_xl"
+              // onChange={(e) => handlesizexl(e.target.value)}
               type="text"
               placeholder="...."
             />
-          </div>
-          <div className="size">
+            <button className="size_submit" type="submit">
+              Save
+            </button>
+          </Form>
+          <Form onSubmit={handlesizexxl} className="size">
             <h6>Size:XXL</h6>
             <p>Body:44-46</p>
             <p>Height:30-31</p>
             <input
               className="size-input"
-              onChange={(e) => handlesizexxl(e.target.value)}
+              name="size_xxl"
+              // onChange={(e) => handlesizexxl(e.target.value)}
               type="text"
               placeholder="...."
             />
-          </div>
+            <button className="size_submit" type="submit">
+              Save
+            </button>
+          </Form>
         </div>
       </div>
       <div className="address-con">

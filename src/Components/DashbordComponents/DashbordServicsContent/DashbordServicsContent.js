@@ -11,6 +11,7 @@ import NotFound from "../../../CommonComponents/NotFound/NotFound";
 import { FaSearchPlus } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { Dropdown } from "react-bootstrap";
+import Swal from "sweetalert2";
 const DashbordServicsContent = () => {
   const [products, setproducts] = useState([]);
   const [cuscount, setcuscount] = useState(0);
@@ -26,27 +27,38 @@ const DashbordServicsContent = () => {
   const isDeleteButtonDisabled = selectedOptions?.length === 0;
   const productid = selectedOptions.map((item) => item._id);
   const handledeleteproduct = () => {
-    console.log(selectedOptions);
-    fetch(`${process.env.REACT_APP_URL}/delete-service`, {
-      method: "DELETE",
-      headers: {
-        "Content-type": "application/json",
-        authorization: `Beare ${localStorage.getItem("garments-token")}`,
-      },
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to delate this!",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "DELATE",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(selectedOptions);
+        fetch(`${process.env.REACT_APP_URL}/delete-service`, {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json",
+            authorization: `Beare ${localStorage.getItem("garments-token")}`,
+          },
 
-      body: JSON.stringify(productid),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data?.deletedCount > 0) {
-          toast("Services delete sucessfully !!!", {
-            position: "top-center",
-            autoClose: 1000,
+          body: JSON.stringify(productid),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data?.deletedCount > 0) {
+              toast("Services delete sucessfully !!!", {
+                position: "top-center",
+                autoClose: 1000,
+              });
+            }
+            refetch();
           });
-        }
-        refetch();
-      });
+      }
+    });
   };
   const { data: productall = [], refetch } = useQuery({
     queryKey: ["services"],
@@ -105,27 +117,38 @@ const DashbordServicsContent = () => {
     }
   };
   const handledeletecategory = (product) => {
-    const productid = [product?._id];
-    fetch(`${process.env.REACT_APP_URL}/delete-single-service`, {
-      method: "DELETE",
-      headers: {
-        "Content-type": "application/json",
-        authorization: `Beare ${localStorage.getItem("garments-token")}`,
-      },
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to delate this !!",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "DELATE",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const productid = [product?._id];
+        fetch(`${process.env.REACT_APP_URL}/delete-single-service`, {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json",
+            authorization: `Beare ${localStorage.getItem("garments-token")}`,
+          },
 
-      body: JSON.stringify(productid),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data?.deletedCount > 0) {
-          toast("Service delete sucessfully !!!", {
-            position: "top-center",
-            autoClose: 1000,
+          body: JSON.stringify(productid),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data?.deletedCount > 0) {
+              toast("Service delete sucessfully !!!", {
+                position: "top-center",
+                autoClose: 1000,
+              });
+            }
+            refetch();
           });
-        }
-        refetch();
-      });
+      }
+    });
   };
   return (
     <div className="dashbord-shop-product-con">
