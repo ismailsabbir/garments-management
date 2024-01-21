@@ -19,7 +19,7 @@
 
 .customize-image-con {
     width: 100%;
-    height: 300px;
+    height: 320px;
     border: 1px solid gainsboro;
     margin: 20px 0px;
     border-radius: 6px;
@@ -28,9 +28,12 @@
 
 }
 
+
+
 .upload-design {
     height: auto;
     border: 1px solid gainsboro;
+    /* border: 1px solid rgb(117, 49, 49); */
     margin: 20px 0px;
     border-radius: 6px;
     text-align: center;
@@ -62,9 +65,9 @@
     transition: 0.3s;
 }
 
-.customize-image-con img:hover {
+/* .customize-image-con img:hover {
     transform: scale(1.1);
-}
+} */
 
 .upload-design-con {
     border: 1px solid #be5184;
@@ -332,4 +335,79 @@ sizea {
     width: 100%;
     padding: 15px;
     margin-top: 30px;
+}
+
+.dress_image_con {
+    width: 100%;
+    height: 290px;
+
+    position: relative;
+}
+
+.dress_image {
+    width: 100%;
+    height: 100%;
+
+}
+
+.dress_design11 {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    left: 18%;
+    bottom: 44%;
+    z-index: 2;
+}
+
+.dress_design11 img {
+    width: 100%;
+    height: 100%;
+}
+
+.dress_design_back {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    right: 19%;
+    bottom: 44%;
+    z-index: 2;
+}
+
+.dress_design_back img {
+    width: 100%;
+    height: 100%;
+}
+
+.polo_design11 {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    left: 30%;
+    bottom: 59%;
+    z-index: 2;
+}
+
+.polo_design11 img {
+    width: 100%;
+    height: 100%;
+}
+
+.image_upload_delate {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.image_upload_delate button {
+    border: 1px solid #be5184;
+    padding: 4px 12px;
+    margin-right: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 6px;
+}
+
+.image_upload_delate button:hover {
+    background-color: #a50e55;
+    color: white;
 }

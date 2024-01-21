@@ -266,10 +266,12 @@ const OrderConfirmPages = () => {
     const createdAt = new Date();
     if (parseInt(orderinfo?.pices) < sum || sum === 0) {
       seterrormessage(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
     if (!postcode || !address || !note) {
       setinfoerror(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
 
@@ -432,7 +434,7 @@ const OrderConfirmPages = () => {
               // onChange={(e) => handlesizes(e.target.value)}
               name="size_s"
               type="text"
-              placeholder="...."
+              placeholder="0"
             />
             <button className="size_submit" type="submit">
               Save
@@ -447,7 +449,7 @@ const OrderConfirmPages = () => {
               name="size_m"
               // onChange={(e) => handlesizem(e.target.value)}
               type="text"
-              placeholder="...."
+              placeholder="0"
             />
             <button className="size_submit" type="submit">
               Save
@@ -462,7 +464,7 @@ const OrderConfirmPages = () => {
               name="size_l"
               // onChange={(e) => handlesizel(e.target.value)}
               type="text"
-              placeholder="...."
+              placeholder="0"
             />
             <button className="size_submit" type="submit">
               Save
@@ -477,7 +479,7 @@ const OrderConfirmPages = () => {
               name="size_xl"
               // onChange={(e) => handlesizexl(e.target.value)}
               type="text"
-              placeholder="...."
+              placeholder="0"
             />
             <button className="size_submit" type="submit">
               Save
@@ -492,7 +494,7 @@ const OrderConfirmPages = () => {
               name="size_xxl"
               // onChange={(e) => handlesizexxl(e.target.value)}
               type="text"
-              placeholder="...."
+              placeholder="0"
             />
             <button className="size_submit" type="submit">
               Save
@@ -526,7 +528,7 @@ const OrderConfirmPages = () => {
                 className="address-input"
                 name="postcode"
                 type="text"
-                placeholder=""
+                placeholder="Post code"
               />
             </Form.Group>
             <Form.Group
@@ -538,7 +540,7 @@ const OrderConfirmPages = () => {
                 className="address-input"
                 name="note"
                 type="text"
-                placeholder=""
+                placeholder="Special Note"
               />
             </Form.Group>
 

@@ -13,6 +13,33 @@
     padding-left: 10px;
     padding-bottom: 5px;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.gift_available {
+    display: flex;
+}
+
+.gift_icon {
+    margin-right: 10px;
+    color: #be5184;
+    font-size: 1.5rem;
+}
+
+.use_gift_btn button {
+    border: 1px solid #be5184;
+    margin-right: 15px;
+    border-radius: 4px;
+    padding: 2px 10px;
+    font-weight: 500;
+    color: rgb(80, 80, 80);
+}
+
+.use_gift_btn button:hover {
+    background-color: #be5184;
+    color: white;
 }
 
 .checkoutlogin p {
@@ -162,6 +189,16 @@
 .whole-sale-discount {
     color: #be5184;
     font-weight: 500;
+}
+
+.whole-sale-discount1 {
+    color: green;
+    font-weight: 500;
+}
+
+.discount-amount1 {
+    margin-bottom: 20px;
+    color: green;
 }
 
 @media only screen and (max-width: 687px) {

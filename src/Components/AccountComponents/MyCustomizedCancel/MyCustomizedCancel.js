@@ -4,7 +4,7 @@ import { AuthContext } from "../../../Context/UserContext";
 import Loading from "../../../CommonComponents/Loading/Loading";
 import { Form } from "react-bootstrap";
 
-const MyCancellOrderPage = () => {
+const MyCustomizedCancel = () => {
   const navigate = useNavigate();
   const { user, userlogout } = useContext(AuthContext);
   const [orders, setorders] = useState([]);
@@ -16,7 +16,7 @@ const MyCancellOrderPage = () => {
   console.log(datasize, count, page);
   useEffect(() => {
     fetch(
-      `${process.env.REACT_APP_URL}/shopordercancel?email=${user?.email}&page=${currentpage}&size=${datasize}`,
+      `${process.env.REACT_APP_URL}/shopcustomoizedcancel?email=${user?.email}&page=${currentpage}&size=${datasize}`,
       {
         headers: {
           authorization: `Beare ${localStorage.getItem("garments-token")}`,
@@ -116,22 +116,21 @@ const MyCancellOrderPage = () => {
                   </Link>
                 </div>
               </div>
-              {order?.productinfo?.map((aproduct) => (
-                <div className="shop-order-product-manage">
-                  <img src={aproduct?.Product_image} alt="" />
-                  <h6>{aproduct?.product_name}</h6>
 
-                  <h6>QTY:{aproduct?.quentuty}</h6>
-                  {order?.order === "paid" ? (
-                    <p>{order?.status}</p>
-                  ) : (
-                    <p>{order?.status}</p>
-                  )}
-                  <p>Estimated Delivery By {order?.delivery_date}</p>
-                  <p>{order?.delivery_status}</p>
-                  <p>{order?.dliveryDate}</p>
-                </div>
-              ))}
+              <div className="shop-order-product-manage">
+                <img src={order?.dress_photo} alt="" />
+                <h6>{order?.category_name}</h6>
+
+                <h6>QTY:{order?.quentuty}</h6>
+                {order?.order === "paid" ? (
+                  <p>{order?.status}</p>
+                ) : (
+                  <p>{order?.status}</p>
+                )}
+                <p>Estimated Delivery By {order?.delivery_date}</p>
+                <p>{order?.delivery_status}</p>
+                <p>{order?.dliveryDate}</p>
+              </div>
             </div>
           ))}
           <div className="pagination-con">
@@ -152,4 +151,4 @@ const MyCancellOrderPage = () => {
   );
 };
 
-export default MyCancellOrderPage;
+export default MyCustomizedCancel;

@@ -6,7 +6,7 @@ import Loading from "../../../CommonComponents/Loading/Loading";
 import { Form } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
-
+import Swal from "sweetalert2";
 const MycartPages = () => {
   const [orders, setorders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -72,18 +72,33 @@ const MycartPages = () => {
     //   });
   };
   const handledelete = (product) => {
-    fetch(`${process.env.REACT_APP_URL}/cartproduct/${product?._id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        const remingproduct = orders?.filter(
-          (rproduct) => rproduct?._id !== product?._id
-        );
-        setorders(remingproduct);
-        if (data?.deletedCount > 0) {
-        }
-      });
+    Swal.fire({
+      title: "Are you sure ??",
+      text: "You want to delate the product !!",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "DELATE",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${process.env.REACT_APP_URL}/cartproduct/${product?._id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            const remingproduct = orders?.filter(
+              (rproduct) => rproduct?._id !== product?._id
+            );
+            setorders(remingproduct);
+            if (data?.deletedCount > 0) {
+              toast("Delete sucessfully !!!", {
+                position: "top-center",
+                autoClose: 1000,
+              });
+            }
+          });
+      }
+    });
   };
   const handleaddwishlist = (product) => {
     const {

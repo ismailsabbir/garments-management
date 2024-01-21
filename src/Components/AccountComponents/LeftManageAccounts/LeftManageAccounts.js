@@ -34,6 +34,13 @@ const LeftManageAccounts = () => {
           {" "}
           My Cancellations
         </Link>
+        <Link
+          to="/manage_account/customized/cancelorder"
+          className="manage-left-link"
+        >
+          {" "}
+          My Customized Cancellations
+        </Link>
       </div>
       <div className="account-link-con">
         <Link to="/manage_account/review" className="manage-left-link">

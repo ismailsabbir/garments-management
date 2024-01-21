@@ -5,6 +5,7 @@ import { Form } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./CartCheckoutPages.css";
 import { AuthContext } from "../../Context/UserContext";
+import { FaGift } from "react-icons/fa";
 const CartCheckoutPages = () => {
   const { user, userlogout } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -28,7 +29,174 @@ const CartCheckoutPages = () => {
   const [showorder, setshoworder] = useState([]);
   const [userinfo, setuserinfo] = useState([]);
   const [userinfos, setuserinfos] = useState([]);
+  const [isRewardUse, setisRewardUse] = useState(false);
+  const [reward, setreward] = useState();
+  const [showorder1, setshoworder1] = useState([]);
   console.log(userinfo);
+  // useEffect(() => {
+  //   setreward(userinfo?.reward);
+  // }, []);
+  // useEffect(() => {
+  //   fetch(`${process.env.REACT_APP_URL}/singleuser?email=${user?.email}`, {
+  //     headers: {
+  //       authorization: `Beare ${localStorage.getItem("garments-token")}`,
+  //     },
+  //   })
+  //     .then((res) => {
+  //       if (res.status === 401 || res.status === 403) {
+  //         return userlogout();
+  //       }
+  //       return res.json();
+  //     })
+  //     .then((jsonData) => {
+  //       setuserinfos(jsonData);
+  //       // setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Failed to fetch data:", error);
+  //       setLoading(false);
+  //     });
+  // }, [user?.email, userlogout]);
+  // useEffect(() => {
+  //   fetch(`${process.env.REACT_APP_URL}/single/employee?email=${user?.email}`, {
+  //     headers: {
+  //       authorization: `Beare ${localStorage.getItem("garments-token")}`,
+  //     },
+  //   })
+  //     .then((res) => {
+  //       if (res.status === 401 || res.status === 403) {
+  //         return userlogout();
+  //       }
+  //       return res.json();
+  //     })
+  //     .then((jsonData) => {
+  //       setuserinfo(jsonData);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Failed to fetch data:", error);
+  //       setLoading(false);
+  //     });
+  // }, [user?.email, userlogout]);
+  // console.log(userinfo);
+  // useEffect(() => {
+  //   fetch(`${process.env.REACT_APP_URL}/address?email=${user?.email}`, {
+  //     headers: {
+  //       authorization: `Beare ${localStorage.getItem("garments-token")}`,
+  //     },
+  //   })
+  //     .then((res) => {
+  //       if (res.status === 401 || res.status === 403) {
+  //         return userlogout();
+  //       }
+  //       return res.json();
+  //     })
+  //     .then((jsonData) => {
+  //       setaddres(jsonData);
+  //       // setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Failed to fetch data:", error);
+  //       setLoading(false);
+  //     });
+  // }, [user?.email, userlogout]);
+  // useEffect(() => {
+  //   fetch(`${process.env.REACT_APP_URL}/shoporder?email=${user?.email}`, {
+  //     headers: {
+  //       authorization: `Beare ${localStorage.getItem("garments-token")}`,
+  //     },
+  //   })
+  //     .then((res) => {
+  //       if (res.status === 401 || res.status === 403) {
+  //         return userlogout();
+  //       }
+  //       return res.json();
+  //     })
+  //     .then((jsonData) => {
+  //       setorders(jsonData);
+  //       // setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Failed to fetch data:", error);
+  //       setLoading(false);
+  //     });
+  // }, [user?.email, userlogout]);
+  // useEffect(() => {
+  //   fetch(`${process.env.REACT_APP_URL}/cart-s-order?email=${user?.email}`, {
+  //     headers: {
+  //       authorization: `Beare ${localStorage.getItem("garments-token")}`,
+  //     },
+  //   })
+  //     .then((res) => {
+  //       if (res.status === 401 || res.status === 403) {
+  //         return userlogout();
+  //       }
+  //       return res.json();
+  //     })
+  //     .then((jsonData) => {
+  //       setcartorder(jsonData);
+  //       // setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Failed to fetch data:", error);
+  //       setLoading(false);
+  //     });
+  // }, [user?.email, userlogout]);
+  // useEffect(() => {
+  //   fetch(
+  //     `${process.env.REACT_APP_URL}/customize-s-order?email=${user?.email}`,
+  //     {
+  //       headers: {
+  //         authorization: `Beare ${localStorage.getItem("garments-token")}`,
+  //       },
+  //     }
+  //   )
+  //     .then((res) => {
+  //       if (res.status === 401 || res.status === 403) {
+  //         return userlogout();
+  //       }
+  //       return res.json();
+  //     })
+  //     .then((jsonData) => {
+  //       setcustomized(jsonData);
+  //       // setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Failed to fetch data:", error);
+  //       setLoading(false);
+  //     });
+  // }, [user?.email, userlogout]);
+  // useEffect(() => {
+  //   if (addresss?.length >= 1) {
+  //     setshoworder(addresss);
+  //   } else if (cartorder?.length >= 1) {
+  //     setshoworder(cartorder);
+  //     setLoading(false);
+  //   } else if (customized.length >= 1) {
+  //     setshoworder(customized);
+  //     setLoading(false);
+  //   } else if (shoporder.length >= 1) {
+  //     setshoworder(shoporder);
+  //     setLoading(false);
+  //   } else {
+  //     setshoworder([
+  //       {
+  //         name: "Enter Name",
+  //         address: "House Number/Road Name/City/District",
+  //         phone: "Mobile Number",
+  //         email: "Enter Email",
+  //       },
+  //     ]);
+  //   }
+  // }, [addresss, shoporder, cartorder, customized]);
+  // useEffect(() => {
+  //   if (!shopinfo) {
+  //     navigate("/shop");
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    setreward(userinfo?.reward);
+  }, []);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/singleuser?email=${user?.email}`, {
       headers: {
@@ -42,7 +210,7 @@ const CartCheckoutPages = () => {
         return res.json();
       })
       .then((jsonData) => {
-        setuserinfos(jsonData);
+        setuserinfo(jsonData);
         // setLoading(false);
       })
       .catch((error) => {
@@ -50,27 +218,6 @@ const CartCheckoutPages = () => {
         setLoading(false);
       });
   }, [user?.email, userlogout]);
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_URL}/single/employee?email=${user?.email}`, {
-      headers: {
-        authorization: `Beare ${localStorage.getItem("garments-token")}`,
-      },
-    })
-      .then((res) => {
-        if (res.status === 401 || res.status === 403) {
-          return userlogout();
-        }
-        return res.json();
-      })
-      .then((jsonData) => {
-        setuserinfo(jsonData);
-      })
-      .catch((error) => {
-        console.error("Failed to fetch data:", error);
-        setLoading(false);
-      });
-  }, [user?.email, userlogout]);
-  console.log(userinfo);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/address?email=${user?.email}`, {
       headers: {
@@ -161,14 +308,18 @@ const CartCheckoutPages = () => {
   useEffect(() => {
     if (addresss?.length >= 1) {
       setshoworder(addresss);
+      setshoworder1(addresss);
     } else if (cartorder?.length >= 1) {
       setshoworder(cartorder);
+      setshoworder1(cartorder);
       setLoading(false);
     } else if (customized.length >= 1) {
       setshoworder(customized);
+      setshoworder1(customized);
       setLoading(false);
     } else if (shoporder.length >= 1) {
       setshoworder(shoporder);
+      setshoworder1(shoporder);
       setLoading(false);
     } else {
       setshoworder([
@@ -179,13 +330,24 @@ const CartCheckoutPages = () => {
           email: "Enter Email",
         },
       ]);
+      setshoworder1([
+        {
+          name: "Enter Name",
+          address: "House Number/Road Name/City/District",
+          phone: "Mobile Number",
+          email: "Enter Email",
+        },
+      ]);
     }
   }, [addresss, shoporder, cartorder, customized]);
+  console.log(showorder1);
   useEffect(() => {
     if (!shopinfo) {
       navigate("/shop");
+      console.log("not shop");
     }
   }, []);
+
   const firstnamehandle = (e) => {
     const firstname = e.target.value;
     setfirstname(firstname);
@@ -229,7 +391,13 @@ const CartCheckoutPages = () => {
     );
   }, 0);
   console.log(total_price);
-  if (userinfos?.role === "Premium") {
+  if (userinfo?.role === "Premium" && isRewardUse) {
+    total_price =
+      total_price_main - parseInt(reward) - (total_price_main * 20) / 100 + 20;
+    console.log("userinfo?.role === Premium && userinfo?.reward", total_price);
+  } else if (isRewardUse) {
+    total_price = total_price_main + 20 - parseInt(reward);
+  } else if (userinfos?.role === "Premium") {
     total_price = shopinfo.reduce((total, currentObject) => {
       return (
         total +
@@ -265,6 +433,9 @@ const CartCheckoutPages = () => {
     const order = "not paid";
     const transiction_id = "";
     const orderconfirm = {
+      reward,
+      createdAt,
+      isRewardUse,
       productinfo,
       name,
       lastname,
@@ -282,10 +453,10 @@ const CartCheckoutPages = () => {
       orderid,
       total_price,
       status,
-      createdAt,
     };
     if (!name || !lastname || !email || !phone || !address || !postcode) {
       seterrorinfo(true);
+      window.scrollTo({ top: 150, behavior: "smooth" });
       return;
     }
     fetch(`${process.env.REACT_APP_URL}/shoporder?userid=${userinfo?._id}`, {
@@ -307,17 +478,47 @@ const CartCheckoutPages = () => {
         console.log(err.message);
       });
   };
-
+  const handleRewardYes = () => {
+    setisRewardUse(true);
+    if (
+      userinfo?.reward >=
+      parseFloat(shopinfo?.product_price) * parseFloat(shopinfo?.quentuty) + 20
+    ) {
+      setreward(
+        parseFloat(shopinfo?.product_price) * parseFloat(shopinfo?.quentuty) +
+          20
+      );
+    } else {
+      setreward(userinfo?.reward);
+    }
+  };
+  const handleRewardNo = () => {
+    setisRewardUse(false);
+  };
   return (
     <div className="checkout-container-hole">
-      <div className="checkoutlogin">
-        <p>
-          Returning customer?{" "}
-          <Link to="/logon" className="login-link-c">
-            Click here to login
-          </Link>{" "}
-        </p>
-      </div>
+      {userinfo?.reward >= 1 ? (
+        <div className="checkoutlogin">
+          <div className="gift_available">
+            <FaGift className="gift_icon" />
+            <p>Available Reward : {userinfo?.reward}</p>
+          </div>
+          <div className="use_gift_btn">
+            {isRewardUse ? (
+              <></>
+            ) : (
+              <button onClick={handleRewardYes}>Yes ! Reward Use</button>
+            )}
+            {isRewardUse ? (
+              <button onClick={handleRewardNo}>Not Use Reward</button>
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
       <div className="checkoutlogin">
         <p>
           Have a coupon?{" "}
@@ -427,6 +628,7 @@ const CartCheckoutPages = () => {
               />
               {/* </form> */}
             </div>
+
             <div className="checkout-info-right col col-12 col-sm-12 col-md-12 col-lg-3">
               <h5>Your Order</h5>
 
@@ -454,7 +656,19 @@ const CartCheckoutPages = () => {
                   <p>Subtotal</p>
                   <h6>Tk {total_price_main} </h6>
                 </div>
-                {userinfos?.role === "Premium" ? (
+                {isRewardUse ? (
+                  <div className="checkout-subtotla">
+                    <p className="whole-sale-discount1">
+                      After Reward Discount Price{" "}
+                    </p>
+                    <h6 className="discount-amount1">
+                      ${total_price_main - parseInt(reward)}
+                    </h6>
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {userinfo?.role === "Premium" ? (
                   <div className="checkout-subtotla">
                     <p className="whole-sale-discount">
                       Discount (20%) For WholeSale
@@ -486,7 +700,6 @@ const CartCheckoutPages = () => {
                 >
                   Confirm Order
                 </button>
-                {/* </Link> */}
               </div>
             </div>
           </Form>

@@ -19,6 +19,7 @@ const ProductReviewsFrom = ({ oneproduct }) => {
 
   const handlereview = (e) => {
     e.preventDefault();
+    const form = e.target;
     const name = e.target.name.value;
     const email = e.target.email.value;
     const review = e.target.review.value;
@@ -70,8 +71,9 @@ const ProductReviewsFrom = ({ oneproduct }) => {
             position: "top-center",
             autoClose: 1000,
           });
+          form.reset();
         } else {
-          toast("Failed !!!", {
+          toast("You are not able to give the review !!!", {
             position: "top-center",
             autoClose: 1000,
           });
@@ -115,9 +117,9 @@ const ProductReviewsFrom = ({ oneproduct }) => {
         <h6 className="mb-4">Captcha</h6>
         <div className="captcher-con">
           <input type="text" name="capture" placeholder="Code" />
-          <input value={code} name="given_capture" type="red" />
+          {/* <input value={code} name="given_capture" type="text" readOnly /> */}
+          <input value={code} name="given_capture" type="text" readOnly />
         </div>
-
         <button className="review-submit">CONTINEW</button>
       </Form>
       <ToastContainer></ToastContainer>

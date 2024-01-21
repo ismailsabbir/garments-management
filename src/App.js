@@ -129,6 +129,7 @@ import EmployeeMyAttendances from "./Components/EmployeeComponents/EmployeeMyAtt
 import EmployeeMySalary from "./Components/EmployeeComponents/EmployeeMySalary/EmployeeMySalary";
 import EmployeeSalaryMake from "./Components/EmployeeComponents/EmployeeSalaryMake/EmployeeSalaryMake";
 import EmployeeStaff from "./Components/EmployeeComponents/EmployeeStaff/EmployeeStaff";
+import MyCustomizedCancel from "./Components/AccountComponents/MyCustomizedCancel/MyCustomizedCancel";
 export const servcontext = createContext();
 function App() {
   const { data } = useFetch(`${process.env.REACT_APP_URL}/services`);
@@ -470,6 +471,14 @@ function App() {
           element: (
             <PrivetRoutes>
               <MyCancellOrderPage></MyCancellOrderPage>
+            </PrivetRoutes>
+          ),
+        },
+        {
+          path: "/manage_account/customized/cancelorder",
+          element: (
+            <PrivetRoutes>
+              <MyCustomizedCancel></MyCustomizedCancel>
             </PrivetRoutes>
           ),
         },

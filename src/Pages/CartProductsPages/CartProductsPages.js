@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { ToastContainer, toast } from "react-toastify";
 import { Form } from "react-bootstrap";
+import Swal from "sweetalert2";
 const CartProductsPages = () => {
   const navigate = useNavigate();
   const { user, userlogout } = useContext(AuthContext);
@@ -23,29 +24,6 @@ const CartProductsPages = () => {
   const [datasize, setdatasize] = useState(5);
   const [count, setcount] = useState(0);
   const page = Math.ceil(count / datasize);
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     fetch(`${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`, {
-  //       headers: {
-  //         authorization: `Beare ${localStorage.getItem("garments-token")}`,
-  //       },
-  //     })
-  //       .then((res) => {
-  //         if (res.status === 401 || res.status === 403) {
-  //           return userlogout();
-  //         }
-  //         return res.json();
-  //       })
-  //       .then((jsonData) => {
-  //         setcartproducts(jsonData);
-  //         setLoading(false);
-  //       })
-  //       .catch((error) => {
-  //         console.error("Failed to fetch data:", error);
-  //         setLoading(false);
-  //       });
-  //   }, 2000);
-  // }, [user?.email, userlogout]);
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_URL}/mycartproduct?email=${user?.email}&page=${currentpage}&size=${datasize}`,
@@ -106,18 +84,33 @@ const CartProductsPages = () => {
   console.log(cartproducts);
 
   const handledelete = (product) => {
-    fetch(`${process.env.REACT_APP_URL}/cartproduct/${product?._id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        const remingproduct = cartproducts?.filter(
-          (rproduct) => rproduct?._id !== product?._id
-        );
-        setcartproducts(remingproduct);
-        if (data?.deletedCount > 0) {
-        }
-      });
+    Swal.fire({
+      title: "Are you sure ??",
+      text: "You want to delate the Product !!",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "DELATE",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${process.env.REACT_APP_URL}/cartproduct/${product?._id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            const remingproduct = cartproducts?.filter(
+              (rproduct) => rproduct?._id !== product?._id
+            );
+            setcartproducts(remingproduct);
+            if (data?.deletedCount > 0) {
+              toast("Delete sucessfully !!!", {
+                position: "top-center",
+                autoClose: 1000,
+              });
+            }
+          });
+      }
+    });
   };
   const handleaddwishlist = (product) => {
     const {

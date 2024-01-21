@@ -179,20 +179,24 @@ const SingleCustomize = ({ category }) => {
 
     if (photoupload === false && colorclick === false) {
       setmessage("Please selected colo or upload design");
+      window.scrollTo({ top: 350, behavior: "smooth" });
       return;
     }
     if (pices < 5) {
       setpicesmessage("Select how many pieces are needed.? minimum 5!");
+      window.scrollTo({ top: 350, behavior: "smooth" });
       return;
     }
     setpicesmessage("");
     if (qualityname === "") {
       setqualitymessage("Please select what types of fabric needed?");
+      window.scrollTo({ top: 350, behavior: "smooth" });
       return;
     }
     setqualitymessage("");
     if (fristdate === false && secoundate === false) {
       setdaymessage("Please select the product delivery date.");
+      window.scrollTo({ top: 350, behavior: "smooth" });
       return;
     }
     setdaymessage("");
@@ -240,6 +244,14 @@ const SingleCustomize = ({ category }) => {
       return;
     }
     setpices(data);
+  };
+  console.log(colorproducts);
+  console.log(category);
+  const handleremovefrontdesign = () => {
+    setfrontphoto();
+  };
+  const handleremovebackdesign = () => {
+    setbackphoto();
   };
   return (
     <div className="customize-con">
@@ -331,14 +343,101 @@ const SingleCustomize = ({ category }) => {
           )}
 
           <div className={upload ? "upload-design" : "customize-image-con"}>
-            {colorclick ? <img src={colorproducts?.image} alt="n" /> : <></>}
-            {photoupload ? <img src={photo} alt="n" /> : <></>}
-            {colordesigns ? (
-              <img src={category?.Default_image} alt="n" />
+            {colorclick ? (
+              <div className="dress_image_con">
+                <img
+                  className="dress_image"
+                  src={colorproducts?.image}
+                  alt="n"
+                />
+                {colorproducts?.name === "Polo" ? (
+                  <>
+                    {frontphoto ? (
+                      <div className="polo_design11">
+                        <img src={frontphoto} alt="" />
+                      </div>
+                    ) : (
+                      <>
+                        {frontphoto ? (
+                          <div className="dress_design11">
+                            <img src={frontphoto} alt="" />
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {frontphoto ? (
+                      <div className="dress_design11">
+                        <img src={frontphoto} alt="" />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                )}
+                {backphoto ? (
+                  <div className="dress_design_back">
+                    <img src={backphoto} alt="" />
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </div>
             ) : (
               <></>
             )}
-
+            {photoupload ? <img src={photo} alt="n" /> : <></>}
+            {colordesigns ? (
+              <div className="dress_image_con">
+                <img
+                  className="dress_image"
+                  src={category?.Default_image}
+                  alt="n"
+                />
+                {category?.name === "Polo" ? (
+                  <>
+                    {frontphoto ? (
+                      <div className="polo_design11">
+                        <img src={frontphoto} alt="" />
+                      </div>
+                    ) : (
+                      <>
+                        {frontphoto ? (
+                          <div className="dress_design11">
+                            <img src={frontphoto} alt="" />
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {frontphoto ? (
+                      <div className="dress_design11">
+                        <img src={frontphoto} alt="" />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                )}
+                {backphoto ? (
+                  <div className="dress_design_back">
+                    <img src={backphoto} alt="" />
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </div>
+            ) : (
+              <></>
+            )}
             {upload ? (
               <div>
                 <label
@@ -453,64 +552,89 @@ const SingleCustomize = ({ category }) => {
               ))}
             </div>
           </div>
-          <div className="color-select">
-            <div className="color-select-hed">
-              <p>
-                Do you want to print anything on front of the {category?.name}
-              </p>
+          {category?.name === "Cap" || category?.name === "Shirt" ? (
+            <></>
+          ) : (
+            <div className="color-select">
+              <div className="color-select-hed">
+                <p>
+                  Do you want to print anything on front of the {category?.name}
+                </p>
+              </div>
+              <div className="image_upload_delate">
+                <label className="custom-file-input-button choose-design">
+                  Yes i will choose front side image
+                  <input
+                    onChange={(e) => {
+                      handlefrontimageupload(e);
+                    }}
+                    name="image"
+                    type="file"
+                    style={{ display: "none" }}
+                  />
+                </label>
+                {frontphoto ? (
+                  <button onClick={handleremovefrontdesign}>Remove</button>
+                ) : (
+                  <></>
+                )}
+              </div>
+
+              <br />
+              <div className="design-checkbox">
+                <input
+                  type="checkbox"
+                  checked="checked"
+                  className="checkbox checkbox-primary"
+                />
+                <span className="label-text">
+                  Transparent background (preview may not be accurate)
+                </span>
+              </div>
             </div>
-            <label className="custom-file-input-button choose-design">
-              Yes i will choose front side image
-              <input
-                onChange={(e) => {
-                  handlefrontimageupload(e);
-                }}
-                name="image"
-                type="file"
-                style={{ display: "none" }}
-              />
-            </label>
-            <br />
-            <div className="design-checkbox">
-              <input
-                type="checkbox"
-                checked="checked"
-                className="checkbox checkbox-primary"
-              />
-              <span className="label-text">
-                Transparent background (preview may not be accurate)
-              </span>
+          )}
+          {category?.name === "Cap" || category?.name === "Shirt" ? (
+            <></>
+          ) : (
+            <div className="color-select">
+              <div className="color-select-hed">
+                <p>
+                  Do you want to print anything on back of the {category?.name}
+                </p>
+              </div>
+              <div className="image_upload_delate">
+                <label className="custom-file-input-button choose-design">
+                  Yes i will choose backside image
+                  <input
+                    onChange={(e) => {
+                      handlebackimageupload(e);
+                    }}
+                    name="image"
+                    type="file"
+                    style={{ display: "none" }}
+                  />
+                </label>
+                {backphoto ? (
+                  <button onClick={handleremovebackdesign}>Remove</button>
+                ) : (
+                  <></>
+                )}
+              </div>
+
+              <br />
+              <div className="design-checkbox">
+                <input
+                  type="checkbox"
+                  checked="checked"
+                  className="checkbox checkbox-primary"
+                />
+                <span className="label-text">
+                  Transparent background (preview may not be accurate)
+                </span>
+              </div>
             </div>
-          </div>
-          <div className="color-select">
-            <div className="color-select-hed">
-              <p>
-                Do you want to print anything on back of the {category?.name}
-              </p>
-            </div>
-            <label className="custom-file-input-button choose-design">
-              Yes i will choose backside image
-              <input
-                onChange={(e) => {
-                  handlebackimageupload(e);
-                }}
-                name="image"
-                type="file"
-                style={{ display: "none" }}
-              />
-            </label>
-            <br />
-            <div className="design-checkbox">
-              <input
-                type="checkbox"
-                checked="checked"
-                className="checkbox checkbox-primary"
-              />
-              <span className="label-text">
-                Transparent background (preview may not be accurate)
-              </span>
-            </div>
-          </div>
+          )}
+
           <div className="color-select">
             <div className="color-select-hed">
               <p>Which quality of fabric do you want</p>

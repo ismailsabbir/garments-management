@@ -5,6 +5,7 @@ import "./CheckOutPages.css";
 import { useState } from "react";
 import { useEffect } from "react";
 import { AuthContext } from "../../../Context/UserContext";
+import { FaGift } from "react-icons/fa";
 const CheckOutPages = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -27,8 +28,12 @@ const CheckOutPages = () => {
   const [showorder, setshoworder] = useState([]);
   const [showorder1, setshoworder1] = useState([]);
   const [userinfo, setuserinfo] = useState([]);
+  const [isRewardUse, setisRewardUse] = useState(false);
+  const [reward, setreward] = useState();
   console.log(userinfo);
-
+  useEffect(() => {
+    setreward(userinfo?.reward);
+  }, []);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/singleuser?email=${user?.email}`, {
       headers: {
@@ -50,7 +55,6 @@ const CheckOutPages = () => {
         setLoading(false);
       });
   }, [user?.email, userlogout]);
-
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/address?email=${user?.email}`, {
       headers: {
@@ -213,9 +217,23 @@ const CheckOutPages = () => {
     setmesssage(message);
   };
   const productinfo = [{ ...shopinfo }];
-  console.log(productinfo);
   let total_price = 0;
-  if (userinfo?.role === "Premium") {
+  if (userinfo?.role === "Premium" && isRewardUse) {
+    total_price =
+      parseFloat(shopinfo?.product_price) * parseFloat(shopinfo?.quentuty) -
+      parseInt(reward) -
+      (parseFloat(shopinfo?.product_price) *
+        parseFloat(shopinfo?.quentuty) *
+        20) /
+        100 +
+      20;
+    console.log("userinfo?.role === Premium && userinfo?.reward", total_price);
+  } else if (isRewardUse) {
+    total_price =
+      parseFloat(shopinfo?.product_price) * parseFloat(shopinfo?.quentuty) +
+      20 -
+      parseInt(reward);
+  } else if (userinfo?.role === "Premium") {
     total_price =
       parseFloat(shopinfo?.product_price) * parseFloat(shopinfo?.quentuty) -
       (parseFloat(shopinfo?.product_price) *
@@ -254,6 +272,9 @@ const CheckOutPages = () => {
     const status = "Pending";
     const createdAt = new Date();
     const orderconfirm = {
+      reward,
+      createdAt,
+      isRewardUse,
       name,
       lastname,
       country,
@@ -278,11 +299,11 @@ const CheckOutPages = () => {
       orderid,
       productinfo,
       status,
-      createdAt,
     };
     console.log("orderconfirm", orderconfirm);
     if (!name || !lastname || !email || !phone || !address || !postcode) {
       seterrorinfo(true);
+      window.scrollTo({ top: 150, behavior: "smooth" });
       return;
     }
     fetch(`${process.env.REACT_APP_URL}/shoporder?userid=${userinfo?._id}`, {
@@ -303,16 +324,49 @@ const CheckOutPages = () => {
         console.log(err.message);
       });
   };
+  const handleRewardYes = () => {
+    setisRewardUse(true);
+    if (
+      userinfo?.reward >=
+      parseFloat(shopinfo?.product_price) * parseFloat(shopinfo?.quentuty) + 20
+    ) {
+      setreward(
+        parseFloat(shopinfo?.product_price) * parseFloat(shopinfo?.quentuty) +
+          20
+      );
+    } else {
+      setreward(userinfo?.reward);
+    }
+  };
+  const handleRewardNo = () => {
+    setisRewardUse(false);
+  };
+  console.log(total_price);
   return (
     <div className="checkout-container-hole">
-      <div className="checkoutlogin">
-        <p>
-          Returning customer?{" "}
-          <Link to="/logon" className="login-link-c">
-            Click here to login
-          </Link>{" "}
-        </p>
-      </div>
+      {userinfo?.reward >= 1 ? (
+        <div className="checkoutlogin">
+          <div className="gift_available">
+            <FaGift className="gift_icon" />
+            <p>Available Reward : {userinfo?.reward}</p>
+          </div>
+          <div className="use_gift_btn">
+            {isRewardUse ? (
+              <></>
+            ) : (
+              <button onClick={handleRewardYes}>Yes ! Reward Use</button>
+            )}
+            {isRewardUse ? (
+              <button onClick={handleRewardNo}>Not Use Reward</button>
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
+
       <div className="checkoutlogin">
         <p>
           Have a coupon?{" "}
@@ -445,6 +499,21 @@ const CheckOutPages = () => {
                       parseFloat(shopinfo?.quentuty)}
                   </h6>
                 </div>
+                {isRewardUse ? (
+                  <div className="checkout-subtotla">
+                    <p className="whole-sale-discount1">
+                      After Reward Discount Price{" "}
+                    </p>
+                    <h6 className="discount-amount1">
+                      $
+                      {parseFloat(shopinfo?.product_price) *
+                        parseFloat(shopinfo?.quentuty) -
+                        parseInt(reward)}
+                    </h6>
+                  </div>
+                ) : (
+                  <></>
+                )}
                 {userinfo?.role === "Premium" ? (
                   <div className="checkout-subtotla">
                     <p className="whole-sale-discount">
@@ -469,7 +538,73 @@ const CheckOutPages = () => {
                   <p>Delivery Fee:</p>
                   <h6>$20</h6>
                 </div>
-                <div className="checkout-totla">
+                {userinfo?.role === "Premium" && isRewardUse ? (
+                  <div className="checkout-totla">
+                    <p>Total:</p>
+                    {userinfo?.role === "Premium" ? (
+                      <p>
+                        $
+                        {parseFloat(shopinfo?.product_price) *
+                          parseFloat(shopinfo?.quentuty) -
+                          parseInt(reward) -
+                          (parseFloat(shopinfo?.product_price) *
+                            parseFloat(shopinfo?.quentuty) *
+                            20) /
+                            100 +
+                          20}
+                      </p>
+                    ) : (
+                      <p>
+                        $
+                        {parseFloat(shopinfo?.product_price) *
+                          parseFloat(shopinfo?.quentuty) +
+                          20}
+                      </p>
+                    )}
+                  </div>
+                ) : (
+                  <div className="checkout-totla">
+                    <p>Total:</p>
+                    {userinfo?.role === "Premium" ? (
+                      <p>
+                        $
+                        {parseFloat(shopinfo?.product_price) *
+                          parseFloat(shopinfo?.quentuty) -
+                          (parseFloat(shopinfo?.product_price) *
+                            parseFloat(shopinfo?.quentuty) *
+                            20) /
+                            100 +
+                          20}
+                      </p>
+                    ) : (
+                      <>
+                        {isRewardUse ? (
+                          <p>
+                            $
+                            {parseFloat(shopinfo?.product_price) *
+                              parseFloat(shopinfo?.quentuty) +
+                              20 -
+                              parseInt(reward)}
+                          </p>
+                        ) : (
+                          <p>
+                            $
+                            {parseFloat(shopinfo?.product_price) *
+                              parseFloat(shopinfo?.quentuty) +
+                              20}
+                          </p>
+                        )}
+                        {/* <p>
+                          $
+                          {parseFloat(shopinfo?.product_price) *
+                            parseFloat(shopinfo?.quentuty) +
+                            20}
+                        </p> */}
+                      </>
+                    )}
+                  </div>
+                )}
+                {/* <div className="checkout-totla">
                   <p>Total:</p>
                   {userinfo?.role === "Premium" ? (
                     <p>
@@ -490,13 +625,7 @@ const CheckOutPages = () => {
                         20}
                     </p>
                   )}
-                  {/* <p>
-                    $
-                    {parseFloat(shopinfo?.product_price) *
-                      parseFloat(shopinfo?.quentuty) +
-                      20}
-                  </p> */}
-                </div>
+                </div> */}
                 <p className="checkout-personal">
                   Your personal data will be used to process your order, support
                   your experience throughout this website, and for other

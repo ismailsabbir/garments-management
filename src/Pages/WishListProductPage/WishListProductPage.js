@@ -12,6 +12,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Modal from "../../Hooks/Modal/Modal";
 import { Form } from "react-bootstrap";
 import LeftManageAccounts from "../../Components/AccountComponents/LeftManageAccounts/LeftManageAccounts";
+import Swal from "sweetalert2";
 
 const WishListProductPage = () => {
   const { user, userlogout } = useContext(AuthContext);
@@ -54,20 +55,6 @@ const WishListProductPage = () => {
       });
   }, [user?.email, userlogout, currentpage, datasize]);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     fetch(`${process.env.REACT_APP_URL}/wishlistproduct?email=${user?.email}`)
-  //       .then((res) => res.json())
-  //       .then((jsonData) => {
-  //         setcartproducts(jsonData);
-  //         setLoading(false);
-  //       })
-  //       .catch((error) => {
-  //         console.error("Failed to fetch data:", error);
-  //         setLoading(false);
-  //       });
-  //   }, 2000);
-  // }, [user?.email]);
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -176,19 +163,34 @@ const WishListProductPage = () => {
     }
   };
   const handledelete = (product) => {
-    fetch(`${process.env.REACT_APP_URL}/wishlistproduct/${product?._id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        const remingproduct = cartproducts?.filter(
-          (rproduct) => rproduct?._id !== product?._id
-        );
-        setcartproducts(remingproduct);
-        if (data?.deletedCount > 0) {
-          setdelete(true);
-        }
-      });
+    Swal.fire({
+      title: "Are you sure ??",
+      text: "You want to delate the Product !!",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "DELATE",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${process.env.REACT_APP_URL}/wishlistproduct/${product?._id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            const remingproduct = cartproducts?.filter(
+              (rproduct) => rproduct?._id !== product?._id
+            );
+            setcartproducts(remingproduct);
+            if (data?.deletedCount > 0) {
+              setdelete(true);
+              toast("Delete sucessfully !!!", {
+                position: "top-center",
+                autoClose: 1000,
+              });
+            }
+          });
+      }
+    });
   };
   const handlesearch = (e) => {
     e.preventDefault();

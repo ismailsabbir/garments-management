@@ -17,6 +17,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useEffect } from "react";
 import ShopRelatedProducts from "../ShopRelatedProducts/ShopRelatedProducts";
 import Rating from "react-rating-stars-component";
+import ReviewsList from "../ReviewsList/ReviewsList";
 const ShopProductDetails = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -487,7 +488,7 @@ const ShopProductDetails = () => {
       </div>
       <ShopDetailsInfo oneproduct={oneproduct}></ShopDetailsInfo>
       <ProductReviewsFrom oneproduct={oneproduct}></ProductReviewsFrom>
-
+      <ReviewsList oneproduct={oneproduct}></ReviewsList>
       <ShopRelatedProducts oneproduct={products}></ShopRelatedProducts>
       <ToastContainer />
     </div>
