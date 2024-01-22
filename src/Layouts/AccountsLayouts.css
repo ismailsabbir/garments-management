@@ -5,17 +5,15 @@
 
 .accounts-layouts-con {
     width: 80%;
-    /* border: 1px solid brown; */
     margin: 0 auto;
-    /* margin-top: 40px;
-    margin-bottom: 40px; */
-}
-
-.account-layouts-left {
-    /* border: 1px solid green; */
 }
 
 .account-layouts-right {
-    /* border: 1px solid gold; */
     padding-left: 30px;
+}
+
+@media only screen and (max-width: 687px) {
+    .accounts-layouts-con {
+        width: 90%;
+    }
 }

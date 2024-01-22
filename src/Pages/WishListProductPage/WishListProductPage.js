@@ -24,11 +24,11 @@ const WishListProductPage = () => {
   const [detlets, setdelete] = useState(false);
   const [quentuty, setquentity] = useState(1);
   const [currentpage, setcurrentpage] = useState(0);
-  const [datasize, setdatasize] = useState(5);
+  const [datasize, setdatasize] = useState(10);
   const [count, setcount] = useState(0);
   const page = Math.ceil(count / datasize);
   console.log(cartproducts);
-
+  console.log(page);
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_URL}/mywishproduct?email=${user?.email}&page=${currentpage}&size=${datasize}`,
@@ -264,7 +264,7 @@ const WishListProductPage = () => {
             </Link>
           </div>
           <div className="wishlist-product-con">
-            <div className="row">
+            <div className="row wishlist_product_mobile">
               <div className="col col-12 col-lg-9 col-md-12 col-sm-12 wishlist-left">
                 <h4>My Wish List</h4>
 
@@ -272,6 +272,7 @@ const WishListProductPage = () => {
                   <select
                     onChange={(e) => setdatasize(e.target.value)}
                     className="select1 select-bordered "
+                    id="card_count_select"
                   >
                     <option value="2">2</option>
                     <option value="5" selected>
@@ -327,7 +328,6 @@ const WishListProductPage = () => {
               </div>
               <div className="col col-12 col-lg-3 col-md-12 col-sm-12 wishlist-right">
                 <LeftManageAccounts></LeftManageAccounts>
-                {/* <AccountMenu></AccountMenu> */}
               </div>
             </div>
           </div>

@@ -27,3 +27,25 @@
     font-size: 1.1rem;
     font-weight: 500;
 }
+
+@media only screen and (max-width: 687px) {
+    .contact-media-con {
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+    }
+
+    .phone-con {
+        width: 90%;
+        margin-bottom: 10px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+}

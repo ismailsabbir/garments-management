@@ -1,18 +1,28 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ReviewsList.css";
-import { AuthContext } from "../../../Context/UserContext";
 import Rating from "react-rating-stars-component";
 const ReviewsList = ({ oneproduct }) => {
-  const { user } = useContext(AuthContext);
   console.log(oneproduct);
   const [reviews, setreviews] = useState([]);
+  const [cuscurrentpage, setcuscurrentpage] = useState(0);
+  const [datasize, setdatasize] = useState(5);
+  const [cuscount, setcuscount] = useState(0);
+  const custompage = Math.ceil(cuscount / datasize);
   useEffect(() => {
     fetch(
-      `${process.env.REACT_APP_URL}/bestreviews?category_id=${oneproduct?.category_id}&product_id=${oneproduct?.product_id}`
+      `${process.env.REACT_APP_URL}/bestreviews?category_id=${oneproduct?.category_id}&product_id=${oneproduct?.product_id}&page=${cuscurrentpage}&&size=${datasize}`
     )
       .then((res) => res.json())
-      .then((data) => setreviews(data));
-  }, [oneproduct?.product_id, oneproduct?.category_id]);
+      .then((data) => {
+        setreviews(data.result);
+        setcuscount(data?.count);
+      });
+  }, [
+    oneproduct?.product_id,
+    oneproduct?.category_id,
+    cuscurrentpage,
+    datasize,
+  ]);
   console.log(reviews);
   return (
     <div className="reviews_list_con">
@@ -27,9 +37,21 @@ const ReviewsList = ({ oneproduct }) => {
               </div>
               <p>{review?.review_date}</p>
             </div>
-            <p>{review?.review}</p>
+            <p className="review_text">{review?.review}</p>
           </div>
         ))}
+        <div className="pagination-con">
+          {[...Array(custompage).keys()].map((number) => (
+            <button
+              key={number}
+              className={cuscurrentpage === number && "selected-page-btn"}
+              id="paginationbtn"
+              onClick={() => setcuscurrentpage(number)}
+            >
+              {number}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

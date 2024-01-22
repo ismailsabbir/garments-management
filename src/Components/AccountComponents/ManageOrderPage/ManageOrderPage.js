@@ -43,12 +43,12 @@ const ManageOrderPage = () => {
                 <img src={order?.Product_image} alt="not" />
                 <div className="manage-warenty">
                   <h6>Product: {order?.product_name}</h6>
-                  <h6>No Warranty Available</h6>
+                  <h6 className="no_warranty_mobile">No Warranty Available</h6>
                   <h6>Status: {orders?.order}</h6>
                 </div>
               </div>
               <p>Quentity: {order?.quentuty}</p>
-              <p>Prices: {order?.product_price}</p>
+              <p>TK: {order?.product_price}</p>
             </div>
           ))}
         </div>
@@ -61,7 +61,7 @@ const ManageOrderPage = () => {
           </div>
 
           <p>{orders?.name}</p>
-          <p>Address : {orders?.address}</p>
+          <p className="manage_address_mobile">Address : {orders?.address}</p>
           <p>{orders?.email}</p>
           <p>{orders?.phone}</p>
         </div>

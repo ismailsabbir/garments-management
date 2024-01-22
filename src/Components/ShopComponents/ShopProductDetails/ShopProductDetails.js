@@ -376,15 +376,13 @@ const ShopProductDetails = () => {
           </div>
         </div>
         <div className="shop-details-right col col-12 col-lg-6 col-md-12 col-sm-12">
-          <h2 className="mb-4 decoration-neutral-300">
+          <h2 className="mb-4 decoration-neutral-300 details_product_name">
             {oneproduct?.product_name}
           </h2>
           <div className="review-stars">
-            {/* <p className="mt-4 mr-4">Ratting({oneproduct?.averageRating}): </p>
-            <Rating value={oneproduct?.averageRating} size={30} edit={false} /> */}
             {oneproduct && oneproduct.averageRating && (
               <>
-                <p className="mt-4 mr-4">
+                <p className="mt-4 mr-4 details_ratting">
                   Rating ({oneproduct.averageRating}):{" "}
                 </p>
                 <Rating
@@ -417,7 +415,7 @@ const ShopProductDetails = () => {
                 {oneproduct?.product_name}
               </p>
             </div>
-            <Link className="brand-logo bg-neutral p-2">
+            <Link to="/shop" className="brand-logo bg-neutral p-2">
               <img src={logo} alt="" />
               <p className="mt-2 ">Garment</p>
             </Link>
@@ -443,7 +441,6 @@ const ShopProductDetails = () => {
           <div className="number-cart-buy">
             <div className="number-input">
               <button onClick={handleincress}>+</button>
-              {/* <span>{quentuty}</span> */}
               <input value={quentuty} type="text" onChange={handleQuentity} />
               <button onClick={handledecress}>-</button>
             </div>

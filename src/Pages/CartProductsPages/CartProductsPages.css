@@ -4,14 +4,11 @@
 
 .cartproduct-row-col {
     width: 80%;
-    /* border: 1px solid brown; */
     margin: 0 auto;
     padding-top: 40px;
 }
 
-/* .cartproduct-left {
-    border: 1px solid green;
-} */
+
 
 .cart-all-select {
     height: 50px;
@@ -128,7 +125,6 @@
 
 .order-summar-com p {
     color: gray;
-    /* font-weight: 500; */
 }
 
 .cart-tk {
@@ -144,7 +140,6 @@
 
 .cart-checkout-con {
     width: 100%;
-    /* border: 1px solid brown; */
     margin: 0 auto;
     margin-top: 20px;
 }
@@ -181,16 +176,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* border: 1px solid gainsboro; */
     padding: 6px;
     margin-bottom: 15px;
     background-color: rgb(245, 248, 252);
 }
-
-/* .summary-products div {
-    width: 30%;
-    border: 1px solid brown;
-} */
 
 .summary-products img {
     width: 50px;
@@ -205,4 +194,65 @@
     font-size: 1rem;
     font-weight: 500;
     color: rgb(93, 93, 93);
+}
+
+@media only screen and (max-width: 687px) {
+    .cartproduct-row-col {
+        width: 95%;
+    }
+
+    .order-quenty-con {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .select1 {
+        width: 40px;
+        border: 2px solid gold;
+    }
+
+    #card_count_select {
+        width: 20%;
+    }
+
+    .search-con {
+        width: 78%;
+    }
+
+    .search-con input {
+        width: 70%;
+    }
+
+    .search-con button {
+        width: 30%;
+    }
+
+    .cart-product {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 3px;
+    }
+
+    .cart-image {
+        width: 60px;
+        height: 60px;
+    }
+
+    .number-input {
+        margin-top: 8px;
+        font-size: 1.2rem;
+        font-weight: 500;
+        height: 30px;
+        width: 40%;
+    }
+
+    .cart-product-info {
+        width: 32%;
+    }
+
+    .cart-product-info p {
+        display: none;
+    }
 }

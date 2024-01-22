@@ -65,3 +65,18 @@
 .wish-delet:hover {
     background-color: #752c4e;
 }
+
+@media only screen and (max-width: 687px) {
+    .wishlisst-product img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .stock {
+        display: none;
+    }
+
+    .wishlist-product {
+        width: 28%;
+    }
+}

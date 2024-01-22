@@ -1,3 +1,10 @@
 #home-project-top {
     margin-bottom: 60px;
 }
+
+@media only screen and (max-width: 687px) {
+    .home-servicess {
+        width: 100%;
+        padding-left: 15px;
+    }
+}

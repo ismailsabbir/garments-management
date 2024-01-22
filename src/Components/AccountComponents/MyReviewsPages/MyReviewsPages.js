@@ -1,11 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../../../Context/UserContext";
 import { Form } from "react-bootstrap";
 import Loading from "../../../CommonComponents/Loading/Loading";
-
+import "./MyReviewsPages.css";
+import Rating from "react-rating-stars-component";
+import Swal from "sweetalert2";
+import { ToastContainer, toast } from "react-toastify";
+import { useQuery } from "@tanstack/react-query";
 const MyReviewsPages = () => {
-  const navigate = useNavigate();
   const { user, userlogout } = useContext(AuthContext);
   const [orders, setorders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,31 +16,32 @@ const MyReviewsPages = () => {
   const [count, setcount] = useState(0);
   const page = Math.ceil(count / datasize);
   console.log(datasize, count, page);
-  useEffect(() => {
-    fetch(
-      `${process.env.REACT_APP_URL}/myreviews?email=${user?.email}&page=${currentpage}&size=${datasize}`,
+  const { data: productall = [], refetch } = useQuery({
+    queryKey: [
+      "myreviews",
       {
-        headers: {
-          authorization: `Beare ${localStorage.getItem("garments-token")}`,
-        },
-      }
-    )
-      .then((res) => {
-        if (res.status === 401 || res.status === 403) {
-          return userlogout();
+        email: user?.email,
+        page: currentpage,
+        size: datasize,
+      },
+    ],
+    queryFn: () =>
+      fetch(
+        `${process.env.REACT_APP_URL}/myreviews?email=${user?.email}&page=${currentpage}&size=${datasize}`,
+        {
+          headers: {
+            authorization: `Beare ${localStorage.getItem("garments-token")}`,
+          },
         }
-        return res.json();
-      })
-      .then((jsonData) => {
-        setorders(jsonData.product);
-        setcount(jsonData.count);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Failed to fetch data:", error);
-        setLoading(false);
-      });
-  }, [user?.email, userlogout, currentpage, datasize]);
+      )
+        .then((req) => req.json())
+        .then((data) => {
+          setorders(data.product);
+          setcount(data.count);
+          setLoading(false);
+          return data;
+        }),
+  });
   const handlesearch = (e) => {
     e.preventDefault();
     const search = e.target.search.value;
@@ -68,6 +71,38 @@ const MyReviewsPages = () => {
       });
   };
   console.log(orders);
+  const handledelateRevier = (review) => {
+    Swal.fire({
+      title: "Are you sure ??",
+      text: "You want to delate the review !!",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "DELATE",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${process.env.REACT_APP_URL}/delete_review?id=${review?._id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json",
+            authorization: `Beare ${localStorage.getItem("garments-token")}`,
+          },
+          body: JSON.stringify(review),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data?.deletedCount > 0) {
+              toast("Review delete sucessfully !!!", {
+                position: "top-center",
+                autoClose: 1000,
+              });
+              refetch();
+            }
+          });
+      }
+    });
+  };
   return (
     <div className="my-orders-continer">
       {loading ? (
@@ -99,33 +134,24 @@ const MyReviewsPages = () => {
             <div className="shop-order-manage">
               <div className="shop-order-manage-title">
                 <div>
-                  <h6>Order {order?.orderid}</h6>
-                  <h6>Placed on {order?.order_date}</h6>
+                  <h6 className="review_priduct_name">
+                    Product {order?.product_name}
+                  </h6>
+                  <h6>Placed on {order?.review_date}</h6>
                 </div>
                 <div>
-                  <Link
-                    to="/manage_account/order/manage"
-                    state={order}
-                    className="ml-6 no-underline"
+                  <button
+                    className="review_delate_btn"
+                    onClick={() => handledelateRevier(order)}
                   >
-                    Manage
-                  </Link>
+                    Delate Review
+                  </button>
                 </div>
               </div>
 
-              <div className="shop-order-product-manage">
-                <img src={order?.dress_photo} alt="" />
-                <h6>{order?.category_name}</h6>
-
-                <h6>QTY:{order?.quentuty}</h6>
-                {order?.order === "paid" ? (
-                  <p>{order?.status}</p>
-                ) : (
-                  <p>{order?.status}</p>
-                )}
-                <p>Estimated Delivery By {order?.delivery_date}</p>
-                <p>{order?.delivery_status}</p>
-                <p>{order?.dliveryDate}</p>
+              <div className="shop-order-product-manage" id="review_info_con">
+                <p>{order?.review}</p>
+                <Rating value={order?.userRating} size={30} edit={false} />
               </div>
             </div>
           ))}
@@ -143,6 +169,7 @@ const MyReviewsPages = () => {
           </div>
         </>
       )}
+      <ToastContainer></ToastContainer>
     </div>
   );
 };

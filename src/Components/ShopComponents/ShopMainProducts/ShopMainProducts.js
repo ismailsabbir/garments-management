@@ -15,12 +15,11 @@ import { Form } from "react-bootstrap";
 import Loading from "../../../CommonComponents/Loading/Loading";
 import { BsArrowRight, BsArrowRightShort } from "react-icons/bs";
 import MultiRangeSlider from "../MultiRangeSlider/MultiRangeSlider";
-import { IconName, ImSearch } from "react-icons/im";
+import { ImSearch } from "react-icons/im";
 import imagea from "../../../Images/ban.jpg";
 import offer from "../../../Images/offer.jpg";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import ShopProductRight from "../ShopProductRight/ShopProductRight";
 import "./ShopMainProducts.css";
 
 const ShopMainProducts = ({ product, categoryid }) => {
@@ -61,11 +60,9 @@ const ShopMainProducts = ({ product, categoryid }) => {
       })
       .then((jsonData) => {
         setuserinfo(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
-        // setLoading(false);
       });
   }, [user?.email, userlogout]);
   const handlecolorsubmit = (event) => {
@@ -78,7 +75,7 @@ const ShopMainProducts = ({ product, categoryid }) => {
   };
   const handlesearchitem = (e) => {
     e.preventDefault();
-    const serach = e.target.search.value;
+    const serach = e.target.product.value;
     setsearch(serach);
   };
   useEffect(() => {
@@ -180,7 +177,6 @@ const ShopMainProducts = ({ product, categoryid }) => {
             }
             return res.json();
           })
-          // .then((response) => response.json())
           .then((data) => {
             if (data?._id) {
               toast(
@@ -222,73 +218,6 @@ const ShopMainProducts = ({ product, categoryid }) => {
     } else {
       navigate("/login");
     }
-    // setmodalproduct(product);
-    // const newObj = { ...product };
-    // if ("_id" in newObj) {
-    //   delete newObj._id;
-    // }
-    // const productinfo = {
-    //   ...newObj,
-    //   quentuty,
-    //   size,
-    //   email,
-    // };
-    // if (product?.dress_size) {
-    //   openModal();
-    // } else {
-    //   fetch(`${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-type": "application/json",
-    //       authorization: `Beare ${localStorage.getItem("garments-token")}`,
-    //     },
-    //     body: JSON.stringify(productinfo),
-    //   })
-    //     .then((res) => {
-    //       if (res.status === 401 || res.status === 403) {
-    //         navigate("/signup");
-    //       }
-    //       return res.json();
-    //     })
-    //     // .then((response) => response.json())
-    //     .then((data) => {
-    //       if (data?._id) {
-    //         toast(
-    //           <div>
-    //             <div className="toast-top">
-    //               <img src={data?.Product_image} alt="not found" />
-    //               <div className="toast-message">
-    //                 <h6>{data?.product_name}</h6>
-    //                 <p>
-    //                   <span>succeed:</span> You have add{" "}
-    //                   <span id="toast-name">{data?.product_name}</span>
-    //                 </p>
-    //               </div>
-    //             </div>
-    //             <div className="toast-button">
-    //               <Link to="/cartproduct" className="toast-cart-btn">
-    //                 View Cart
-    //               </Link>
-    //               <Link className="toast-cart-btn1">CheckOut</Link>
-    //             </div>
-    //           </div>,
-    //           {
-    //             position: "top-right",
-    //             autoClose: 10000,
-    //             hideProgressBar: false,
-    //             closeOnClick: true,
-    //             pauseOnHover: true,
-    //             draggable: false,
-    //             progress: undefined,
-    //             theme: "light",
-    //           }
-    //         );
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       console.log(err.message);
-    //     });
-    // }
   };
   const handlebuynow = (product) => {
     setmodalproduct(product);
@@ -424,7 +353,6 @@ const ShopMainProducts = ({ product, categoryid }) => {
   };
   const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
       items: 5,
     },
@@ -454,7 +382,7 @@ const ShopMainProducts = ({ product, categoryid }) => {
         product={modalproduct}
       />
       <div className="shopmain-product-con">
-        <div className="row">
+        <div className="row" id="mobile_design">
           <div className="shop-product-left col col-12 col-lg-10 col-sm-12 col-md-12">
             <div className="row">
               <div className="main-product-fil-con">
@@ -464,10 +392,9 @@ const ShopMainProducts = ({ product, categoryid }) => {
                 </p>
                 <Form onSubmit={handlesearchitem} className="search-by-item">
                   <input
-                    name="search"
+                    name="product"
                     type="text"
                     placeholder="Search for items"
-                    // required
                   />
                   <button type="submit">
                     <ImSearch></ImSearch>

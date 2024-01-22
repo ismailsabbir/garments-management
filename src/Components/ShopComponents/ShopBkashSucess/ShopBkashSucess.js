@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { GoInfo } from "react-icons/go";
 import { useLocation } from "react-router-dom";
-
+import "./ShopBkashSucess.css";
 const ShopBkashSucess = () => {
   const [products, setproducts] = useState([]);
   const location = useLocation();

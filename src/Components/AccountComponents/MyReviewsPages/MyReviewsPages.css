@@ -1,0 +1,20 @@
+.review_priduct_name {
+    color: purple;
+}
+
+#review_info_con {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.review_delate_btn {
+    border: 1px solid #be5184;
+    background-color: #be5184;
+    padding: 6px 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    border-radius: 4px;
+}

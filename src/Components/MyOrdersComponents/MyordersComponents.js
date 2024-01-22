@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import Loading from "../../CommonComponents/Loading/Loading";
 import { Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import { classnames } from "classnames";
 const MyordersComponents = () => {
   const navigate = useNavigate();
   const { user, userlogout } = useContext(AuthContext);
@@ -85,6 +86,7 @@ const MyordersComponents = () => {
             <select
               onChange={(e) => setdatasize(e.target.value)}
               className="select1 select-bordered "
+              id="card_count_select"
             >
               <option value="2" selected>
                 2
@@ -134,15 +136,22 @@ const MyordersComponents = () => {
               {order?.productinfo?.map((aproduct) => (
                 <div className="shop-order-product-manage">
                   <img src={aproduct?.Product_image} alt="" />
-                  <h6>{aproduct?.product_name}</h6>
+                  <h6 className="order_product_mobile">
+                    {aproduct?.product_name}
+                  </h6>
 
                   <h6>QTY:{aproduct?.quentuty}</h6>
                   {order?.order === "paid" ? (
-                    <p>{order?.order}</p>
+                    <p className="pay_status_mobile">{order?.order}</p>
                   ) : (
-                    <p>Payment Pending</p>
+                    <p className="pay_status_mobile">Payment Pending</p>
                   )}
-                  <p>Estimated Delivery By {order?.delivery_date}</p>
+                  <p>
+                    <span className="delivery_date_mobile">
+                      Estimated Delivery By
+                    </span>{" "}
+                    {order?.delivery_date}
+                  </p>
                   <p>{order?.delivery_status}</p>
                   <p>{order?.dliveryDate}</p>
                 </div>

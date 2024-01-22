@@ -359,7 +359,7 @@ const OrderConfirmPages = () => {
         Please Confirm your orders.Thank you !!!
       </div>
       <div className="order-confirm-hed">
-        <div className="confirm-left">
+        <div className="confirm-left" id="confirm_mobile">
           <p>Dear Sir/Madam</p>
           <p>Here is your order summary</p>
         </div>
@@ -431,7 +431,6 @@ const OrderConfirmPages = () => {
             <p>Height:26-27</p>
             <input
               className="size-input"
-              // onChange={(e) => handlesizes(e.target.value)}
               name="size_s"
               type="text"
               placeholder="0"

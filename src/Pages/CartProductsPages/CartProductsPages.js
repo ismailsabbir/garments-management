@@ -326,6 +326,7 @@ const CartProductsPages = () => {
                 <select
                   onChange={(e) => setdatasize(e.target.value)}
                   className="select1 select-bordered "
+                  id="card_count_select"
                 >
                   <option value="2">2</option>
                   <option value="5" selected>
@@ -363,7 +364,7 @@ const CartProductsPages = () => {
                       <h6>{product?.product_name}</h6>
                       <p>{product?.brand}</p>
                     </div>
-                    <div>
+                    <div className="cart_price_mobile">
                       <h5>Tk: {product?.product_price}</h5>
                       <div className="favarite-delete">
                         <button onClick={() => handleaddwishlist(product)}>

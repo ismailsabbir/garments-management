@@ -117,7 +117,6 @@ const ProductReviewsFrom = ({ oneproduct }) => {
         <h6 className="mb-4">Captcha</h6>
         <div className="captcher-con">
           <input type="text" name="capture" placeholder="Code" />
-          {/* <input value={code} name="given_capture" type="text" readOnly /> */}
           <input value={code} name="given_capture" type="text" readOnly />
         </div>
         <button className="review-submit">CONTINEW</button>

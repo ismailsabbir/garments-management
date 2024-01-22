@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import "./DashbordAttendanceSheet.css";
 import { useQuery } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
-import { BiPrinter } from "react-icons/bi";
-import { Link } from "react-router-dom";
-import { IoIosCheckmark, IoIosStar, IoMdCheckmark } from "react-icons/io";
+import { IoIosStar } from "react-icons/io";
 import NotFound from "../../../CommonComponents/NotFound/NotFound";
 import Loading from "../../../CommonComponents/Loading/Loading";
 import { Form } from "react-bootstrap";
@@ -21,7 +19,6 @@ const DashbordAttendanceSheet = () => {
   const [attendanceSheet, setAttendanceSheet] = useState([]);
   const [reset, setreset] = useState(false);
   const [employeeId, setEmployeeID] = useState("");
-  const [firstday, setfirstday] = useState("");
   const { data: productall = [], refetch } = useQuery({
     queryKey: [
       "allcustomizedorders",
@@ -67,9 +64,6 @@ const DashbordAttendanceSheet = () => {
   console.log(datesArray);
   const handleStartDateChange = (e) => {
     console.log(e);
-    // const values = e.target.startday.value;
-    // console.log(values);
-    // setfirstday(values);
   };
   return (
     <div>
@@ -82,7 +76,7 @@ const DashbordAttendanceSheet = () => {
               type="date"
               name="startday"
               placeholder="Search Product"
-              onChange={(e)=>handleStartDateChange(e.target.value)}
+              onChange={(e) => handleStartDateChange(e.target.value)}
             />
             <input
               className="date-chose"

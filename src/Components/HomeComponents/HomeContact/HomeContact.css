@@ -29,3 +29,18 @@
     margin: 0 auto;
     margin-bottom: 20px;
 }
+
+@media only screen and (max-width: 687px) {
+    .homecontact-con {
+        padding: 20px;
+    }
+
+    .homecontact-con p {
+        width: 95%;
+    }
+
+    .homecontact-con h1 {
+        width: 95%;
+        font-size: 1.5rem;
+    }
+}

@@ -16,7 +16,7 @@ const DashbordStaffs = () => {
   const [cuscount, setcuscount] = useState(0);
   const custompage = Math.ceil(cuscount / datasize);
   const [searchvalue, setsearchvalue] = useState("");
-  const [staff, setstaff] = useState("");
+
   const { data: products = [], refetch } = useQuery({
     queryKey: [
       "staff",

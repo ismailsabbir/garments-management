@@ -143,3 +143,34 @@
     font-size: 1.4rem;
     color: #be5184;
 }
+
+@media only screen and (max-width: 687px) {
+    .manage-image-name img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .no_warranty_mobile {
+        display: none;
+    }
+
+    .manage-address {
+        width: 100%;
+        height: auto;
+        margin-bottom: 15px;
+
+    }
+
+    .manage_address_mobile {}
+
+    .manage-summary {
+        width: 100%;
+    }
+
+    .manage-address-con {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+}

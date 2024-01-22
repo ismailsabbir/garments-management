@@ -74,20 +74,8 @@
 }
 
 @media only screen and (max-width: 687px) {
-
     .banner-bottom-con {
-
-        left: 0px;
-        bottom: -500px;
-        /* border: 2px solid brown; */
-        width: 100%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin: 0px;
-
+        display: none;
     }
 
     .home-banner-left {
@@ -95,9 +83,19 @@
         margin: 0 auto;
     }
 
-    .home-banner-hole {
-        margin-bottom: 600px;
+    .home-banner-left h1 {
+        font-weight: 500;
+        font-size: 1.1rem;
     }
+
+    .home-banner-p {
+        font-size: 1rem;
+
+    }
+
+    /* .home-banner-hole {
+        margin-bottom: 600px;
+    } */
 
     .banner-bottom-1 {
         width: 90%;

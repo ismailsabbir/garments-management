@@ -43,3 +43,15 @@
     width: 100%;
     border-radius: 50%;
 }
+
+@media only screen and (max-width: 687px) {
+    .comments {
+        width: 95%;
+        padding: 30px;
+    }
+
+    .comments p {
+        width: 100%;
+
+    }
+}

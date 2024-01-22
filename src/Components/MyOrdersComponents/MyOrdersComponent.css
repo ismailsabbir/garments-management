@@ -8,11 +8,6 @@
     justify-content: space-between;
 }
 
-.search-con {
-    /* border: 1px solid gainsboro; */
-
-}
-
 .search-con input {
     padding: 6px 8px;
     border: 1px solid gainsboro;
@@ -89,4 +84,38 @@
     background-color: #be5184;
     padding: 4px 6px;
     border-radius: 6px;
+}
+
+@media only screen and (max-width: 687px) {
+    .my-orders-continer {
+        width: 100%;
+
+    }
+
+    .shop-order-product-manage img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .shop-order-product-manage {
+
+        padding: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .pay_status_mobile {
+        display: none;
+    }
+
+    .delivery_date_mobile {
+        display: none;
+    }
+
+    .order_product_mobile {
+        width: 32%;
+        font-size: 1rem;
+        font-weight: 500;
+    }
 }

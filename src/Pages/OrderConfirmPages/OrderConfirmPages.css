@@ -144,11 +144,6 @@
 
 }
 
-/* .address-input {
-    width: 90%;
-
-} */
-
 .confirm-btn {
     border: 1px solid #be5184;
     background-color: #be5184;
@@ -183,4 +178,54 @@
     background-color: #86A7FC;
     padding: 4px 10px;
     border-radius: 4px;
+}
+
+@media only screen and (max-width: 687px) {
+    .order-confirm-con {
+        width: 95%;
+    }
+
+    .order-info-con {
+        width: 90%;
+        overflow: auto;
+        max-height: 300px;
+        margin: 0 auto;
+    }
+
+    .info-table {
+        overflow: auto;
+        max-height: 300px;
+
+    }
+
+    .dress-sizes {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .size {
+        border: 1px solid rgb(232, 230, 230);
+        border-radius: 4px;
+        padding: 6px;
+        text-align: center;
+        width: 45%;
+        line-height: 0.9rem;
+
+    }
+
+    .dress-size-quen {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .dress-size-quen p {
+        width: 30%;
+        margin-bottom: 10px;
+    }
+
+    #confirm_mobile {
+        display: none;
+    }
 }

@@ -1,0 +1,67 @@
+@media only screen and (max-width: 687px) {
+
+    .paymentinfo {
+        width: 98%;
+        padding: 6px;
+    }
+
+    .products-images {
+        margin: 0px;
+        padding: 0px;
+        height: 110px;
+    }
+
+    .main-product {
+        height: 100px;
+    }
+
+    .main-product img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .front-con img {
+        width: 100px;
+        height: 100px;
+        margin: 0px;
+    }
+
+    .front-con h6 {
+        display: none;
+    }
+
+    .product-design {
+        padding: 0px;
+        height: 100px;
+    }
+
+    .front-con {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .back-con img {
+        width: 100px;
+        height: 100px;
+        margin: 0px;
+    }
+
+    .back-con h6 {
+        display: none;
+    }
+
+    .payment-customer-info {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .payment-customer-info div {
+        width: 50%;
+    }
+
+    .payment-customer-info div h6 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

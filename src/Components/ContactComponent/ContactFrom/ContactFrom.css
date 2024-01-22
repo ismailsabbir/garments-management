@@ -10,3 +10,9 @@
     align-items: center;
     justify-content: space-between;
 }
+
+@media only screen and (max-width: 687px) {
+    .contact-from-con {
+        width: 85%;
+    }
+}

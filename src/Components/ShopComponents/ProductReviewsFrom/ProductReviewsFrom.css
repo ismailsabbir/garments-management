@@ -41,3 +41,13 @@
     margin-top: 20px;
     border-radius: 8px;
 }
+
+@media only screen and (max-width: 687px) {
+    .review-form-container {
+        width: 98%;
+    }
+
+    .captcher-con input {
+        width: 46%;
+    }
+}

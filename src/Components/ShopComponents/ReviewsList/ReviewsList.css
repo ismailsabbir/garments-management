@@ -35,3 +35,24 @@
     margin-top: 14px;
     margin-left: 10px;
 }
+
+@media only screen and (max-width: 687px) {
+    .review_hed_con {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+    }
+
+    .review_hed_left {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+    }
+
+    .review_text {
+        text-align: justify;
+        padding: 2px;
+    }
+}
