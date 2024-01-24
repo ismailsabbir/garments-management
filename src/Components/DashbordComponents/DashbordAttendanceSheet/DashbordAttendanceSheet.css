@@ -42,7 +42,6 @@
 
 .attendance-present {
     border: 1px solid green;
-    /* margin-top: 8px; */
     font-size: 1.3rem;
     font-weight: 600;
     padding: 2px;
@@ -56,5 +55,27 @@
 
 .employy-name input {
     width: 100%;
-    /* border: 1px solid brown; */
+}
+
+@media only screen and (max-width:688px) {
+
+    .order-status-limit {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    #date_mobile {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .employy-name {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #order-reset-btn {
+        width: 100%;
+    }
 }

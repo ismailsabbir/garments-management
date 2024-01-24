@@ -201,24 +201,34 @@ const EmployeeLeaves = () => {
                     <tr>
                       <td className="das-order-data">
                         <span className="staff-image-name">
-                          <p>{order?.name}</p>
+                          <p className="check_in_mobile">{order?.name}</p>
                         </span>
                       </td>
 
                       <td className="das-order-data">
-                        <span>{order?.apply_date}</span>{" "}
+                        <span>
+                          <p className="check_in_mobile">{order?.apply_date}</p>
+                        </span>{" "}
                       </td>
                       <td className="das-order-data">
-                        <span>{order?.from_date}</span>{" "}
+                        <span>
+                          <p className="check_in_mobile">{order?.from_date}</p>
+                        </span>{" "}
                       </td>
                       <td className="das-order-data">
-                        <span> {order?.to_date}</span>{" "}
+                        <span>
+                          {" "}
+                          <p className="check_in_mobile">{order?.to_date}</p>
+                        </span>{" "}
                       </td>
                       <td className="das-order-data">
                         <span> {order?.half_day}</span>{" "}
                       </td>
                       <td className="das-order-data">
-                        <span> {order?.leave_type}</span>{" "}
+                        <span>
+                          {" "}
+                          <p className="check_in_mobile">{order?.leave_type}</p>
+                        </span>{" "}
                       </td>
                       <td className="das-order-data">
                         <span
@@ -231,7 +241,12 @@ const EmployeeLeaves = () => {
                         </span>{" "}
                       </td>
                       <td className="das-order-data">
-                        <span> {order?.reason?.slice(0, 15)}....</span>{" "}
+                        <span>
+                          {" "}
+                          <p className="check_in_mobile">
+                            {order?.reason?.slice(0, 15)}....
+                          </p>
+                        </span>{" "}
                       </td>
                       <td className="das-order-data">
                         <div className="print-serach">

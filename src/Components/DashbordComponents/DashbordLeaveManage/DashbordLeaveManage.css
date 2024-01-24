@@ -13,3 +13,21 @@
     align-items: center;
     justify-content: space-between;
 }
+
+@media only screen and (max-width:688px) {
+    .leave_manage_hed {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+    }
+
+    .order-reset-btn {
+        width: 100%;
+    }
+
+    #add-staff-btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+}

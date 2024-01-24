@@ -9,7 +9,6 @@ import { Form } from "react-bootstrap";
 import { RxCross2 } from "react-icons/rx";
 import { TbStarHalfFilled } from "react-icons/tb";
 import { FaCheck } from "react-icons/fa";
-
 const DashbordAttendanceSheet = () => {
   const [currentpage, setcurrentpage] = useState(0);
   const [datasize, setdatasize] = useState(10);
@@ -77,6 +76,7 @@ const DashbordAttendanceSheet = () => {
               name="startday"
               placeholder="Search Product"
               onChange={(e) => handleStartDateChange(e.target.value)}
+              id="date_mobile"
             />
             <input
               className="date-chose"
@@ -84,6 +84,7 @@ const DashbordAttendanceSheet = () => {
               placeholder="Search Product"
               // value={endDate}
               // onChange={handleEndDateChange}
+              id="date_mobile"
             />
             <Form onSubmit={handleEmployeesearch} className="employy-name">
               <input

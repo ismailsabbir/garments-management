@@ -317,7 +317,11 @@ const DashbordShopCategory = () => {
                               <span>{order?.category_name}</span>{" "}
                             </td>
                             <td className="das-order-data">
-                              <span>Product category</span>{" "}
+                              <span>
+                                <p className="category_mobile">
+                                  Product category
+                                </p>
+                              </span>{" "}
                             </td>
 
                             <td className="das-order-data">

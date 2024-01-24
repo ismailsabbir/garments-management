@@ -13,3 +13,25 @@
 #customiz_order_rate_last {
     background-color: #CE5A67;
 }
+
+@media only screen and (max-width: 687px) {
+    .dashbord-home-first-hole {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .dashbord-first-card {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .number-of-orders {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .first-num-order {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+}

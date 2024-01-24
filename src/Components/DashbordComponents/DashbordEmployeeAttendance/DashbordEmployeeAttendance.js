@@ -112,22 +112,21 @@ const DashbordEmployeeAttendance = () => {
               <p>{Attendance?.employeeinfo?.role}</p>
             </div>
           </div>
-          <div>
+          <div className="emplouee_attendance_mobile">
             <h6>Employee ID</h6>
             <p>{Attendance?.employeeinfo?.employee_id}</p>
           </div>
-          <div>
+          <div className="emplouee_attendance_mobile">
             <h6>Joining Date</h6>
             <p>{Attendance?.employeeinfo?.join_date}</p>
           </div>
-          <div>
+          <div className="emplouee_attendance_mobile">
             <h6>Department</h6>
             <p>Garments</p>
           </div>
         </div>
         <div className="employee-working-time-con">
           <div className="employee-time-chart">
-            {/* averageInTime, averageOutTime, averageWorkingTime */}
             <h3>{Attendance?.averageWorkingTime}</h3>
             <p>Average Working Hours</p>
           </div>
@@ -176,10 +175,19 @@ const DashbordEmployeeAttendance = () => {
                               <span>{attendance?.attendance_date}</span>{" "}
                             </td>
                             <td className="das-order-data">
-                              <span>{attendance?.attendance_in_time}</span>{" "}
+                              <span>
+                                <p className="attendance_name_mobile">
+                                  {attendance?.attendance_in_time}
+                                </p>
+                              </span>{" "}
                             </td>
                             <td className="das-order-data">
-                              <span> {attendance?.attendance_out_time}</span>{" "}
+                              <span>
+                                {" "}
+                                <p className="attendance_name_mobile">
+                                  {attendance?.attendance_out_time}
+                                </p>
+                              </span>{" "}
                             </td>
                             <td className="das-order-data">
                               <span>{attendance?.totalDuration}</span>{" "}
@@ -189,13 +197,16 @@ const DashbordEmployeeAttendance = () => {
                             </td>
                             <td className="das-order-data">
                               <span>
-                                {attendance?.status_in === "present" &&
-                                attendance?.status_out === "present"
-                                  ? "Present"
-                                  : attendance?.status_in === "present" ||
-                                    attendance?.status_out === "present"
-                                  ? "Half Day"
-                                  : "Absence"}
+                                <p className="attendance_name_mobile">
+                                  {" "}
+                                  {attendance?.status_in === "present" &&
+                                  attendance?.status_out === "present"
+                                    ? "Present"
+                                    : attendance?.status_in === "present" ||
+                                      attendance?.status_out === "present"
+                                    ? "Half Day"
+                                    : "Absence"}
+                                </p>
                               </span>
                             </td>
                             <td className="das-order-data">

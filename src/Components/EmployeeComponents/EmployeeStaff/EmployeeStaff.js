@@ -8,7 +8,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import Swal from "sweetalert2";
-
+import "./EmployeeStaff.css";
 const EmployeeStaff = () => {
   const [staffs, setstaffs] = useState([]);
   const [cuscurrentpage, setcuscurrentpage] = useState(0);
@@ -223,7 +223,7 @@ const EmployeeStaff = () => {
                     <td className="das-order-data">
                       <span className="staff-image-name">
                         <img src={order?.photo} alt="" />
-                        <p>{order?.name}</p>
+                        <p className="name_mobile">{order?.name}</p>
                       </span>
                     </td>
                     <td className="das-order-data">
@@ -233,7 +233,9 @@ const EmployeeStaff = () => {
                       <span>{order?.phone}</span>{" "}
                     </td>
                     <td className="das-order-data">
-                      <span>{order?.join_date}</span>{" "}
+                      <span>
+                        <p className="name_mobile">{order?.join_date}</p>
+                      </span>{" "}
                     </td>
                     <td className="das-order-data">
                       <span> {order?.role}</span>{" "}

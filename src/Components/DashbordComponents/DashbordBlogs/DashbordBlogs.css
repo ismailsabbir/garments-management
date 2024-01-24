@@ -1,0 +1,13 @@
+@media only screen and (max-width:688px) {
+    #blog_mobile {
+        width: 300px;
+    }
+
+    .blog_about_mobile {
+        width: auto;
+    }
+
+    .blog_date_mobile {
+        width: 150px;
+    }
+}

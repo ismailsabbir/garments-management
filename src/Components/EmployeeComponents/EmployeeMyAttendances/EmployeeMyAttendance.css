@@ -6,3 +6,19 @@
     font-weight: 500;
     margin-right: 10px;
 }
+
+@media only screen and (max-width:688px) {
+    .check_in_mobile {
+        width: 120px;
+    }
+
+    .employee-attendance-search {
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    .employee_reset_btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+}

@@ -8,8 +8,6 @@
     border-radius: 6px;
 }
 
-
-
 .email-input-staff {
     padding: 10px;
     width: 24%;
@@ -102,4 +100,10 @@
     color: white;
     font-weight: 500;
     border-radius: 6px;
+}
+
+@media only screen and (max-width:688px) {
+    .staff_join_mobile {
+        width: 100px;
+    }
 }

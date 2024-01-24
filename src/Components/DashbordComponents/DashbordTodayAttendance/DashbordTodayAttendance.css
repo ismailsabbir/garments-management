@@ -11,3 +11,39 @@
     border-radius: 4px;
     color: brown;
 }
+
+@media only screen and (max-width:688px) {
+    .attendance-btn1 {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .product-search-con {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .serch-form {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .product-category-search {
+        width: 100%;
+    }
+
+    .product-reset {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .addendance-staff-img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .attendance_name_mobile {
+        width: 120px;
+    }
+}

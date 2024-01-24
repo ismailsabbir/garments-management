@@ -116,3 +116,37 @@
 #invoice-print {
     width: 30%;
 }
+
+@media only screen and (max-width:688px) {
+    .location_mobile {
+        display: none;
+    }
+
+    .invoice-mid {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .invoice-mid-left {
+        width: 48%;
+    }
+
+    .invoice-mid-mid {
+        width: 48%;
+    }
+
+    .invoice-mid-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    .staff_name_mobile {
+        width: 150px;
+    }
+
+    .staff_join_mobile {
+        width: 170px
+    }
+}

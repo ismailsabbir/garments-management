@@ -39,3 +39,30 @@
     color: #9e3566;
     font-size: 1.6rem;
 }
+
+@media only screen and (max-width:688px) {
+    #category-search-form {
+        width: 100%;
+    }
+
+    .category_mobile {
+        width: 180px;
+    }
+
+    .searchproduct {
+        width: 100%;
+    }
+
+    /* .product-filter {
+        width: 100%;
+    } */
+
+    .product-reset {
+        width: 100%;
+
+    }
+
+    #category-filt-btn {
+        width: 100%;
+    }
+}

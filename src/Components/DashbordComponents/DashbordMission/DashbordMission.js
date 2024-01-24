@@ -72,8 +72,8 @@ const DashbordMission = () => {
           <div className="overflow-x-auto">
             <table className="table recent-order-table">
               <tr className="recent-order-tr">
-                <th className="recent-order-hed">Vission Id</th>
-                <th className="recent-order-hed">vission</th>
+                <th className="recent-order-hed">Mission Id</th>
+                <th className="recent-order-hed">Mission</th>
                 <th className="recent-order-hed">ACTION</th>
               </tr>
               <tbody>
@@ -83,7 +83,9 @@ const DashbordMission = () => {
                       <span>{order?.mission_id}</span>{" "}
                     </td>
                     <td className="das-order-data">
-                      <span>{order?.mission}</span>{" "}
+                      <span>
+                        <p className="vission_mobile">{order?.mission}</p>
+                      </span>{" "}
                     </td>
 
                     <td className="das-order-data">

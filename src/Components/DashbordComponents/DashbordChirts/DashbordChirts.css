@@ -1,6 +1,4 @@
 .dash-chirt-con {
-
-    /* width: 97%; */
     margin: 0 auto;
     margin-bottom: 40px;
 
@@ -37,13 +35,22 @@
     border-radius: 10px;
 }
 
-
-
-/* 
-Mobile Responsivr
-*/
 @media only screen and (max-width:688px) {
     .areachart {
         width: 100px;
+    }
+
+    .barchart_mobile {
+        margin-right: 2px;
+        padding: 0px;
+        width: 90%;
+        margin-bottom: 20px;
+        margin-left: 0px;
+        padding-left: 0px;
+
+    }
+
+    .chart_container_mobile {
+        overflow: auto;
     }
 }

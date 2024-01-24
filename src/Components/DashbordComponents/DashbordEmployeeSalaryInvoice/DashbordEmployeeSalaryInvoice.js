@@ -47,7 +47,9 @@ const DashbordEmployeeSalaryInvoice = () => {
           </div>
           <div className="invoice-top-right">
             <img src={logo} alt="logo" />
-            <p>59 Station Rd, Mirpur-10 Bridge, Bangladesh</p>
+            <p id="location_mobile">
+              59 Station Rd, Mirpur-10 Bridge, Bangladesh
+            </p>
             <p>019579034</p>
             <p>garmet.shop@gmail.com</p>
             <p>garment.shop.vercel.app</p>
@@ -59,9 +61,8 @@ const DashbordEmployeeSalaryInvoice = () => {
             <p>Role: {order?.role}</p>
             <p>Employee ID: {order?.employee_id}</p>
             <p>Joining Date: {order?.join_date}</p>
-            <p>
-              {order?.email},{order?.phone}
-            </p>
+            <p>{order?.email}</p>
+            <p>{order?.phone}</p>
           </div>
         </div>
         <div className="invoice-last">

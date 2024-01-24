@@ -164,7 +164,6 @@ const DashbordStaffs = () => {
         <h5>Our Staffs</h5>
         <button onClick={handlereset}>Reset</button>
       </div>
-
       <div className="staff-search-con">
         <Form onSubmit={handlenamesearch} className="name-search">
           <input
@@ -223,7 +222,7 @@ const DashbordStaffs = () => {
                     <td className="das-order-data">
                       <span className="staff-image-name">
                         <img src={order?.photo} alt="" />
-                        <p>{order?.name}</p>
+                        <p className="staff_name_mobile">{order?.name}</p>
                       </span>
                     </td>
                     <td className="das-order-data">
@@ -233,7 +232,9 @@ const DashbordStaffs = () => {
                       <span>{order?.phone}</span>{" "}
                     </td>
                     <td className="das-order-data">
-                      <span>{order?.join_date}</span>{" "}
+                      <span className="staff_join_mobile">
+                        <p className="staff_join_mobile"> {order?.join_date}</p>
+                      </span>{" "}
                     </td>
                     <td className="das-order-data">
                       <span> {order?.role}</span>{" "}

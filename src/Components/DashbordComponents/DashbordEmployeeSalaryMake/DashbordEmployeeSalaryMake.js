@@ -167,7 +167,7 @@ const DashbordEmployeeSalaryMake = () => {
                     <tbody>
                       {staffs?.map((order) => (
                         <tr>
-                          <td className="das-order-data">
+                          <td className="das-order-data" id="das-order-datam">
                             <span className="staff-image-name">
                               <img src={order?.photo} alt="" />
                               <p>{order?.name}</p>
@@ -180,7 +180,9 @@ const DashbordEmployeeSalaryMake = () => {
                             <span>{order?.phone}</span>{" "}
                           </td>
                           <td className="das-order-data">
-                            <span>{order?.join_date}</span>{" "}
+                            <span>
+                              <p className="join_mobile">{order?.join_date}</p>
+                            </span>{" "}
                           </td>
                           <td className="das-order-data">
                             <span> {order?.role}</span>{" "}
@@ -215,7 +217,7 @@ const DashbordEmployeeSalaryMake = () => {
                             order?.paymentStatus
                               .split(" - ")[1]
                               ?.split(" ")[0] === currentMonth ? (
-                              <>
+                              <div className="slip_mobile">
                                 {" "}
                                 <Link
                                   to="/dashbord/employee/salary/invoice"
@@ -225,7 +227,7 @@ const DashbordEmployeeSalaryMake = () => {
                                 >
                                   Genarate Slip
                                 </Link>
-                              </>
+                              </div>
                             ) : (
                               <>
                                 <Link

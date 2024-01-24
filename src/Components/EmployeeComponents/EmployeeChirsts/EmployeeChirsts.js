@@ -1,37 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { XAxis, YAxis, Tooltip, BarChart, Legend, Bar } from "recharts";
 import { EmployeeContext } from "../../../Layouts/EmployeeLayouts/EmployeeLayouts";
-// const data = [
-//   { name: "Taskstats", uv: 0, pv: 90, amt: 100 },
-//   { name: "Saturday", uv: 50, pv: 100, amt: 100 },
-//   { name: "Sunday", uv: 20, pv: 100, amt: 100 },
-//   { name: "Monday", uv: 40, pv: 100, amt: 100 },
-//   { name: "Tuesday", uv: 20, pv: 80, amt: 100 },
-//   { name: "Wednesday", uv: 40, pv: 100, amt: 100 },
-//   { name: "Thursday", uv: 5, pv: 100, amt: 100 },
-// ];
-// const data1 = [
-//   { name: "Taskstats", uv: 0, pv: 100, amt: 100 },
-//   { name: "Saturday", uv: 50, pv: 100, amt: 100 },
-//   { name: "Sunday", uv: 20, pv: 100, amt: 100 },
-//   { name: "Monday", uv: 40, pv: 100, amt: 100 },
-//   { name: "Tuesday", uv: 20, pv: 100, amt: 100 },
-//   { name: "Wednesday", uv: 40, pv: 100, amt: 100 },
-//   { name: "Thursday", uv: 5, pv: 100, amt: 100 },
-// ];
+import "./EmployeeChirsts.css";
 const EmployeeChirsts = () => {
   const employee = useContext(EmployeeContext);
   const [data, setdata] = useState([]);
   const [data1, setdata1] = useState([]);
-  // useEffect(() => {
-  //   fetch(
-  //     `${process.env.REACT_APP_URL}/weekAttendance/${employee?.employee_id}`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setdata(data);
-  //     });
-  // }, []);
 
   useEffect(() => {
     fetch(
@@ -46,8 +20,8 @@ const EmployeeChirsts = () => {
   const currentDate = new Date();
 
   const options = {
-    month: "long", // Full month name
-    year: "numeric", // Full year
+    month: "long",
+    year: "numeric",
   };
 
   const formattedDate = currentDate.toLocaleDateString("en-US", options);
@@ -86,7 +60,7 @@ const EmployeeChirsts = () => {
               />
             </BarChart>
           </div> */}
-          <div className="col col-12 col-sm-12 col-md-6 col-lg-12">
+          <div className="col col-12 col-sm-12 col-md-6 col-lg-12 employee_chirt">
             <h6 className="progressratio">
               {formattedDate} ,{employee?.name} Working Duration
             </h6>

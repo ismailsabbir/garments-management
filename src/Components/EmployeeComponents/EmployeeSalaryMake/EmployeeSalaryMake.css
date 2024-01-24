@@ -1,0 +1,14 @@
+@media only screen and (max-width:688px) {
+    .employee_name_mobile {
+        width: 190px;
+    }
+
+    .employee_join_date {
+        width: 140px;
+    }
+
+    .slip_mobile {
+        width: 115px;
+
+    }
+}

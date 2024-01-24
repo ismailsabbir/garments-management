@@ -240,7 +240,11 @@ const DashbordServicsContent = () => {
                               </span>{" "}
                             </td>
                             <td className="das-order-data">
-                              <span>{order?.about?.slice(0, 50)}</span>{" "}
+                              <span>
+                                <p className="service_about_mobile">
+                                  {order?.about?.slice(0, 50)}
+                                </p>
+                              </span>{" "}
                             </td>
                             <td className="das-order-data">
                               <span>

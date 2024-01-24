@@ -66,3 +66,18 @@
     width: 50px;
     padding: 5px;
 }
+
+@media only screen and (max-width:688px) {
+    .order-status-limit input {
+        width: 100%;
+    }
+
+    .date-chose {
+        margin-top: 10px;
+    }
+
+    .download-order-btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+}

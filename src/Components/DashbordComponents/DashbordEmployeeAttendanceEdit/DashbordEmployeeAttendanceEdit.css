@@ -22,3 +22,22 @@
     font-weight: 500;
 
 }
+
+@media only screen and (max-width:688px) {
+    .staff-first-name-lastname {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .firstname-staff {
+        width: 100%;
+    }
+
+    .product-category {
+        width: 100%;
+    }
+
+    .add-staf--btn {
+        width: 100%;
+    }
+}

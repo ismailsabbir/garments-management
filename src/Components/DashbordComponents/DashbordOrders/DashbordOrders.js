@@ -341,9 +341,12 @@ const DashbordOrders = () => {
                             </td>
                             <td className="das-order-data">
                               <span>
-                                {order?.order === "paid"
-                                  ? "online Payment"
-                                  : order?.order}
+                                <p className="category_mobile">
+                                  {" "}
+                                  {order?.order === "paid"
+                                    ? "online Payment"
+                                    : order?.order}
+                                </p>
                               </span>{" "}
                             </td>
                             <td className="das-order-data">

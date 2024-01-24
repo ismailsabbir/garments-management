@@ -86,7 +86,9 @@ const DashbordVission = () => {
                       <span>{order?.vission_id}</span>{" "}
                     </td>
                     <td className="das-order-data">
-                      <span>{order?.vision}</span>{" "}
+                      <p className="vission_mobile">
+                        <span>{order?.vision}</span>
+                      </p>{" "}
                     </td>
 
                     <td className="das-order-data">

@@ -16,13 +16,7 @@
     border-radius: 10px;
 }
 
-.employee_informationss {
-    /* text-align: center; */
-}
 
-.employee_informationss p {
-    /* color: #be5184; */
-}
 
 .employee-img-name img {
     width: 60px;
@@ -62,4 +56,53 @@
     justify-content: space-between;
     margin-bottom: 20px;
     margin-top: 10px;
+}
+
+@media only screen and (max-width:688px) {
+    .employee-attendance-search {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+    }
+
+    .name-search {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .name-input-staff {
+        width: 100%;
+    }
+
+    .employee-info-con-admin {
+        display: flex;
+        flex-wrap: wrap;
+
+    }
+
+    .employee-img-name {
+        width: 100%;
+        margin: 0px;
+        margin-bottom: 10px;
+    }
+
+    .emplouee_attendance_mobile {
+        margin: 0px;
+        margin-bottom: 10px;
+    }
+
+    .employee-working-time-con {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .employee-time-chart {
+        width: 44%;
+
+        height: 120px;
+    }
 }

@@ -49,3 +49,62 @@
     justify-content: space-between;
     border: 1px solid rgb(53, 52, 52);
 }
+
+@media only screen and (max-width:688px) {
+    .invoice-all-container {
+        width: 100%;
+    }
+
+    .salary-invoice-hed h5 {
+        font-size: 1rem;
+    }
+
+    .invoice-top {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .invoice-top-left {
+        width: 100%;
+    }
+
+    .invoice-top-right {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    .invoice-last {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .invoice-left {
+        width: 100%;
+    }
+
+    #invoice-print {
+        width: 100%;
+
+    }
+
+    #location_mobile {
+        display: none;
+    }
+
+    .invoice-top-right img {
+        width: 90px;
+    }
+
+    .invoice-top-left h5 {
+        font-size: 1rem;
+    }
+
+    .invoice-print-download {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+}

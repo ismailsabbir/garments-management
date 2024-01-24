@@ -146,10 +146,19 @@ const EmployeeMyAttendances = () => {
                               <span>{attendance?.attendance_date}</span>{" "}
                             </td>
                             <td className="das-order-data">
-                              <span>{attendance?.attendance_in_time}</span>{" "}
+                              <span>
+                                <p className="check_in_mobile">
+                                  {attendance?.attendance_in_time}
+                                </p>
+                              </span>{" "}
                             </td>
                             <td className="das-order-data">
-                              <span> {attendance?.attendance_out_time}</span>{" "}
+                              <span>
+                                {" "}
+                                <p className="check_in_mobile">
+                                  {attendance?.attendance_out_time}
+                                </p>
+                              </span>{" "}
                             </td>
                             <td className="das-order-data">
                               <span>{attendance?.totalDuration}</span>{" "}
@@ -159,13 +168,15 @@ const EmployeeMyAttendances = () => {
                             </td>
                             <td className="das-order-data">
                               <span>
-                                {attendance?.status_in === "present" &&
-                                attendance?.status_out === "present"
-                                  ? "Present"
-                                  : attendance?.status_in === "present" ||
-                                    attendance?.status_out === "present"
-                                  ? "Half Day"
-                                  : "Absence"}
+                                <p className="check_in_mobile">
+                                  {attendance?.status_in === "present" &&
+                                  attendance?.status_out === "present"
+                                    ? "Present"
+                                    : attendance?.status_in === "present" ||
+                                      attendance?.status_out === "present"
+                                    ? "Half Day"
+                                    : "Absence"}
+                                </p>
                               </span>
                             </td>
                           </tr>

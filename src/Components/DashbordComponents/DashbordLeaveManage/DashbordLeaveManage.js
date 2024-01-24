@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import { EmployeeContext } from "../../../Layouts/EmployeeLayouts/EmployeeLayouts";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import { Form } from "react-bootstrap";
@@ -12,7 +11,6 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import "./DashbordLeaveManage.css";
 import Swal from "sweetalert2";
 const DashbordLeaveManage = () => {
-  const employee = useContext(EmployeeContext);
   const [staffs, setstaffs] = useState([]);
   const [cuscurrentpage, setcuscurrentpage] = useState(0);
   const [datasize, setdatasize] = useState(5);
@@ -180,18 +178,24 @@ const DashbordLeaveManage = () => {
                     <tr>
                       <td className="das-order-data">
                         <span className="staff-image-name">
-                          <p>{order?.name}</p>
+                          <p className="join_mobile">{order?.name}</p>
                         </span>
                       </td>
 
                       <td className="das-order-data">
-                        <span>{order?.apply_date}</span>{" "}
+                        <span>
+                          <p className="join_mobile">{order?.apply_date}</p>
+                        </span>{" "}
                       </td>
                       <td className="das-order-data">
-                        <span>{order?.from_date}</span>{" "}
+                        <span>
+                          <p className="join_mobile">{order?.from_date}</p>
+                        </span>{" "}
                       </td>
                       <td className="das-order-data">
-                        <span> {order?.to_date}</span>{" "}
+                        <span>
+                          <p className="join_mobile"> {order?.to_date}</p>
+                        </span>{" "}
                       </td>
                       <td className="das-order-data">
                         <span className="no-of-day">
@@ -204,7 +208,10 @@ const DashbordLeaveManage = () => {
                         <span> {order?.half_day}</span>{" "}
                       </td>
                       <td className="das-order-data">
-                        <span> {order?.leave_type}</span>{" "}
+                        <span>
+                          {" "}
+                          <p className="join_mobile">{order?.leave_type}</p>
+                        </span>{" "}
                       </td>
                       <td className="das-order-data">
                         <span
@@ -217,7 +224,12 @@ const DashbordLeaveManage = () => {
                         </span>{" "}
                       </td>
                       <td className="das-order-data">
-                        <span> {order?.reason?.slice(0, 15)}....</span>{" "}
+                        <span>
+                          {" "}
+                          <p className="join_mobile">
+                            {order?.reason?.slice(0, 15)}....
+                          </p>
+                        </span>{" "}
                       </td>
                       <td className="das-order-data">
                         <div className="print-serach">

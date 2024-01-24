@@ -5,7 +5,6 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { FaSearchPlus } from "react-icons/fa";
-import { Dropdown } from "react-bootstrap";
 import NotFound from "../../../CommonComponents/NotFound/NotFound";
 import Loading from "../../../CommonComponents/Loading/Loading";
 import { IoMdAdd } from "react-icons/io";
@@ -230,17 +229,26 @@ const DashbordBlogs = () => {
                               </label>
                             </th>
                             <td className="das-order-data">
-                              <span className="dashbord-product-image">
+                              <span
+                                className="dashbord-product-image"
+                                id="blog_mobile"
+                              >
                                 <img
                                   className="dashbord-product"
                                   src={order?.image}
                                   alt="not"
                                 />
-                                {order?.name}
+                                <p className="blog_about_mobile">
+                                  {order?.name}
+                                </p>
                               </span>{" "}
                             </td>
                             <td className="das-order-data">
-                              <span>{order?.date}</span>{" "}
+                              <span>
+                                <p className="blog_date_mobile">
+                                  {order?.date}
+                                </p>
+                              </span>{" "}
                             </td>
                             <td className="das-order-data">
                               <span>

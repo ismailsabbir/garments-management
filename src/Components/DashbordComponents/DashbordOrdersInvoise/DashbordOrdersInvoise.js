@@ -41,7 +41,9 @@ const DashbordOrdersInvoise = () => {
           </div>
           <div className="invoice-top-right">
             <img src={logo} alt="logo" />
-            <p>59 Station Rd, Mirpur-10 Bridge, Bangladesh</p>
+            <p className="location_mobile">
+              59 Station Rd, Mirpur-10 Bridge, Bangladesh
+            </p>
             <p>019579034</p>
             <p>garmet.shop@gmail.com</p>
             <p>garment.shop.vercel.app</p>
@@ -65,7 +67,7 @@ const DashbordOrdersInvoise = () => {
             <p>{order?.address}</p>
           </div>
         </div>
-        <div className="invoice-last">
+        <div className="invoice-last overflow-x-auto">
           <table className="table recent-order-table">
             <tr className="recent-order-tr">
               <th className="recent-order-hed">SR.</th>

@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Loading from "../../../CommonComponents/Loading/Loading";
 import NotFound from "../../../CommonComponents/NotFound/NotFound";
 import { Link } from "react-router-dom";
-
+import "./EmployeeSalaryMake.css";
 const EmployeeSalaryMake = () => {
   const [staffs, setstaffs] = useState([]);
   const [loading, setloading] = useState(true);
@@ -152,7 +152,6 @@ const EmployeeSalaryMake = () => {
               <div className="overflow-x-auto">
                 <div className="overflow-x-auto">
                   <table className="table recent-order-table">
-                    {/* <thead> */}
                     <tr className="recent-order-tr">
                       <th className="recent-order-hed">NAME</th>
                       <th className="recent-order-hed">EMAIL</th>
@@ -163,14 +162,16 @@ const EmployeeSalaryMake = () => {
                       <th className="recent-order-hed">MAKE SALARY</th>
                       <th className="recent-order-hed">PAYSLIP</th>
                     </tr>
-                    {/* </thead> */}
+
                     <tbody>
                       {staffs?.map((order) => (
                         <tr>
                           <td className="das-order-data">
                             <span className="staff-image-name">
                               <img src={order?.photo} alt="" />
-                              <p>{order?.name}</p>
+                              <p className="employee_name_mobile">
+                                {order?.name}
+                              </p>
                             </span>
                           </td>
                           <td className="das-order-data">
@@ -180,7 +181,11 @@ const EmployeeSalaryMake = () => {
                             <span>{order?.phone}</span>{" "}
                           </td>
                           <td className="das-order-data">
-                            <span>{order?.join_date}</span>{" "}
+                            <span>
+                              <p className="employee_join_date">
+                                {order?.join_date}
+                              </p>
+                            </span>{" "}
                           </td>
                           <td className="das-order-data">
                             <span> {order?.role}</span>{" "}
@@ -197,7 +202,7 @@ const EmployeeSalaryMake = () => {
                               ?.split(" ")[0] === currentMonth ? (
                               <span className="salary-add-done">Paid</span>
                             ) : (
-                              <>
+                              <div>
                                 <Link
                                   className="make-admin-btn"
                                   id="make-salary-btn"
@@ -206,7 +211,7 @@ const EmployeeSalaryMake = () => {
                                 >
                                   Make Salary
                                 </Link>
-                              </>
+                              </div>
                             )}
                           </td>
                           <td className="das-order-data">
@@ -215,7 +220,7 @@ const EmployeeSalaryMake = () => {
                             order?.paymentStatus
                               .split(" - ")[1]
                               ?.split(" ")[0] === currentMonth ? (
-                              <>
+                              <div className="slip_mobile">
                                 {" "}
                                 <Link
                                   to="/dashbord/employee/salary/invoice"
@@ -225,7 +230,7 @@ const EmployeeSalaryMake = () => {
                                 >
                                   Genarate Slip
                                 </Link>
-                              </>
+                              </div>
                             ) : (
                               <>
                                 <Link

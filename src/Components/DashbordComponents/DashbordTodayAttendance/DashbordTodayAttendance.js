@@ -1,10 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import Loading from "../../../CommonComponents/Loading/Loading";
 import NotFound from "../../../CommonComponents/NotFound/NotFound";
-
-import { AuthContext } from "../../../Context/UserContext";
 import { useQuery } from "@tanstack/react-query";
 import "./DashbordTodayAttendance.css";
 import { Link } from "react-router-dom";
@@ -24,7 +22,6 @@ const DashbordTodayAttendance = () => {
   const [count, setcount] = useState(0);
   const page = Math.ceil(count / datasize);
   const { data: productall = [], refetch } = useQuery({
-    // &search=${search}&reset=${reset}&status=${status}&employeeId=${employeeId}
     queryKey: [
       "todayAttendance",
       {
@@ -248,13 +245,25 @@ const DashbordTodayAttendance = () => {
                               </span>{" "}
                             </td>
                             <td className="das-order-data">
-                              <span>{attendance?.name}</span>{" "}
+                              <span>
+                                <p className="attendance_name_mobile">
+                                  {attendance?.name}
+                                </p>
+                              </span>{" "}
                             </td>
                             <td className="das-order-data">
-                              <span>{attendance?.employee_id}</span>{" "}
+                              <span>
+                                <p className="attendance_name_mobile">
+                                  {attendance?.employee_id}
+                                </p>
+                              </span>{" "}
                             </td>
                             <td className="das-order-data">
-                              <span>{attendance?.attendance_in_time}</span>{" "}
+                              <span>
+                                <p className="attendance_name_mobile">
+                                  {attendance?.attendance_in_time}
+                                </p>
+                              </span>{" "}
                             </td>
                             <td className="das-order-data">
                               <span
@@ -270,9 +279,12 @@ const DashbordTodayAttendance = () => {
                             <td className="das-order-data">
                               <span>
                                 {" "}
-                                {attendance?.attendance_out_time
-                                  ? attendance?.attendance_out_time
-                                  : "00:00 PM"}
+                                <p className="attendance_name_mobile">
+                                  {" "}
+                                  {attendance?.attendance_out_time
+                                    ? attendance?.attendance_out_time
+                                    : "00:00 PM"}
+                                </p>
                               </span>{" "}
                             </td>
                             <td className="das-order-data">
