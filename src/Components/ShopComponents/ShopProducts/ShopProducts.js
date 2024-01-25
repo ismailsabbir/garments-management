@@ -18,6 +18,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../../../Context/UserContext";
 import { useEffect } from "react";
 import Loading from "../../../CommonComponents/Loading/Loading";
+import "../ShopProductRight/ShopProductRight.css";
+import "../ShopAllProducts/ShopAllProducts.css";
 const ShopProducts = () => {
   const navigate = useNavigate();
   const [shopallproduct, setshopallproduct] = useState([]);

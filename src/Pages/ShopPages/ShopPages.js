@@ -1,7 +1,12 @@
 import React from "react";
 import "./ShopPage.css";
+
 import ShopBanner from "../../Components/ShopComponents/ShopBanner/ShopBanner";
+import ShopCategory from "../../Components/ShopComponents/ShopCategory/ShopCategory";
 import ShopMainProducts from "../../Components/ShopComponents/ShopMainProducts/ShopMainProducts";
+
+// import ShopBanner from "../../Components/ShopComponents/ShopBanner/ShopBanner";
+// import ShopMainProducts from "../../Components/ShopComponents/ShopMainProducts/ShopMainProducts";
 const ShopPages = () => {
   console.log("Shop Page");
   return (
