@@ -1,5 +1,4 @@
 .paymentcontainer {
-    /* margin-top: 90px; */
     border: 1px solid gainsboro;
     background-color: gainsboro;
 
@@ -7,9 +6,7 @@
 
 .payment-text {
     width: 80%;
-    /* border: 1px solid black; */
     margin: 0 auto;
-
     margin-bottom: 190px;
     margin-top: 40px;
 
@@ -24,13 +21,9 @@
 
 .bkash {
     width: 150px;
-    /* height: 80px; */
     border: 1px solid white;
     background-color: white;
     border-radius: 8px;
-    /* padding-top: 15px;
-    padding-bottom: 15px; */
-    /* padding: 20px; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -94,7 +87,6 @@
 }
 
 .card-input {
-    /* border: 1px solid black; */
     width: 50%;
 }
 
@@ -139,13 +131,11 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    /* border: 1px solid brown; */
     width: auto;
 }
 
 .pay-bk {
     width: 150px;
-    /* border: 1px solid black; */
     display: flex;
     align-items: center;
     justify-content: center;

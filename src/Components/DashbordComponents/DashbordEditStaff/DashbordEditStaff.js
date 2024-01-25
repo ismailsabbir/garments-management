@@ -3,17 +3,14 @@ import { Form } from "react-bootstrap";
 import { BsFillImageFill } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-
 const DashbordEditStaff = () => {
   const [userData, setUserData] = useState({});
   const location = useLocation();
   const staff = location?.state;
-  console.log(staff);
+  console.log("Dashbord Edit Staff");
   useEffect(() => {
     setUserData(staff);
   }, {});
-  console.log(userData?.photo);
-
   const [photo, setphoto1] = useState(staff?.photo);
   const imagebb = process.env.REACT_APP_IMGBB;
   const handleimage1 = (e) => {
@@ -42,7 +39,6 @@ const DashbordEditStaff = () => {
         });
       });
   };
-  console.log(photo);
   const handlestaffedit = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -66,7 +62,6 @@ const DashbordEditStaff = () => {
       salary,
       cardId,
     };
-    console.log(staffinfo);
     fetch(`${process.env.REACT_APP_URL}/edit_staff/${staff?._id}`, {
       method: "PUT",
       body: JSON.stringify(staffinfo),
@@ -76,7 +71,6 @@ const DashbordEditStaff = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         toast("Update sucessfully !!!", {
           position: "top-center",
           autoClose: 1000,

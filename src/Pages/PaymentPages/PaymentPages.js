@@ -16,10 +16,9 @@ import { AuthContext } from "../../Context/UserContext";
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 const PaymentPages = () => {
   const { user } = useContext(AuthContext);
-  console.log(user);
+  console.log("Payment Sucess");
   const { state } = useLocation();
   const confirm_info = state.orderconfirm;
-  console.log(confirm_info);
   const [cardshow, setcardshow] = useState(true);
   const [bkashshow, setbkashshow] = useState(false);
   const cardhandler = () => {
@@ -38,7 +37,6 @@ const PaymentPages = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         window.location.replace(data.url);
       });
   };
@@ -84,7 +82,6 @@ const PaymentPages = () => {
                   <img src={circle} alt="not found" />
                   <img src={blue} alt="not found" />
                 </div>
-                {/* //////////////////////////////////////////////// */}
                 <div>
                   <Elements stripe={stripePromise}>
                     <CheckoutForm paymentinfo={confirm_info}></CheckoutForm>

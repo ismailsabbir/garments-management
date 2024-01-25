@@ -2,7 +2,6 @@
     width: 100%;
     height: auto;
     display: flex;
-    /* align-items: center; */
     justify-content: space-around;
     margin-top: 200px;
     margin-bottom: 20px;
@@ -60,7 +59,6 @@
 
 .mission-vission-right {
     width: 50%;
-    /* border: 1px solid green; */
 }
 
 .about-garmen {
@@ -87,8 +85,6 @@
 .mission-vission {
     display: flex;
     margin-bottom: 20px;
-    /* align-items: center; */
-    /* justify-content: space-between; */
 }
 
 .vission {
@@ -157,7 +153,7 @@
     }
 
     .mission-vission-empty {
-        /* display: none; */
+
         width: 70%;
         height: 380px;
         left: 60px;
@@ -166,7 +162,6 @@
 
     .mission-vission-right {
         width: 94%;
-        /* border: 1px solid green; */
     }
 
     .mission-vission {

@@ -15,15 +15,13 @@ const DashbordAddProduct = () => {
   const currentDate = new Date();
   const options = { year: "numeric", month: "long", day: "numeric" };
   const formattedDate = currentDate.toLocaleDateString(undefined, options);
-  console.log(formattedDate);
+  console.log("Dashbord Add Product");
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/shopcategory`)
       .then((res) => res.json())
       .then((data) => setproductcategorys(data));
   }, []);
-  console.log(productcategorys);
   const handleimage1 = (e) => {
-    console.log("click");
     const image1 = e.target.files[0];
     const formdata = new FormData();
     formdata.append("image", image1);
@@ -52,7 +50,6 @@ const DashbordAddProduct = () => {
       });
   };
   const handleimage2 = (e) => {
-    console.log("click1");
     const image1 = e.target.files[0];
     const formdata = new FormData();
     formdata.append("image", image1);
@@ -64,7 +61,6 @@ const DashbordAddProduct = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          console.log(data.data.url);
           setdaisplayimage(data.data.url);
           toast("Product Image Upload sucessfully !!!", {
             position: "top-center",
@@ -84,7 +80,6 @@ const DashbordAddProduct = () => {
   const handleAddProduct = (e) => {
     e.preventDefault();
     const product_name = e.target.productname.value.toString();
-    console.log(typeof product_name, product_name);
     const category_name = e.target.category.value.toString();
     const product_price = parseInt(e.target.price.value);
     const availavle = e.target.quantity.value.toString();
@@ -108,8 +103,6 @@ const DashbordAddProduct = () => {
       "This Short Sleeve collared shirt is Great for Gaming Fans, Old School and New",
       "Machine Wash Cold, Tumble Dry Low",
     ];
-    console.log(product_name);
-    console.log(process.env.REACT_APP_URL);
     const productinfo = {
       product_id,
       category_id,
@@ -138,7 +131,6 @@ const DashbordAddProduct = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         toast("Product Added sucessfully !!!", {
           position: "top-center",
           autoClose: 1000,
@@ -149,7 +141,6 @@ const DashbordAddProduct = () => {
     <div className="add-staff-con">
       <h5>Add Product</h5>
       <p>Add your product and necessary information from here</p>
-
       <Form onSubmit={handleAddProduct} className="add-staff-form">
         <div className="staff-image-con">
           <div className="product-image-edit">
@@ -337,12 +328,6 @@ const DashbordAddProduct = () => {
               <option value="In Stock">In Stock</option>
               <option value="Not Available">Not Available</option>
             </select>
-            {/* <Form.Control
-              className="staff-input"
-              type="text"
-              placeholder="Status"
-              name="status"
-            /> */}
           </Form.Group>
           <button className="add-staf--btn" variant="primary" type="submit">
             ADD NEW PRODUCT

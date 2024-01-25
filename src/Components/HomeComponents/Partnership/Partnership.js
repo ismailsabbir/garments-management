@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Partnership.css";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import image1 from "../../../Images/Partner-1.png";
-import image2 from "../../../Images/Partner-2.png";
-import image3 from "../../../Images/Partner-3.png";
-import image4 from "../../../Images/Partner-4.png";
-import image5 from "../../../Images/Partner-5.png";
-import image6 from "../../../Images/Partner-7.png";
-
 const Partnership = () => {
   const [partnership, setpartnership] = useState([]);
   useEffect(() => {
@@ -19,7 +11,7 @@ const Partnership = () => {
         setpartnership(data);
       });
   }, []);
-  console.log(partnership);
+  console.log("Partnership");
 
   return (
     <div>

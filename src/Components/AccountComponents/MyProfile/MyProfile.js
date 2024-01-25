@@ -10,6 +10,7 @@ const MyProfile = () => {
   const { user, userlogout } = useContext(AuthContext);
   const [userinfo, setuser] = useState([]);
   const [loading, setLoading] = useState(true);
+  console.log("My Profile");
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/user?email=${user?.email}`, {
       headers: {
@@ -31,7 +32,6 @@ const MyProfile = () => {
         setLoading(false);
       });
   }, [user?.email, userlogout]);
-  console.log(userinfo);
   return (
     <div>
       {loading ? (

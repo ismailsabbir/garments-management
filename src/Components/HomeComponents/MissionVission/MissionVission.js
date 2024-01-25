@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { servcontext } from "../../../App";
 const MissionVission = () => {
   const { missions, vissions } = useContext(servcontext);
-  console.log(typeof missions, vissions);
+  console.log("Mission Vission");
   return (
     <div className="mission-vission-con">
       <div className="mission-vission-left">

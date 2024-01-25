@@ -7,6 +7,7 @@ import { useState } from "react";
 const DashbordAddStaff = () => {
   const [photo, setphoto1] = useState();
   const imagebb = process.env.REACT_APP_IMGBB;
+  console.log("Dashbord Add Staff");
   const handleimage1 = (e) => {
     const image1 = e.target.files[0];
     const formdata = new FormData();
@@ -46,7 +47,6 @@ const DashbordAddStaff = () => {
     const salary = e.target.salary.value;
     const isEmployee = true;
     const cardId = e.target.cardId.value;
-
     const staffinfo = {
       name,
       email,
@@ -60,7 +60,6 @@ const DashbordAddStaff = () => {
       isEmployee,
       cardId,
     };
-    console.log(staffinfo);
     fetch(`${process.env.REACT_APP_URL}/addstaff`, {
       method: "POST",
       body: JSON.stringify(staffinfo),
@@ -70,7 +69,6 @@ const DashbordAddStaff = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         toast("Staff Add sucessfully !!!", {
           position: "top-center",
           autoClose: 1000,

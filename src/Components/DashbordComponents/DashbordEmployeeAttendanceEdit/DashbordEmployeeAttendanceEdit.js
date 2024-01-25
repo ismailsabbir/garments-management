@@ -15,6 +15,7 @@ const DashbordEmployeeAttendanceEdit = () => {
   );
   const [status_in, setstatus_in] = useState(attendance?.status_in);
   const [status_out, setstatus_out] = useState(attendance?.status_out);
+  console.log("Dashbord Employee Attendance Edit");
   useEffect(() => {
     setattendance(attendance);
   }, {});
@@ -30,8 +31,6 @@ const DashbordEmployeeAttendanceEdit = () => {
   const handlestatusOut = (e) => {
     setstatus_out(e.target.value);
   };
-  console.log(attendance);
-  console.log(attendance_in_time, attendance_out_time, status_in, status_out);
   const handleEmployeeAttendancedit = (e) => {
     e.preventDefault();
     const attendance_date = attendanceData?.attendance_date;
@@ -46,7 +45,6 @@ const DashbordEmployeeAttendanceEdit = () => {
       status_in,
       status_out,
     };
-    console.log(attendanceinfo);
     fetch(
       `${process.env.REACT_APP_URL}/edit_employee-attendance/${attendanceData?._id}`,
       {
@@ -59,7 +57,6 @@ const DashbordEmployeeAttendanceEdit = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         toast("Update sucessfully !!!", {
           position: "top-center",
           autoClose: 1000,

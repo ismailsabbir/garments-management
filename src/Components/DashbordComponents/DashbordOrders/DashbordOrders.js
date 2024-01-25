@@ -27,7 +27,7 @@ const DashbordOrders = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [orderStatus, setOrderStatus] = useState("");
-
+  console.log("Dashbord Orders");
   const handleStartDateChange = (event) => {
     setStartDate(event.target.value);
   };
@@ -67,7 +67,6 @@ const DashbordOrders = () => {
           return res.json();
         })
         .then((data) => {
-          console.log(data);
           setorders(data?.product);
           setcount(data?.count);
           setLoading(false);
@@ -89,7 +88,6 @@ const DashbordOrders = () => {
   };
   const handlecategory = (e) => {
     const orderDate = e.target.value;
-    console.log(orderDate);
     setreset(false);
     setorderDate();
     setStartDate("");
@@ -107,17 +105,6 @@ const DashbordOrders = () => {
     setsearch("");
     setOrderStatus(orderStatus);
   };
-  const searchOrders = () => {
-    if (startDate && endDate) {
-      console.log("Start Date:", startDate);
-      console.log("End Date:", endDate);
-    } else {
-      toast("Please select both start and end dates.", {
-        position: "top-center",
-        autoClose: 1000,
-      });
-    }
-  };
   const handlecustomersearch = (event) => {
     event.preventDefault();
     const customerName = event.target.name.value;
@@ -127,7 +114,6 @@ const DashbordOrders = () => {
     setEndDate("");
     setOrderStatus("");
     setsearch(customerName);
-    console.log(customerName);
   };
   const handleOrderStatusChange = async (event, order) => {
     Swal.fire({
@@ -140,7 +126,6 @@ const DashbordOrders = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         const status = event.target.value;
-        console.log(status);
         fetch(
           `${process.env.REACT_APP_URL}/update_order_status/${order?._id}?status=${status}`,
           {
@@ -153,7 +138,6 @@ const DashbordOrders = () => {
         )
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
             refetch();
             toast("Update sucessfully !!!", {
               position: "top-center",
@@ -285,10 +269,6 @@ const DashbordOrders = () => {
               value={endDate}
               onChange={handleEndDateChange}
             />
-            {/* <button onClick={searchOrders} className="download-order-btn">
-              <FaSearchPlus className="order-search-btn"></FaSearchPlus>
-              search Orders
-            </button> */}
             <button
               onClick={handlereset}
               className="product-reset"

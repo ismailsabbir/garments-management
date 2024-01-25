@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./DashbordServicsContent.css";
 import { ToastContainer, toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
@@ -17,6 +17,7 @@ const DashbordServicsContent = () => {
   const [cuscount, setcuscount] = useState(0);
   const [loading, setloading] = useState(true);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  console.log("Dashbord Service Content");
   const handleOptionClick = (product) => {
     if (!selectedOptions.includes(product)) {
       setSelectedOptions([...selectedOptions, product]);
@@ -36,7 +37,6 @@ const DashbordServicsContent = () => {
       confirmButtonText: "DELATE",
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(selectedOptions);
         fetch(`${process.env.REACT_APP_URL}/delete-service`, {
           method: "DELETE",
           headers: {
@@ -48,7 +48,6 @@ const DashbordServicsContent = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data?.deletedCount > 0) {
               toast("Services delete sucessfully !!!", {
                 position: "top-center",
@@ -70,7 +69,6 @@ const DashbordServicsContent = () => {
       })
         .then((req) => req.json())
         .then((data) => {
-          console.log(data);
           setproducts(data);
           setcuscount(data?.length);
           setloading(false);
@@ -85,7 +83,6 @@ const DashbordServicsContent = () => {
       reader.onload = (e) => {
         try {
           const fileContents = JSON.parse(e.target.result);
-          console.log(fileContents);
           for (let i = 0; i < fileContents.length; i++) {
             fetch(`${process.env.REACT_APP_URL}/service_add`, {
               method: "POST",
@@ -102,9 +99,7 @@ const DashbordServicsContent = () => {
                 });
                 refetch();
               })
-              .catch((err) => {
-                console.log(err.message);
-              });
+              .catch((err) => {});
           }
         } catch (error) {
           console.error("Invalid JSON file:", error);
@@ -138,7 +133,6 @@ const DashbordServicsContent = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data?.deletedCount > 0) {
               toast("Service delete sucessfully !!!", {
                 position: "top-center",

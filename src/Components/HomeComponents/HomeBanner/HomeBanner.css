@@ -48,7 +48,6 @@
 
 #banner-bottom-fixed {
     position: absolute;
-    /* bottom: 150px; */
     bottom: 80px;
 }
 
@@ -92,10 +91,6 @@
         font-size: 1rem;
 
     }
-
-    /* .home-banner-hole {
-        margin-bottom: 600px;
-    } */
 
     .banner-bottom-1 {
         width: 90%;

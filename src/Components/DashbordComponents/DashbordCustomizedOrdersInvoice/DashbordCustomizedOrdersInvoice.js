@@ -6,7 +6,7 @@ import html2canvas from "html2canvas";
 const DashbordCustomizedOrdersInvoice = () => {
   const location = useLocation();
   const order = location.state;
-  console.log(order);
+  console.log("Dashbord Customized Order Invoice");
   const handleDownloadClick = async () => {
     const content = document.getElementById("invoice-content");
     try {

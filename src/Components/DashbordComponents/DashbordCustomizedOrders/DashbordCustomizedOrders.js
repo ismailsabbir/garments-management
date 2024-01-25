@@ -28,7 +28,7 @@ const DashbordCustomizedOrders = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [orderStatus, setOrderStatus] = useState("");
-
+  console.log("Dashbord Customized Orders");
   const { data: productall = [], refetch } = useQuery({
     queryKey: [
       "allcustomizedorders",
@@ -59,7 +59,6 @@ const DashbordCustomizedOrders = () => {
           return res.json();
         })
         .then((data) => {
-          console.log(data);
           setorders(data?.product);
           setcount(data?.count);
           setLoading(false);
@@ -88,7 +87,6 @@ const DashbordCustomizedOrders = () => {
   };
   const handlecategory = (e) => {
     const orderDate = e.target.value;
-    console.log(orderDate);
     setreset(false);
     setorderDate();
     setStartDate("");
@@ -115,7 +113,6 @@ const DashbordCustomizedOrders = () => {
     setEndDate("");
     setOrderStatus("");
     setsearch(customerName);
-    console.log(customerName);
   };
   const handleOrderStatusChange = async (event, order) => {
     Swal.fire({
@@ -128,7 +125,6 @@ const DashbordCustomizedOrders = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         const status = event.target.value;
-        console.log(status);
         fetch(
           `${process.env.REACT_APP_URL}/update_customized_order_status/${order?._id}?status=${status}`,
           {
@@ -141,7 +137,6 @@ const DashbordCustomizedOrders = () => {
         )
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
             refetch();
             toast("Update sucessfully !!!", {
               position: "top-center",
@@ -273,10 +268,6 @@ const DashbordCustomizedOrders = () => {
               value={endDate}
               onChange={handleEndDateChange}
             />
-            {/* <button onClick={searchOrders} className="download-order-btn">
-              <FaSearchPlus className="order-search-btn"></FaSearchPlus>
-              search Orders
-            </button> */}
             <button
               onClick={handlereset}
               className="product-reset"

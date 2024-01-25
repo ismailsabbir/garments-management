@@ -14,11 +14,10 @@ const DashbordCategoryEdit = () => {
   useEffect(() => {
     setcategoryData(category);
   }, {});
-  console.log(categoryData);
+  console.log("Dashbord Category Edit");
   const [category_image, setcategory_image] = useState(
     category?.category_image
   );
-
   const handleCategoryedit = (e) => {
     e.preventDefault();
     const category_id = e.target.categoryid.value.toString();
@@ -28,7 +27,6 @@ const DashbordCategoryEdit = () => {
       category_name,
       category_image,
     };
-    console.log(staffinfo);
     fetch(`${process.env.REACT_APP_URL}/edit_category/${category?._id}`, {
       method: "PUT",
       body: JSON.stringify(staffinfo),
@@ -38,7 +36,6 @@ const DashbordCategoryEdit = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         toast("Update sucessfully !!!", {
           position: "top-center",
           autoClose: 1000,
@@ -46,7 +43,6 @@ const DashbordCategoryEdit = () => {
       });
   };
   const handleimage1 = (e) => {
-    console.log("click");
     const image1 = e.target.files[0];
     const formdata = new FormData();
     formdata.append("image", image1);
@@ -78,7 +74,6 @@ const DashbordCategoryEdit = () => {
     <div className="add-staff-con">
       <h5>Edit Category</h5>
       <p>Edit your Category and necessary information from here</p>
-
       <Form onSubmit={handleCategoryedit} className="add-staff-form">
         <div className="staff-image-con">
           <div className="product-image-edit">

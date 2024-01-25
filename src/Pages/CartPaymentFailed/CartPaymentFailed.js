@@ -8,13 +8,12 @@ const CartPaymentFailed = () => {
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const orderid = parseInt(query.get("orderid"));
+  console.log("Cart Payment Failed");
   useEffect(() => {
-    // fetch(`${process.env.REACT_APP_URL}/cart/order/by_order_id/${orderid}`)
     fetch(`${process.env.REACT_APP_URL}/product/order/by_order_id/${orderid}`)
       .then((req) => req.json())
       .then((data) => setproducts(data));
   }, [orderid]);
-  console.log(products);
   const handlebkashpayment = () => {
     fetch(`${process.env.REACT_APP_URL}/cart_bkash_payment`, {
       method: "POST",
@@ -23,7 +22,6 @@ const CartPaymentFailed = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         window.location.replace(data.url);
       });
   };

@@ -18,12 +18,8 @@ const EmployeeLayouts = () => {
       .then((data) => {
         setemployee(data);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   }, []);
-  console.log(employee);
-
   return (
     <EmployeeContext.Provider value={employee}>
       <div className="dashbord-layut-hole">

@@ -6,6 +6,7 @@ import { AuthContext } from "../../../Context/UserContext";
 import { ToastContainer, toast } from "react-toastify";
 import Rating from "react-rating-stars-component";
 const ProductReviewsFrom = ({ oneproduct }) => {
+  console.log("Product Review From");
   const { user } = useContext(AuthContext);
   const [userRating, setUserRating] = useState(0);
   const handleRatingChange = (newRating) => {
@@ -56,7 +57,6 @@ const ProductReviewsFrom = ({ oneproduct }) => {
       product_id,
       product_name,
     };
-    console.log(name, email, review);
     fetch(`${process.env.REACT_APP_URL}/addreview`, {
       method: "POST",
       headers: {

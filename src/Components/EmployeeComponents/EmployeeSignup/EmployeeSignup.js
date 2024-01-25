@@ -3,12 +3,11 @@ import { Form } from "react-bootstrap";
 import { BiLogoGmail } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/UserContext";
-
 const EmployeeSignup = () => {
   const { createuser } = useContext(AuthContext);
   const [errormessage, seterrormessage] = useState("");
   const [sucessmessage, setsucessmessage] = useState(false);
-
+  console.log("Employee Sign up");
   const handleregister = (e) => {
     e.preventDefault();
     setsucessmessage(false);
@@ -36,12 +35,9 @@ const EmployeeSignup = () => {
                 },
               })
                 .then((req) => req.json())
-                .then((data) => {
-                  console.log(data);
-                });
+                .then((data) => {});
             })
             .catch((error) => {
-              console.log(error);
               seterrormessage(error.message);
             });
         } else {
@@ -83,7 +79,6 @@ const EmployeeSignup = () => {
             <></>
           )}
           <input
-            // onBlur={handlesetemail}
             className="signup-input"
             name="email"
             type="email"
@@ -104,10 +99,6 @@ const EmployeeSignup = () => {
               />
               <span className="label-text">Remember me</span>
             </label>
-
-            {/* <Link onClick={handlerestpassword} className="forget">
-                  Forgot password?
-                </Link> */}
           </div>
           {errormessage ? (
             <div className="alert alert-warning">

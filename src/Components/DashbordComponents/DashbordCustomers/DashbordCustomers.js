@@ -22,6 +22,7 @@ const DashbordCustomers = () => {
   const [searchemail, setsearchemail] = useState("");
   const [searchrole, setsearchrole] = useState("");
   const [reset, setreset] = useState(false);
+  console.log("Dashbord Customers");
   const { data: productss = [], refetch } = useQuery({
     queryKey: [
       "allusers",
@@ -51,7 +52,6 @@ const DashbordCustomers = () => {
           return data;
         }),
   });
-  console.log(products);
   const handledelete = (staff) => {
     Swal.fire({
       title: "Are you sure?",
@@ -70,7 +70,6 @@ const DashbordCustomers = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             toast("Customer Delate Sucessfully !!!", {
               position: "top-center",
               autoClose: 1000,
@@ -138,13 +137,11 @@ const DashbordCustomers = () => {
                 autoClose: 1000,
               });
             }
-            console.log(data);
             refetch();
           });
       }
     });
   };
-  const handlenormal = () => {};
   return (
     <div className="dashbord-shop-product-con">
       <div className="dashbord_customer_hed">
@@ -176,13 +173,6 @@ const DashbordCustomers = () => {
             <BsSearch></BsSearch>
           </button>
         </Form>
-
-        {/* <input
-          className="email-input-staff"
-          onChange={handleemailsearch}
-          type="email"
-          placeholder="Search by Email"
-        /> */}
         <select
           onChange={(e) => handlerole(e.target.value)}
           id="cars"

@@ -17,14 +17,12 @@ import { GrFavorite } from "react-icons/gr";
 import { GoCodeReview } from "react-icons/go";
 import { BiLogOut } from "react-icons/bi";
 import useAdmin from "../../Hooks/useAdmin";
-
 const MainNavbar = () => {
   const { user, userlogout } = useContext(AuthContext);
   const [cartproducts, setcartproducts] = useState([]);
   const [isFixed, setIsFixed] = useState(false);
   const [isAdmin] = useAdmin(user?.email);
   const [userinfo, setuserinfo] = useState([]);
-
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/singleuser?email=${user?.email}`, {
       headers: {
@@ -122,24 +120,6 @@ const MainNavbar = () => {
               >
                 AboutUs
               </NavLink>
-              {/* <NavLink
-                className={({ isActive }) =>
-                  isActive ? "new-item-color" : undefined
-                }
-                id="nav-item"
-                to="/Services"
-              >
-                Services
-              </NavLink>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "new-item-color" : undefined
-                }
-                id="nav-item"
-                to="/Projects"
-              >
-                Projects
-              </NavLink> */}
               <NavLink
                 className={({ isActive }) =>
                   isActive ? "new-item-color" : undefined
@@ -203,27 +183,11 @@ const MainNavbar = () => {
                   Login
                 </NavLink>
               )}
-              {/* {userinfo?.role === "Premium" ? (
-                <></>
-              ) : (
-                <Link
-                  to="/premium/customer/login"
-                  className="button1 ml-4"
-                  id="make-wholesale-btn"
-                >
-                  Login For Wholesale
-                </Link>
-              )} */}
             </Nav>
             <Navbar.Collapse className="justify-content-end navbar-end-con">
-              {/* <Link to="/make-project" className="button" id="make-project-btn">
-                wholesale
-              </Link> */}
               <Link to="/make-project" className="button" id="make-project-btn">
                 Customized
               </Link>
-
-              {/* jdfhdfdkd */}
               <div className="account-wishlist-cart-con">
                 <div className="nav-useer dropdown dropdown-hover">
                   <FaUserPlus
@@ -318,93 +282,6 @@ const MainNavbar = () => {
                   </Link>
                 </Link>
               </div>
-
-              {/* <div className="nav-useer dropdown dropdown-hover">
-                <FaUserPlus tabIndex={0} className="nav-user-icon"></FaUserPlus>
-                <div className="nav-login-register account">
-                  <p tabIndex={0}>Account</p>
-                  <Link to="/login" className="nav-login">
-                    Login
-                  </Link>
-                  <>/</>
-                  <Link to="/signup" className="nav-login">
-                    Register
-                  </Link>
-                </div>
-                <ul
-                  tabIndex={0}
-                  className="dropdown-content z-[1] menu p-2 shadow bg-base-100  w-52 dropdrown-menu"
-                >
-                  <li>
-                    <Link to="/manage_account" className="nav-account">
-                      <BsEmojiSmile></BsEmojiSmile> <>Manage My Account</>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/manage_account/shop_orders"
-                      className="nav-account"
-                    >
-                      <AiOutlineInbox></AiOutlineInbox> <>My Orders</>
-                    </Link>
-                    <Link
-                      to="/manage_account/customized_orders"
-                      className="nav-account"
-                    >
-                      <AiOutlineInbox></AiOutlineInbox>{" "}
-                      <>My Customized Orders</>
-                    </Link>
-                    <Link
-                      to="/manage_account/cartproduct"
-                      className="nav-account"
-                    >
-                      <BsBagDash></BsBagDash>
-                      <>My Shoping cart</>
-                    </Link>
-                    <Link to="/manage_account/wishlist" className="nav-account">
-                      <GrFavorite></GrFavorite>
-                      <>My Wishlist & Followed Stores</>
-                    </Link>
-                    <Link to="/manage_account/review" className="nav-account">
-                      <GoCodeReview></GoCodeReview>
-                      <>My Reviews</>
-                    </Link>
-                    <button onClick={handlelogout} className="nav-account">
-                      <BiLogOut></BiLogOut>
-                      <>Logout</>
-                    </button>
-                  </li>
-                </ul>
-              </div>
-
-              <Link to={`/wishlistproduct`} className="nav-useer">
-                <RiDislikeLine className="favarite-icon"></RiDislikeLine>
-                <Link
-                  to="/wishlistproduct"
-                  className="nav-login-register no-underline"
-                >
-                  <p> Wishlist</p>
-                  <Link
-                    to={`/wishlistproduct`}
-                    className="nav-login no-underline"
-                  >
-                    Edit your wishlist
-                  </Link>
-                </Link>
-              </Link>
-
-              <Link to="/cartproduct" className="indicator nav-cart-con">
-                <span className="indicator-item badge badge-secondary">
-                  {cartproducts?.length}
-                  <sup>+</sup>{" "}
-                </span>
-                <Link
-                  to="/cartproduct"
-                  className="grid w-5 h-5  place-items-center"
-                >
-                  <BsBagDash className="nav-cart-icon"></BsBagDash>
-                </Link>
-              </Link> */}
             </Navbar.Collapse>
           </Navbar.Collapse>
         </div>

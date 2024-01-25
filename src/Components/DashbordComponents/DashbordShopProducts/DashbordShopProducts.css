@@ -40,7 +40,6 @@
 }
 
 .bulk-action button {
-    /* border: 1px solid gainsboro; */
     padding: 9px 15px;
     font-size: 1rem;
     font-weight: 500;
@@ -56,7 +55,6 @@
 .bulk-icon {
     margin-right: 8px;
     font-size: 1.2rem;
-    /* color: rgb(88, 87, 87); */
 }
 
 #pro-delete-btn {
@@ -96,13 +94,10 @@
     border: 1px solid rgb(195, 221, 244);
     padding: 15px 8px;
     border-radius: 4px;
-    /* width: 25%; */
     width: 100%;
     background-color: aliceblue;
     font-size: 1.1rem;
 }
-
-
 
 .product-category-search {
     border: 1px solid rgb(207, 228, 246);
@@ -140,7 +135,6 @@
     height: 40px;
     margin-right: 8px;
     border-radius: 50%;
-    /* border: 0.8px solid gainsboro; */
 }
 
 .dashbord-product-image {
@@ -162,7 +156,6 @@
 #disablecss {
     background-color: #efa2c6;
     color: white;
-    /* border: 1px solid gray; */
 }
 
 .add-product-link {

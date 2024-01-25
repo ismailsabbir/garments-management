@@ -13,7 +13,6 @@ const useToken = (email) => {
       })
         .then((req) => req.json())
         .then((data) => {
-          console.log(data);
           localStorage.setItem("garments-token", data?.token);
           settoken(data.token);
         });

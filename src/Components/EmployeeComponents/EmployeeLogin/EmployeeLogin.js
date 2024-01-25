@@ -13,14 +13,13 @@ const EmployeeLogin = () => {
   let location = useLocation();
   let from = location.state?.from?.pathname || "/";
 
-  console.log(email1);
+  console.log("Employee Login");
   const loginuser = (e) => {
     e.preventDefault();
     setsucessmessage(false);
     const form = e.target;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
     seterrormessage("");
     userlogin(email, password)
       .then((req) => {
@@ -39,62 +38,15 @@ const EmployeeLogin = () => {
         })
           .then((req) => req.json())
           .then((data) => {
-            console.log(data);
             localStorage.setItem("garments-token", data?.token);
             navigate(from, { replace: true });
           });
       })
       .catch((error) => {
-        console.log(error);
         seterrormessage(error.message);
       });
   };
 
-  //   const loginuser = (e) => {
-  //     e.preventDefault();
-  //     const email = e.target.email.value;
-  //     const password = e.target.password.value;
-  //     const employeeInfo = { email, password };
-  //     fetch(`${process.env.REACT_APP_URL}/employee/login`, {
-  //       method: "POST",
-  //       body: JSON.stringify(employeeInfo),
-  //       headers: {
-  //         "Content-type": "application/json",
-  //       },
-  //     })
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         console.log(data?.employee);
-  //         if (data?.message) {
-  //           setsucessmessage(true);
-  //           seterrormessage("");
-  //           const currentuser = {
-  //             email: data?.employee?.email,
-  //           };
-  //           fetch(`${process.env.REACT_APP_URL}/jwt`, {
-  //             method: "POST",
-  //             headers: {
-  //               "Content-type": "application/json",
-  //             },
-  //             body: JSON.stringify(currentuser),
-  //           })
-  //             .then((req) => req.json())
-  //             .then((data) => {
-  //               console.log(data);
-  //               localStorage.setItem("employee-token", data?.token);
-  //               navigate("/employee");
-  //             });
-  //         } else {
-  //           setsucessmessage(false);
-  //           seterrormessage(data?.error);
-  //         }
-
-  //         //   toast("Staff Add sucessfully !!!", {
-  //         //     position: "top-center",
-  //         //     autoClose: 1000,
-  //         //   });
-  //       });
-  //   };
   return (
     <div className="employss-login-con">
       <div className="signup-right" id="employee-login">
@@ -128,7 +80,6 @@ const EmployeeLogin = () => {
             <></>
           )}
           <input
-            // onBlur={handlesetemail}
             className="signup-input"
             name="email"
             type="email"
@@ -149,10 +100,6 @@ const EmployeeLogin = () => {
               />
               <span className="label-text">Remember me</span>
             </label>
-
-            {/* <Link onClick={handlerestpassword} className="forget">
-                Forgot password?
-              </Link> */}
           </div>
           {errormessage ? (
             <div className="alert alert-warning">

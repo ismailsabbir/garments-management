@@ -21,6 +21,7 @@ const DashbordTodayAttendance = () => {
   const [datasize, setdatasize] = useState(20);
   const [count, setcount] = useState(0);
   const page = Math.ceil(count / datasize);
+  console.log("Dashbord Today Attendance");
   const { data: productall = [], refetch } = useQuery({
     queryKey: [
       "todayAttendance",
@@ -41,7 +42,6 @@ const DashbordTodayAttendance = () => {
           return res.json();
         })
         .then((data) => {
-          console.log(data);
           setTodayAttendance(data?.attendance);
           setcount(data?.count);
           setLoading(false);
@@ -52,8 +52,6 @@ const DashbordTodayAttendance = () => {
           setLoading(false);
         }),
   });
-
-  console.log(todayAttendance);
   async function triggerAttendanceCheck() {
     try {
       setIsSubmitting(true);
@@ -65,7 +63,6 @@ const DashbordTodayAttendance = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           setIsSubmitting(false);
           refetch();
           if (data?.sucess) {
@@ -77,7 +74,6 @@ const DashbordTodayAttendance = () => {
         })
         .catch((error) => {
           setIsSubmitting(false);
-          console.log(error);
           toast("Try again!!!", {
             position: "top-center",
             autoClose: 1000,
@@ -114,8 +110,6 @@ const DashbordTodayAttendance = () => {
     setsearch("");
     setreset(true);
   };
-  console.log(isSubmitting);
-
   const handledeleteAttendance = (attendance) => {
     Swal.fire({
       title: "Are you sure?",
@@ -126,7 +120,6 @@ const DashbordTodayAttendance = () => {
       confirmButtonText: "DELATE",
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(attendance);
         fetch(
           `${process.env.REACT_APP_URL}/delete-employee-attendance/${attendance?._id}`,
           {
@@ -141,7 +134,6 @@ const DashbordTodayAttendance = () => {
         )
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data?.deletedCount > 0) {
               toast("Attendance delete sucessfully !!!", {
                 position: "top-center",
@@ -197,7 +189,6 @@ const DashbordTodayAttendance = () => {
             </option>
             <option value="present">Present</option>
             <option value="absence">Absence</option>
-            {/* <option value="half">Half Day</option> */}
           </select>
 
           <button onClick={handlereset} className="product-reset">

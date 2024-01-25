@@ -4,6 +4,7 @@ import { servcontext } from "../../../App";
 import SingleServices from "../SingleServices/SingleServices";
 const Servicess = () => {
   const { data } = useContext(servcontext);
+  console.log("Service");
   return (
     <div className="homeservices-con">
       <div className="homeservices-top">

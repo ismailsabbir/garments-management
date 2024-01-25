@@ -15,7 +15,7 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 const ShopPaymentPages = () => {
   const { state } = useLocation();
   const confirm_info = state.orderconfirm;
-  console.log(confirm_info);
+  console.log("Shop Payment Page");
   const [cardshow, setcardshow] = useState(true);
   const [bkashshow, setbkashshow] = useState(false);
   const cardhandler = () => {
@@ -34,7 +34,6 @@ const ShopPaymentPages = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         window.location.replace(data.url);
       });
   };
@@ -80,7 +79,6 @@ const ShopPaymentPages = () => {
                   <img src={circle} alt="not found" />
                   <img src={blue} alt="not found" />
                 </div>
-                {/* //////////////////////////////////////////////// */}
                 <div>
                   <Elements stripe={stripePromise}>
                     <ShopCheckoutForm

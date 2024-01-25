@@ -13,7 +13,7 @@ const MyCustomizedCancel = () => {
   const [datasize, setdatasize] = useState(5);
   const [count, setcount] = useState(0);
   const page = Math.ceil(count / datasize);
-  console.log(datasize, count, page);
+  console.log("My Customized Cancel Order");
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_URL}/shopcustomoizedcancel?email=${user?.email}&page=${currentpage}&size=${datasize}`,
@@ -43,7 +43,6 @@ const MyCustomizedCancel = () => {
   const handlesearch = (e) => {
     e.preventDefault();
     const search = e.target.search.value;
-    console.log(search);
     fetch(
       `${process.env.REACT_APP_URL}/idodrders?email=${user?.email}&page=${currentpage}&size=${datasize}&search=${search}`,
       {
@@ -68,10 +67,6 @@ const MyCustomizedCancel = () => {
         setLoading(false);
       });
   };
-  const handleorderpayment = (orderconfirm) => {
-    navigate("/cartproductpayment", { state: { orderconfirm } });
-  };
-  console.log(orders);
   return (
     <div className="my-orders-continer">
       {loading ? (

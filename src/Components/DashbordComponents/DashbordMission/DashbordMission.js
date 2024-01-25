@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import "./DashbordMission.css";
-import { servcontext } from "../../../App";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
@@ -10,6 +9,7 @@ import { FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 const DashbordMission = () => {
   const [vissions, setvissions] = useState([]);
+  console.log("Dashbord Mission");
   const { data: products = [], refetch } = useQuery({
     queryKey: ["missions"],
     queryFn: () =>
@@ -25,7 +25,6 @@ const DashbordMission = () => {
         }),
   });
   const handledelete = (staff) => {
-    console.log(staff);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to delate this!",

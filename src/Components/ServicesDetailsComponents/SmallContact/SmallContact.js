@@ -1,6 +1,7 @@
 import React from "react";
 import "./SmallContact.css";
 const SmallContact = () => {
+  console.log("Small Contact");
   return (
     <div className="small-contact-con">
       <h5>Consult With Us The Suitable Material for Your Project</h5>

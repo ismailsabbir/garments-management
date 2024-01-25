@@ -150,8 +150,6 @@ function App() {
   const category = categorys.data;
   const missions = missionss?.data;
   const vissions = vissionss?.data;
-
-  console.log(missions, vissions);
   const alldata = {
     data,
     projects,

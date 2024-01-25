@@ -15,14 +15,13 @@ const PremiumCustomerLogin = () => {
   let location = useLocation();
   let from = location.state?.from?.pathname || "/";
 
-  console.log(email1);
+  console.log("Premium Customer login");
   const loginuser = (e) => {
     e.preventDefault();
     setsucessmessage(false);
     const form = e.target;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
     seterrormessage("");
     userlogin(email, password)
       .then((req) => {
@@ -41,13 +40,11 @@ const PremiumCustomerLogin = () => {
         })
           .then((req) => req.json())
           .then((data) => {
-            console.log(data);
             localStorage.setItem("garments-token", data?.token);
             navigate(from, { replace: true });
           });
       })
       .catch((error) => {
-        console.log(error);
         seterrormessage(error.message);
       });
   };
@@ -82,9 +79,7 @@ const PremiumCustomerLogin = () => {
           theme: "light",
         });
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
   return (
     <div className="employss-login-con">

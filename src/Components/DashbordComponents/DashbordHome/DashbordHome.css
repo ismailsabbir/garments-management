@@ -9,7 +9,6 @@
 }
 
 .dashbord-first-card {
-    /* border: 1px solid brown; */
     width: 24%;
     display: flex;
     align-items: center;
@@ -24,7 +23,6 @@
 
 #mid-card-dash {
     background-color: #55E6C1;
-    /* background-color: #e67e22; */
 }
 
 #mid1-card-dash {
@@ -77,13 +75,11 @@
     width: 24%;
     display: flex;
     align-items: center;
-    /* justify-content: center; */
 }
 
 .das-order-div {
     background-color: rgb(195, 221, 245);
     padding: 10px;
-    /* border: 1px solid brown; */
     border-radius: 100%;
     margin-right: 25px;
 }
@@ -94,11 +90,6 @@
     font-size: 1.2rem;
     color: rgb(43, 155, 253);
     margin: 6px;
-    /* border: 1px solid brown; */
-    /* background-color: aliceblue; */
-    /* padding: 6px; */
-
-
 }
 
 .order-num-info span {

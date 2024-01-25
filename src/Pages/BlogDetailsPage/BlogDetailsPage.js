@@ -1,15 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import "./BlogDetailsPage.css";
 import { useLocation } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
-import { AuthContext } from "../../Context/UserContext";
 import Rating from "react-rating-stars-component";
 const BlogDetailsPage = () => {
   const location = useLocation();
   const blog = location.state;
-  const { user } = useContext(AuthContext);
   const [userRating, setUserRating] = useState(0);
+  console.log("Blog Details");
   const handleRatingChange = (newRating) => {
     setUserRating(newRating);
   };
@@ -64,7 +63,6 @@ const BlogDetailsPage = () => {
       });
       return;
     }
-    console.log(reviewinfo);
     fetch(`${process.env.REACT_APP_URL}/blog/review/${blog?._id}`, {
       method: "POST",
       headers: {
@@ -107,7 +105,6 @@ const BlogDetailsPage = () => {
                 name="email"
                 type="email"
                 placeholder="Enter Email"
-                // value={user?.email}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">

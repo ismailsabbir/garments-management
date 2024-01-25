@@ -11,8 +11,6 @@
     margin-bottom: 25px;
     transition: all 2ms;
     padding-left: 20px;
-
-    /* border: 1px solid green; */
 }
 
 .dashbord-link:hover {
@@ -36,15 +34,9 @@
     font-weight: 500;
     padding-left: 20px;
     border-left: 6px solid #be5184;
-    /* border-radius: 2px; */
-}
-
-.dropdown-con {
-    /* border: 1px solid brown; */
 }
 
 #dashbord-drop-drown {
-    /* border: 1px solid green; */
     width: 100%;
 
 }

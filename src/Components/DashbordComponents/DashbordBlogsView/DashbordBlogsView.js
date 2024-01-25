@@ -1,9 +1,9 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-
 const DashbordBlogsView = () => {
   const location = useLocation();
   const blog = location.state;
+  console.log("Dashbord Blog View");
   return (
     <div>
       <div className="blog_details_text">

@@ -20,9 +20,7 @@ const DashbordLayouts = () => {
       .then((data) => {
         setemployee(data);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   }, []);
   return (
     <AdminContext.Provider value={employee}>

@@ -4,7 +4,6 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { IoCallOutline, IoLocationOutline } from "react-icons/io5";
 import { MdOutlineEmail } from "react-icons/md";
 import { GiWorld } from "react-icons/gi";
-
 import {
   AiOutlineTwitter,
   AiOutlineInstagram,
@@ -69,7 +68,6 @@ const Footer = () => {
             <FaArrowRightLong className="footer-right-arwo"></FaArrowRightLong>
             <Link
               to="/employee"
-              // to="/employee/Login"
               className="link link-hover text-white text-base font-medium"
             >
               Employee

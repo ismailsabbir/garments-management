@@ -9,7 +9,7 @@ const EmployeeTakeAttendance = () => {
   const [capturedImage, setCapturedImage] = useState(null);
   const [employee_id, setEmployeeId] = useState("E-00000");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  console.log(capturedImage);
+  console.log("Employee Take Attendanc");
   const captureImage = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -66,7 +66,6 @@ const EmployeeTakeAttendance = () => {
               return response.json();
             })
             .then((data) => {
-              console.log(data);
               if (!data?.error) {
                 toast("Presence Count successfully added !!!", {
                   position: "top-center",
@@ -125,7 +124,7 @@ const EmployeeTakeAttendance = () => {
           className="add-staf--btn attendance-btn"
           variant="primary"
           type="submit"
-          disabled={isSubmitting} // Disable the button when submitting
+          disabled={isSubmitting}
         >
           {isSubmitting ? "Submitting..." : "SUBMIT ATTENDANCE"}
         </button>

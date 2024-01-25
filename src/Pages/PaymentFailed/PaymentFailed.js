@@ -13,7 +13,7 @@ const PaymentFailed = () => {
       .then((req) => req.json())
       .then((data) => setproducts(data));
   }, [orderid]);
-  console.log(products);
+  console.log("Payment Failed Page");
   const handlebkashpayment = () => {
     fetch(`${process.env.REACT_APP_URL}/shop_bkash_payment`, {
       method: "POST",
@@ -22,7 +22,6 @@ const PaymentFailed = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         window.location.replace(data.url);
       });
   };

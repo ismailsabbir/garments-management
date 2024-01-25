@@ -9,20 +9,14 @@ const DashbordBlogsEdit = () => {
   const imagebb = process.env.REACT_APP_IMGBB;
   const url = process.env.REACT_APP_URL;
   const [image, setpicture] = useState("");
-  const currentDate = new Date();
-  const options = { year: "numeric", month: "long", day: "numeric" };
-  const formattedDate = currentDate.toLocaleDateString(undefined, options);
-  console.log(formattedDate);
+  console.log("Dashbord Blog Edit");
   const blog = location.state;
   const [blogdata, setblogdata] = useState({});
   useEffect(() => {
     setblogdata(blog);
     setpicture(blog?.image);
   }, {});
-  console.log(blog);
-
   const handleimagelogo = (e) => {
-    console.log("click logo");
     const image1 = e.target.files[0];
     const formdata = new FormData();
     formdata.append("image", image1);
@@ -50,7 +44,6 @@ const DashbordBlogsEdit = () => {
         });
       });
   };
-
   const handleAddProduct = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -70,7 +63,6 @@ const DashbordBlogsEdit = () => {
       para4,
       id,
     };
-    console.log(productinfo);
     fetch(`${url}/blog_add`, {
       method: "POST",
       body: JSON.stringify(productinfo),
@@ -80,7 +72,6 @@ const DashbordBlogsEdit = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data?.sucess) {
           toast("Update sucessfully !!!", {
             position: "top-center",
@@ -98,7 +89,6 @@ const DashbordBlogsEdit = () => {
     <div className="add-staff-con">
       <h5>Add New Blog</h5>
       <p>Add Blog and necessary information from here</p>
-
       <Form onSubmit={handleAddProduct} className="add-staff-form">
         <div className="staff-image-con">
           <div className="product-image-edit">

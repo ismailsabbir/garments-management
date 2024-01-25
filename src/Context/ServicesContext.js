@@ -7,7 +7,6 @@ const ServicesContext = () => {
       .then((res) => res.json())
       .then((data) => setservices(data));
   }, []);
-  console.log(services);
   return <servcontext.Provider value={services}></servcontext.Provider>;
 };
 

@@ -3,8 +3,6 @@ import { servcontext } from "../../../App";
 import { Link } from "react-router-dom";
 import { BsArrowRight, BsArrowRightShort } from "react-icons/bs";
 import "./ShopProductRight.css";
-import Slider from "react-slider";
-// import MultiRangeSlider from "../../Component/MultiRangeSlider/MultiRangeSlider";
 import imagea from "../../../../src/Images/ban.jpg";
 import offer from "../../../../src/Images/offer.jpg";
 import { Form } from "react-bootstrap";
@@ -19,7 +17,7 @@ const ShopProductRight = () => {
     const color = event.target.value;
     setcolor(color);
   };
-  console.log(minprice, maxprice);
+  console.log("Shop Product Right");
 
   return (
     <div>

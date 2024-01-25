@@ -1,20 +1,17 @@
 .wishlist-product-con {
     width: 85%;
-    /* border: 1px solid brown; */
     margin: 0 auto;
     margin-bottom: 40px;
     margin-top: 10px;
 }
 
 .wishlist-left {
-    /* border: 1px solid gainsboro; */
     padding: 10px 15px;
     background-color: aliceblue;
 
 }
 
 .wishlist-right {
-    /* border: 1px solid yellow; */
     padding-left: 50px;
 }
 
@@ -33,7 +30,6 @@
 }
 
 .wishlist-product {
-    /* border: 1px solid brown; */
     width: 30%;
 }
 

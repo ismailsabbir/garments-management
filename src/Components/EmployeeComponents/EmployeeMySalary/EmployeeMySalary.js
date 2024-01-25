@@ -9,7 +9,7 @@ const EmployeeMySalary = () => {
       .then((res) => res.json())
       .then((data) => setsalary(data));
   }, []);
-
+  console.log("Employee Salary");
   return (
     <div>
       <h5>My Salary</h5>

@@ -6,6 +6,7 @@ import SmallContact from "../SmallContact/SmallContact";
 import BlogList from "../BlogList/BlogList";
 import SocialMediaList from "../SocialMediaList/SocialMediaList";
 const ServicesDetailsRight = () => {
+  console.log("Service Details Right");
   return (
     <div>
       <MinProject></MinProject>

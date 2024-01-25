@@ -11,7 +11,7 @@ const LoginPages = () => {
   let location = useLocation();
   const { userlogin, signinwithgoogle, resetpassword, facebooksignup, user } =
     useContext(AuthContext);
-  console.log(user);
+  console.log("Login Page");
   const [errormessage, seterrormessage] = useState("");
   const [sucessmessage, setsucessmessage] = useState(false);
   const [email1, setemail] = useState("");
@@ -26,7 +26,6 @@ const LoginPages = () => {
     const form = e.target;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
     seterrormessage("");
     userlogin(email, password)
       .then((req) => {
@@ -45,13 +44,11 @@ const LoginPages = () => {
         })
           .then((req) => req.json())
           .then((data) => {
-            console.log(data);
             localStorage.setItem("garments-token", data?.token);
             navigate(from, { replace: true });
           });
       })
       .catch((error) => {
-        console.log(error);
         seterrormessage(error.message);
       });
   };
@@ -62,7 +59,6 @@ const LoginPages = () => {
         const currentuser = {
           email: user.email,
         };
-        console.log(user);
         setsucessmessage(true);
         fetch(`${process.env.REACT_APP_URL}/users`, {
           method: "POST",
@@ -73,7 +69,6 @@ const LoginPages = () => {
         })
           .then((req) => req.json())
           .then((data) => {
-            console.log(data);
             fetch(`${process.env.REACT_APP_URL}/jwt`, {
               method: "POST",
               headers: {
@@ -83,7 +78,6 @@ const LoginPages = () => {
             })
               .then((req) => req.json())
               .then((data) => {
-                console.log(data);
                 localStorage.setItem("garments-token", data?.token);
                 navigate(from, { replace: true });
               });
@@ -91,7 +85,6 @@ const LoginPages = () => {
         navigate("/login");
       })
       .catch((error) => {
-        console.log(error);
         seterrormessage(error.message);
       });
   };
@@ -126,9 +119,7 @@ const LoginPages = () => {
           theme: "light",
         });
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
   const handlefacebooksign = () => {
     facebooksignup()
@@ -146,7 +137,6 @@ const LoginPages = () => {
         })
           .then((req) => req.json())
           .then((data) => {
-            console.log(data);
             fetch(`${process.env.REACT_APP_URL}/jwt`, {
               method: "POST",
               headers: {
@@ -156,16 +146,13 @@ const LoginPages = () => {
             })
               .then((req) => req.json())
               .then((data) => {
-                console.log(data);
                 localStorage.setItem("garments-token", data?.token);
                 navigate(from, { replace: true });
               });
           });
         navigate("/login");
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
   return (
     <div className="sign-page-con">

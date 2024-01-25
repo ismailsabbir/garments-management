@@ -12,9 +12,7 @@ const EmployeeLeavesRequestEdit = () => {
     setleaveinfo(state);
   }, []);
 
-  console.log(leaveinfo);
-
-  console.log(employee);
+  console.log("Employee Leave Request Edit");
   const handlestaffadd = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -39,7 +37,6 @@ const EmployeeLeavesRequestEdit = () => {
       reason,
       request_number,
     };
-    console.log(leaveinfo);
     fetch(`${process.env.REACT_APP_URL}/leave/Request/edit`, {
       method: "PUT",
       body: JSON.stringify(leaveinfo),
@@ -177,8 +174,6 @@ const EmployeeLeavesRequestEdit = () => {
               setleaveinfo({ ...leaveinfo, leave_status: e.target.value })
             }
           >
-            {/* <option value="Approved">Approved</option>
-            <option value="Rejected">Rejected</option> */}
             <option value="Pending">Pending</option>
           </select>
         </div>

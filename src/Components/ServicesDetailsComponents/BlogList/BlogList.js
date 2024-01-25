@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const BlogList = () => {
   const { blogs } = useContext(servcontext);
   const recentblog = blogs.slice(0, 3);
+  console.log("Blog List");
   return (
     <div className="services-list-con bg-neutral">
       <h4>Recent Blog</h4>

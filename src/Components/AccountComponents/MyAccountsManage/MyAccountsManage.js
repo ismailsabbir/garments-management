@@ -14,6 +14,7 @@ const MyAccountsManage = () => {
   const [loading, setLoading] = useState(true);
   const { user, userlogout } = useContext(AuthContext);
   const [showorder, setshoworder] = useState([]);
+  console.log("My Account Manage");
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/address?email=${user?.email}`, {
       headers: {
@@ -114,10 +115,6 @@ const MyAccountsManage = () => {
       setLoading(false);
     }
   }, [shoporder, cartorder, customized, address]);
-
-  console.log(shoporder, address, customized, cartorder, loading);
-  console.log(user);
-
   return (
     <div className="manage-account-con">
       {loading ? (
@@ -141,7 +138,6 @@ const MyAccountsManage = () => {
               </div>
               <div className="col col-12 col-lg-4 col-md-3 col-sm-12 manage-personal">
                 <h6 className="manage-title">Address Book </h6>
-                {/* <BiWorld className="user-image-mange"></BiWorld> */}
                 {showorder?.map((firstorder) => (
                   <div className="manage-user-name-email">
                     <h6> {firstorder?.name}</h6>

@@ -25,17 +25,15 @@ const DashbordCustomizedCategory = () => {
   const custompage = Math.ceil(cuscount / datasize);
   const [search, setsearch] = useState("");
   const [reset, setreset] = useState(false);
-  // customizedcategory
+  console.log("Dashbord Customized Category");
   const { data: productall = [], refetch } = useQuery({
     queryKey: [
       "customized-details-all",
       {
-        // category: category,
         search: search,
         page: cuscurrentpage,
         size: datasize,
         reset: reset,
-        // status: status,
       },
     ],
     queryFn: () =>
@@ -49,27 +47,21 @@ const DashbordCustomizedCategory = () => {
       )
         .then((req) => req.json())
         .then((data) => {
-          console.log(data);
           setproducts(data?.category);
           setcuscount(data?.count);
           setloading(false);
           return data;
         }),
   });
-  console.log(products);
   const handleFileUpload = (event) => {
     const fileInput = event.target;
     const file = fileInput.files[0];
-    console.log("file is ", file);
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
         try {
           const fileContents = JSON.parse(e.target.result);
-          console.log(fileContents);
           for (let i = 0; i < fileContents.length; i++) {
-            console.log(fileContents[i]);
-
             fetch(`${process.env.REACT_APP_URL}/customizedcategory`, {
               method: "POST",
               body: JSON.stringify(fileContents[i]),
@@ -79,16 +71,13 @@ const DashbordCustomizedCategory = () => {
             })
               .then((response) => response.json())
               .then((data) => {
-                console.log(data);
                 toast("Product add sucessfully !!!", {
                   position: "top-center",
                   autoClose: 1000,
                 });
                 refetch();
               })
-              .catch((err) => {
-                console.log(err.message);
-              });
+              .catch((err) => {});
           }
         } catch (error) {
           console.error("Invalid JSON file:", error);
@@ -123,7 +112,6 @@ const DashbordCustomizedCategory = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data?.deletedCount > 0) {
               toast("Category delete sucessfully !!!", {
                 position: "top-center",
@@ -144,7 +132,6 @@ const DashbordCustomizedCategory = () => {
   };
   const isDeleteButtonDisabled = selectedOptions.length === 0;
   const productid = selectedOptions.map((item) => item._id);
-  console.log(productid);
   const handledeleteproduct = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -155,7 +142,6 @@ const DashbordCustomizedCategory = () => {
       confirmButtonText: "DELATE",
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(selectedOptions);
         fetch(`${process.env.REACT_APP_URL}/delete-customized-category`, {
           method: "DELETE",
           headers: {
@@ -167,7 +153,6 @@ const DashbordCustomizedCategory = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data?.deletedCount > 0) {
               toast("Category delete sucessfully !!!", {
                 position: "top-center",
@@ -182,7 +167,6 @@ const DashbordCustomizedCategory = () => {
   const handleproductsearch = (e) => {
     e.preventDefault();
     const search = e.target.searchproduct.value;
-    console.log(search);
     setreset(false);
     setsearch(search);
   };
@@ -211,9 +195,6 @@ const DashbordCustomizedCategory = () => {
           />
         </label>
         <div className="bulk-action">
-          {/* <button>
-            <LuClipboardEdit className="bulk-icon"></LuClipboardEdit>Bulk Action
-          </button> */}
           <button
             onClick={handledeleteproduct}
             id={isDeleteButtonDisabled ? "disablecss" : "pro-delete-btn"}
@@ -326,10 +307,6 @@ const DashbordCustomizedCategory = () => {
                                 <input
                                   type="checkbox"
                                   className="toggle toggle-success"
-                                  // checked={checkedStates[order.category_id]}
-                                  // onChange={() =>
-                                  //   handleToggle(order.category_id)
-                                  // }
                                 />
                               </span>
                             </td>

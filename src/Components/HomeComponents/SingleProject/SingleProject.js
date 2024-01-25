@@ -3,6 +3,7 @@ import "./SingleProject.css";
 import { Link } from "react-router-dom";
 import { MdArrowRightAlt } from "react-icons/md";
 const SingleProject = ({ project }) => {
+  console.log("single project");
   return (
     <Link
       to={`/projectDetails/${project?._id}`}

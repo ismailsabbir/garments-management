@@ -6,13 +6,11 @@ import { RxCross2 } from "react-icons/rx";
 import "./EmployeeHome.css";
 import EmployeeChirsts from "../EmployeeChirsts/EmployeeChirsts";
 import { EmployeeContext } from "../../../Layouts/EmployeeLayouts/EmployeeLayouts";
-import { AuthContext } from "../../../Context/UserContext";
 const EmployeeHome = () => {
   const employee = useContext(EmployeeContext);
-  const { userlogout } = useContext(AuthContext);
   const [employeeinfo, setemployeeinfo] = useState([]);
   const [weekattendance, setweekattendance] = useState([]);
-  console.log(employee?.employee_id);
+  console.log("Employee Home");
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_URL}/singleAttendance/${employee?.employee_id}`
@@ -33,7 +31,6 @@ const EmployeeHome = () => {
         setweekattendance(data);
       });
   }, []);
-  console.log(employeeinfo);
   return (
     <div className="employee_static-con">
       <div className="number-of-orders" id="employee-presence">

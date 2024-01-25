@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-
 const ShopBkashFailed = () => {
   const [products, setproducts] = useState([]);
   const location = useLocation();
@@ -13,7 +12,7 @@ const ShopBkashFailed = () => {
       .then((req) => req.json())
       .then((data) => setproducts(data));
   }, [orderid]);
-  console.log(products);
+  console.log("Shop Bkash Failed");
   const handlebkashpayment = () => {
     fetch(`${process.env.REACT_APP_URL}/product_bkash_payment`, {
       method: "POST",
@@ -22,7 +21,6 @@ const ShopBkashFailed = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         window.location.replace(data.url);
       });
   };

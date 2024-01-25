@@ -3,7 +3,6 @@ import { AuthContext } from "../../Context/UserContext";
 import { Navigate, useLocation } from "react-router-dom";
 import Loading from "../../CommonComponents/Loading/Loading";
 import useEmployee from "../../Hooks/useEmployee";
-
 const EmployeeRoutes = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const [isEmployee, employeeloading] = useEmployee(user?.email);
@@ -16,7 +15,6 @@ const EmployeeRoutes = ({ children }) => {
     );
   }
   if (user && user?.uid && isEmployee) {
-    console.log(user);
     return children;
   }
   return (

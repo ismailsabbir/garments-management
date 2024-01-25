@@ -4,6 +4,7 @@ import "./HomeProjects.css";
 import SingleProject from "../SingleProject/SingleProject";
 const HomeProjects = () => {
   const { projects } = useContext(servcontext);
+  console.log("Home Project");
   return (
     <div className="homeprojects-con">
       <div className="homeservices-top" id="home-project-top">

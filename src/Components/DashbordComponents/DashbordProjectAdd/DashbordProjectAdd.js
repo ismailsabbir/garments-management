@@ -14,12 +14,8 @@ const DashbordProjectAdd = () => {
   const [image, setphoto1] = useState("");
   const [picture2, setdaisplayimage] = useState("");
   const productid = location.state;
-  const currentDate = new Date();
-  const options = { year: "numeric", month: "long", day: "numeric" };
-  const formattedDate = currentDate.toLocaleDateString(undefined, options);
-  console.log(formattedDate);
   const [inputFields, setInputFields] = useState([{ name: "", process: "" }]);
-  console.log(inputFields);
+  console.log("Dashbord Project Add");
   const handleInputChange1 = (index, field, value) => {
     const newInputFields = [...inputFields];
     if (newInputFields[index]) {
@@ -36,7 +32,6 @@ const DashbordProjectAdd = () => {
     setInputFields(newInputFields);
   };
   const handleimagelogo = (e) => {
-    console.log("click logo");
     const image1 = e.target.files[0];
     const formdata = new FormData();
     formdata.append("image", image1);
@@ -65,7 +60,6 @@ const DashbordProjectAdd = () => {
       });
   };
   const handleimage1 = (e) => {
-    console.log("click imge");
     const image1 = e.target.files[0];
     const formdata = new FormData();
     formdata.append("image", image1);
@@ -78,7 +72,6 @@ const DashbordProjectAdd = () => {
       .then((data) => {
         if (data.success) {
           setphoto1(data.data.url);
-          console.log(data.data.url);
           toast("Product Image Upload sucessfully !!!", {
             position: "top-center",
             autoClose: 1000,
@@ -95,7 +88,6 @@ const DashbordProjectAdd = () => {
       });
   };
   const handleimage2 = (e) => {
-    console.log("click image1");
     const image1 = e.target.files[0];
     const formdata = new FormData();
     formdata.append("image", image1);
@@ -107,7 +99,6 @@ const DashbordProjectAdd = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          console.log(data.data.url);
           setdaisplayimage(data.data.url);
           toast("Product Image Upload sucessfully !!!", {
             position: "top-center",
@@ -141,7 +132,6 @@ const DashbordProjectAdd = () => {
       about,
       project_id,
     };
-    console.log(productinfo);
     fetch(`${url}/addProject`, {
       method: "POST",
       body: JSON.stringify(productinfo),
@@ -151,7 +141,6 @@ const DashbordProjectAdd = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         toast("Project Added sucessfully !!!", {
           position: "top-center",
           autoClose: 1000,
@@ -162,7 +151,6 @@ const DashbordProjectAdd = () => {
     <div className="add-staff-con">
       <h5>Add New Project</h5>
       <p>Add your Project and necessary information from here</p>
-
       <Form onSubmit={handleAddProduct} className="add-staff-form">
         <div className="staff-image-con">
           <div className="product-image-edit">

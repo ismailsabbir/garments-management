@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { useEffect } from "react";
 import { AuthContext } from "../../../Context/UserContext";
 import { useState } from "react";
-import Loading from "../../../CommonComponents/Loading/Loading";
 import "./MyAddress.css";
 import { Link, useLocation } from "react-router-dom";
 const MyAddress = () => {
@@ -15,6 +14,7 @@ const MyAddress = () => {
   const [loading, setLoading] = useState(true);
   const { user, userlogout } = useContext(AuthContext);
   const [showorder, setshoworder] = useState([]);
+  console.log("My Address");
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/address?email=${user?.email}`, {
       headers: {
@@ -29,7 +29,6 @@ const MyAddress = () => {
       })
       .then((jsonData) => {
         setaddres(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -50,7 +49,6 @@ const MyAddress = () => {
       })
       .then((jsonData) => {
         setorders(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -71,7 +69,6 @@ const MyAddress = () => {
       })
       .then((jsonData) => {
         setcartorder(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -95,7 +92,6 @@ const MyAddress = () => {
       })
       .then((jsonData) => {
         setcustomized(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -118,9 +114,6 @@ const MyAddress = () => {
       setLoading(false);
     }
   }, [location.state, address, shoporder, cartorder, customized]);
-  console.log(showorder);
-  console.log(location.state);
-
   return (
     <div>
       <h5>Address Book</h5>

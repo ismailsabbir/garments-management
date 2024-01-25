@@ -9,7 +9,7 @@ import { useEffect } from "react";
 const DashbordCustomProductEdit = () => {
   const location = useLocation();
   const product = location.state;
-  console.log(product);
+  console.log("Dashbord Customized Product Edit");
   const [userData, setUserData] = useState({});
   const imagebb = process.env.REACT_APP_IMGBB;
   const [image, setphoto1] = useState(product?.image);
@@ -30,7 +30,6 @@ const DashbordCustomProductEdit = () => {
       .then((data) => setcolors(data));
   }, []);
   const handleimage1 = (e) => {
-    console.log("click");
     const image1 = e.target.files[0];
     const formdata = new FormData();
     formdata.append("image", image1);
@@ -71,7 +70,6 @@ const DashbordCustomProductEdit = () => {
       color,
       availavle,
     };
-    console.log(staffinfo);
     fetch(`${process.env.REACT_APP_URL}/edit_custom_product/${product?._id}`, {
       method: "PUT",
       body: JSON.stringify(staffinfo),
@@ -81,7 +79,6 @@ const DashbordCustomProductEdit = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         toast("Update sucessfully !!!", {
           position: "top-center",
           autoClose: 1000,
@@ -92,7 +89,6 @@ const DashbordCustomProductEdit = () => {
     <div className="add-staff-con">
       <h5>Update Product</h5>
       <p>Updated your Product necessary information from here</p>
-
       <Form onSubmit={handlestaffedit} className="add-staff-form">
         <div className="staff-image-con">
           <div className="product-image-edit">
@@ -146,20 +142,6 @@ const DashbordCustomProductEdit = () => {
               ))}
             </select>
           </Form.Group>
-
-          {/* <Form.Group className="mb-3 firstname-staff">
-            <Form.Label>Category Id</Form.Label>
-            <Form.Control
-              className="staff-input"
-              type="text"
-              placeholder="Category"
-              name="category"
-              value={userData?.category_id}
-              onChange={(e) =>
-                setUserData({ ...userData, category_id: e.target.value })
-              }
-            />
-          </Form.Group> */}
         </div>
         <div className="staff-first-name-lastname mt-4">
           <Form.Group className="mb-3 firstname-staff">
@@ -205,20 +187,6 @@ const DashbordCustomProductEdit = () => {
             </select>
           </Form.Group>
 
-          {/* <Form.Group className="mb-3 firstname-staff">
-            <Form.Label>Color Id</Form.Label>
-            <Form.Control
-              className="staff-input"
-              type="text"
-              placeholder="Brand"
-              name="color_id"
-              value={userData?.color_id}
-              onChange={(e) =>
-                setUserData({ ...userData, color_id: e.target.value })
-              }
-            />
-          </Form.Group> */}
-
           <Form.Group className="mb-3 firstname-staff">
             <Form.Label>Color Name</Form.Label>
             <br />
@@ -233,20 +201,6 @@ const DashbordCustomProductEdit = () => {
               ))}
             </select>
           </Form.Group>
-
-          {/* <Form.Group className="mb-3 firstname-staff">
-            <Form.Label>Color Name</Form.Label>
-            <Form.Control
-              className="staff-input"
-              type="text"
-              placeholder="Product Fabric"
-              name="color_name"
-              value={userData?.color_name}
-              onChange={(e) =>
-                setUserData({ ...userData, color_name: e.target.value })
-              }
-            />
-          </Form.Group> */}
         </div>
         <div className="staff-first-name-lastname mt-4">
           <Form.Group className="mb-3 firstname-staff">

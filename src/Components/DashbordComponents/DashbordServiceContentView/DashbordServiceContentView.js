@@ -7,7 +7,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 const DashbordServiceContentView = () => {
   const location = useLocation();
   const service = location.state;
-  console.log(service);
+  console.log("Dashbord Service Content view");
   return (
     <div className="service-details-left-con" id="service_view_con">
       <h5 className="mb-6">{service?.name} Details View: </h5>

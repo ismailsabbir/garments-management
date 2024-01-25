@@ -16,9 +16,8 @@ import CartCheckoutForm from "../CartCheckoutForm/CartCheckoutForm";
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 const CartPaymentPages = () => {
   const { state } = useLocation();
-  console.log(state);
+  console.log("Cart Payment Pages");
   const confirm_info = state.orderconfirm;
-
   const [cardshow, setcardshow] = useState(true);
   const [bkashshow, setbkashshow] = useState(false);
   const cardhandler = () => {
@@ -37,7 +36,6 @@ const CartPaymentPages = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         window.location.replace(data.url);
       });
   };
@@ -83,15 +81,11 @@ const CartPaymentPages = () => {
                   <img src={circle} alt="not found" />
                   <img src={blue} alt="not found" />
                 </div>
-                {/* //////////////////////////////////////////////// */}
                 <div>
                   <Elements stripe={stripePromise}>
                     <CartCheckoutForm
                       paymentinfo={confirm_info}
                     ></CartCheckoutForm>
-                    {/* <ShopCheckoutForm
-                      paymentinfo={confirm_info}
-                    ></ShopCheckoutForm> */}
                   </Elements>
                 </div>
               </div>

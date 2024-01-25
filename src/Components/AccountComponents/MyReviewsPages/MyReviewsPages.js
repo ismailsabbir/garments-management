@@ -15,7 +15,7 @@ const MyReviewsPages = () => {
   const [datasize, setdatasize] = useState(5);
   const [count, setcount] = useState(0);
   const page = Math.ceil(count / datasize);
-  console.log(datasize, count, page);
+  console.log("My Review Page");
   const { data: productall = [], refetch } = useQuery({
     queryKey: [
       "myreviews",
@@ -45,7 +45,6 @@ const MyReviewsPages = () => {
   const handlesearch = (e) => {
     e.preventDefault();
     const search = e.target.search.value;
-    console.log(search);
     fetch(
       `${process.env.REACT_APP_URL}/idodrders?email=${user?.email}&page=${currentpage}&size=${datasize}&search=${search}`,
       {
@@ -70,7 +69,6 @@ const MyReviewsPages = () => {
         setLoading(false);
       });
   };
-  console.log(orders);
   const handledelateRevier = (review) => {
     Swal.fire({
       title: "Are you sure ??",
@@ -91,7 +89,6 @@ const MyReviewsPages = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data?.deletedCount > 0) {
               toast("Review delete sucessfully !!!", {
                 position: "top-center",

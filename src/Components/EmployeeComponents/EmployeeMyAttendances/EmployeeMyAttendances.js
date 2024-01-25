@@ -17,6 +17,7 @@ const EmployeeMyAttendances = () => {
   const [employeeid, setemployeeid] = useState(employee?.employee_id);
   const [attendance_date, setattendance_date] = useState("");
   const [reset, setreset] = useState(false);
+  console.log("Employee My Attendance");
   const { data: productall = [], refetch } = useQuery({
     queryKey: [
       "myAttendance",
@@ -34,7 +35,6 @@ const EmployeeMyAttendances = () => {
           return res.json();
         })
         .then((data) => {
-          console.log(data);
           setAttendance(data);
           setLoading(false);
           return data;
@@ -48,7 +48,6 @@ const EmployeeMyAttendances = () => {
     e.preventDefault();
     const attendance_date = e.target.attendance_date.value;
     setattendance_date(attendance_date);
-    console.log(attendance_date);
   };
 
   const handlereset = () => {
@@ -59,7 +58,6 @@ const EmployeeMyAttendances = () => {
     <div>
       <div className="employee-attendance-search">
         <h5>Employee Attendance</h5>
-
         <Form onSubmit={handleattendancedate} className="name-search">
           <input
             className="name-input-staff"
@@ -98,7 +96,6 @@ const EmployeeMyAttendances = () => {
       </div>
       <div className="employee-working-time-con">
         <div className="employee-time-chart">
-          {/* averageInTime, averageOutTime, averageWorkingTime */}
           <h3>{Attendance?.averageWorkingTime}</h3>
           <p>Average Working Hours</p>
         </div>

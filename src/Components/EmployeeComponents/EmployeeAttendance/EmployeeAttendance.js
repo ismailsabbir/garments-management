@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import "./EmployeeAttendance.css";
-import { Form, Table } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import { FiEdit } from "react-icons/fi";
 import { Link } from "react-router-dom";
@@ -11,13 +11,12 @@ import { EmployeeContext } from "./../../../Layouts/EmployeeLayouts/EmployeeLayo
 import { useQuery } from "@tanstack/react-query";
 import { BsSearch } from "react-icons/bs";
 import Swal from "sweetalert2";
-import { AdminContext } from "../../../Layouts/DashbordLayouts/DashbordLayouts";
 const EmployeeAttendance = () => {
   const employee = useContext(EmployeeContext);
   const [Attendance, setAttendance] = useState([]);
   const [loading, setLoading] = useState(true);
   const [employeeid, setemployeeid] = useState(employee?.employee_id);
-
+  console.log("Employee Attendance");
   const { data: productall = [], refetch } = useQuery({
     queryKey: [
       "specificAttendance",
@@ -33,7 +32,6 @@ const EmployeeAttendance = () => {
           return res.json();
         })
         .then((data) => {
-          console.log(data);
           setAttendance(data);
           setLoading(false);
           return data;
@@ -43,7 +41,6 @@ const EmployeeAttendance = () => {
           setLoading(false);
         }),
   });
-  console.log(Attendance);
   const handledeleteAttendance = (attendance) => {
     Swal.fire({
       title: "Are you sure?",
@@ -54,7 +51,6 @@ const EmployeeAttendance = () => {
       confirmButtonText: "DELATE",
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(attendance);
         fetch(
           `${process.env.REACT_APP_URL}/delete-employee-attendance/${attendance?._id}`,
           {
@@ -69,7 +65,6 @@ const EmployeeAttendance = () => {
         )
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data?.deletedCount > 0) {
               toast("Attendance delete sucessfully !!!", {
                 position: "top-center",
@@ -83,9 +78,7 @@ const EmployeeAttendance = () => {
   };
   const handleEmployIdSearch = (e) => {
     e.preventDefault();
-    console.log(e.target.employeeId.value);
     setemployeeid(e.target.employeeId.value);
-    // refetch();
   };
   return (
     <div>
@@ -128,7 +121,6 @@ const EmployeeAttendance = () => {
         </div>
         <div className="employee-working-time-con">
           <div className="employee-time-chart">
-            {/* averageInTime, averageOutTime, averageWorkingTime */}
             <h3>{Attendance?.averageWorkingTime}</h3>
             <p>Average Working Hours</p>
           </div>

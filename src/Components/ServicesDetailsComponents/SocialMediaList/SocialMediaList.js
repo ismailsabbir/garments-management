@@ -7,6 +7,7 @@ import {
   AiOutlineTwitter,
 } from "react-icons/ai";
 const SocialMediaList = () => {
+  console.log("Social media list");
   return (
     <div className="services-list-con bg-neutral">
       <h4>Our Social Media</h4>

@@ -18,6 +18,7 @@ const DashbordAttendanceSheet = () => {
   const [attendanceSheet, setAttendanceSheet] = useState([]);
   const [reset, setreset] = useState(false);
   const [employeeId, setEmployeeID] = useState("");
+  console.log("Dashbord Attendance Sheet");
   const { data: productall = [], refetch } = useQuery({
     queryKey: [
       "allcustomizedorders",
@@ -36,7 +37,6 @@ const DashbordAttendanceSheet = () => {
           return res.json();
         })
         .then((data) => {
-          console.log(data);
           setAttendanceSheet(data?.attendanceSheet);
           setcount(data?.count);
           setLoading(false);
@@ -60,10 +60,7 @@ const DashbordAttendanceSheet = () => {
     setEmployeeID("");
     setreset(true);
   };
-  console.log(datesArray);
-  const handleStartDateChange = (e) => {
-    console.log(e);
-  };
+  const handleStartDateChange = (e) => {};
   return (
     <div>
       <div className="das-recent-order-con">
@@ -82,8 +79,6 @@ const DashbordAttendanceSheet = () => {
               className="date-chose"
               type="date"
               placeholder="Search Product"
-              // value={endDate}
-              // onChange={handleEndDateChange}
               id="date_mobile"
             />
             <Form onSubmit={handleEmployeesearch} className="employy-name">

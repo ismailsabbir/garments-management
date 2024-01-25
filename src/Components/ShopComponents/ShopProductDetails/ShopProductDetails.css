@@ -144,7 +144,6 @@
 .number-input {
     border: 1px solid gainsboro;
     width: 20%;
-    /* padding: 10px; */
     margin-right: 10px;
     display: flex;
     align-items: center;
@@ -160,7 +159,6 @@
 
 
 .number-input button {
-    /* border: 1px solid black; */
     width: 40%;
     height: 100%;
 }
@@ -263,8 +261,6 @@
     color: #be5184;
 }
 
-
-/* toast design */
 .toast-top {
     width: 100%;
     display: flex;

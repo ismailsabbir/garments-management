@@ -6,7 +6,7 @@ import ProjectDetailsLeft from "../../Components/ProjectsDetailsComponents/Proje
 
 const ProjectDetails = () => {
   const project = useLoaderData();
-  // console.log(project);
+  console.log("Project Details");
   return (
     <div className="mb-28">
       <ProjectDetailsBanner></ProjectDetailsBanner>

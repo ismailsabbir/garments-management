@@ -7,7 +7,7 @@ import { MdSummarize } from "react-icons/md";
 const ManageOrderPage = () => {
   const location = useLocation();
   const orders = location?.state;
-  console.log(orders);
+  console.log("Manage Order");
   return (
     <div className="manageorder-con">
       <h5>Order Details</h5>

@@ -29,19 +29,16 @@ const ShopProductDetails = () => {
   const categoryid = pathname.split("/")[2];
   const id = pathname.split("/")[3];
   const [oneproduct, setoneproduct] = useState();
+  console.log("Shop Product Details");
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/detailsproduct/${categoryid}/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setoneproduct(data);
       });
   }, []);
-
-  console.log(oneproduct);
   const [dressimage, setdressimage] = useState(oneproduct?.Product_image);
   const [products, setproducts] = useState([]);
-  console.log(products);
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_URL}/shopproduct/${oneproduct?.category_id}?email=${user?.email}&category=${oneproduct?.category_name}`
@@ -74,8 +71,6 @@ const ShopProductDetails = () => {
   const handleQuentity = async (e) => {
     if (parseInt(e.target.value) > 1) {
       await setquentity(parseInt(e.target.value));
-      console.log(e.target.value);
-      console.log("quentuty", quentuty);
       if (parseInt(e.target.value) > oneproduct?.availavle) {
         toast(`${parseInt(e.target.value)} products not available`, {
           position: "top-center",
@@ -104,11 +99,9 @@ const ShopProductDetails = () => {
   }
   const productinfo = {
     ...productinfoid,
-    // email,
   };
   const handlecartadd = () => {
     if (email) {
-      console.log("click cart");
       fetch(`${process.env.REACT_APP_URL}/cartproduct`, {
         method: "POST",
         headers: {
@@ -151,59 +144,10 @@ const ShopProductDetails = () => {
             );
           }
         })
-        .catch((err) => {
-          console.log(err.message);
-        });
+        .catch((err) => {});
     } else {
       navigate("/login");
     }
-
-    // console.log("click cart");
-    // fetch(`${process.env.REACT_APP_URL}/cartproduct`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(productinfo),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     if (data?._id) {
-    //       toast(
-    //         <div>
-    //           <div className="toast-top">
-    //             <img src={data?.Product_image} alt="not found" />
-    //             <div className="toast-message">
-    //               <h6>{data?.product_name}</h6>
-    //               <p>
-    //                 <span>succeed:</span> You have add{" "}
-    //                 <span id="toast-name">{data?.product_name}</span>
-    //               </p>
-    //             </div>
-    //           </div>
-    //           <div className="toast-button">
-    //             <Link to="/cartproduct" className="toast-cart-btn">
-    //               View Cart
-    //             </Link>
-    //             <Link className="toast-cart-btn1">CheckOut</Link>
-    //           </div>
-    //         </div>,
-    //         {
-    //           position: "top-right",
-    //           autoClose: 10000,
-    //           hideProgressBar: false,
-    //           closeOnClick: true,
-    //           pauseOnHover: true,
-    //           draggable: true,
-    //           progress: undefined,
-    //           theme: "light",
-    //         }
-    //       );
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.message);
-    //   });
   };
 
   const handleaddwishlist = () => {
@@ -248,56 +192,10 @@ const ShopProductDetails = () => {
             );
           }
         })
-        .catch((err) => {
-          console.log(err.message);
-        });
+        .catch((err) => {});
     } else {
       navigate("/login");
     }
-
-    // fetch(`${process.env.REACT_APP_URL}/wishlistproduct`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(productinfo),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     if (data?._id) {
-    //       toast(
-    //         <div>
-    //           <div className="toast-top">
-    //             <img src={data?.Product_image} alt="not found" />
-    //             <div className="toast-message">
-    //               <h6>{data?.product_name}</h6>
-    //               <p>
-    //                 <span>succeed:</span> You have add{" "}
-    //                 <span id="toast-name">{data?.product_name}</span>
-    //               </p>
-    //             </div>
-    //           </div>
-    //           <div className="toast-button">
-    //             To your
-    //             <Link to="/wishlistproduct">WishList</Link>
-    //           </div>
-    //         </div>,
-    //         {
-    //           position: "top-right",
-    //           autoClose: 10000,
-    //           hideProgressBar: false,
-    //           closeOnClick: true,
-    //           pauseOnHover: true,
-    //           draggable: false,
-    //           progress: undefined,
-    //           theme: "light",
-    //         }
-    //       );
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.message);
-    //   });
   };
 
   const isButtonEnabled = oneproduct?.availavle > 1;

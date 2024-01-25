@@ -3,6 +3,7 @@ import "./AccountMenu.css";
 import { Link } from "react-router-dom";
 import { BiChevronRight } from "react-icons/bi";
 const AccountMenu = () => {
+  console.log("Account Menu");
   return (
     <div className="account-menu-con">
       <h5>Account Menu</h5>

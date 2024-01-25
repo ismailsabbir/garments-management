@@ -7,6 +7,7 @@ import HomeComments from "./../../Components/HomeComponents/HomeComments/HomeCom
 import HomeContact from "./../../Components/HomeComponents/HomeContact/HomeContact";
 import TeamMembers from "../../Components/AboutusComponents/TeamMembers/TeamMembers";
 const AboutUs = () => {
+  console.log("About Us ");
   return (
     <div>
       <AboutBanner></AboutBanner>

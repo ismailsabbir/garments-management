@@ -4,6 +4,7 @@ import HomeProjects from "../../Components/HomeComponents/HomeProjects/HomeProje
 import HomeContact from "../../Components/HomeComponents/HomeContact/HomeContact";
 
 const ProjectPages = () => {
+  console.log("Project Page");
   return (
     <div>
       <ProjectPageBanner></ProjectPageBanner>

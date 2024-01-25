@@ -1,5 +1,4 @@
 .modal-con {
-    /* border: 1px solid brown; */
     width: 100%;
 }
 
@@ -8,12 +7,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* border: 1px solid brown; */
 }
 
 .modal-top h3 {
     width: 80%;
-    /* border: 1px solid gray; */
 }
 
 .modal-bottoom {
@@ -28,7 +25,6 @@
 .modal-add-cart {
     width: 100%;
     border: 1px solid #be5184;
-    /* margin-top: 80px; */
     background-color: #be5184;
     color: white;
     padding: 6px;

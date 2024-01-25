@@ -6,6 +6,7 @@ import { BiMessage } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import "./SingleBlog.css";
 const SingleBlog = ({ blog }) => {
+  console.log("Single Blog");
   return (
     <Link
       to="/blog/details"

@@ -16,7 +16,7 @@ const DashbordEmployeeAttendance = () => {
   const [Attendance, setAttendance] = useState([]);
   const [loading, setLoading] = useState(true);
   const [employeeid, setemployeeid] = useState(employee?.employee_id);
-
+  console.log("Dashbord Employee Attendance");
   const { data: productall = [], refetch } = useQuery({
     queryKey: [
       "specificAttendance",
@@ -32,7 +32,6 @@ const DashbordEmployeeAttendance = () => {
           return res.json();
         })
         .then((data) => {
-          console.log(data);
           setAttendance(data);
           setLoading(false);
           return data;
@@ -42,7 +41,6 @@ const DashbordEmployeeAttendance = () => {
           setLoading(false);
         }),
   });
-  console.log(Attendance);
   const handledeleteAttendance = (attendance) => {
     Swal.fire({
       title: "Are you sure?",
@@ -53,7 +51,6 @@ const DashbordEmployeeAttendance = () => {
       confirmButtonText: "DELATE",
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(attendance);
         fetch(
           `${process.env.REACT_APP_URL}/delete-employee-attendance/${attendance?._id}`,
           {
@@ -68,7 +65,6 @@ const DashbordEmployeeAttendance = () => {
         )
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data?.deletedCount > 0) {
               toast("Attendance delete sucessfully !!!", {
                 position: "top-center",
@@ -82,9 +78,7 @@ const DashbordEmployeeAttendance = () => {
   };
   const handleEmployIdSearch = (e) => {
     e.preventDefault();
-    console.log(e.target.employeeId.value);
     setemployeeid(e.target.employeeId.value);
-    // refetch();
   };
   return (
     <div>

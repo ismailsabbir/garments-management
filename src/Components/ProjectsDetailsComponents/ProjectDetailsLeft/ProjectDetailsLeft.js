@@ -5,7 +5,7 @@ import { PiShareFat } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import "./ProjectDetailsLeft.css";
 const ProjectDetailsLeft = ({ project }) => {
-  console.log(project);
+  console.log("Project details left");
   return (
     <div className="service-details-left-con">
       <div className="service-details-image">

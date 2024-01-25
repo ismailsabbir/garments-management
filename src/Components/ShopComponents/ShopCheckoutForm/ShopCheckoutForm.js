@@ -13,8 +13,7 @@ const ShopCheckoutForm = ({ paymentinfo }) => {
   const [payprocessing, setpayprocessing] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
-
-  console.log(paymentinfo);
+  console.log("Shop CheckOut From");
   const { email, orderid } = paymentinfo;
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/create-payment-intent`, {
@@ -40,11 +39,9 @@ const ShopCheckoutForm = ({ paymentinfo }) => {
     });
 
     if (error) {
-      console.log(error);
       setcarderror(error);
     } else {
       setcarderror("");
-      console.log(paymentMethod);
     }
     setpaymentsucess("");
     settransactionid("");
@@ -64,7 +61,6 @@ const ShopCheckoutForm = ({ paymentinfo }) => {
       setcarderror(confirmerror.message);
       return;
     }
-    console.log(paymentIntent);
     if (paymentIntent.status === "succeeded") {
       setpaymentsucess("congratulations! Payment Completed");
       settransactionid(paymentIntent.id);
@@ -99,9 +95,7 @@ const ShopCheckoutForm = ({ paymentinfo }) => {
             setpayprocessing(false);
           }
         })
-        .catch((err) => {
-          console.log(err.message);
-        });
+        .catch((err) => {});
     }
   };
   return (

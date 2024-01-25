@@ -6,23 +6,18 @@ import { LiaShoppingBagSolid } from "react-icons/lia";
 import { MdCompareArrows, MdFavoriteBorder } from "react-icons/md";
 import Modal from "../../../Hooks/Modal/Modal";
 import { ToastContainer, toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ShopModal from "../../../Hooks/ShopModal";
-
 const ShopAllProducts = ({ product, categoryid }) => {
-  const navigate = useNavigate();
   const [size, setsize] = useState("S");
   const [quentuty, setquentity] = useState(1);
   const [modalproduct, setmodalproduct] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isshopModalOpen, setIsshopModalOpen] = useState(false);
-  const [products, setproducts] = useState([]);
   const { user } = useContext(AuthContext);
   const email = user?.email;
   const allproduct = product?.products;
-
-  console.log(product);
-
+  console.log("Shop All Product");
   const handleincress = () => {
     const newquentity = quentuty + 1;
     setquentity(newquentity);
@@ -103,23 +98,14 @@ const ShopAllProducts = ({ product, categoryid }) => {
             );
           }
         })
-        .catch((err) => {
-          console.log(err.message);
-        });
+        .catch((err) => {});
     }
   };
   const handlebuynow = (product) => {
     setmodalproduct(product);
-    const productinfo = {
-      ...product,
-      quentuty,
-      size,
-      email,
-    };
     if (product?.dress_size) {
       openshopModal();
     } else {
-      // navigate("/checkout", { state: { productinfo } });
       openshopModal();
     }
   };
@@ -169,9 +155,7 @@ const ShopAllProducts = ({ product, categoryid }) => {
           );
         }
       })
-      .catch((err) => {
-        console.log(err.message);
-      });
+      .catch((err) => {});
   };
 
   return (

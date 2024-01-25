@@ -20,6 +20,7 @@ const ContactFrom = () => {
     second: "2-digit",
     hour12: true,
   });
+  console.log("Contact From");
   const handlecontact = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -44,7 +45,6 @@ const ContactFrom = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         toast("Requested sucessfully !!!", {
           position: "top-center",
           autoClose: 1000,

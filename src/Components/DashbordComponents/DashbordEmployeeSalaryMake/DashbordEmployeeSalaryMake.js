@@ -18,6 +18,7 @@ const DashbordEmployeeSalaryMake = () => {
   const [searchemail, setsearchemail] = useState("");
   const [role, setrole] = useState("");
   const [reset, setreset] = useState(false);
+  console.log("Dashbord Employee Salary Make");
   const currentMonth = new Date().toLocaleString("en-us", {
     month: "long",
   });
@@ -60,7 +61,6 @@ const DashbordEmployeeSalaryMake = () => {
   const handlenamesearch = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
-    console.log(name);
     setrole("");
     setsearchemail("");
     setsearchname(name);
@@ -75,7 +75,6 @@ const DashbordEmployeeSalaryMake = () => {
   const handlerole = (e) => {
     setsearchname("");
     setsearchemail("");
-    console.log(e);
     setrole(e);
   };
   const handlereset = () => {
@@ -84,7 +83,6 @@ const DashbordEmployeeSalaryMake = () => {
     setrole("");
     setreset(true);
   };
-  console.log(staffs);
   return (
     <div className="dashbord-shop-product-con">
       <div className="salary_make_hed">

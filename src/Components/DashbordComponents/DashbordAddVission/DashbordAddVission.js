@@ -1,7 +1,6 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
-
 const DashbordAddVission = () => {
   const handlestaffedit = (e) => {
     e.preventDefault();
@@ -11,7 +10,7 @@ const DashbordAddVission = () => {
       vission_id,
       vision,
     };
-    console.log(staffinfo);
+    console.log("Dashbord Add Vission");
     fetch(`${process.env.REACT_APP_URL}/vission/add`, {
       method: "POST",
       body: JSON.stringify(staffinfo),
@@ -21,7 +20,6 @@ const DashbordAddVission = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data?.sucess) {
           toast("Vission Add  sucessfully !!!", {
             position: "top-center",
@@ -39,7 +37,6 @@ const DashbordAddVission = () => {
     <div className="add-staff-con">
       <h5>Add New Vission</h5>
       <p>Give All Information for Add new Vission</p>
-
       <Form onSubmit={handlestaffedit} className="add-staff-form">
         <div className="staff-first-name-lastname mt-4">
           <Form.Group className="mb-3 firstname-staff">

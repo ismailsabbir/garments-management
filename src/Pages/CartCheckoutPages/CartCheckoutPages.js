@@ -11,7 +11,7 @@ const CartCheckoutPages = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const shopinfo = location.state.selectproducts;
-  console.log(shopinfo);
+  console.log("Cart Checkout Page");
   const [name, setfirstname] = useState();
   const [lastname, setlastname] = useState();
   const [country, setcountry] = useState();
@@ -32,168 +32,6 @@ const CartCheckoutPages = () => {
   const [isRewardUse, setisRewardUse] = useState(false);
   const [reward, setreward] = useState();
   const [showorder1, setshoworder1] = useState([]);
-  console.log(userinfo);
-  // useEffect(() => {
-  //   setreward(userinfo?.reward);
-  // }, []);
-  // useEffect(() => {
-  //   fetch(`${process.env.REACT_APP_URL}/singleuser?email=${user?.email}`, {
-  //     headers: {
-  //       authorization: `Beare ${localStorage.getItem("garments-token")}`,
-  //     },
-  //   })
-  //     .then((res) => {
-  //       if (res.status === 401 || res.status === 403) {
-  //         return userlogout();
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((jsonData) => {
-  //       setuserinfos(jsonData);
-  //       // setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Failed to fetch data:", error);
-  //       setLoading(false);
-  //     });
-  // }, [user?.email, userlogout]);
-  // useEffect(() => {
-  //   fetch(`${process.env.REACT_APP_URL}/single/employee?email=${user?.email}`, {
-  //     headers: {
-  //       authorization: `Beare ${localStorage.getItem("garments-token")}`,
-  //     },
-  //   })
-  //     .then((res) => {
-  //       if (res.status === 401 || res.status === 403) {
-  //         return userlogout();
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((jsonData) => {
-  //       setuserinfo(jsonData);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Failed to fetch data:", error);
-  //       setLoading(false);
-  //     });
-  // }, [user?.email, userlogout]);
-  // console.log(userinfo);
-  // useEffect(() => {
-  //   fetch(`${process.env.REACT_APP_URL}/address?email=${user?.email}`, {
-  //     headers: {
-  //       authorization: `Beare ${localStorage.getItem("garments-token")}`,
-  //     },
-  //   })
-  //     .then((res) => {
-  //       if (res.status === 401 || res.status === 403) {
-  //         return userlogout();
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((jsonData) => {
-  //       setaddres(jsonData);
-  //       // setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Failed to fetch data:", error);
-  //       setLoading(false);
-  //     });
-  // }, [user?.email, userlogout]);
-  // useEffect(() => {
-  //   fetch(`${process.env.REACT_APP_URL}/shoporder?email=${user?.email}`, {
-  //     headers: {
-  //       authorization: `Beare ${localStorage.getItem("garments-token")}`,
-  //     },
-  //   })
-  //     .then((res) => {
-  //       if (res.status === 401 || res.status === 403) {
-  //         return userlogout();
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((jsonData) => {
-  //       setorders(jsonData);
-  //       // setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Failed to fetch data:", error);
-  //       setLoading(false);
-  //     });
-  // }, [user?.email, userlogout]);
-  // useEffect(() => {
-  //   fetch(`${process.env.REACT_APP_URL}/cart-s-order?email=${user?.email}`, {
-  //     headers: {
-  //       authorization: `Beare ${localStorage.getItem("garments-token")}`,
-  //     },
-  //   })
-  //     .then((res) => {
-  //       if (res.status === 401 || res.status === 403) {
-  //         return userlogout();
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((jsonData) => {
-  //       setcartorder(jsonData);
-  //       // setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Failed to fetch data:", error);
-  //       setLoading(false);
-  //     });
-  // }, [user?.email, userlogout]);
-  // useEffect(() => {
-  //   fetch(
-  //     `${process.env.REACT_APP_URL}/customize-s-order?email=${user?.email}`,
-  //     {
-  //       headers: {
-  //         authorization: `Beare ${localStorage.getItem("garments-token")}`,
-  //       },
-  //     }
-  //   )
-  //     .then((res) => {
-  //       if (res.status === 401 || res.status === 403) {
-  //         return userlogout();
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((jsonData) => {
-  //       setcustomized(jsonData);
-  //       // setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Failed to fetch data:", error);
-  //       setLoading(false);
-  //     });
-  // }, [user?.email, userlogout]);
-  // useEffect(() => {
-  //   if (addresss?.length >= 1) {
-  //     setshoworder(addresss);
-  //   } else if (cartorder?.length >= 1) {
-  //     setshoworder(cartorder);
-  //     setLoading(false);
-  //   } else if (customized.length >= 1) {
-  //     setshoworder(customized);
-  //     setLoading(false);
-  //   } else if (shoporder.length >= 1) {
-  //     setshoworder(shoporder);
-  //     setLoading(false);
-  //   } else {
-  //     setshoworder([
-  //       {
-  //         name: "Enter Name",
-  //         address: "House Number/Road Name/City/District",
-  //         phone: "Mobile Number",
-  //         email: "Enter Email",
-  //       },
-  //     ]);
-  //   }
-  // }, [addresss, shoporder, cartorder, customized]);
-  // useEffect(() => {
-  //   if (!shopinfo) {
-  //     navigate("/shop");
-  //   }
-  // }, []);
-
   useEffect(() => {
     setreward(userinfo?.reward);
   }, []);
@@ -211,7 +49,6 @@ const CartCheckoutPages = () => {
       })
       .then((jsonData) => {
         setuserinfo(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -232,7 +69,6 @@ const CartCheckoutPages = () => {
       })
       .then((jsonData) => {
         setaddres(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -253,7 +89,6 @@ const CartCheckoutPages = () => {
       })
       .then((jsonData) => {
         setorders(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -274,7 +109,6 @@ const CartCheckoutPages = () => {
       })
       .then((jsonData) => {
         setcartorder(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -298,7 +132,6 @@ const CartCheckoutPages = () => {
       })
       .then((jsonData) => {
         setcustomized(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -340,11 +173,9 @@ const CartCheckoutPages = () => {
       ]);
     }
   }, [addresss, shoporder, cartorder, customized]);
-  console.log(showorder1);
   useEffect(() => {
     if (!shopinfo) {
       navigate("/shop");
-      console.log("not shop");
     }
   }, []);
 
@@ -390,11 +221,9 @@ const CartCheckoutPages = () => {
       total + parseInt(currentObject?.product_price) * currentObject?.quentuty
     );
   }, 0);
-  console.log(total_price);
   if (userinfo?.role === "Premium" && isRewardUse) {
     total_price =
       total_price_main - parseInt(reward) - (total_price_main * 20) / 100 + 20;
-    console.log("userinfo?.role === Premium && userinfo?.reward", total_price);
   } else if (isRewardUse) {
     total_price = total_price_main + 20 - parseInt(reward);
   } else if (userinfos?.role === "Premium") {
@@ -409,7 +238,6 @@ const CartCheckoutPages = () => {
         20
       );
     }, 0);
-    console.log(total_price);
   } else {
     total_price = shopinfo.reduce((total, currentObject) => {
       return (
@@ -426,7 +254,6 @@ const CartCheckoutPages = () => {
   const productinfo = shopinfo;
   const status = "Pending";
   const createdAt = new Date();
-  console.log(productinfo);
   const handleorderconfirm = (e) => {
     e.preventDefault();
     const order_status = "confirm";
@@ -460,7 +287,6 @@ const CartCheckoutPages = () => {
       return;
     }
     fetch(`${process.env.REACT_APP_URL}/shoporder?userid=${userinfo?._id}`, {
-      // fetch(`${process.env.REACT_APP_URL}/cartorder`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -469,14 +295,11 @@ const CartCheckoutPages = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data._id);
         if (data._id) {
           navigate("/cartproductpayment", { state: { orderconfirm } });
         }
       })
-      .catch((err) => {
-        console.log(err.message);
-      });
+      .catch((err) => {});
   };
   const handleRewardYes = () => {
     setisRewardUse(true);
@@ -554,7 +377,6 @@ const CartCheckoutPages = () => {
           <Form className="checkout-inforow-col row">
             <div className="checkout-info-con-left col col-12 col-sm-12 col-md-12 col-lg-8">
               <h4 className="biling-text">Billing Details</h4>
-              {/* <form> */}
               <div className="first-name-last-name">
                 <input
                   type="text"
@@ -589,7 +411,6 @@ const CartCheckoutPages = () => {
               </select>
               <input
                 type="text"
-                // placeholder="House Number, Road Name,City,District"
                 name="address"
                 placeholder={order?.address}
                 className="company-input"
@@ -626,7 +447,6 @@ const CartCheckoutPages = () => {
                 className="note-input"
                 onChange={messagehandler}
               />
-              {/* </form> */}
             </div>
 
             <div className="checkout-info-right col col-12 col-sm-12 col-md-12 col-lg-3">

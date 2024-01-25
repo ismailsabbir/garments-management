@@ -17,6 +17,7 @@ const DashbordProject = () => {
   const [cuscount, setcuscount] = useState(0);
   const [loading, setloading] = useState(true);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  console.log("Dashbord Project");
   const handleOptionClick = (product) => {
     if (!selectedOptions.includes(product)) {
       setSelectedOptions([...selectedOptions, product]);
@@ -47,7 +48,6 @@ const DashbordProject = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data?.deletedCount > 0) {
               toast("Services delete sucessfully !!!", {
                 position: "top-center",
@@ -69,7 +69,6 @@ const DashbordProject = () => {
       })
         .then((req) => req.json())
         .then((data) => {
-          console.log(data);
           setproducts(data);
           setcuscount(data?.length);
           setloading(false);
@@ -84,7 +83,6 @@ const DashbordProject = () => {
       reader.onload = (e) => {
         try {
           const fileContents = JSON.parse(e.target.result);
-          console.log(fileContents);
           for (let i = 0; i < fileContents.length; i++) {
             fetch(`${process.env.REACT_APP_URL}/project_add`, {
               method: "POST",
@@ -101,9 +99,7 @@ const DashbordProject = () => {
                 });
                 refetch();
               })
-              .catch((err) => {
-                console.log(err.message);
-              });
+              .catch((err) => {});
           }
         } catch (error) {
           console.error("Invalid JSON file:", error);
@@ -137,7 +133,6 @@ const DashbordProject = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data?.deletedCount > 0) {
               toast("Project delete sucessfully !!!", {
                 position: "top-center",

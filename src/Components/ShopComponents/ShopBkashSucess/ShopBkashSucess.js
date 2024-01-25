@@ -9,18 +9,15 @@ const ShopBkashSucess = () => {
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const transiction_id = query.get("transiction_id");
-  console.log(transiction_id);
+  console.log("Shop Bkash Sucess");
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_URL}/product/order/by_transcation_id/${transiction_id}`
     )
       .then((res) => res.json())
       .then((data) => setproducts(data))
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   }, [transiction_id]);
-  console.log(products);
   if (products?.length <= 0) {
     return (
       <div className="mt-4 mb-4 p-6">

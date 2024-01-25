@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
 import { servcontext } from "../../../App";
 import SingleMember from "../SingleMember/SingleMember";
 import "./TeamMembers.css";

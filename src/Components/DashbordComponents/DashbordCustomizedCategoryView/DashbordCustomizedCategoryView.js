@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 const DashbordCustomizedCategoryView = () => {
   const location = useLocation();
   const category = location.state;
-  console.log(category);
+  console.log("Dashbord Category View");
   return (
     <div className="category-view-con">
       <div className="category-view-left">

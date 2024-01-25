@@ -3,6 +3,7 @@ import image from "../../../Images/coming.svg";
 import { Link } from "react-router-dom";
 import "./DashbordCommingPage.css";
 const DashbordCommingPage = () => {
+  console.log("Dashbord Comming Page");
   return (
     <div className="coming-soon-con">
       <img src={image} alt="" />

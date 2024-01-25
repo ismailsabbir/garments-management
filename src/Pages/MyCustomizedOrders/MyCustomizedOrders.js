@@ -17,7 +17,7 @@ const MyCustomizedOrders = () => {
   const [datasize, setdatasize] = useState(5);
   const [count, setcount] = useState(0);
   const page = Math.ceil(count / datasize);
-  console.log(datasize, count, page);
+  console.log("My Customized Orders");
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_URL}/customizedorders?email=${user?.email}&page=${currentpage}&size=${datasize}`,
@@ -47,7 +47,6 @@ const MyCustomizedOrders = () => {
   const handlesearch = (e) => {
     e.preventDefault();
     const search = e.target.search.value;
-    console.log(search);
     fetch(
       `${process.env.REACT_APP_URL}/idcustomizedodrders?email=${user?.email}&page=${currentpage}&size=${datasize}&search=${search}`,
       {
@@ -75,7 +74,6 @@ const MyCustomizedOrders = () => {
   const handleorderpayment = (orderconfirm) => {
     navigate("/payment", { state: { orderconfirm } });
   };
-  console.log(orders);
   return (
     <div className="my-orders-continer">
       {loading ? (
@@ -127,7 +125,6 @@ const MyCustomizedOrders = () => {
               <div className="shop-order-product-manage">
                 <img src={order?.dress_photo} alt="" />
                 <h6>{order?.category_name}</h6>
-
                 <h6>QTY:{order?.pices}</h6>
                 <p>{order?.order}</p>
                 <p>{order?.delivery_status}</p>

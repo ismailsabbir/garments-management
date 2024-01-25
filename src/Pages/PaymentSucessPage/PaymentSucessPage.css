@@ -23,7 +23,6 @@
     margin-top: 20px;
     margin-bottom: 30px;
     text-align: center;
-    /* border-bottom: 1px solid #be5184; */
 }
 
 .products-images {
@@ -32,15 +31,12 @@
     justify-content: space-around;
     height: 200px;
     width: 100%;
-    /* border: 1px solid brown; */
     margin-bottom: 45px;
     margin-top: 25px;
 }
 
 .main-product {
-    /* width: 20%; */
     height: 100%;
-    /* border: 1px solid gold; */
 }
 
 .main-product img {
@@ -53,26 +49,12 @@
     justify-content: space-evenly;
     height: 200px;
     width: 60%;
-    /* border: 1px solid green; */
-    /* width: 50%; */
-
 }
 
 .product-design img {
     height: 170px;
-
-    /* border: 1px solid black; */
 }
 
-/* .front-con {
-    width: 48%;
-    border: 1px solid brown;
-}
-
-.back-con {
-    width: 48%;
-    border: 1px solid brown;
-} */
 .payment-title {
     color: #be5184;
     font-size: 1.1rem;

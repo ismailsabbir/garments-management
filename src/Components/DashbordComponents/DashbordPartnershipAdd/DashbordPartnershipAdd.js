@@ -9,6 +9,7 @@ const DashbordPartnershipAdd = () => {
   const count = location.state;
   const [company_logo, setphoto1] = useState();
   const imagebb = process.env.REACT_APP_IMGBB;
+  console.log("Dashbord Partnership Add");
   const handleimage1 = (e) => {
     const image1 = e.target.files[0];
     const formdata = new FormData();
@@ -48,7 +49,6 @@ const DashbordPartnershipAdd = () => {
       company_logo,
       start,
     };
-    console.log(staffinfo);
     fetch(`${process.env.REACT_APP_URL}/add/Partnership`, {
       method: "POST",
       body: JSON.stringify(staffinfo),
@@ -58,7 +58,6 @@ const DashbordPartnershipAdd = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data?.sucess) {
           toast("PartnerShip Add sucessfully !!!", {
             position: "top-center",
@@ -77,7 +76,6 @@ const DashbordPartnershipAdd = () => {
     <div className="add-staff-con">
       <h5>Add New Partnership</h5>
       <p>Give All Information for Add new Partnership</p>
-
       <Form onSubmit={handlestaffadd} className="add-staff-form">
         <div className="staff-image-con">
           <Form.Group className="mb-3">

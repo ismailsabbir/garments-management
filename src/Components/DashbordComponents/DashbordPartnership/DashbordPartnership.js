@@ -4,15 +4,13 @@ import "./DashbordPartnership.css";
 import { Link } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { Form } from "react-bootstrap";
-import { BsSearch } from "react-icons/bs";
-import { IoMdAdd } from "react-icons/io";
 import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
 import { FaPeopleGroup } from "react-icons/fa6";
 const DashbordPartnership = () => {
   const [partnership, setpartnership] = useState();
   const [count, setcount] = useState(0);
+  console.log("Dashbord Partnership");
   const { data: productall = [], refetch } = useQuery({
     queryKey: ["partnership"],
     queryFn: () =>
@@ -23,15 +21,12 @@ const DashbordPartnership = () => {
       })
         .then((req) => req.json())
         .then((data) => {
-          console.log(data);
           setpartnership(data);
           setcount(data?.length);
           return data;
         }),
   });
-  console.log(partnership);
   const handledelete = (staff) => {
-    console.log(staff);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to delate this!",
@@ -80,10 +75,7 @@ const DashbordPartnership = () => {
             <h6>Name:{partner?.Company_Name}</h6>
             <p>Start Date: {partner?.start}</p>
             <div className="print-serach">
-              <Link
-                to="/dashbord/vissions/edit"
-                // state={order}
-              >
+              <Link to="/dashbord/vissions/edit">
                 <FiEdit className="printlogo"></FiEdit>
               </Link>
 

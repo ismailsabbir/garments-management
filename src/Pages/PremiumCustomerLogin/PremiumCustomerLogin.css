@@ -13,11 +13,9 @@
     border-radius: 8px 0px 0px 8px;
     color: white;
     padding: 10px;
-    /* border: 1px solid brown; */
 }
 
 .premium-information {
-    /* margin-top: 60px; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,10 +24,8 @@
 
 .premium-info-hed {
     text-align: justify;
-    /* color: #be5184; */
     font-size: 1rem;
     font-weight: 400;
-    /* margin-bottom: 15px; */
 }
 
 .please-premium-login {
@@ -51,4 +47,34 @@
     width: 150px;
     margin: 0 auto;
     margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 687px) {
+    .employss-login-con {
+        height: auto;
+        width: 100%;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        padding-right: 25px;
+    }
+
+    .premium-login-container {
+        width: 95%;
+    }
+
+    .premium-login-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .prmium-login-info {
+        width: 100%;
+        margin: 0px;
+        border-radius: 8px 8px 0px 0px;
+    }
+
+    #premium-login {
+        width: 100%;
+        margin: 0px;
+    }
 }

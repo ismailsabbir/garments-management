@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { EmployeeContext } from "./../../../Layouts/EmployeeLayouts/EmployeeLayouts";
 const EmployeeLeavesRequest = () => {
   const employee = useContext(EmployeeContext);
-  console.log(employee);
+  console.log("Employee Leave Request");
   const handlestaffadd = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -18,8 +18,6 @@ const EmployeeLeavesRequest = () => {
     const leave_status = e.target.leave_status.value;
     const reason = e.target.reason.value;
     const randomNumber = Math.floor(Math.random() * 99999) + 1;
-
-    // Format the number as "R-00000"
     const request_number = `R-${String(randomNumber).padStart(5, "0")}`;
     const leaveinfo = {
       name,
@@ -33,7 +31,6 @@ const EmployeeLeavesRequest = () => {
       reason,
       request_number,
     };
-    console.log(leaveinfo);
     fetch(`${process.env.REACT_APP_URL}/leave/Request`, {
       method: "POST",
       body: JSON.stringify(leaveinfo),

@@ -45,7 +45,7 @@ const ShopMainProducts = ({ product, categoryid }) => {
   const [search, setsearch] = useState("");
   const [userinfo, setuserinfo] = useState([]);
   const [interastedproducts, setinterastedproduct] = useState([]);
-  console.log(count);
+  console.log("Shop Main Product");
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/singleuser?email=${user?.email}`, {
       headers: {
@@ -102,9 +102,7 @@ const ShopMainProducts = ({ product, categoryid }) => {
         setloading(false);
       });
   }, [currentpage, datasize, minprice, maxprice, color, search]);
-  console.log(allproduct);
   const sortProductsByPrice = (e) => {
-    console.log(e, typeof e);
     if (e === "norm") {
       setallproduct(allproduct);
     } else if (e === "assc") {
@@ -211,9 +209,7 @@ const ShopMainProducts = ({ product, categoryid }) => {
               );
             }
           })
-          .catch((err) => {
-            console.log(err.message);
-          });
+          .catch((err) => {});
       }
     } else {
       navigate("/login");
@@ -287,69 +283,10 @@ const ShopMainProducts = ({ product, categoryid }) => {
             );
           }
         })
-        .catch((err) => {
-          console.log(err.message);
-        });
+        .catch((err) => {});
     } else {
       navigate("/login");
     }
-    // const newObj = { ...product };
-    // if ("_id" in newObj) {
-    //   delete newObj._id;
-    // }
-    // const productinfo = {
-    //   ...newObj,
-    //   email,
-    // };
-    // fetch(`${process.env.REACT_APP_URL}/wishlistproduct?email=${user?.email}`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-type": "application/json",
-    //     authorization: `Beare ${localStorage.getItem("garments-token")}`,
-    //   },
-    //   body: JSON.stringify(productinfo),
-    // })
-    //   .then((res) => {
-    //     if (res.status === 401 || res.status === 403) {
-    //       navigate("/signup");
-    //     }
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     if (data?._id) {
-    //       toast(
-    //         <div>
-    //           <div className="toast-top">
-    //             <img src={data?.Product_image} alt="not found" />
-    //             <div className="toast-message">
-    //               <h6>{data?.product_name}</h6>
-    //               <p>
-    //                 <span>succeed:</span> You have add{" "}
-    //                 <span id="toast-name">{data?.product_name}</span>
-    //               </p>
-    //             </div>
-    //           </div>
-    //           <div className="toast-button">
-    //             To your
-    //             <Link to="/wishlistproduct">WishList</Link>
-    //           </div>
-    //         </div>,
-    //         {
-    //           position: "top-right",
-    //           autoClose: 10000,
-    //           hideProgressBar: false,
-    //           closeOnClick: true,
-    //           pauseOnHover: true,
-    //           draggable: false,
-    //           progress: undefined,
-    //           theme: "light",
-    //         }
-    //       );
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.message);
-    //   });
   };
   const responsive = {
     superLargeDesktop: {
@@ -520,16 +457,6 @@ const ShopMainProducts = ({ product, categoryid }) => {
                     ))}
                   </>
                 )}
-                {/* {[...Array(page).keys()].map((number) => (
-                  <button
-                    key={number}
-                    className={currentpage === number && "selected-page-btn"}
-                    id="paginationbtn"
-                    onClick={() => setcurrentpage(number)}
-                  >
-                    {number}
-                  </button>
-                ))} */}
               </div>
             </div>
           </div>
@@ -757,72 +684,6 @@ const ShopMainProducts = ({ product, categoryid }) => {
               ) : (
                 <></>
               )}
-              {/* <div className="new-product-con">
-                <h6>NEW PRODUCTS</h6>
-                <div className="new-product-hole">
-                  <div className="new-product-info">
-                    <img src={imagea} alt="not found" />
-                  </div>
-
-                  <div className="new-product-info-start">
-                    <p>Chen Cardigan</p>
-                    <p>$99.50</p>
-                    <div className="star-con">
-                      <AiFillStar className="new-pro-star"></AiFillStar>
-                      <AiFillStar className="new-pro-star"></AiFillStar>
-                      <AiFillStar className="new-pro-star"></AiFillStar>
-                      <AiFillStar className="new-pro-star"></AiFillStar>
-                      <AiFillStar className="new-pro-star"></AiFillStar>
-                    </div>
-                  </div>
-                </div>
-                <div className="new-product-hole">
-                  <div className="new-product-info">
-                    <img src={imagea} alt="not found" />
-                  </div>
-
-                  <div className="new-product-info-start">
-                    <p>Chen Cardigan</p>
-                    <p>$99.50</p>
-                    <div className="star-con">
-                      <AiFillStar className="new-pro-star"></AiFillStar>
-                      <AiFillStar className="new-pro-star"></AiFillStar>
-                      <AiFillStar className="new-pro-star"></AiFillStar>
-                      <AiFillStar className="new-pro-star"></AiFillStar>
-                      <AiFillStar className="new-pro-star"></AiFillStar>
-                    </div>
-                  </div>
-                </div>
-                <div className="new-product-hole">
-                  <div className="new-product-info">
-                    <img src={imagea} alt="not found" />
-                  </div>
-
-                  <div className="new-product-info-start">
-                    <p>Chen Cardigan</p>
-                    <p>$99.50</p>
-                    <div className="star-con">
-                      <AiFillStar className="new-pro-star"></AiFillStar>
-                      <AiFillStar className="new-pro-star"></AiFillStar>
-                      <AiFillStar className="new-pro-star"></AiFillStar>
-                      <AiFillStar className="new-pro-star"></AiFillStar>
-                      <AiFillStar className="new-pro-star"></AiFillStar>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="offer-con">
-                <img src={offer} alt="not found" />
-                <div className="offer-info">
-                  <span>Women Zone</span>
-                  <h5>
-                    Save 17% on <br /> Office Dress
-                  </h5>
-                  <Link className="offer-shop-link">
-                    <BsArrowRight></BsArrowRight>Shop Now
-                  </Link>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>

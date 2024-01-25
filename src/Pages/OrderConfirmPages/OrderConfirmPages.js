@@ -9,7 +9,7 @@ const OrderConfirmPages = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const orderinfo = state?.request_info;
-  console.log("state?.request_info", state?.request_info);
+  console.log("Order confirm page");
   const [size_s, setsizes] = useState();
   const [size_m, setsizem] = useState();
   const [size_l, setsizel] = useState();
@@ -65,7 +65,6 @@ const OrderConfirmPages = () => {
       })
       .then((jsonData) => {
         setorders(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -86,7 +85,6 @@ const OrderConfirmPages = () => {
       })
       .then((jsonData) => {
         setcartorder(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -110,7 +108,6 @@ const OrderConfirmPages = () => {
       })
       .then((jsonData) => {
         setcustomized(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -140,24 +137,6 @@ const OrderConfirmPages = () => {
       ]);
     }
   }, [addresss, shoporder, cartorder, customized]);
-
-  console.log(orderinfo);
-  const handlesizes = (dress_number) => {
-    seterrormessage(false);
-    if (!dress_number) {
-      const newsum = 0;
-      setSum(newsum);
-    } else {
-      const newsum = parseInt(sum) + parseInt(dress_number);
-      setSum(newsum);
-      seterrormessage(false);
-      const sizes = {
-        size: "S",
-        dress_number,
-      };
-      setsizes(sizes);
-    }
-  };
   const handlesizesF = (e) => {
     seterrormessage(false);
     const dress_number = e.target.size_s.value;
@@ -175,7 +154,6 @@ const OrderConfirmPages = () => {
       setsizes(sizes);
     }
     e.preventDefault();
-    console.log("click");
   };
   const handlesizem = (e) => {
     e.preventDefault();
@@ -253,7 +231,6 @@ const OrderConfirmPages = () => {
     setSum(0);
     setsizes();
   };
-  console.log(size_s, size_m, size_l, size_xl, size_xxl);
   const handleorderconfirm = (e) => {
     e.preventDefault();
     const postcode = e.target.postcode.value;
@@ -291,7 +268,6 @@ const OrderConfirmPages = () => {
       status,
       createdAt,
     };
-    console.log(orderconfirm);
     fetch(`${process.env.REACT_APP_URL}/requesed_order`, {
       method: "POST",
       headers: {
@@ -301,14 +277,11 @@ const OrderConfirmPages = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data._id);
         if (data._id) {
           navigate("/payment", { state: { orderconfirm } });
         }
       })
-      .catch((err) => {
-        console.log(err.message);
-      });
+      .catch((err) => {});
   };
 
   return (
@@ -446,7 +419,6 @@ const OrderConfirmPages = () => {
             <input
               className="size-input"
               name="size_m"
-              // onChange={(e) => handlesizem(e.target.value)}
               type="text"
               placeholder="0"
             />
@@ -461,7 +433,6 @@ const OrderConfirmPages = () => {
             <input
               className="size-input"
               name="size_l"
-              // onChange={(e) => handlesizel(e.target.value)}
               type="text"
               placeholder="0"
             />
@@ -476,7 +447,6 @@ const OrderConfirmPages = () => {
             <input
               className="size-input"
               name="size_xl"
-              // onChange={(e) => handlesizexl(e.target.value)}
               type="text"
               placeholder="0"
             />
@@ -491,7 +461,6 @@ const OrderConfirmPages = () => {
             <input
               className="size-input"
               name="size_xxl"
-              // onChange={(e) => handlesizexxl(e.target.value)}
               type="text"
               placeholder="0"
             />

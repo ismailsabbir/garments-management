@@ -3,15 +3,13 @@ import { Form } from "react-bootstrap";
 import { BsFillImageFill } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-
 const DashbordAddCategory = () => {
   const location = useLocation();
   const categoryid = location.state;
   const [category_image, setcategory_image] = useState();
-  console.log(categoryid);
+  console.log("Dashbord Add Category");
   const imagebb = process.env.REACT_APP_IMGBB;
   const handleimage1 = (e) => {
-    console.log("click");
     const image1 = e.target.files[0];
     const formdata = new FormData();
     formdata.append("image", image1);
@@ -44,7 +42,6 @@ const DashbordAddCategory = () => {
     e.preventDefault();
     const category_id = e.target.categoryid.value.toString();
     const category_name = e.target.categorytname.value.toString();
-
     const productinfo = {
       category_id,
       category_name,
@@ -60,7 +57,6 @@ const DashbordAddCategory = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           toast("Product Added sucessfully !!!", {
             position: "top-center",
             autoClose: 1000,
@@ -77,7 +73,6 @@ const DashbordAddCategory = () => {
     <div className="add-staff-con">
       <h5>Add Category</h5>
       <p>Add your Category and necessary information from here</p>
-
       <Form onSubmit={handleAddProduct} className="add-staff-form">
         <div className="staff-image-con">
           <div className="product-image-edit">

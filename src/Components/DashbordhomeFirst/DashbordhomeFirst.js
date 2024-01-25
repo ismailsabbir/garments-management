@@ -7,6 +7,7 @@ import { TiTick } from "react-icons/ti";
 import "./DashbordhomeFirst.css";
 import DashbordChirts from "../DashbordComponents/DashbordChirts/DashbordChirts";
 const DashbordhomeFirst = () => {
+  console.log("Dashbord Home First");
   const [todayshoporders, settodayshoporders] = useState([]);
   const [todayCustomizedorders, settodayCustomizedorders] = useState([]);
   const [todayshopordersPrice, settodayshopordersprice] = useState("");
@@ -53,7 +54,6 @@ const DashbordhomeFirst = () => {
     fetch(`${process.env.REACT_APP_URL}/today-orders`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("todaydata", data);
         settodayshoporders(data?.todayOrders);
         settodayCustomizedorders(data?.todycustomorders);
         settodayshopordersprice(data?.totalPrice);

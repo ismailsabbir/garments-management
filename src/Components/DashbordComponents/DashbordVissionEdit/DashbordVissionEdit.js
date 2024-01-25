@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-
 const DashbordVissionEdit = () => {
   const location = useLocation();
   const vissio = location?.state;
   const [vission, setmission] = useState({});
+  console.log("Dashbord Vission Edit");
   useEffect(() => {
     setmission(vissio);
   }, []);
@@ -18,7 +18,6 @@ const DashbordVissionEdit = () => {
       vission_id,
       vision,
     };
-    console.log(staffinfo);
     fetch(`${process.env.REACT_APP_URL}/edit_vission/${vission?._id}`, {
       method: "PUT",
       body: JSON.stringify(staffinfo),
@@ -28,7 +27,6 @@ const DashbordVissionEdit = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data?.sucess) {
           toast("Update sucessfully !!!", {
             position: "top-center",
@@ -46,7 +44,6 @@ const DashbordVissionEdit = () => {
     <div className="add-staff-con">
       <h5>Edit Vission</h5>
       <p>Updated your Vission</p>
-
       <Form onSubmit={handlestaffedit} className="add-staff-form">
         <div className="staff-first-name-lastname mt-4">
           <Form.Group className="mb-3 firstname-staff">

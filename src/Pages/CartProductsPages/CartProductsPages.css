@@ -8,8 +8,6 @@
     padding-top: 40px;
 }
 
-
-
 .cart-all-select {
     height: 50px;
     display: flex;
@@ -54,7 +52,6 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    /* border: 1px solid gainsboro; */
     margin-bottom: 20px;
     background-color: white;
     padding: 10px 0px;

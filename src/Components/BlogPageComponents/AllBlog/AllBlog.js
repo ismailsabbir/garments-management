@@ -4,6 +4,7 @@ import SingleBlog from "../../HomeComponents/SingleBlog/SingleBlog";
 
 const AllBlog = () => {
   const { blogs } = useContext(servcontext);
+  console.log("All Blog ");
   return (
     <div className="home-blog-con">
       <div className="homeservices-top" id="home-project-top">

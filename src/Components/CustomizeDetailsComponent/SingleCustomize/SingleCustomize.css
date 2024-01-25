@@ -56,9 +56,6 @@
     transition: 0.3s;
 }
 
-/* .customize-image-con img:hover {
-    transform: scale(1.1);
-} */
 
 .upload-design-con {
     border: 1px solid #be5184;
@@ -73,7 +70,6 @@
 }
 
 .amount-con {
-    /* border: 1px solid gainsboro; */
     border-radius: 6px;
     text-align: center;
     padding: 15px;
@@ -105,7 +101,6 @@
 .show-details-btn {
     width: 100%;
     border: 1px solid #be5184;
-    /* background-color: #be5184; */
     padding: 6px;
     border-radius: 5px;
     font-size: 1rem;
@@ -113,7 +108,6 @@
 }
 
 .customizeright {
-    /* border: 1px solid green; */
     padding-left: 30px;
 }
 
@@ -201,7 +195,6 @@ sizea {
 }
 
 .design-checkbox {
-    /* border: 1px solid brown; */
     display: flex;
     align-items: center;
     margin-left: 6px;
@@ -260,7 +253,6 @@ sizea {
     padding: 15px 30px;
     display: flex;
     align-items: center;
-    /* justify-content: space-between; */
 }
 
 .delivery-date1 {
@@ -275,8 +267,6 @@ sizea {
 
 .delivery-date1 h6 {
     color: #be5184;
-    /* font-size: 0.9rem; */
-    /* font-weight: 700; */
 }
 
 .delivery-date2 {

@@ -8,6 +8,7 @@ const ReviewsList = ({ oneproduct }) => {
   const [datasize, setdatasize] = useState(5);
   const [cuscount, setcuscount] = useState(0);
   const custompage = Math.ceil(cuscount / datasize);
+  console.log("Review List");
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_URL}/bestreviews?category_id=${oneproduct?.category_id}&product_id=${oneproduct?.product_id}&page=${cuscurrentpage}&&size=${datasize}`
@@ -23,7 +24,6 @@ const ReviewsList = ({ oneproduct }) => {
     cuscurrentpage,
     datasize,
   ]);
-  console.log(reviews);
   return (
     <div className="reviews_list_con">
       <div>

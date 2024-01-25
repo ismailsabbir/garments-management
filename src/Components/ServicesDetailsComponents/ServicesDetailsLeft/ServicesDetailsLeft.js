@@ -3,9 +3,9 @@ import "./ServicesDetailsLeft.css";
 import { AiOutlineFileText, AiOutlineFolderOpen } from "react-icons/ai";
 import { PiShareFat } from "react-icons/pi";
 import { FaArrowRightLong } from "react-icons/fa6";
-
 import { Link } from "react-router-dom";
 const ServicesDetailsLeft = ({ service }) => {
+  console.log("Service Details Left");
   return (
     <div className="service-details-left-con">
       <div className="service-details-image">

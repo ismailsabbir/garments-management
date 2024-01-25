@@ -2,6 +2,7 @@ import React from "react";
 import "./ServicesBanner.css";
 import { Link } from "react-router-dom";
 const ServicesBanner = () => {
+  console.log("service Banner");
   return (
     <div className="about-banner-con">
       <div className="ml-28 about-banner-text">

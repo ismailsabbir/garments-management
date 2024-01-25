@@ -6,6 +6,7 @@ import ServicesDetailsRight from "../../Components/ServicesDetailsComponents/Ser
 import "./ServicesDetails.css";
 const ServicesDetails = () => {
   const service = useLoaderData();
+  console.log("Service Details");
   return (
     <div className="mb-28">
       <ServicesDetailsBanner></ServicesDetailsBanner>

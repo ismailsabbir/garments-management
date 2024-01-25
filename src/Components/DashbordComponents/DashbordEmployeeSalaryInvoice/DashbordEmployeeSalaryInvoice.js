@@ -10,7 +10,7 @@ const DashbordEmployeeSalaryInvoice = () => {
   const lastPaymentDateStr = order.paymentStatus.split(" - ")[1];
   const lastPaymentMonth = lastPaymentDateStr.split(" ")[0];
   const currentYear = new Date().getFullYear();
-  console.log(order, lastPaymentMonth);
+  console.log("Dashbord Employee Salary Invoice");
   const handleDownloadClick = async () => {
     const content = document.getElementById("invoice-content");
     try {

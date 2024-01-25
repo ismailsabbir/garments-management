@@ -14,6 +14,7 @@ const CheckoutForm = ({ paymentinfo }) => {
   const stripe = useStripe();
   const elements = useElements();
   const { email, orderid } = paymentinfo;
+  console.log("Checkout From");
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/create-payment-intent`, {
       method: "POST",
@@ -38,11 +39,9 @@ const CheckoutForm = ({ paymentinfo }) => {
     });
 
     if (error) {
-      console.log(error);
       setcarderror(error);
     } else {
       setcarderror("");
-      console.log(paymentMethod);
     }
     setpaymentsucess("");
     settransactionid("");
@@ -62,7 +61,6 @@ const CheckoutForm = ({ paymentinfo }) => {
       setcarderror(confirmerror.message);
       return;
     }
-    console.log(paymentIntent);
     if (paymentIntent.status === "succeeded") {
       setpaymentsucess("congratulations! Payment Completed");
       settransactionid(paymentIntent.id);
@@ -97,9 +95,7 @@ const CheckoutForm = ({ paymentinfo }) => {
             // a
           }
         })
-        .catch((err) => {
-          console.log(err.message);
-        });
+        .catch((err) => {});
     }
   };
   return (

@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 const DashbordCutomProductView = () => {
   const location = useLocation();
   const product = location.state;
-  console.log(product);
+  console.log("Dashbord Customized Product View");
   return (
     <div className="product-view-con">
       <h5 className="mb-4 product-view-hed">Product Details</h5>

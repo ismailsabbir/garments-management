@@ -7,6 +7,7 @@ const DashbordMissionEdit = () => {
   const location = useLocation();
   const vissio = location?.state;
   const [vission, setmission] = useState({});
+  console.log("Dashbord Mission Edit");
   useEffect(() => {
     setmission(vissio);
   }, []);
@@ -18,7 +19,6 @@ const DashbordMissionEdit = () => {
       mission_id,
       mission,
     };
-    console.log(staffinfo);
     fetch(`${process.env.REACT_APP_URL}/edit_mission/${vission?._id}`, {
       method: "PUT",
       body: JSON.stringify(staffinfo),
@@ -28,7 +28,6 @@ const DashbordMissionEdit = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data?.sucess) {
           toast("Update sucessfully !!!", {
             position: "top-center",
@@ -46,7 +45,6 @@ const DashbordMissionEdit = () => {
     <div className="add-staff-con">
       <h5>Edit Mission</h5>
       <p>Updated your Mission</p>
-
       <Form onSubmit={handlestaffedit} className="add-staff-form">
         <div className="staff-first-name-lastname mt-4">
           <Form.Group className="mb-3 firstname-staff">

@@ -6,6 +6,7 @@ const DashbordLeaveResponse = () => {
   const { state } = useLocation();
   const [leaveinfo, setleaveinfo] = useState([]);
   const [notice, setnotice] = useState("");
+  console.log("Dashbord Leave Response");
   useEffect(() => {
     setleaveinfo(state);
   }, []);
@@ -33,7 +34,6 @@ const DashbordLeaveResponse = () => {
       reason,
       request_number,
     };
-    console.log(leaveinfo);
     fetch(`${process.env.REACT_APP_URL}/leave/Response/edit`, {
       method: "PUT",
       body: JSON.stringify(leaveinfo),

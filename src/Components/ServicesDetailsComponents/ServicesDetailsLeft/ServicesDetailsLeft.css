@@ -66,9 +66,6 @@
 .details-mid-image {
     padding-right: 10px;
     width: 50%;
-    /* height: 300px; */
-
-
 }
 
 .details-mid-image img {
@@ -78,12 +75,9 @@
 }
 
 .details-mid-right {
-    /* border: 1px solid brown; */
     margin-left: 15px;
 
 }
-
-
 
 .details-mid-right h5 {
     margin-bottom: 10px;
@@ -105,7 +99,6 @@
 
 .services-types p {
     font-size: 1.1rem;
-    /* font-weight: 500; */
     color: rgb(75, 74, 74);
 }
 

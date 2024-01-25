@@ -7,7 +7,7 @@ import { AuthContext } from "../../../Context/UserContext";
 import { ToastContainer, toast } from "react-toastify";
 
 const SingleCustomize = ({ category }) => {
-  console.log(category);
+  console.log("Single Customized Product");
   const navigate = useNavigate();
   const imagebb = process.env.REACT_APP_IMAGEBB;
   const [singlequality, settargetquality] = useState();
@@ -148,12 +148,10 @@ const SingleCustomize = ({ category }) => {
   const handlefirstdate = (day) => {
     setfirstdate(true);
     setsecounddate(false);
-    console.log(day);
   };
   const handlesecoundate = (day) => {
     setsecounddate(true);
     setfirstdate(false);
-    console.log(day);
   };
 
   const requestsubmit = (e) => {
@@ -245,8 +243,6 @@ const SingleCustomize = ({ category }) => {
     }
     setpices(data);
   };
-  console.log(colorproducts);
-  console.log(category);
   const handleremovefrontdesign = () => {
     setfrontphoto();
   };

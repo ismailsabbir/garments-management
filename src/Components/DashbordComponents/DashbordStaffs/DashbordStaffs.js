@@ -16,7 +16,7 @@ const DashbordStaffs = () => {
   const [cuscount, setcuscount] = useState(0);
   const custompage = Math.ceil(cuscount / datasize);
   const [searchvalue, setsearchvalue] = useState("");
-
+  console.log("Dashbord Staff");
   const { data: products = [], refetch } = useQuery({
     queryKey: [
       "staff",
@@ -57,7 +57,6 @@ const DashbordStaffs = () => {
             autoClose: 1000,
           });
         }
-        console.log(data);
         refetch();
       });
   };
@@ -79,7 +78,6 @@ const DashbordStaffs = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             toast("Staff Delate Sucessfully !!!", {
               position: "top-center",
               autoClose: 1000,
@@ -103,10 +101,8 @@ const DashbordStaffs = () => {
     )
       .then((req) => req.json())
       .then((data) => {
-        console.log(data.result);
         setstaffs(data.result);
         setcuscount(data?.count);
-        // setcuscount(0);
       });
   };
   const handleemailsearch = (e) => {
@@ -122,7 +118,6 @@ const DashbordStaffs = () => {
     )
       .then((req) => req.json())
       .then((data) => {
-        console.log(data.result);
         setstaffs(data.result);
         setcuscount(data?.count);
       });
@@ -204,7 +199,6 @@ const DashbordStaffs = () => {
         <div className="overflow-x-auto">
           <div className="overflow-x-auto">
             <table className="table recent-order-table">
-              {/* <thead> */}
               <tr className="recent-order-tr">
                 <th className="recent-order-hed">NAME</th>
                 <th className="recent-order-hed">EMAIL</th>
@@ -215,7 +209,6 @@ const DashbordStaffs = () => {
                 <th className="recent-order-hed">PUBLISHED</th>
                 <th className="recent-order-hed">ACTION</th>
               </tr>
-              {/* </thead> */}
               <tbody>
                 {staffs?.map((order) => (
                   <tr>

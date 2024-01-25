@@ -2,12 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Context/UserContext";
-
 const AccountCheckoutPages = () => {
   const { user, userlogout } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-
   const shopinfo = location.state.selectproducts;
   const [name, setfirstname] = useState();
   const [lastname, setlastname] = useState();
@@ -18,14 +16,13 @@ const AccountCheckoutPages = () => {
   const [phone, setmobile] = useState();
   const [note, setmesssage] = useState();
   const [errorinfo, seterrorinfo] = useState(false);
-  console.log(shopinfo);
   const [shoporder, setorders] = useState([]);
   const [cartorder, setcartorder] = useState([]);
   const [customized, setcustomized] = useState([]);
   const [addresss, setaddres] = useState([]);
   const [loading, setLoading] = useState(true);
-  // const { user, userlogout } = useContext(AuthContext);
   const [showorder, setshoworder] = useState([]);
+  console.log("Account CheckOut Pages");
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/address?email=${user?.email}`, {
       headers: {
@@ -40,7 +37,6 @@ const AccountCheckoutPages = () => {
       })
       .then((jsonData) => {
         setaddres(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -61,7 +57,6 @@ const AccountCheckoutPages = () => {
       })
       .then((jsonData) => {
         setorders(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -82,7 +77,6 @@ const AccountCheckoutPages = () => {
       })
       .then((jsonData) => {
         setcartorder(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -106,7 +100,6 @@ const AccountCheckoutPages = () => {
       })
       .then((jsonData) => {
         setcustomized(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -136,8 +129,6 @@ const AccountCheckoutPages = () => {
       ]);
     }
   }, [addresss, shoporder, cartorder, customized]);
-  console.log(showorder);
-
   useEffect(() => {
     if (!shopinfo) {
       navigate("/shop");
@@ -187,14 +178,12 @@ const AccountCheckoutPages = () => {
   const nextdate = new Date(today.setDate(today.getDate() + 4));
   const delivery_date = nextdate.toLocaleDateString("en-GB");
   const productinfo = shopinfo;
-  console.log(productinfo);
   const handleorderconfirm = (e) => {
     e.preventDefault();
     const order_status = "confirm";
     const order = "not paid";
     const transiction_id = "";
     const orderconfirm = {
-      // shopinfo,
       productinfo,
       name,
       lastname,
@@ -217,7 +206,6 @@ const AccountCheckoutPages = () => {
       return;
     }
     fetch(`${process.env.REACT_APP_URL}/shoporder`, {
-      // fetch(`${process.env.REACT_APP_URL}/cartorder`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -226,17 +214,12 @@ const AccountCheckoutPages = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data._id);
         if (data._id) {
           navigate("/cartproductpayment", { state: { orderconfirm } });
         }
       })
-      .catch((err) => {
-        console.log(err.message);
-      });
+      .catch((err) => {});
   };
-
-  console.log("abc");
   return (
     <div className="checkout-container-hole">
       <div className="checkoutlogin">
@@ -282,7 +265,6 @@ const AccountCheckoutPages = () => {
           <Form className="checkout-inforow-col row">
             <div className="checkout-info-con-left col col-12 col-sm-12 col-md-12 col-lg-8">
               <h4 className="biling-text">Billing Details</h4>
-              {/* <form> */}
               <div className="first-name-last-name">
                 <input
                   type="text"
@@ -317,7 +299,6 @@ const AccountCheckoutPages = () => {
               </select>
               <input
                 type="text"
-                // placeholder="House Number, Road Name,City,District"
                 placeholder={order?.address}
                 className="company-input"
                 onChange={cityhandler}
@@ -350,7 +331,6 @@ const AccountCheckoutPages = () => {
                 className="note-input"
                 onChange={messagehandler}
               />
-              {/* </form> */}
             </div>
             <div className="checkout-info-right col col-12 col-sm-12 col-md-12 col-lg-3">
               <h5>Your Order</h5>
@@ -401,7 +381,6 @@ const AccountCheckoutPages = () => {
                 >
                   Confirm Order
                 </button>
-                {/* </Link> */}
               </div>
             </div>
           </Form>

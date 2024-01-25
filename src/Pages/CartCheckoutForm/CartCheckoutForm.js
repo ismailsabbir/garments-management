@@ -15,19 +15,8 @@ const CartCheckoutForm = ({ paymentinfo }) => {
   const [payprocessing, setpayprocessing] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
-  // const [paymentinfos, setpaymentinfos] = useState();
-
-  // useEffect(() => {
-  //   if (paymentinfo) {
-  //     setpaymentinfos(paymentinfo);
-  //     console.log(" payments");
-  //   } else {
-  //     navigate("/shop");
-  //     console.log("not payments");
-  //   }
-  // }, [paymentinfo, navigate]);
-  console.log(paymentinfo);
   const { email, orderid } = paymentinfo;
+  console.log("Cart Check Out From");
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/create-payment-intent`, {
       method: "POST",
@@ -52,11 +41,9 @@ const CartCheckoutForm = ({ paymentinfo }) => {
     });
 
     if (error) {
-      console.log(error);
       setcarderror(error);
     } else {
       setcarderror("");
-      console.log(paymentMethod);
     }
     setpaymentsucess("");
     settransactionid("");
@@ -76,7 +63,6 @@ const CartCheckoutForm = ({ paymentinfo }) => {
       setcarderror(confirmerror.message);
       return;
     }
-    console.log(paymentIntent);
     if (paymentIntent.status === "succeeded") {
       setpaymentsucess("congratulations! Payment Completed");
       settransactionid(paymentIntent.id);
@@ -111,9 +97,7 @@ const CartCheckoutForm = ({ paymentinfo }) => {
             setpayprocessing(false);
           }
         })
-        .catch((err) => {
-          console.log(err.message);
-        });
+        .catch((err) => {});
     }
   };
   return (

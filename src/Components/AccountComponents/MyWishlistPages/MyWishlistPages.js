@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Form, Link } from "react-router-dom";
 import { RiDeleteBin5Line } from "react-icons/ri";
-import { MdFavoriteBorder } from "react-icons/md";
 import Loading from "../../../CommonComponents/Loading/Loading";
 import { BsBagDash } from "react-icons/bs";
 import Modal from "../../../Hooks/Modal/Modal";
@@ -24,7 +23,7 @@ const MyWishlistPages = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [detlets, setdelete] = useState(false);
   const [quentuty, setquentity] = useState(1);
-  console.log(datasize, count, page);
+  console.log("My Wishlist Page");
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_URL}/mywishproduct?email=${user?.email}&page=${currentpage}&size=${datasize}`,
@@ -54,30 +53,6 @@ const MyWishlistPages = () => {
   const handlesearch = (e) => {
     e.preventDefault();
     const search = e.target.search.value;
-    console.log(search);
-    // fetch(
-    //   `${process.env.REACT_APP_URL}/idodrders?email=${user?.email}&page=${currentpage}&size=${datasize}&search=${search}`,
-    //   {
-    //     headers: {
-    //       authorization: `Beare ${localStorage.getItem("garments-token")}`,
-    //     },
-    //   }
-    // )
-    //   .then((res) => {
-    //     if (res.status === 401 || res.status === 403) {
-    //       return userlogout();
-    //     }
-    //     return res.json();
-    //   })
-    //   .then((jsonData) => {
-    //     setorders(jsonData.product);
-    //     setcount(jsonData.count);
-    //     setLoading(false);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Failed to fetch data:", error);
-    //     setLoading(false);
-    //   });
   };
   const handledelete = (product) => {
     fetch(`${process.env.REACT_APP_URL}/wishlistproduct/${product?._id}`, {
@@ -197,12 +172,9 @@ const MyWishlistPages = () => {
             );
           }
         })
-        .catch((err) => {
-          console.log(err.message);
-        });
+        .catch((err) => {});
     }
   };
-  console.log(orders);
   return (
     <div className="my-orders-continer">
       <Modal

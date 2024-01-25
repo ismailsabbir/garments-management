@@ -10,17 +10,15 @@ const DashbordProductEdit = () => {
   const location = useLocation();
   const product = location.state;
   const [userData, setUserData] = useState({});
-  const staff = location?.state;
+  console.log("Dashbord Product Edit");
   useEffect(() => {
     setUserData(product);
   }, {});
-  console.log(userData);
   const imagebb = process.env.REACT_APP_IMGBB;
   const [Product_image, setphoto1] = useState(product?.Product_image);
   const [daisplay_image, setdaisplayimage] = useState(product?.daisplay_image);
 
   const handleimage2 = (e) => {
-    console.log("click1");
     const image1 = e.target.files[0];
     const formdata = new FormData();
     formdata.append("image", image1);
@@ -32,7 +30,6 @@ const DashbordProductEdit = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          console.log(data.data.url);
           setdaisplayimage(data.data.url);
           toast("Image Uplode sucessfully !!!", {
             position: "top-center",
@@ -42,7 +39,6 @@ const DashbordProductEdit = () => {
       });
   };
   const handleimage1 = (e) => {
-    console.log("click");
     const image1 = e.target.files[0];
     const formdata = new FormData();
     formdata.append("image", image1);
@@ -62,8 +58,6 @@ const DashbordProductEdit = () => {
         }
       });
   };
-
-  console.log(Product_image, daisplay_image);
   const handlestaffedit = (e) => {
     e.preventDefault();
     const product_name = e.target.productname.value.toString();
@@ -86,7 +80,6 @@ const DashbordProductEdit = () => {
       fabric,
       stock,
     };
-    console.log(staffinfo);
     fetch(`${process.env.REACT_APP_URL}/edit_product/${product?._id}`, {
       method: "PUT",
       body: JSON.stringify(staffinfo),
@@ -96,14 +89,12 @@ const DashbordProductEdit = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         toast("Update sucessfully !!!", {
           position: "top-center",
           autoClose: 1000,
         });
       });
   };
-  console.log(product);
   return (
     <div className="add-staff-con">
       <h5>Update Product</h5>

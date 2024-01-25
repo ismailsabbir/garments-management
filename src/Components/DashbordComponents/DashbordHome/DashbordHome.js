@@ -3,6 +3,7 @@ import "./DashbordHome.css";
 import DashbordhomeFirst from "../../DashbordhomeFirst/DashbordhomeFirst";
 import DashboardRecentOrder from "../DashboardRecentOrder/DashboardRecentOrder";
 const DashbordHome = () => {
+  console.log("Dashbord Home");
   return (
     <div className="dashbord-home-con">
       <h4>Dashboard Overview</h4>

@@ -3,8 +3,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { servcontext } from "../../../App";
 import { FaHome } from "react-icons/fa";
 import { BsArrowRight, BsArrowRightShort } from "react-icons/bs";
-import ShopProductRight from "../ShopProductRight/ShopProductRight";
-import ShopAllProducts from "../ShopAllProducts/ShopAllProducts";
 import "./ShopProducts.css";
 import { AiFillStar, AiOutlineShopping } from "react-icons/ai";
 import { Form } from "react-bootstrap";
@@ -25,7 +23,7 @@ const ShopProducts = () => {
   const [shopallproduct, setshopallproduct] = useState([]);
   const { shopproduct } = useContext(servcontext);
   const { shopcategory } = useContext(servcontext);
-  console.log(shopproduct);
+  console.log("Shop Product");
   const location = useLocation();
   const { pathname } = location;
   const id = pathname.split("/")[2];
@@ -57,7 +55,6 @@ const ShopProducts = () => {
   );
   const singlproduct = singleproducts?.[0];
   const sortProductsByPrice = (e) => {
-    console.log(e, typeof e);
     if (e === "norm") {
       setshopallproduct(shopallproduct);
     } else if (e === "assc") {
@@ -86,7 +83,6 @@ const ShopProducts = () => {
   }, [id, currentpage, datasize, minprice, maxprice, color]);
   const categoryNames = shopallproduct.map((product) => product.category_name);
   const firstCategoryName = categoryNames[0];
-  console.log(firstCategoryName);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/usercategory?email=${user?.email}`, {
       method: "PUT",
@@ -153,7 +149,6 @@ const ShopProducts = () => {
             }
             return res.json();
           })
-          // .then((response) => response.json())
           .then((data) => {
             if (data?._id) {
               toast(
@@ -188,93 +183,17 @@ const ShopProducts = () => {
               );
             }
           })
-          .catch((err) => {
-            console.log(err.message);
-          });
+          .catch((err) => {});
       }
     } else {
       navigate("/login");
     }
-    // setmodalproduct(product);
-    // const newObj = { ...product };
-    // if ("_id" in newObj) {
-    //   delete newObj._id;
-    // }
-    // const productinfo = {
-    //   ...newObj,
-    //   quentuty,
-    //   size,
-    //   email,
-    // };
-    // if (product?.dress_size) {
-    //   openModal();
-    // } else {
-    //   fetch(`${process.env.REACT_APP_URL}/cartproduct?email=${user?.email}`, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-type": "application/json",
-    //       authorization: `Beare ${localStorage.getItem("garments-token")}`,
-    //     },
-    //     body: JSON.stringify(productinfo),
-    //   })
-    //     .then((res) => {
-    //       if (res.status === 401 || res.status === 403) {
-    //         navigate("/signup");
-    //       }
-    //       return res.json();
-    //     })
-    //     // .then((response) => response.json())
-    //     .then((data) => {
-    //       if (data?._id) {
-    //         toast(
-    //           <div>
-    //             <div className="toast-top">
-    //               <img src={data?.Product_image} alt="not found" />
-    //               <div className="toast-message">
-    //                 <h6>{data?.product_name}</h6>
-    //                 <p>
-    //                   <span>succeed:</span> You have add{" "}
-    //                   <span id="toast-name">{data?.product_name}</span>
-    //                 </p>
-    //               </div>
-    //             </div>
-    //             <div className="toast-button">
-    //               <Link to="/cartproduct" className="toast-cart-btn">
-    //                 View Cart
-    //               </Link>
-    //               <Link className="toast-cart-btn1">CheckOut</Link>
-    //             </div>
-    //           </div>,
-    //           {
-    //             position: "top-right",
-    //             autoClose: 10000,
-    //             hideProgressBar: false,
-    //             closeOnClick: true,
-    //             pauseOnHover: true,
-    //             draggable: false,
-    //             progress: undefined,
-    //             theme: "light",
-    //           }
-    //         );
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       console.log(err.message);
-    //     });
-    // }
   };
   const handlebuynow = (product) => {
     setmodalproduct(product);
-    const productinfo = {
-      ...product,
-      quentuty,
-      size,
-      email,
-    };
     if (product?.dress_size) {
       openshopModal();
     } else {
-      // navigate("/checkout", { state: { productinfo } });
       openshopModal();
     }
   };
@@ -306,7 +225,6 @@ const ShopProducts = () => {
           }
           return res.json();
         })
-        // .then((response) => response.json())
         .then((data) => {
           if (data?._id) {
             toast(
@@ -339,9 +257,7 @@ const ShopProducts = () => {
             );
           }
         })
-        .catch((err) => {
-          console.log(err.message);
-        });
+        .catch((err) => {});
     } else {
       navigate("/login");
     }
@@ -394,11 +310,6 @@ const ShopProducts = () => {
             </div>
           </div>
           <div className="all-product-container">
-            {/* <ShopAllProducts
-              product={singlproduct}
-              categoryid={id}
-            ></ShopAllProducts> */}
-
             <div className="all-products-con">
               <Modal
                 isOpen={isModalOpen}
@@ -501,96 +412,12 @@ const ShopProducts = () => {
                   </div>
                 </>
               )}
-              {/* <div className="row">
-                {shopallproduct?.map((product) => (
-                  <div className=" shop-single-product col col-12 col-lg-4 col-sm-12 col-md-6">
-                    <div className="shop-product-inner">
-                      <Link
-                        to={`/shop-details/${product?.category_id}/${product?.product_id}`}
-                      >
-                        {" "}
-                        <img
-                          className="original-image"
-                          src={product?.Product_image}
-                          alt=""
-                        />
-                      </Link>
-                      <Link
-                        to={`/shop-details/${product?.category_id}/${product?.product_id}`}
-                      >
-                        <img
-                          className="hover-image"
-                          src={product?.daisplay_image}
-                          alt=""
-                        />
-                      </Link>
 
-                      <div className="add-to-cart-con">
-                        <div className="number-input" id="product-quen">
-                          <button
-                            className="quen-icress"
-                            onClick={handleincress}
-                          >
-                            +
-                          </button>
-                          <span>{quentuty}</span>
-                          <button
-                            className="quen-icress"
-                            onClick={handledecress}
-                          >
-                            -
-                          </button>
-                        </div>
-                        <button
-                          className="add-to-cart-button"
-                          onClick={() => handleaddtocart(product)}
-                        >
-                          <LiaShoppingBagSolid className="mr-2 text-lg"></LiaShoppingBagSolid>
-                          Add to cart
-                        </button>
-                        <MdFavoriteBorder
-                          onClick={() => handleaddwishlist(product)}
-                          className="product-fava"
-                        ></MdFavoriteBorder>
-                        <MdCompareArrows className="product-fava1"></MdCompareArrows>
-                      </div>
-                    </div>
-
-                    <div className="shop-product-information">
-                      <h6>{product?.product_name}</h6>
-                      <p>Tk:{product?.product_price}</p>
-
-                      <Link
-                        onClick={() => handlebuynow(product)}
-                        className="buy-now-button"
-                      >
-                        <AiOutlineShopping></AiOutlineShopping>{" "}
-                        <span className="ml-2">Buy Now</span>
-                      </Link>
-                    </div>
-                  </div>
-                ))}
-
-                <div className="pagination-con">
-                  {[...Array(page).keys()].map((number) => (
-                    <button
-                      key={number}
-                      className={currentpage === number && "selected-page-btn"}
-                      id="paginationbtn"
-                      onClick={() => setcurrentpage(number)}
-                    >
-                      {number}
-                    </button>
-                  ))}
-                </div>
-              </div> */}
               <ToastContainer />
             </div>
           </div>
         </div>
         <div className="shop-product-right col col-12 col-lg-2 col-sm-12 col-md-12">
-          {/* <ShopProductRight></ShopProductRight> */}
-
           <div>
             <div className="all-cata-con">
               <h5>All Categories</h5>

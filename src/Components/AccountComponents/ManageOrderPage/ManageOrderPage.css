@@ -34,7 +34,6 @@
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid gray;
-    /* padding-bottom: 6px; */
 }
 
 .gift-box-package {
@@ -73,14 +72,11 @@
     align-items: center;
     justify-content: space-between;
     padding: 25px 10px;
-    /* border: 1px solid brown; */
 }
 
 .manage-image-name {
     display: flex;
 }
-
-.manage-image-name div {}
 
 .manage-image-name img {
     width: 100px;
@@ -106,7 +102,6 @@
 
 .manage-address {
     width: 48%;
-    /* border: 1px solid gainsboro; */
     background-color: white;
     padding: 15px;
     height: 150px;
@@ -120,7 +115,6 @@
 
 .manage-summary {
     width: 48%;
-    /* border: 1px solid gainsboro; */
     background-color: white;
     padding: 15px;
     height: 160px;
@@ -160,8 +154,6 @@
         margin-bottom: 15px;
 
     }
-
-    .manage_address_mobile {}
 
     .manage-summary {
         width: 100%;

@@ -7,8 +7,7 @@ import { Link, useLocation } from "react-router-dom";
 const DashbordProjectView = () => {
   const location = useLocation();
   const project = location.state;
-  console.log(project);
-  //   id="service_view_con"
+  console.log("Dashbord Project View");
   return (
     <div className="service-details-left-con" id="service_view_con">
       <div className="service-details-image">

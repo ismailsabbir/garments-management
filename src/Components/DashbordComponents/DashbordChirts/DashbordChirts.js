@@ -4,7 +4,7 @@ import "./DashbordChirts.css";
 const DashbordChirts = () => {
   const [data, setdata] = useState([]);
   const [data1, setdata1] = useState([]);
-
+  console.log("Dashbord Chirt");
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/weeklyordersl`)
       .then((res) => res.json())

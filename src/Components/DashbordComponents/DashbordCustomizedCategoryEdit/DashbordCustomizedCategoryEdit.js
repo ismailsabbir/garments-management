@@ -14,9 +14,8 @@ const DashbordCustomizedCategoryEdit = () => {
   const [categorydetails, setcategorydetails] = useState({});
   const [color, setcolor] = useState([]);
   const [selectedColors, setSelectedColors] = useState([]);
-  console.log(categorydetails);
+  console.log("Dashbord Category Edit");
   const [allcategory, setallcategory] = useState([]);
-  console.log(categoryData?.category_id);
   useEffect(() => {
     setSelectedColors(categorydetails?.colors);
   }, [categorydetails]);
@@ -39,7 +38,6 @@ const DashbordCustomizedCategoryEdit = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setcategorydetails(data);
       })
       .catch((error) => {
@@ -74,7 +72,6 @@ const DashbordCustomizedCategoryEdit = () => {
     categorydetails?.Default_image
   );
   const handleimage2 = (e) => {
-    console.log("click1");
     const image1 = e.target.files[0];
     const formdata = new FormData();
     formdata.append("image", image1);
@@ -86,7 +83,6 @@ const DashbordCustomizedCategoryEdit = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          console.log(data.data.url);
           setDefault_image(data.data.url);
           toast("Image Uplode sucessfully !!!", {
             position: "top-center",
@@ -96,7 +92,6 @@ const DashbordCustomizedCategoryEdit = () => {
       });
   };
   const handleimage1 = (e) => {
-    console.log("click");
     const image1 = e.target.files[0];
     const formdata = new FormData();
     formdata.append("image", image1);
@@ -136,7 +131,6 @@ const DashbordCustomizedCategoryEdit = () => {
       colors,
       custom_price,
     };
-    console.log(staffinfo);
     fetch(
       `${process.env.REACT_APP_URL}/edit-customized_category/${category?.category_id}`,
       {
@@ -149,7 +143,6 @@ const DashbordCustomizedCategoryEdit = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         toast("Update sucessfully !!!", {
           position: "top-center",
           autoClose: 1000,
@@ -160,7 +153,6 @@ const DashbordCustomizedCategoryEdit = () => {
     <div className="add-staff-con">
       <h5>Edit Category</h5>
       <p>Edit your Category and necessary information from here</p>
-
       <Form onSubmit={handleCategoryedit} className="add-staff-form">
         <div className="staff-image-con">
           <div className="product-image-edit">

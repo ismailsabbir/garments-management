@@ -27,7 +27,7 @@ const DashbordCustomizedProduct = () => {
   const [category, setcategory] = useState();
   const [allcategory, setallcategory] = useState([]);
   const alldata = useContext(servcontext);
-  console.log(selectedOptions);
+  console.log("Dashbord Customized Product");
   useEffect(() => {
     setallcategory(alldata?.category);
   }, []);
@@ -56,7 +56,6 @@ const DashbordCustomizedProduct = () => {
       )
         .then((req) => req.json())
         .then((data) => {
-          console.log(data);
           setproducts(data?.category);
           setcuscount(data?.count);
           setloading(false);
@@ -72,10 +71,7 @@ const DashbordCustomizedProduct = () => {
       reader.onload = (e) => {
         try {
           const fileContents = JSON.parse(e.target.result);
-          console.log(fileContents);
           for (let i = 0; i < fileContents.length; i++) {
-            console.log(fileContents[i]);
-
             fetch(`${process.env.REACT_APP_URL}/customized-pproduct`, {
               method: "POST",
               body: JSON.stringify(fileContents[i]),
@@ -85,16 +81,13 @@ const DashbordCustomizedProduct = () => {
             })
               .then((response) => response.json())
               .then((data) => {
-                console.log(data);
                 toast("Product add sucessfully !!!", {
                   position: "top-center",
                   autoClose: 1000,
                 });
                 refetch();
               })
-              .catch((err) => {
-                console.log(err.message);
-              });
+              .catch((err) => {});
           }
         } catch (error) {
           console.error("Invalid JSON file:", error);
@@ -139,7 +132,6 @@ const DashbordCustomizedProduct = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data?.deletedCount > 0) {
               toast("Product delete sucessfully !!!", {
                 position: "top-center",
@@ -176,7 +168,6 @@ const DashbordCustomizedProduct = () => {
         )
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data?.deletedCount > 0) {
               toast("product delete sucessfully !!!", {
                 position: "top-center",
@@ -201,7 +192,6 @@ const DashbordCustomizedProduct = () => {
     setcategory(category);
   };
   const sortProductsByPrice = (e) => {
-    console.log(e, typeof e);
     if (e === "norm") {
       setproducts(products);
     } else if (e === "sell") {
@@ -287,7 +277,6 @@ const DashbordCustomizedProduct = () => {
         </Form>
 
         <select
-          // onChange={(e) => setcategory(e.target.value)}
           onChange={handlecategory}
           className="product-category-search"
           id="cars"
@@ -316,8 +305,6 @@ const DashbordCustomizedProduct = () => {
           <option value="IN STOCK">Status-Selling</option>
           <option value="STOCK OUT">Status-Out Of Stock</option>
         </select>
-
-        {/* <button className="product-filter">Filter</button> */}
         <button onClick={handlereset} className="product-reset">
           ReSet
         </button>

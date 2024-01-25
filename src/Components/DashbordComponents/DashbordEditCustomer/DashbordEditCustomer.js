@@ -9,8 +9,7 @@ const DashbordEditCustomer = () => {
   const [customerinfo, setcustomerinfo] = useState();
   const customers = location?.state;
   const [photo, setphoto1] = useState(customers?.photo);
-
-  console.log(customers);
+  console.log("Dashbord Edit Customer");
   useEffect(() => {
     setcustomerinfo(customers);
   }, []);
@@ -42,24 +41,6 @@ const DashbordEditCustomer = () => {
         });
       });
   };
-  //   const specialCharacters = "!@#$%^&*()_-+=<>?/[]{}|";
-  //   const lowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
-  //   const uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  //   const numbers = "0123456789";
-  //   const allCharacters =
-  //     lowercaseLetters + uppercaseLetters + numbers + specialCharacters;
-  //   const getRandomChar = (string) =>
-  //     string[Math.floor(Math.random() * string.length)];
-  //   let password = "";
-  //   password += getRandomChar(specialCharacters);
-  //   for (let i = password.length; i < 8; i++) {
-  //     password += getRandomChar(allCharacters);
-  //   }
-  //   password = password
-  //     .split("")
-  //     .sort(() => Math.random() - 0.5)
-  //     .join("");
-  //   console.log(password);
   const handlestaffadd = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -85,7 +66,6 @@ const DashbordEditCustomer = () => {
       });
       return;
     }
-
     const staffinfo = {
       id,
       name,
@@ -98,7 +78,6 @@ const DashbordEditCustomer = () => {
       created_date,
       isCustomer,
     };
-    console.log(staffinfo);
     fetch(`${process.env.REACT_APP_URL}/edit_customers`, {
       method: "PUT",
       body: JSON.stringify(staffinfo),
@@ -108,7 +87,6 @@ const DashbordEditCustomer = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data?.sucess) {
           toast("Customer Updated sucessfully !!!", {
             position: "top-center",
@@ -223,12 +201,6 @@ const DashbordEditCustomer = () => {
               placeholder="Staff Password"
               name="join"
               value={customerinfo?.created_date}
-              // onChange={(e) =>
-              //   setcustomerinfo({
-              //     ...customerinfo,
-              //     created_date: e.target.value,
-              //   })
-              // }
             />
           </Form.Group>
         </div>
@@ -249,20 +221,6 @@ const DashbordEditCustomer = () => {
             EDIT CUSTOMER INFORMATIONS
           </button>
         </div>
-        {/* <div className="staff-first-name-lastname mt-4">
-            <Form.Group className="mb-3 firstname-staff">
-              <Form.Label>Card Number</Form.Label>
-              <Form.Control
-                className="staff-input"
-                type="text"
-                placeholder="Card Id"
-                name="cardId"
-              />
-            </Form.Group>
-            <button className="add-staf--btn" variant="primary" type="submit">
-              ADD STAFF
-            </button>
-          </div> */}
       </Form>
       <ToastContainer></ToastContainer>
     </div>

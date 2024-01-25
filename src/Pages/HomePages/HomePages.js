@@ -23,7 +23,6 @@ const HomePages = () => {
       <HomeComments></HomeComments>
       <HomeContact></HomeContact>
       <HomeProjects></HomeProjects>
-
       <HomeBlogs></HomeBlogs>
     </div>
   );

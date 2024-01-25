@@ -16,6 +16,7 @@ const DashbordBlogs = () => {
   const [cuscount, setcuscount] = useState(0);
   const [loading, setloading] = useState(true);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  console.log("Dashbord Blog");
   const handleOptionClick = (product) => {
     if (!selectedOptions.includes(product)) {
       setSelectedOptions([...selectedOptions, product]);
@@ -35,7 +36,6 @@ const DashbordBlogs = () => {
       confirmButtonText: "DELATE",
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(selectedOptions);
         fetch(`${process.env.REACT_APP_URL}/delete-blog`, {
           method: "DELETE",
           headers: {
@@ -47,7 +47,6 @@ const DashbordBlogs = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data?.deletedCount > 0) {
               toast("Blog delete sucessfully !!!", {
                 position: "top-center",
@@ -70,7 +69,6 @@ const DashbordBlogs = () => {
       })
         .then((req) => req.json())
         .then((data) => {
-          console.log(data);
           setproducts(data);
           setcuscount(data?.length);
           setloading(false);
@@ -85,7 +83,6 @@ const DashbordBlogs = () => {
       reader.onload = (e) => {
         try {
           const fileContents = JSON.parse(e.target.result);
-          console.log(fileContents);
           for (let i = 0; i < fileContents.length; i++) {
             fetch(`${process.env.REACT_APP_URL}/blog_add`, {
               method: "POST",
@@ -102,9 +99,7 @@ const DashbordBlogs = () => {
                 });
                 refetch();
               })
-              .catch((err) => {
-                console.log(err.message);
-              });
+              .catch((err) => {});
           }
         } catch (error) {
           console.error("Invalid JSON file:", error);
@@ -138,7 +133,6 @@ const DashbordBlogs = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data?.deletedCount > 0) {
               toast("Blog delete sucessfully !!!", {
                 position: "top-center",

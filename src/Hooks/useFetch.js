@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 const useFetch = (url) => {
   const [data, setdata] = useState();
-
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())

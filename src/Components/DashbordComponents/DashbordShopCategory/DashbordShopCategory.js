@@ -23,6 +23,7 @@ const DashbordShopCategory = () => {
   const [search, setsearch] = useState("");
   const [reset, setreset] = useState(false);
   const [loading, setloading] = useState(true);
+  console.log("Dashbord Shop Category");
   const handleToggle = (orderId) => {
     setCheckedStates((prevStates) => ({
       ...prevStates,
@@ -38,7 +39,6 @@ const DashbordShopCategory = () => {
   };
   const isDeleteButtonDisabled = selectedOptions.length === 0;
   const productid = selectedOptions.map((item) => item._id);
-  console.log(productid);
   const { data: productall = [], refetch } = useQuery({
     queryKey: [
       "shopdascategory",
@@ -60,17 +60,13 @@ const DashbordShopCategory = () => {
       )
         .then((req) => req.json())
         .then((data) => {
-          console.log(data);
           setproducts(data);
-          console.log(data);
           setproducts(data?.shopcategory);
           setcuscount(data?.count);
           setloading(false);
           return data;
         }),
   });
-
-  console.log(products);
   const handledeleteproduct = () => {
     Swal.fire({
       title: "Are you sure ??",
@@ -91,7 +87,6 @@ const DashbordShopCategory = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data?.deletedCount > 0) {
               toast("Category delete sucessfully !!!", {
                 position: "top-center",
@@ -107,16 +102,12 @@ const DashbordShopCategory = () => {
   const handleFileUpload = (event) => {
     const fileInput = event.target;
     const file = fileInput.files[0];
-    console.log("file is ", file);
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
         try {
           const fileContents = JSON.parse(e.target.result);
-          console.log(fileContents);
           for (let i = 0; i < fileContents.length; i++) {
-            console.log(fileContents[i]);
-
             fetch(`${process.env.REACT_APP_URL}/shopcategory`, {
               method: "POST",
               body: JSON.stringify(fileContents[i]),
@@ -126,16 +117,13 @@ const DashbordShopCategory = () => {
             })
               .then((response) => response.json())
               .then((data) => {
-                console.log(data);
                 toast("Product add sucessfully !!!", {
                   position: "top-center",
                   autoClose: 1000,
                 });
                 refetch();
               })
-              .catch((err) => {
-                console.log(err.message);
-              });
+              .catch((err) => {});
           }
         } catch (error) {
           console.error("Invalid JSON file:", error);
@@ -151,7 +139,6 @@ const DashbordShopCategory = () => {
   const handleproductsearch = (e) => {
     e.preventDefault();
     const search = e.target.searchproduct.value;
-    console.log(search);
     setreset(false);
     setsearch(search);
   };
@@ -180,7 +167,6 @@ const DashbordShopCategory = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data?.deletedCount > 0) {
               toast("Category delete sucessfully !!!", {
                 position: "top-center",
@@ -210,14 +196,10 @@ const DashbordShopCategory = () => {
             id="input-file1"
             className="fileinput"
             type="file"
-            // accept=".json"
             onChange={handleFileUpload}
           />
         </label>
         <div className="bulk-action">
-          {/* <button>
-            <LuClipboardEdit className="bulk-icon"></LuClipboardEdit>Bulk Action
-          </button> */}
           <button
             onClick={handledeleteproduct}
             id={isDeleteButtonDisabled ? "disablecss" : "pro-delete-btn"}
@@ -374,97 +356,6 @@ const DashbordShopCategory = () => {
                 )}
               </>
             )}
-            {/* {products?.length > 0 ? (
-              <>
-                <table className="table recent-order-table">
-                  <tr className="recent-order-tr">
-                    <th>Select</th>
-                    <th className="recent-order-hed">ID</th>
-                    <th className="recent-order-hed">Icon</th>
-                    <th className="recent-order-hed">NAME</th>
-                    <th className="recent-order-hed">DESCRIPTION</th>
-                    <th className="recent-order-hed">PUBLISHED</th>
-                    <th className="recent-order-hed">VIEW</th>
-                    <th className="recent-order-hed">ACTION</th>
-                  </tr>
-
-                  <tbody>
-                    {products?.map((order) => (
-                      <tr>
-                        <th>
-                          <label>
-                            <input
-                              onClick={() => handleOptionClick(order)}
-                              type="checkbox"
-                              className="checkbox"
-                            />
-                          </label>
-                        </th>
-                        <td className="das-order-data">
-                          <span>{order?.category_id}</span>{" "}
-                        </td>
-                        <td className="das-order-data">
-                          <span>
-                            <img
-                              className="dashbord-product"
-                              src={order?.category_image}
-                              alt="not"
-                            />
-                          </span>{" "}
-                        </td>
-                        <td className="das-order-data">
-                          <span>{order?.category_name}</span>{" "}
-                        </td>
-                        <td className="das-order-data">
-                          <span>Product category</span>{" "}
-                        </td>
-
-                        <td className="das-order-data">
-                          <span>
-                            <input
-                              type="checkbox"
-                              className="toggle toggle-success"
-                              checked={checkedStates[order.category_id]}
-                              onChange={() => handleToggle(order.category_id)}
-                            />
-                          </span>
-                        </td>
-                        <td className="das-order-data">
-                          <span>
-                            <Link
-                              to="/dashbord/shop-category-view"
-                              state={order}
-                            >
-                              <FaSearchPlus className="printlogo"></FaSearchPlus>
-                            </Link>
-                          </span>{" "}
-                        </td>
-                        <td className="das-order-data">
-                          <div className="print-serach">
-                            <Link
-                              to="/dashbord/shop-category-edit"
-                              state={order}
-                            >
-                              <FiEdit className="printlogo"></FiEdit>
-                            </Link>
-
-                            <RiDeleteBinLine
-                              onClick={() => handledeletecategory(order)}
-                              className="printlogo"
-                              id="category-delete-btn"
-                            ></RiDeleteBinLine>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </>
-            ) : (
-              <>
-                <NotFound></NotFound>
-              </>
-            )} */}
 
             <div className="pagination-con">
               {[...Array(custompage).keys()].map((number) => (

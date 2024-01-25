@@ -2,9 +2,9 @@ import React from "react";
 import { LuPhoneCall } from "react-icons/lu";
 import { TfiEmail, TfiWorld } from "react-icons/tfi";
 import { FaMapLocationDot } from "react-icons/fa6";
-
 import "./ContactMedia.css";
 const ContactMedia = () => {
+  console.log("Contact Media");
   return (
     <div className="contact-media-con">
       <div className="phone-con">

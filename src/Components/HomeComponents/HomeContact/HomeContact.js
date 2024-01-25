@@ -2,6 +2,7 @@ import React from "react";
 import "./HomeContact.css";
 import { Link } from "react-router-dom";
 const HomeContact = () => {
+  console.log("Home Contact");
   return (
     <div className="homecontact-con">
       <h1>Consult With Us The Suitable Material for Your Project</h1>

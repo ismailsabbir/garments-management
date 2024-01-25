@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import "./EmployeeLeaves.css";
 import { ToastContainer, toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Form } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
@@ -20,7 +20,7 @@ const EmployeeLeaves = () => {
   const custompage = Math.ceil(cuscount / datasize);
   const [searchvalue, setsearchvalue] = useState("");
   const [loading, setloading] = useState(true);
-  console.log(staffs);
+  console.log("Employee Leaves");
   const { data: products = [], refetch } = useQuery({
     queryKey: [
       "my_leave_requests",
@@ -46,28 +46,7 @@ const EmployeeLeaves = () => {
           return data;
         }),
   });
-
-  const handleadmin = (id) => {
-    fetch(`${process.env.REACT_APP_URL}/staff/admin/${id}`, {
-      headers: {
-        authorization: `Beare ${localStorage.getItem("garments-token")}`,
-      },
-      method: "PUT",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.message === "farbidden access") {
-          toast("farbidden access !!!", {
-            position: "top-center",
-            autoClose: 1000,
-          });
-        }
-        console.log(data);
-        refetch();
-      });
-  };
   const handledelete = (staff) => {
-    console.log(staff);
     fetch(`${process.env.REACT_APP_URL}/delete-request/${staff?._id}`, {
       headers: {
         authorization: `Beare ${localStorage.getItem("garments-token")}`,
@@ -76,7 +55,6 @@ const EmployeeLeaves = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         refetch();
       });
   };
@@ -94,30 +72,8 @@ const EmployeeLeaves = () => {
     )
       .then((req) => req.json())
       .then((data) => {
-        console.log(data.result);
         setstaffs(data.result);
         setcuscount(data?.count);
-        // setcuscount(0);
-      });
-  };
-  const handleemailsearch = (e) => {
-    e.preventDefault();
-    const email = e.target.email.value;
-
-    fetch(
-      `${process.env.REACT_APP_URL}/single_staff?email=${email}&&page=${cuscurrentpage}&&size=${datasize}`,
-      {
-        headers: {
-          authorization: `Beare ${localStorage.getItem("garments-token")}`,
-        },
-      }
-    )
-      .then((req) => req.json())
-      .then((data) => {
-        console.log(data.result);
-        setstaffs(data.result);
-        setcuscount(data?.count);
-        // setcuscount(0);
       });
   };
   const handlerole = (e) => {
@@ -152,19 +108,6 @@ const EmployeeLeaves = () => {
             <BsSearch></BsSearch>
           </button>
         </Form>
-
-        {/* <Form onSubmit={handleemailsearch} className="name-search">
-          <input
-            className="name-input-staff"
-            type="email"
-            placeholder="Search by Email"
-            name="email"
-          />
-          <button type="submit">
-            <BsSearch></BsSearch>
-          </button>
-        </Form> */}
-
         <select onChange={handlerole} id="cars" placeholder="Category">
           <option value="" disabled selected>
             Leave Status
@@ -181,7 +124,6 @@ const EmployeeLeaves = () => {
         <div className="overflow-x-auto">
           <div className="overflow-x-auto">
             <table className="table recent-order-table">
-              {/* <thead> */}
               <tr className="recent-order-tr">
                 <th className="recent-order-hed">NAME</th>
                 <th className="recent-order-hed">Apply Date</th>

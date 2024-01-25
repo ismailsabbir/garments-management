@@ -5,7 +5,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 const ServicesList = () => {
   const { data } = useContext(servcontext);
-  console.log(data);
+  console.log("Service List");
   return (
     <div className="services-list-con bg-neutral">
       <h4>Other Services</h4>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./MyAddressEdit.css";
 import { useContext } from "react";
@@ -9,7 +9,7 @@ const MyAddressEdit = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const showorder = location.state;
-  console.log(showorder);
+  console.log("My Address Edit");
   const handleeditadress = (e) => {
     e.preventDefault();
     const email = user?.email;
@@ -32,7 +32,6 @@ const MyAddressEdit = () => {
       location,
       area,
     };
-    console.log(data);
     fetch(`${process.env.REACT_APP_URL}/address?email=${user?.email}`, {
       method: "POST",
       body: JSON.stringify(data),
@@ -43,12 +42,9 @@ const MyAddressEdit = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         navigate("/manage_account/address-book", { state: data });
       })
-      .catch((err) => {
-        console.log(err.message);
-      });
+      .catch((err) => {});
   };
   return (
     <div>

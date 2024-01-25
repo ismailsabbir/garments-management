@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const HomeBlogs = () => {
   const { blogs } = useContext(servcontext);
   const newblogs = blogs?.slice(0, 3);
+  console.log("Home Blog");
   return (
     <div className="home-blog-con">
       <div className="homeservices-top" id="home-project-top">

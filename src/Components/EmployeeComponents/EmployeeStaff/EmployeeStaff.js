@@ -16,7 +16,7 @@ const EmployeeStaff = () => {
   const [cuscount, setcuscount] = useState(0);
   const custompage = Math.ceil(cuscount / datasize);
   const [searchvalue, setsearchvalue] = useState("");
-  const [staff, setstaff] = useState("");
+  console.log("Employee Staff");
   const { data: products = [], refetch } = useQuery({
     queryKey: [
       "single_employee_staff",
@@ -57,7 +57,6 @@ const EmployeeStaff = () => {
             autoClose: 1000,
           });
         }
-        console.log(data);
         refetch();
       });
   };
@@ -79,7 +78,6 @@ const EmployeeStaff = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             toast("Staff Delate Sucessfully !!!", {
               position: "top-center",
               autoClose: 1000,
@@ -103,10 +101,8 @@ const EmployeeStaff = () => {
     )
       .then((req) => req.json())
       .then((data) => {
-        console.log(data.result);
         setstaffs(data.result);
         setcuscount(data?.count);
-        // setcuscount(0);
       });
   };
   const handleemailsearch = (e) => {
@@ -122,7 +118,6 @@ const EmployeeStaff = () => {
     )
       .then((req) => req.json())
       .then((data) => {
-        console.log(data.result);
         setstaffs(data.result);
         setcuscount(data?.count);
       });
@@ -205,7 +200,6 @@ const EmployeeStaff = () => {
         <div className="overflow-x-auto">
           <div className="overflow-x-auto">
             <table className="table recent-order-table">
-              {/* <thead> */}
               <tr className="recent-order-tr">
                 <th className="recent-order-hed">NAME</th>
                 <th className="recent-order-hed">EMAIL</th>
@@ -216,7 +210,6 @@ const EmployeeStaff = () => {
                 <th className="recent-order-hed">PUBLISHED</th>
                 <th className="recent-order-hed">ACTION</th>
               </tr>
-              {/* </thead> */}
               <tbody>
                 {staffs?.map((order) => (
                   <tr>

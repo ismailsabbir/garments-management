@@ -4,7 +4,7 @@ import { servcontext } from "../../../App";
 import { Link } from "react-router-dom";
 const ProjectCategorys = () => {
   const { category } = useContext(servcontext);
-  console.log(category);
+  console.log("Project Category");
   return (
     <div className="categorys-con">
       <div className="category-head">

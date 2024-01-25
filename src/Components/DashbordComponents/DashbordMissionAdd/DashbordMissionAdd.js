@@ -1,8 +1,8 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
-
 const DashbordMissionAdd = () => {
+  console.log("Dashbord Mission Add");
   const handlestaffedit = (e) => {
     e.preventDefault();
     const mission_id = e.target.mission_id.value.toString();
@@ -11,7 +11,6 @@ const DashbordMissionAdd = () => {
       mission_id,
       mission,
     };
-    console.log(staffinfo);
     fetch(`${process.env.REACT_APP_URL}/mission/add`, {
       method: "POST",
       body: JSON.stringify(staffinfo),
@@ -21,7 +20,6 @@ const DashbordMissionAdd = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data?.sucess) {
           toast("Mission Add  sucessfully !!!", {
             position: "top-center",

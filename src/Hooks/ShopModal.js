@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../Context/UserContext";
-// import { AuthContext } from "../../Context/UserContext";
-
 const ShopModal = ({ isOpen, closeModal, product }) => {
   const { user } = useContext(AuthContext);
   const [quentuty, setquentity] = useState(1);

@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Form } from "react-bootstrap";
 import "./DashbordAttendance.css";
-
 const DashbordAttendance = () => {
   const imagebb = process.env.REACT_APP_IMGBB;
   const webcamRef = useRef(null);
@@ -17,7 +16,6 @@ const DashbordAttendance = () => {
     setCapturedImage(imageSrc);
     convertToJPEGAndUpload(imageSrc);
   };
-
   const convertToJPEGAndUpload = (imageSrc) => {
     const img = new Image();
     img.src = imageSrc;
@@ -66,7 +64,6 @@ const DashbordAttendance = () => {
               return response.json();
             })
             .then((data) => {
-              console.log(data);
               if (!data?.error) {
                 toast("Presence Count successfully added !!!", {
                   position: "top-center",
@@ -75,7 +72,6 @@ const DashbordAttendance = () => {
               }
             })
             .catch((error) => {
-              console.error(error);
               toast(
                 { error },
                 {
@@ -124,7 +120,7 @@ const DashbordAttendance = () => {
           className="add-staf--btn attendance-btn"
           variant="primary"
           type="submit"
-          disabled={isSubmitting} // Disable the button when submitting
+          disabled={isSubmitting}
         >
           {isSubmitting ? "Submitting..." : "SUBMIT ATTENDANCE"}
         </button>

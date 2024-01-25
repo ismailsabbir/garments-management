@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import { BiPrinter, IconName } from "react-icons/bi";
+import React, { useContext, useState } from "react";
+import { BiPrinter } from "react-icons/bi";
 import { FaSearchPlus } from "react-icons/fa";
 import "./DashboardRecentOrder.css";
-import { AuthContext } from "../../../Context/UserContext";
 import { useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import jsPDF from "jspdf";
@@ -12,7 +11,6 @@ const DashboardRecentOrder = () => {
   const [orders, setorders] = useState([]);
   const [customizesorders, setcustomizedorders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { user, userlogout } = useContext(AuthContext);
   const [currentpage, setcurrentpage] = useState(0);
   const [cuscurrentpage, setcuscurrentpage] = useState(0);
   const [datasize, setdatasize] = useState(10);
@@ -20,7 +18,7 @@ const DashboardRecentOrder = () => {
   const [cuscount, setcuscount] = useState(0);
   const page = Math.ceil(count / datasize);
   const custompage = Math.ceil(cuscount / datasize);
-  console.log(datasize, count, page);
+  console.log("Dashbord Recent Order");
   const { data: products = [], refetch } = useQuery({
     queryKey: ["currents_orders"],
     queryFn: () =>
@@ -34,7 +32,6 @@ const DashboardRecentOrder = () => {
       )
         .then((req) => req.json())
         .then((data) => {
-          console.log(data);
           setorders(data?.todayOrders);
           setcount(data?.countorders);
           setcustomizedorders(data?.todaycustom);
@@ -45,7 +42,6 @@ const DashboardRecentOrder = () => {
   });
   const handleOrderStatusChange = async (event, order) => {
     const status = event.target.value;
-    console.log(status);
     Swal.fire({
       title: "Are you sure?",
       text: "You can update the status of orders.!",
@@ -67,7 +63,6 @@ const DashboardRecentOrder = () => {
         )
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
             refetch();
             toast("Update sucessfully !!!", {
               position: "top-center",
@@ -80,7 +75,6 @@ const DashboardRecentOrder = () => {
 
   const handlecustomOrderStatusChange = async (event, order) => {
     const status = event.target.value;
-    console.log(status);
     Swal.fire({
       title: "Are you sure?",
       text: "You can update the status of orders.!",
@@ -102,7 +96,6 @@ const DashboardRecentOrder = () => {
         )
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
             refetch();
             toast("Update sucessfully !!!", {
               position: "top-center",
@@ -283,7 +276,6 @@ const DashboardRecentOrder = () => {
         <div className="overflow-x-auto">
           <div className="overflow-x-auto">
             <table className="table recent-order-table">
-              {/* <thead> */}
               <tr className="recent-order-tr">
                 <th className="recent-order-hed">INVOICE NO</th>
                 <th className="recent-order-hed">ORDER TIME</th>
@@ -294,7 +286,6 @@ const DashboardRecentOrder = () => {
                 <th className="recent-order-hed">ACTION</th>
                 <th className="recent-order-hed">INVOICE</th>
               </tr>
-              {/* </thead> */}
               <tbody>
                 {customizesorders?.map((order) => (
                   <tr>

@@ -16,7 +16,7 @@ const MycartPages = () => {
   const [datasize, setdatasize] = useState(5);
   const [count, setcount] = useState(0);
   const page = Math.ceil(count / datasize);
-  console.log(datasize, count, page);
+  console.log("My Cart Product Page");
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_URL}/mycartproduct?email=${user?.email}&page=${currentpage}&size=${datasize}`,
@@ -46,30 +46,6 @@ const MycartPages = () => {
   const handlesearch = (e) => {
     e.preventDefault();
     const search = e.target.search.value;
-    console.log(search);
-    // fetch(
-    //   `${process.env.REACT_APP_URL}/idodrders?email=${user?.email}&page=${currentpage}&size=${datasize}&search=${search}`,
-    //   {
-    //     headers: {
-    //       authorization: `Beare ${localStorage.getItem("garments-token")}`,
-    //     },
-    //   }
-    // )
-    //   .then((res) => {
-    //     if (res.status === 401 || res.status === 403) {
-    //       return userlogout();
-    //     }
-    //     return res.json();
-    //   })
-    //   .then((jsonData) => {
-    //     setorders(jsonData.product);
-    //     setcount(jsonData.count);
-    //     setLoading(false);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Failed to fetch data:", error);
-    //     setLoading(false);
-    //   });
   };
   const handledelete = (product) => {
     Swal.fire({
@@ -188,9 +164,7 @@ const MycartPages = () => {
           );
         }
       })
-      .catch((err) => {
-        console.log(err.message);
-      });
+      .catch((err) => {});
   };
   const handleincress = (productId) => {
     const updatedProducts = orders.map((product) => {
@@ -205,7 +179,6 @@ const MycartPages = () => {
   const handledecress = (productId) => {
     const updatedProducts = orders.map((product) => {
       if (product._id === productId?._id) {
-        // return { ...product, quentuty: parseInt(product.quentuty) - 1 };
         return {
           ...product,
           quentuty: Math.max(1, parseInt(product.quentuty) - 1),
@@ -216,7 +189,6 @@ const MycartPages = () => {
 
     setorders(updatedProducts);
   };
-  console.log(orders);
   return (
     <div className="my-orders-continer">
       {loading ? (

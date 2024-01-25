@@ -30,7 +30,7 @@ const CheckOutPages = () => {
   const [userinfo, setuserinfo] = useState([]);
   const [isRewardUse, setisRewardUse] = useState(false);
   const [reward, setreward] = useState();
-  console.log(userinfo);
+  console.log("Checkout Page");
   useEffect(() => {
     setreward(userinfo?.reward);
   }, []);
@@ -48,7 +48,6 @@ const CheckOutPages = () => {
       })
       .then((jsonData) => {
         setuserinfo(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -69,7 +68,6 @@ const CheckOutPages = () => {
       })
       .then((jsonData) => {
         setaddres(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -90,7 +88,6 @@ const CheckOutPages = () => {
       })
       .then((jsonData) => {
         setorders(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -111,7 +108,6 @@ const CheckOutPages = () => {
       })
       .then((jsonData) => {
         setcartorder(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -135,7 +131,6 @@ const CheckOutPages = () => {
       })
       .then((jsonData) => {
         setcustomized(jsonData);
-        // setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch data:", error);
@@ -177,11 +172,9 @@ const CheckOutPages = () => {
       ]);
     }
   }, [addresss, shoporder, cartorder, customized]);
-  console.log(showorder1);
   useEffect(() => {
     if (!shopinfo) {
       navigate("/shop");
-      console.log("not shop");
     }
   }, []);
   const firstnamehandle = (e) => {
@@ -227,7 +220,6 @@ const CheckOutPages = () => {
         20) /
         100 +
       20;
-    console.log("userinfo?.role === Premium && userinfo?.reward", total_price);
   } else if (isRewardUse) {
     total_price =
       parseFloat(shopinfo?.product_price) * parseFloat(shopinfo?.quentuty) +
@@ -300,7 +292,6 @@ const CheckOutPages = () => {
       productinfo,
       status,
     };
-    console.log("orderconfirm", orderconfirm);
     if (!name || !lastname || !email || !phone || !address || !postcode) {
       seterrorinfo(true);
       window.scrollTo({ top: 150, behavior: "smooth" });
@@ -315,14 +306,11 @@ const CheckOutPages = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data._id);
         if (data._id) {
           navigate("/shoppayment", { state: { orderconfirm } });
         }
       })
-      .catch((err) => {
-        console.log(err.message);
-      });
+      .catch((err) => {});
   };
   const handleRewardYes = () => {
     setisRewardUse(true);
@@ -341,7 +329,6 @@ const CheckOutPages = () => {
   const handleRewardNo = () => {
     setisRewardUse(false);
   };
-  console.log(total_price);
   return (
     <div className="checkout-container-hole">
       {userinfo?.reward >= 1 ? (
@@ -402,7 +389,6 @@ const CheckOutPages = () => {
           <Form className="checkout-inforow-col row">
             <div className="checkout-info-con-left col col-12 col-sm-12 col-md-12 col-lg-8">
               <h4 className="biling-text">Billing Details</h4>
-              {/* <form> */}
               <div className="first-name-last-name">
                 <input
                   type="text"
@@ -438,7 +424,6 @@ const CheckOutPages = () => {
               <input
                 type="text"
                 name="address"
-                // placeholder="House Number, Road Name,City,District"
                 placeholder={order?.address}
                 className="company-input"
                 onChange={cityhandler}
@@ -474,7 +459,6 @@ const CheckOutPages = () => {
                 className="note-input"
                 onChange={messagehandler}
               />
-              {/* </form> */}
             </div>
             <div className="checkout-info-right col col-12 col-sm-12 col-md-12 col-lg-3">
               <h5>Your Order</h5>
@@ -594,44 +578,15 @@ const CheckOutPages = () => {
                               20}
                           </p>
                         )}
-                        {/* <p>
-                          $
-                          {parseFloat(shopinfo?.product_price) *
-                            parseFloat(shopinfo?.quentuty) +
-                            20}
-                        </p> */}
                       </>
                     )}
                   </div>
                 )}
-                {/* <div className="checkout-totla">
-                  <p>Total:</p>
-                  {userinfo?.role === "Premium" ? (
-                    <p>
-                      $
-                      {parseFloat(shopinfo?.product_price) *
-                        parseFloat(shopinfo?.quentuty) -
-                        (parseFloat(shopinfo?.product_price) *
-                          parseFloat(shopinfo?.quentuty) *
-                          20) /
-                          100 +
-                        20}
-                    </p>
-                  ) : (
-                    <p>
-                      $
-                      {parseFloat(shopinfo?.product_price) *
-                        parseFloat(shopinfo?.quentuty) +
-                        20}
-                    </p>
-                  )}
-                </div> */}
                 <p className="checkout-personal">
                   Your personal data will be used to process your order, support
                   your experience throughout this website, and for other
                   purposes described in our privacy policy.
                 </p>
-                {/* <Link to="/shoppayment" state={{ orderconfirm }}> */}
                 <button
                   onClick={handleorderconfirm}
                   type="submit"
@@ -639,7 +594,6 @@ const CheckOutPages = () => {
                 >
                   Confirm Order
                 </button>
-                {/* </Link> */}
               </div>
             </div>
           </Form>

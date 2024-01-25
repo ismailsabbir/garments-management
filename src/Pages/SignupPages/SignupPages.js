@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import logo from "../../Images/Logo.png";
 import { CgGoogle } from "react-icons/cg";
 import { BiLogoFacebook, BiLogoGmail } from "react-icons/bi";
-
 import "./SignupPages.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/UserContext";
@@ -17,7 +16,7 @@ const SignupPages = () => {
   const name = user?.displayName;
   const email = user?.email;
   const userdata = { name, email };
-  console.log(userdata);
+  console.log("Sign up Page");
   const handleregister = (e) => {
     e.preventDefault();
     setsucessmess(false);
@@ -40,9 +39,7 @@ const SignupPages = () => {
         setsucessmess(true);
         form.reset();
         updateusername(name)
-          .then((req) => {
-            console.log(req.user);
-          })
+          .then((req) => {})
           .catch((error) => {
             console.error(error);
           });
@@ -54,12 +51,9 @@ const SignupPages = () => {
           },
         })
           .then((req) => req.json())
-          .then((data) => {
-            console.log(data);
-          });
+          .then((data) => {});
       })
       .catch((error) => {
-        console.log(error);
         seterrormessage(error.message);
       });
   };
@@ -82,7 +76,6 @@ const SignupPages = () => {
         })
           .then((req) => req.json())
           .then((data) => {
-            console.log(data);
             fetch(`${process.env.REACT_APP_URL}/jwt`, {
               method: "POST",
               headers: {
@@ -92,14 +85,12 @@ const SignupPages = () => {
             })
               .then((req) => req.json())
               .then((data) => {
-                console.log(data);
                 localStorage.setItem("garments-token", data?.token);
                 navigate(from, { replace: true });
               });
           });
       })
       .catch((error) => {
-        console.log(error);
         seterrormessage(error.message);
       });
   };
@@ -110,7 +101,6 @@ const SignupPages = () => {
         const currentuser = {
           email: user.email,
         };
-        console.log(user);
         fetch(`${process.env.REACT_APP_URL}/users`, {
           method: "POST",
           body: JSON.stringify(userdata),
@@ -120,7 +110,6 @@ const SignupPages = () => {
         })
           .then((req) => req.json())
           .then((data) => {
-            console.log(data);
             fetch(`${process.env.REACT_APP_URL}/jwt`, {
               method: "POST",
               headers: {
@@ -130,15 +119,12 @@ const SignupPages = () => {
             })
               .then((req) => req.json())
               .then((data) => {
-                console.log(data);
                 localStorage.setItem("garments-token", data?.token);
                 navigate(from, { replace: true });
               });
           });
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
   return (
     <div className="sign-page-con">

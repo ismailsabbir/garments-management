@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { MdArrowRightAlt } from "react-icons/md";
 import "./SingleServices.css";
 const SingleServices = ({ service }) => {
+  console.log("Single service");
   return (
     <Link
       to={`/serviceDetails/${service?._id}`}

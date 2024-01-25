@@ -9,18 +9,15 @@ const ShopPaymentSucessPage = () => {
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const transiction_id = query.get("transiction_id");
-  console.log(location);
+  console.log("Shop Payment Sucess Page");
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_URL}/shoporder/by_transcation_id/${transiction_id}`
     )
       .then((res) => res.json())
       .then((data) => setproducts(data))
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   }, [transiction_id]);
-  console.log(products);
   return (
     <div className="payment-sucess-con">
       <div className="paymentinfo">

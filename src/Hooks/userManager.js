@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 const useManager = (email) => {
   const [isManager, setManager] = useState(false);
   const [managerloading, setmanagerloading] = useState(true);

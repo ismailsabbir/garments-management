@@ -7,7 +7,6 @@ import { useEffect } from "react";
 import Loading from "../../CommonComponents/Loading/Loading";
 import { Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { classnames } from "classnames";
 const MyordersComponents = () => {
   const navigate = useNavigate();
   const { user, userlogout } = useContext(AuthContext);
@@ -17,7 +16,7 @@ const MyordersComponents = () => {
   const [datasize, setdatasize] = useState(5);
   const [count, setcount] = useState(0);
   const page = Math.ceil(count / datasize);
-  console.log(datasize, count, page);
+  console.log("My order component");
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_URL}/shoporders?email=${user?.email}&page=${currentpage}&size=${datasize}`,
@@ -47,7 +46,6 @@ const MyordersComponents = () => {
   const handlesearch = (e) => {
     e.preventDefault();
     const search = e.target.search.value;
-    console.log(search);
     fetch(
       `${process.env.REACT_APP_URL}/idodrders?email=${user?.email}&page=${currentpage}&size=${datasize}&search=${search}`,
       {
@@ -75,7 +73,6 @@ const MyordersComponents = () => {
   const handleorderpayment = (orderconfirm) => {
     navigate("/cartproductpayment", { state: { orderconfirm } });
   };
-  console.log(orders);
   return (
     <div className="my-orders-continer">
       {loading ? (

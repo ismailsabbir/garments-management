@@ -6,6 +6,7 @@ import icon3 from "../../../Images/Icon-3.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 const HomeBanner = () => {
+  console.log("Home Banner");
   const [isFixed, setIsFixed] = useState(false);
   const handleScroll = () => {
     if (window.scrollY > 60) {

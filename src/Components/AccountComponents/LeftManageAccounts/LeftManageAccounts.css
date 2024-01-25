@@ -12,10 +12,6 @@
 
 .left-link-con {
     width: 100%;
-    /* display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column; */
 }
 
 .manage-left-link {
@@ -23,6 +19,5 @@
     color: gray;
     font-size: 1rem;
     font-weight: 400;
-    /* border: 1px solid brown; */
     width: 100%;
 }

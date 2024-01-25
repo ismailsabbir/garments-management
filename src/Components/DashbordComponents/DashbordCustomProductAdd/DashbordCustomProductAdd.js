@@ -8,6 +8,7 @@ const DashbordCustomProductAdd = () => {
   const imagebb = process.env.REACT_APP_IMGBB;
   const [productcategorys, setproductcategorys] = useState([]);
   const [colors, setcolors] = useState([]);
+  console.log("Dashbord Customized Product Add");
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/project-category`)
       .then((res) => res.json())
@@ -18,9 +19,7 @@ const DashbordCustomProductAdd = () => {
       .then((res) => res.json())
       .then((data) => setcolors(data));
   }, []);
-  console.log(productcategorys);
   const handleimage1 = (e) => {
-    console.log("click");
     const image1 = e.target.files[0];
     const formdata = new FormData();
     formdata.append("image", image1);
@@ -70,7 +69,6 @@ const DashbordCustomProductAdd = () => {
       image,
       availavle,
     };
-    console.log(productinfo);
     fetch(`${process.env.REACT_APP_URL}/customized-pproduct`, {
       method: "POST",
       body: JSON.stringify(productinfo),
@@ -80,7 +78,6 @@ const DashbordCustomProductAdd = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data.message) {
           toast("This product is already present in your DB", {
             position: "top-center",
@@ -98,7 +95,6 @@ const DashbordCustomProductAdd = () => {
     <div className="add-staff-con">
       <h5>Add Customized Product</h5>
       <p>Add your Customized product and necessary information from here</p>
-
       <Form onSubmit={handleAddProduct} className="add-staff-form">
         <div className="staff-image-con">
           <div className="product-image-edit">

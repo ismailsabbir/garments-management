@@ -10,7 +10,7 @@ const DashbordEmployeeSalaryAdd = () => {
   const employee = location.state;
   const employeeid = employee?.employee_id;
   const salary = employee?.salary;
-
+  console.log("Dashbord Employee Salary Add");
   return (
     <div className="employee_salary_form">
       <h5>Employee Payment System</h5>
@@ -20,7 +20,6 @@ const DashbordEmployeeSalaryAdd = () => {
         <p>Employee Id: {employee?.employee_id}</p>
         <p>Salary: {employee?.salary}</p>
       </div>
-
       <Elements stripe={stripePromise}>
         <PaymentComponent employeeId={employee} amount={salary} />
       </Elements>

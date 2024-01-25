@@ -18,6 +18,7 @@ const EmployeeSalaryMake = () => {
   const [searchemail, setsearchemail] = useState("");
   const [role, setrole] = useState("");
   const [reset, setreset] = useState(false);
+  console.log("Employee Salary Make");
   const currentMonth = new Date().toLocaleString("en-us", {
     month: "long",
   });
@@ -60,7 +61,6 @@ const EmployeeSalaryMake = () => {
   const handlenamesearch = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
-    console.log(name);
     setrole("");
     setsearchemail("");
     setsearchname(name);
@@ -75,7 +75,6 @@ const EmployeeSalaryMake = () => {
   const handlerole = (e) => {
     setsearchname("");
     setsearchemail("");
-    console.log(e);
     setrole(e);
   };
   const handlereset = () => {
@@ -84,7 +83,7 @@ const EmployeeSalaryMake = () => {
     setrole("");
     setreset(true);
   };
-  console.log(staffs);
+
   return (
     <div className="dashbord-shop-product-con">
       <div className="salary_make_hed">
@@ -193,7 +192,6 @@ const EmployeeSalaryMake = () => {
                           <td className="das-order-data">
                             <span> {order?.salary}</span>
                           </td>
-                          {/* to="/dashbord/employee/salary/add" */}
                           <td className="das-order-data">
                             {order &&
                             order?.paymentStatus &&
@@ -234,8 +232,6 @@ const EmployeeSalaryMake = () => {
                             ) : (
                               <>
                                 <Link
-                                  // to="/dashbord/employee/salary/invoice"
-                                  // state={order}
                                   className="make-admin-btn"
                                   id="make-slip-btn"
                                   onClick={handleemployeeError}

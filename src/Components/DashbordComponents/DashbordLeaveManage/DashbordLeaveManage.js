@@ -21,7 +21,7 @@ const DashbordLeaveManage = () => {
   const [rolesearch, setrolesearch] = useState("");
   const [reset, setreset] = useState(false);
   const [loading, setloading] = useState(true);
-  console.log(staffs);
+  console.log("Dashbord Leave Manage");
   const { data: products = [], refetch } = useQuery({
     queryKey: [
       "all_leave_requests",
@@ -69,7 +69,6 @@ const DashbordLeaveManage = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             refetch();
             toast("Delate sucessfully !!!", {
               position: "top-center",
@@ -157,7 +156,6 @@ const DashbordLeaveManage = () => {
         <div className="overflow-x-auto">
           <div className="overflow-x-auto">
             <table className="table recent-order-table">
-              {/* <thead> */}
               <tr className="recent-order-tr">
                 <th className="recent-order-hed">NAME</th>
                 <th className="recent-order-hed">Apply Date</th>

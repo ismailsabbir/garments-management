@@ -8,6 +8,7 @@ const PremiumCustomerSignup = () => {
   const { createuser } = useContext(AuthContext);
   const [errormessage, seterrormessage] = useState("");
   const [sucessmessage, setsucessmessage] = useState(false);
+  console.log("Premium Customer Sign up");
   const handleregister = (e) => {
     e.preventDefault();
     setsucessmessage(false);
@@ -35,12 +36,9 @@ const PremiumCustomerSignup = () => {
                 },
               })
                 .then((req) => req.json())
-                .then((data) => {
-                  console.log(data);
-                });
+                .then((data) => {});
             })
             .catch((error) => {
-              console.log(error);
               seterrormessage(error.message);
             });
         } else {
@@ -70,11 +68,7 @@ const PremiumCustomerSignup = () => {
             <button className="go-contact-btn">Go to Contact Page</button>{" "}
           </Link>
         </div>
-        <div
-          className="signup-right"
-          // id="employee-login"
-          id="premium-login"
-        >
+        <div className="signup-right" id="premium-login">
           <div className="alreday-link">
             <Link className="signup-link" to="/premium/customer/login">
               ALREADY A MEMBER
@@ -105,7 +99,6 @@ const PremiumCustomerSignup = () => {
               <></>
             )}
             <input
-              // onBlur={handlesetemail}
               className="signup-input"
               name="email"
               type="email"
@@ -126,10 +119,6 @@ const PremiumCustomerSignup = () => {
                 />
                 <span className="label-text">Remember me</span>
               </label>
-
-              {/* <Link onClick={handlerestpassword} className="forget">
-                    Forgot password?
-                  </Link> */}
             </div>
             {errormessage ? (
               <div className="alert alert-warning">

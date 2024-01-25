@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./DashbordServicsContentAdd.css";
-import { Button, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { BsFillImageFill } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -17,9 +17,8 @@ const DashbordServicsContentAdd = () => {
   const currentDate = new Date();
   const options = { year: "numeric", month: "long", day: "numeric" };
   const formattedDate = currentDate.toLocaleDateString(undefined, options);
-  console.log(formattedDate);
   const [inputValues, setInputValues] = useState([""]);
-  console.log(inputValues);
+  console.log("Dashbord Service Content Add");
   const handleInputChange = (index, value) => {
     const newValues = [...inputValues];
     newValues[index] = value;
@@ -31,7 +30,6 @@ const DashbordServicsContentAdd = () => {
   };
 
   const [inputFields, setInputFields] = useState([{ name: "", process: "" }]);
-  console.log(inputFields);
   const handleInputChange1 = (index, field, value) => {
     const newInputFields = [...inputFields];
     if (newInputFields[index]) {
@@ -48,7 +46,6 @@ const DashbordServicsContentAdd = () => {
     setInputFields(newInputFields);
   };
   const handleimagelogo = (e) => {
-    console.log("click logo");
     const image1 = e.target.files[0];
     const formdata = new FormData();
     formdata.append("image", image1);
@@ -77,7 +74,6 @@ const DashbordServicsContentAdd = () => {
       });
   };
   const handleimage1 = (e) => {
-    console.log("click imge");
     const image1 = e.target.files[0];
     const formdata = new FormData();
     formdata.append("image", image1);
@@ -90,7 +86,6 @@ const DashbordServicsContentAdd = () => {
       .then((data) => {
         if (data.success) {
           setphoto1(data.data.url);
-          console.log(data.data.url);
           toast("Product Image Upload sucessfully !!!", {
             position: "top-center",
             autoClose: 1000,
@@ -107,7 +102,6 @@ const DashbordServicsContentAdd = () => {
       });
   };
   const handleimage2 = (e) => {
-    console.log("click image1");
     const image1 = e.target.files[0];
     const formdata = new FormData();
     formdata.append("image", image1);
@@ -119,7 +113,6 @@ const DashbordServicsContentAdd = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          console.log(data.data.url);
           setdaisplayimage(data.data.url);
           toast("Product Image Upload sucessfully !!!", {
             position: "top-center",
@@ -139,7 +132,6 @@ const DashbordServicsContentAdd = () => {
 
   const handleAddProduct = (e) => {
     e.preventDefault();
-
     const name = e.target.name.value;
     const about = e.target.about.value;
     const types = inputValues;
@@ -155,7 +147,6 @@ const DashbordServicsContentAdd = () => {
       process,
       publish_date,
     };
-    console.log(productinfo);
     fetch(`${url}/addService`, {
       method: "POST",
       body: JSON.stringify(productinfo),
@@ -165,7 +156,6 @@ const DashbordServicsContentAdd = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         toast("Service Added sucessfully !!!", {
           position: "top-center",
           autoClose: 1000,

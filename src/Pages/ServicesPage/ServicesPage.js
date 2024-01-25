@@ -6,6 +6,7 @@ import Statistics from "../../Components/HomeComponents/Statistics/Statistics";
 import HomeProjects from "../../Components/HomeComponents/HomeProjects/HomeProjects";
 import HomeContact from "../../Components/HomeComponents/HomeContact/HomeContact";
 const ServicesPage = () => {
+  console.log("Service Page");
   return (
     <div>
       <ServicesBanner></ServicesBanner>

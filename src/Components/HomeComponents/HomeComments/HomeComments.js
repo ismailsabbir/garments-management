@@ -3,6 +3,7 @@ import { FaCommentDots } from "react-icons/fa";
 import image from "../../../Images/user.jpg";
 import "./HomeComments.css";
 const HomeComments = () => {
+  console.log("Home comments");
   return (
     <div className="comments-con">
       <div className="comments">

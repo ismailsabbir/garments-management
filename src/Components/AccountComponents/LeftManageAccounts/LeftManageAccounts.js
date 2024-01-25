@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import "./LeftManageAccounts.css";
 const LeftManageAccounts = () => {
   const { user } = useContext(AuthContext);
+  console.log("Left Manage Account");
   return (
     <div className="left-link-con">
       <p className="mb-6">

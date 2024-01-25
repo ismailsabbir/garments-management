@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/UserContext";
 import { useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -11,14 +11,12 @@ import { MdCompareArrows, MdFavoriteBorder } from "react-icons/md";
 import { AiOutlineShopping } from "react-icons/ai";
 
 const ShopRelatedProducts = ({ oneproduct }) => {
-  console.log(oneproduct);
-  const navigate = useNavigate();
+  console.log("Shop Related Product");
   const [size, setsize] = useState("S");
   const [quentuty, setquentity] = useState(1);
   const [modalproduct, setmodalproduct] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isshopModalOpen, setIsshopModalOpen] = useState(false);
-  //   const [products, setproducts] = useState([]);
   const { user } = useContext(AuthContext);
   const email = user?.email;
   const singleproducts = oneproduct[0];
@@ -105,23 +103,14 @@ const ShopRelatedProducts = ({ oneproduct }) => {
             );
           }
         })
-        .catch((err) => {
-          console.log(err.message);
-        });
+        .catch((err) => {});
     }
   };
   const handlebuynow = (product) => {
     setmodalproduct(product);
-    const productinfo = {
-      ...product,
-      quentuty,
-      size,
-      email,
-    };
     if (product?.dress_size) {
       openshopModal();
     } else {
-      // navigate("/checkout", { state: { productinfo } });
       openshopModal();
     }
   };
@@ -171,11 +160,8 @@ const ShopRelatedProducts = ({ oneproduct }) => {
           );
         }
       })
-      .catch((err) => {
-        console.log(err.message);
-      });
+      .catch((err) => {});
   };
-  //   console.log(products);
   return (
     <div className="all-products-con">
       <h4 className="mb-8">Related Products</h4>

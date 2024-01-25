@@ -8,7 +8,6 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { MdFavoriteBorder } from "react-icons/md";
 import Loading from "./../../CommonComponents/Loading/Loading";
 import { Link, useNavigate } from "react-router-dom";
-
 import { ToastContainer, toast } from "react-toastify";
 import { Form } from "react-bootstrap";
 import Swal from "sweetalert2";
@@ -24,6 +23,7 @@ const CartProductsPages = () => {
   const [datasize, setdatasize] = useState(5);
   const [count, setcount] = useState(0);
   const page = Math.ceil(count / datasize);
+  console.log("Cart Product Page");
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_URL}/mycartproduct?email=${user?.email}&page=${currentpage}&size=${datasize}`,
@@ -70,7 +70,6 @@ const CartProductsPages = () => {
   const handledecress = (productId) => {
     const updatedProducts = cartproducts.map((product) => {
       if (product._id === productId?._id) {
-        // return { ...product, quentuty: parseInt(product.quentuty) - 1 };
         return {
           ...product,
           quentuty: Math.max(1, parseInt(product.quentuty) - 1),
@@ -81,8 +80,6 @@ const CartProductsPages = () => {
 
     setcartproducts(updatedProducts);
   };
-  console.log(cartproducts);
-
   const handledelete = (product) => {
     Swal.fire({
       title: "Are you sure ??",
@@ -200,13 +197,10 @@ const CartProductsPages = () => {
           );
         }
       })
-      .catch((err) => {
-        console.log(err.message);
-      });
+      .catch((err) => {});
   };
   const handledeleteallcart = () => {
     if (selectall) {
-      console.log("delete");
       fetch(`${process.env.REACT_APP_URL}/allcartproduct`, {
         method: "DELETE",
       })
@@ -221,8 +215,6 @@ const CartProductsPages = () => {
     }
   };
   const [selectproducts, setselectproduct] = useState([]);
-  console.log(selectproducts);
-
   const handlesetproduct = (product) => {
     setmessae(false);
     const selectpp = selectproducts?.find(
@@ -244,7 +236,6 @@ const CartProductsPages = () => {
     );
   }, 0);
   const handlecheckout = () => {
-    console.log(selectproducts);
     if (selectproducts.length > 0) {
       navigate("/cart-checkout", { state: { selectproducts } });
     } else {
@@ -253,34 +244,8 @@ const CartProductsPages = () => {
   };
   const handlesearch = (e) => {
     e.preventDefault();
-    const search = e.target.search.value;
-    console.log(search);
-    // fetch(
-    //   `${process.env.REACT_APP_URL}/idodrders?email=${user?.email}&page=${currentpage}&size=${datasize}&search=${search}`,
-    //   {
-    //     headers: {
-    //       authorization: `Beare ${localStorage.getItem("garments-token")}`,
-    //     },
-    //   }
-    // )
-    //   .then((res) => {
-    //     if (res.status === 401 || res.status === 403) {
-    //       return userlogout();
-    //     }
-    //     return res.json();
-    //   })
-    //   .then((jsonData) => {
-    //     setorders(jsonData.product);
-    //     setcount(jsonData.count);
-    //     setLoading(false);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Failed to fetch data:", error);
-    //     setLoading(false);
-    //   });
   };
 
-  console.log(selectproducts);
   return (
     <div className="cartproduct-container">
       {loading ? (

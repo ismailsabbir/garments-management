@@ -12,17 +12,12 @@ import { MdOutlineNoteAlt, MdOutlinePayments } from "react-icons/md";
 const EmployeeLeft = () => {
   const employee = useContext(EmployeeContext);
   const { userlogout } = useContext(AuthContext);
-  console.log(employee);
+  console.log("Employee Left");
   const handleLogOut = () => {
     userlogout()
-      .then(() => {
-        console.log("Log Out Sucessfully");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      .then(() => {})
+      .catch((error) => {});
   };
-  console.log(employee);
   return (
     <div className="dashbord-left-con print:hidden">
       <div className="employee-info">

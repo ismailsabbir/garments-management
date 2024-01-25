@@ -1,18 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
-import { servcontext } from "../../../App";
+import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
-
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { IoMdAdd } from "react-icons/io";
 import { useQuery } from "@tanstack/react-query";
-import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "./DashbordVission.css";
 import Swal from "sweetalert2";
 const DashbordVission = () => {
   const [vissions, setvissions] = useState([]);
+  console.log("Dashbord Vission");
   const { data: products = [], refetch } = useQuery({
     queryKey: ["vissions"],
     queryFn: () =>
@@ -28,7 +26,6 @@ const DashbordVission = () => {
         }),
   });
   const handledelete = (staff) => {
-    console.log(staff);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to delate this!",

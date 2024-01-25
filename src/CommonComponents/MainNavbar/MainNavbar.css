@@ -3,14 +3,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* border: 1px solid brown; */
 }
 
 .main-nav-con {
-    /* border: 1px solid white; */
     width: 100%;
     display: flex;
-    /* align-items: center; */
     justify-content: space-between;
     padding: 0px 30px;
     z-index: 9;
@@ -29,11 +26,6 @@
 
 #topnone {
     display: none;
-}
-
-.navbar-brand-imaage {
-    /* border: 1px solid brown; */
-    /* width: 400px; */
 }
 
 .navbar-brand-imaage img {
@@ -77,12 +69,8 @@
 }
 
 .navbar-end-con {
-    /* border: 1px solid brown; */
     display: flex;
     align-items: center;
-    /* width: 620px; */
-    /* width: 10%; */
-
 }
 
 #make-project-btn {
@@ -131,17 +119,12 @@
 .nav-cart-con {
     margin-left: 20px;
     color: white;
-    /* border: 1px solid white; */
-    /* padding: 8.5px; */
     border-radius: 5px;
-    /* background-color: #be5184; */
-
 }
 
 .nav-cart-icon {
     font-size: 1.5rem;
     color: white;
-    /* position: relative; */
 }
 
 .cartproduct-q {
@@ -149,8 +132,6 @@
     background-color: #be5184;
     padding: 2px;
     border-radius: 50%;
-    /* position: absolute; */
-    /* top: 2px; */
 }
 
 .account {
@@ -159,7 +140,6 @@
 
 .dropdrown-menu {
     height: auto;
-    /* border: 1px solid brown; */
     margin-top: 320px;
     width: 300px;
 }
@@ -177,7 +157,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* border: 1px solid gray; */
 }
 
 .account-wishlist-cart-con {
@@ -213,7 +192,6 @@
     }
 
     .nav-items {
-        /* border: 1px solid brown; */
         width: 100%;
         margin-bottom: 10px;
     }
@@ -221,13 +199,11 @@
     .navbar-end-con {
         margin-top: 30px;
         width: 100%;
-        /* border: 1px solid white; */
         display: flex;
         align-items: center;
         justify-content: space-between;
         flex-wrap: nowrap;
         padding-bottom: 10px;
-        /* border-top: 1px solid #be5184; */
     }
 
     .make-project-btn {
@@ -235,7 +211,6 @@
     }
 
     .nav-useer {
-        /* border: 1px solid green; */
         margin: 0px;
         margin-top: 20px;
         margin-right: 10px;
@@ -252,7 +227,6 @@
     }
 
     .dropdrown-menu {
-        /* border: 1px solid brown; */
         width: 300px;
         margin-top: 315px;
 

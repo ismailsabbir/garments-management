@@ -1,11 +1,6 @@
-.product-view-con {
-    /* border: 1px solid gainsboro; */
-}
-
 .product-view-details {
     display: flex;
     align-items: center;
-    /* justify-content: center; */
 }
 
 .product-view-details-left {

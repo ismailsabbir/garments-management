@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { ToastContainer, toast } from "react-toastify";
-
 const PaymentComponent = ({ employeeId, amount }) => {
-  console.log(employeeId, amount);
+  console.log("Payment Component");
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState("");
@@ -51,9 +50,7 @@ const PaymentComponent = ({ employeeId, amount }) => {
     });
     const data = await response.json();
     setClientSecret(data?.clientSecret);
-    console.log(data);
     if (response.ok) {
-      console.log("ok");
       setPaymentError(null);
       setPaymentSuccess(true);
 
@@ -68,7 +65,6 @@ const PaymentComponent = ({ employeeId, amount }) => {
           },
         });
       if (confirmerror) {
-        // setcarderror(confirmerror.message);
         return;
       }
       if (paymentIntent) {
@@ -85,7 +81,6 @@ const PaymentComponent = ({ employeeId, amount }) => {
           theme: "light",
         });
       }
-      console.log(paymentIntent);
     } else {
       setPaymentError(data.error || "Payment failed");
       setpayprocessing(false);
@@ -103,7 +98,6 @@ const PaymentComponent = ({ employeeId, amount }) => {
         id="paydoller"
         type="submit"
         disabled={payprocessing}
-        // disabled={!stripe || !clientSecret || paymentstatus || payprocessing}
       >
         {payprocessing ? <>Processing.....</> : <>Pay</>}
       </button>

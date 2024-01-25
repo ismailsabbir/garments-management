@@ -2,7 +2,6 @@
     height: 400px;
     margin-bottom: 50px;
     background-image: linear-gradient(rgba(54, 50, 73, 0.699), rgba(77, 74, 92, 0.699)), url(../../../Images/lastbanner.webp);
-    /* background-position: center; */
     background-position: center top;
     background-size: cover;
     background-repeat: no-repeat;
@@ -13,8 +12,6 @@
 
 
 }
-
-.about-banner-text h1 {}
 
 .banner-link {
     display: flex;

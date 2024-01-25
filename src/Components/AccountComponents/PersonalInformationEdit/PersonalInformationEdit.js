@@ -10,6 +10,7 @@ const PersonalInformationEdit = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  console.log("Personal Information Edit");
   const day = [
     "01",
     "02",
@@ -49,27 +50,6 @@ const PersonalInformationEdit = () => {
   for (let year = currentYear; year >= 1900; year--) {
     years.push(year);
   }
-  // useEffect(() => {
-  //   fetch(`${process.env.REACT_APP_URL}/user?email=${user?.email}`, {
-  //     headers: {
-  //       authorization: `Beare ${localStorage.getItem("garments-token")}`,
-  //     },
-  //   })
-  //     .then((res) => {
-  //       if (res.status === 401 || res.status === 403) {
-  //         return userlogout();
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((jsonData) => {
-  //       setuser(jsonData);
-  //       setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Failed to fetch data:", error);
-  //       setLoading(false);
-  //     });
-  // }, [user?.email, userlogout]);
   const handlechange = (e) => {
     e.preventDefault();
     const name = e.target.name.value;

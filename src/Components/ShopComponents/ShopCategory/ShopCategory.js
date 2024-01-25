@@ -4,7 +4,7 @@ import "./ShopCategory.css";
 import { Link } from "react-router-dom";
 const ShopCategory = () => {
   const { shopcategory } = useContext(servcontext);
-  console.log(shopcategory);
+  console.log("Shop Category");
   return (
     <div className="shopcategory-con">
       <div className="shopcategory-hole row">

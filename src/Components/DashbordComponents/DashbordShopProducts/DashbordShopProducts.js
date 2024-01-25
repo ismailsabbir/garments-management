@@ -34,7 +34,7 @@ const DashbordShopProducts = () => {
   };
   const isDeleteButtonDisabled = selectedOptions?.length === 0;
   const productid = selectedOptions.map((item) => item._id);
-  console.log(productid);
+  console.log("Dashbord Shop Product");
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/shopcategory`)
       .then((res) => res.json())
@@ -52,7 +52,6 @@ const DashbordShopProducts = () => {
       confirmButtonText: "DELATE",
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(selectedOptions);
         fetch(`${process.env.REACT_APP_URL}/delete-products`, {
           method: "DELETE",
           headers: {
@@ -64,7 +63,6 @@ const DashbordShopProducts = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data?.deletedCount > 0) {
               toast("Product delete sucessfully !!!", {
                 position: "top-center",
@@ -100,7 +98,6 @@ const DashbordShopProducts = () => {
       )
         .then((req) => req.json())
         .then((data) => {
-          console.log(data);
           setproducts(data?.product);
           setcuscount(data?.count);
           setloading(false);
@@ -115,10 +112,7 @@ const DashbordShopProducts = () => {
       reader.onload = (e) => {
         try {
           const fileContents = JSON.parse(e.target.result);
-          console.log(fileContents);
           for (let i = 0; i < fileContents.length; i++) {
-            console.log(fileContents[i]);
-
             fetch(`${process.env.REACT_APP_URL}/shopproduct`, {
               method: "POST",
               body: JSON.stringify(fileContents[i]),
@@ -128,16 +122,13 @@ const DashbordShopProducts = () => {
             })
               .then((response) => response.json())
               .then((data) => {
-                console.log(data);
                 toast("Product add sucessfully !!!", {
                   position: "top-center",
                   autoClose: 1000,
                 });
                 refetch();
               })
-              .catch((err) => {
-                console.log(err.message);
-              });
+              .catch((err) => {});
           }
         } catch (error) {
           console.error("Invalid JSON file:", error);
@@ -162,7 +153,6 @@ const DashbordShopProducts = () => {
     setcategory(category);
   };
   const sortProductsByPrice = (e) => {
-    console.log(e, typeof e);
     if (e === "norm") {
       setproducts(products);
     } else if (e === "sell") {
@@ -215,7 +205,6 @@ const DashbordShopProducts = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data?.deletedCount > 0) {
               toast("product delete sucessfully !!!", {
                 position: "top-center",
@@ -245,7 +234,6 @@ const DashbordShopProducts = () => {
             id="input-file1"
             className="fileinput"
             type="file"
-            // accept=".json"
             onChange={handleFileUpload}
           />
         </label>
@@ -282,7 +270,6 @@ const DashbordShopProducts = () => {
         </Form>
 
         <select
-          // onChange={(e) => setcategory(e.target.value)}
           onChange={handlecategory}
           className="product-category-search"
           id="cars"
